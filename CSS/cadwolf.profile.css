@@ -1,0 +1,431 @@
+/* ---------------------------------------------------------------------
+   This controls the profiles page
+---------------------------------------------------------------------- */
+
+html {
+	height:100%;
+}
+
+body {
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px;
+	font-family:'Lato', sans-serif !important;
+	font-size: 12px !important;
+}
+
+p {
+	height:auto;
+}
+
+
+/*------------------------------------------------------------------------------------------------------*/
+/*----------------------------- This is the main wrappers and other things -----------------------------*/
+/*------------------------------------------------------------------------------------------------------*/
+#Main_Wrapper {
+	width:100%;
+	height:100%;
+}
+
+#Left_Wrapper {
+	position:fixed;
+	top:0px;
+	left:0px;
+	width:250px;
+	height:100%;
+	background-image: url(http://www.cadwolf.com/Images/Pages/type.png);
+}
+
+#profile_wrapper {
+	margin:75px 0px 0px 250px;
+	font-size:1.25em;
+	padding:0px 20px 0px 20px;
+}
+
+#personal_wrapper, #FAF_wrapper, #Pass_wrapper {
+	width:800px;
+	margin:auto;
+	padding:20px 0px 0px 0px;
+}
+
+.profiletitle {
+	width:100%;
+	text-align:center;
+	font-size:2em;
+	border-bottom:2px solid #456382;
+	padding:0px 0px 10px 0px;
+}
+
+#userimage {
+	margin:10px auto;
+	width:200px;
+	height:200px;
+	padding:0px;
+	border-radius:100px;
+	background-size:cover;
+	background-repeat:no-repeat;
+	border:2px solid #456382;
+}
+
+#FAF_wrapper, #Pass_wrapper {
+	display:none;
+}
+
+#left_wrapper {
+	float:left;
+	width:250px;
+	clear:both;
+}
+
+#right_wrapper {
+	float:right;
+	width:450px;
+	margin:25px;
+}
+
+.profile_infoline {
+	float:left;
+	width:450px;
+	margin:5px 0px;
+	border-bottom:2px solid #456382;
+	padding:0px 0px 8px 0px;
+	letter-spacing:1px;
+}
+
+.profile_infolabel {
+	float:left;
+	text-align:left;
+	width:180px;
+	font-size:1.2em;
+}
+
+.profile_infoitem {
+	float:right;
+	width:250px;
+	padding:3px 0px 0px 0px;
+}
+
+#ProfileBar_Wrapper {
+	width:100%;
+	position:relative;
+	top:-15px;
+}
+
+#Profile_Bar {
+	width:250px;
+	margin:auto;
+}
+
+#Profile_Bio, #Profile_FAFs {
+	border:1px solid #8BA2BD;
+	margin:auto;
+	padding:5px;
+	float:left;
+	cursor:pointer;
+}
+
+#Profile_Bio:hover, #Profile_FAFs:hover { background-color:#8BA2BD;}
+
+
+#Profile_Bio {	border-radius:5px 0px 0px 5px; }
+#Profile_FAFs {	border-radius:0px 5px 5px 0px; }
+
+.profile_current {
+	background-color:#8BA2BD;
+}
+
+.profile_notcurrent {
+	background-color:#FFFFFF;
+}
+
+.profile_text {
+	float:left;
+	width:100%;
+	text-align:justify;
+	line-height:25px;
+}
+
+#FAFList {
+	width:800px;
+	margin:auto;
+}
+
+#Profile_FAF {
+	width:800px;
+	float:left;
+	margin:10px 0px 0px 0px;
+}
+
+.Profile_FAF_line {
+	width:780px;
+	padding:5px 10px;
+	float:left;
+	border-bottom:1px solid #8BA2BD;
+}
+
+.Profile_FAF_header1 {
+	width:240px;
+	float:left;
+	font-weight:bold;
+	text-align:center;
+}
+
+.Profile_FAF_header2 {
+	width:540px;
+	float:left;
+	font-weight:bold;
+	text-align:center;
+}
+
+.Profile_FAF_name {
+	width:220px;
+	float:left;
+	text-align:center;
+}
+
+.Profile_FAF_address {
+	width:520px;
+	float:left;
+	text-align:center;
+	cursor:pointer;
+}
+
+.Profile_FAF_address:hover {
+	background-color:#ccc;
+}
+
+.Profile_FAF_nameholder {
+	float:left;
+	text-align:center;
+	width:220px;
+}
+
+.Profile_FAF_addressholder {
+	float:left;
+	text-align:center;
+	width:520px;
+}
+
+.Profile_FAF_delete, .File_FAF_delete {
+	width:24px;
+	height:24px;
+	float:left;
+	cursor:pointer;
+	background: url(http://www.cadwolf.com/Images/profile_sprite.png) no-repeat -55px -1px;
+}
+
+
+
+#Profile_Add, #AddFAFLine {
+	float:left;
+	height:24px;
+	width:24px;
+	background: url(http://www.cadwolf.com/Images/profile_sprite.png) no-repeat -84px -1px;
+	margin:10px 0px 0px 0px;
+	cursor:pointer;
+}
+
+.FAF_input, .Profile_FAF_input {
+	border:0px;
+	outline-width: 0;
+	font-size:1em;
+	padding:0px;
+	text-align:center;
+	width:100%;
+}
+
+.error {
+	background-color:#E6B4B3;
+}
+
+#message, #biomessage {
+	width:100%;
+	font-size:1em;
+	color: #000;
+	margin:0px 0px 10px 0px;
+	text-align:center;
+	background-color:#E6B4B3;
+	float:left;
+	padding:4px 0px;
+	border:4px solid #730324;
+	display:none;
+}
+
+.profileedit {
+	cursor:pointer;
+}
+
+.profile_input {
+	border:0px;
+	padding:0px;
+	margin:0px;
+	font-size:1em;
+	float:right;
+	width:250px;
+	border-right:2px solid #8BA2BD;
+}
+
+#adduserimage {
+	float:left;
+	width:80%;
+	text-align:center;
+	padding:8px 0px;
+	margin:10px 10%;
+	border-radius:5px;
+	cursor:pointer;
+	background-color:#8BA2BD;
+	border:2px solid #456382;
+	font-size:18px;
+	font-family:Roboto;
+	color:#DFE3E5;
+}
+
+#adduserimage:hover {
+	background-color:#730324;
+	border:2px solid #000000;
+	color:#DFE3E5;
+}
+
+#image_uploader {
+	display:none;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------- Block Sections on the Left -----------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*
+#show_profile 	{	background: url(http://www.cadwolf.com/Images/profile_sprite.png) no-repeat -27px -0px; 	height:24px; width:24px;	}
+#show_faf 		{	background: url(http://www.cadwolf.com/Images/profile_sprite.png) no-repeat -0px -1px; 		height:24px; width:24px;	}
+
+#show_profile_current 	{	background: url(http://www.cadwolf.com/Images/profile_sprite.png) no-repeat -26px -28px; 	height:24px; width:24px;	}
+#show_faf_current 		{	background: url(http://www.cadwolf.com/Images/profile_sprite.png) no-repeat -0px -29px; 	height:24px; width:24px;	}
+
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------- The activation code stuff ------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+#activate_account_wrapper	{	
+	width:99%;
+	margin:10px 0px;	
+	border:2px solid #456382;
+	padding:10px 0px;
+}
+
+#activate_description {
+	width:100%;
+	text-align:center;
+	margin:10px 0px;
+	font-size:1.5em;
+	letter-spacing:1px;
+}
+
+#activate_account:-moz-placeholder { color:#730324; }
+#activate_account::-webkit-input-placeholder { color:#730324; }
+#activate_account::-moz-placeholder { color:#730324; }
+#activate_account:-ms-input-placeholder { color:#730324; }
+
+#activate_account {
+	width:500px;
+	height:25px;
+	margin:auto 150px;
+	color:#FFFFFF;
+	font-size:1em;
+	border:2px solid #456382;
+	background-color:#B4C4D4;
+	text-align:center;
+}
+
+#activate_success {
+	width:550px;
+	height:25px;
+	margin:20px auto;
+	font-size:1em;
+	text-align:center;
+	display:none;
+}
+
+#validationError {
+	width:500px;
+	height:25px;
+	margin:auto 150px;
+	color:#730324;	
+	display:none;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------- THE RESET PASSWORD SECTION ---------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+#passSection {
+	width:600px;
+	margin:20px auto 0px;
+	letter-spacing:1px;
+}
+
+#passInner {
+	width:800px;
+	margin:0px auto;
+}
+
+.passLine {
+	width:100%;
+}
+
+.passLeft {
+	float:left;
+	width:175px;
+	text-align:right;
+	margin:15px 25px 8px 0px;
+}
+
+.passRight {
+	float:right;
+	width:350px;
+	text-align:left;
+	margin:10px 0px 0px 0px;
+}
+
+#pass1, #pass2, #pass3 {
+	height:25px;
+	width:300px;	
+	text-align:center;
+}
+
+#passErrorBox {
+	float:left;
+	width:400px;
+	background-color:#730324;
+	border:2px solid #000000;
+	margin:10px 100px;
+	color:#FFFFFF;
+	padding:10px 0px;
+	text-align:center;
+	display:none;
+}
+
+#submitPass {
+	float:left;
+	width:200px;
+	background-color:#B4C4D4;
+	border:2px solid #456382;
+	color:#456382;
+	margin:20px 200px;
+	text-align:center;
+	font-family:Roboto;
+	font-size:16px;
+	border-radius:10px;
+	cursor:pointer;
+	padding:10px;
+}
+
+#submitPass:hover {
+	background-color:#730324;
+	border:2px solid #000000;
+	color:#FFFFFF;
+	cursor:pointer;
+}/*----------------------------------------------------------------------------------------------------------------------------------------------------*/

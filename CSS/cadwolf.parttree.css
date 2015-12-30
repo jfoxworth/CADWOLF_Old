@@ -1,0 +1,992 @@
+/*
+For the colors, the "Cherries on the Lake" pattern was used for colors. The "Theme 3" was also looked at.
+Red			-	#730324
+White		-	#DFE3E5
+Light Blue	-	#B4C4D4
+Middle Blue	-	#8BA2BD
+Dark Blue	-	#456382
+
+*/
+
+
+body {
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px;
+	background-color:#FFFFFF;
+	font-family:'Lato', sans-serif;
+	font-size:0.85em;
+	letter-spacing:1px;
+	font-weight:300;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*								Items that are related solely to the structures page on the part tree page.
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+#partTreeData {
+	display:none;	
+}
+
+.partTreeTitle {
+	width:100%;
+	font-size:32px;
+	text-align:center;
+}
+
+.partTreeTitle2 {
+	width:100%;
+	font-size:24px;
+	text-align:center;
+	color:#555;
+}
+
+#partTreeSetup {
+	width:100%;
+	font-size:13px;
+	text-align:justify;
+	letter-spacing:1.5px;
+	line-height:20px;
+	font-family:sans-serif;
+}
+
+#partStructureWrapper {
+	margin:0px 0px 0px 75px;
+}
+
+#partStructureBody {
+	width:1000px;
+	margin:50px auto;
+}
+
+#partStructureContent {
+	width:1000px;
+	margin:auto;
+}
+
+#partTreeDescription {
+	width:100%;
+	min-height:200px;
+	text-align:justify;
+	letter-spacing:1.5px;
+	line-height:20px;
+	font-family:sans-serif;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*								Items that are related solely to the structures page on the part tree page.
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+#partListWrapper {
+	display:none;
+	margin:0px 0px 0px 75px;
+}
+
+#partListBody {
+	width:1000px;
+	margin:50px auto;
+}
+
+#partListContent {
+	width:1000px;
+	margin:auto;
+	float:left;
+}
+
+#partListRotator {
+	width:128px;
+	height:128px;
+	margin:auto;
+	background-image:url('/Images/rotator.GIF');
+}
+
+#partListTitleLine {
+	float:right;
+	width:100%;
+	text-align:center;
+}
+
+#partListTitleLeft {
+	float:left;
+	width:700px;
+	text-align:center;
+	font-size:18px;
+	margin:15px 0px;
+	border-top:1px solid #000;
+	border-bottom:1px solid #000;
+	padding:5px 0px;
+}
+
+#partListTitleRight {
+	float:right;
+	width:100px;
+	text-align:center;
+	font-size:18px;
+	margin:15px 0px;
+	border-top:1px solid #000;
+	border-bottom:1px solid #000;
+	padding:5px 200px 5px 0px;
+}
+
+#partListPropertyLine {
+	float:left;
+	width:100%;
+	padding:5px 0px;
+}
+
+#partListProperty {
+	float:right;
+	width:300px;
+	border:1px solid #ccc;
+	padding:5px 0px;
+	margin:0px 130px;
+	text-align:center;
+}
+
+.propertyValue {
+	float:right;
+	width:300px;
+	height:20px;
+	text-align:center;
+}
+
+.pVOld { 
+	color:#730324; 
+}
+
+.moveLine {
+	float:right;
+	width:100%;
+	height:30px;
+}
+
+.moveInput {
+	float:right;
+	width:90%;
+	margin:0px 5%;
+}
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*											Items that are related solely to the ckeditor.
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+#Format_Wrapper {
+	height: 50px;
+	z-index:999;
+	width:auto;
+	position:fixed;
+	top:0px;
+	left:160px;
+	width:100%;
+}
+
+#NicEdit_Wrapper {	margin:auto; background-color:#FFF; }
+
+
+#cktoolbar {
+	margin:auto;
+	padding:0px 0px 0px 0px;
+}
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*											Items that are related solely to the Block of the part tree.
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+#partTreeSection {
+	margin:50px auto 0px 0px;
+}
+
+#partTreeList {
+	float:left;
+	width:250px;
+	margin:0px 0px 50px 0px;
+}
+
+#partTreeInfo {
+	float:left;
+	width:700px;
+	margin:0px 0px 50px 50px;	
+}
+
+#partTreeName {
+	float:left;
+	width:750px;	
+}
+
+#partTreeNameInput {
+	width:200px;
+	border:1px dashed #ccc;
+	padding:10px;
+	font-size:14px;
+	text-align:center;
+}
+
+.partTreeSubTitle {
+	float:left;
+	width:750px;
+	font-weight:bold;
+	font-size:20px;
+	border-bottom:1px solid #ccc;
+	margin:15px 0px 10px 0px;
+	padding:0px 0px 10px 0px;
+}
+
+#partTreeComponentDescription {
+	float:left;
+	width:750px;	
+}
+
+#partTreeType {
+	float:left;
+	width:750px;	
+}
+
+#partTreeListBlock {
+	float:left;
+	width:750px;	
+}
+
+#partTreeOptionList {
+	float:left;
+	width:750px;	
+}
+
+.dataBlock {
+	float:left;
+	width:600px;
+}
+
+.dataBlockAdd {
+	float:left;
+	width:24px;
+	height:24px;
+	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -100px -60px; 
+	margin:0px 88px 0px 133px;
+	cursor:pointer;
+	border:1px solid #ccc;
+	border-radius:20px;
+	padding:3px;
+}
+
+.dataBlockAdd:hover {
+	border:1px solid #456382;
+}
+
+.dataBlockDelete {
+	float:left;
+	width:24px;
+	height:24px;
+	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -190px -59px; 
+	margin:0px 0px 0px 0px;
+	cursor:pointer;
+	border:1px solid #ccc;
+	border-radius:20px;
+	padding:3px;
+}
+
+.dataBlockDeleteNull {
+	float:left;
+	width:24px;
+	height:24px;
+	margin:0px 0px 0px 0px;
+	padding:5px;
+}
+
+.dataBlockDelete:hover {
+	border:1px solid #730324;
+}
+
+.dataBlockName {
+	float:left;
+	width:180px;
+	text-align:center;
+	padding:10px;
+	border-radius:10px;
+	border:1px solid #ccc;
+	cursor:pointer;
+}
+
+.dataBlockNameCurrent {
+	float:left;
+	width:180px;
+	text-align:center;
+	padding:10px;
+	border-radius:10px;
+	border:1px solid #456382;
+	cursor:pointer;
+	background-color:#B4C4D4;
+	color:#456382;
+}
+
+.optionLine {
+	width:100%;
+	margin:5px 0px;
+	height:25px;
+}
+
+.optionText {
+	float:left;
+	width:250px;
+	font-size:18px;
+}
+
+.optionDelete {
+	float:left;
+	width:16px;
+	height:16px;
+	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -94px -101px;
+	margin:3px 10px 0px 0px;
+	cursor:pointer;	
+}
+
+.optionDeleteNull {
+	float:left;
+	width:16px;
+	height:16px;
+	margin:3px 10px 0px 0px;
+s}
+
+.optionSelect {
+	float:left;
+	width:200px;
+	font-size:18px;
+}
+
+#optionSelect {
+	width:150px;
+	font-size:16px;
+	background-color:#FFF;
+}
+
+.optionInput {
+	width:400px;
+	font-size:16px;
+	border:0px;
+	background-color:#FFF;
+}
+
+#partTreeAddLine {
+	float:left;
+	width:200px;
+	text-align:center;
+	height:25px;
+	margin:10px 275px;
+}
+
+#partTreeAdd {
+	float:left;
+	width:16px;
+	height:16px;
+	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -49px -101px; 	
+	cursor:pointer;
+}
+
+#partTreeAddText {
+	float:left;
+	width:175px;
+}
+
+.vertLineWrapper {
+	float:left;
+	width:250px;
+	height:10px;
+}
+
+.vertLineLeft {
+	float:left;
+	width:149px;
+	border-right:1px solid #ccc;
+	height:10px;
+}
+
+.vertLineRight {
+	float:left;
+	width:100px;	
+	height:10px;
+}
+
+.horLineWrapperNull {
+	float:left;
+	width:10px;
+	height:20px;
+	margin:0px 0px 0px 0px;
+}
+
+.horLineWrapper {
+	float:left;
+	width:10px;
+	height:20px;
+	margin:0px 0px 0px 0px;
+}
+
+.horLineUp {
+	float:left;
+	width:10px;
+	border-bottom:1px solid #ccc;
+	height:17px;
+}
+
+.horLineDown {
+	float:left;
+	width:10px;	
+	height:10px;
+}
+
+.numberLine {
+	width:300px;
+	margin:20px 223px;
+	border:1px solid #ccc;
+	float:left;
+	padding:10px 0px;
+}
+
+.numberText {
+	float:left;
+	width:200px;
+	text-align:center;
+}
+
+
+.numberItem {
+	float:left;
+	width:100px;
+	text-align:center;
+	cursor:pointer;
+}
+
+#numberLowInput, #numberHighInput {
+	float:left;
+	width:75px;
+	border:0px;
+	cursor:pointer;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------ ITEMS RELATED TO The messages  ------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+#GoodMessageWrapper, #BadMessageWrapper {
+	position:fixed;
+	top:0px;
+	left:0px;
+	width:100%;
+	display:none;
+	text-align:center;
+	padding:5px 0px 5px 115px;
+	font-size:1.5em;
+	font-family:cinzel;
+	letter-spacing:1.5px;
+	color:#FFF;
+	z-index:9999;
+}
+
+#BadMessageWrapper {
+	background-color:#730324;
+}
+
+#GoodMessageWrapper {
+	background-color:#228008;
+}
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------- ITEMS RELATED TO The SAVE BUTTON  ------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+#SaveBlock { 
+	float:left;
+	width:200px;
+	margin:0px 25px;
+	height:auto;
+	padding:2px;
+	background-color:#456382;
+	font-size:1.25em;
+	border-radius:5px;
+	text-align:center;
+	letter-spacing:1.5px;
+	cursor:pointer;
+}
+
+#SaveBlock:hover {
+	background-color:#730324;
+}
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*								Items that the addline and the add system and parts
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+#topAddLine {
+	
+}
+
+.editBar {
+	float:right;
+	width:130px;
+}
+
+.addLine {
+	width:100%;	
+}
+
+.addSystem, .addPart, .deletePart, .deleteSystem, .includeMe, .includeMeNot, .dummyBlock, .moveItem {
+	float:right;
+	width:16px;
+	height:16px;
+	margin:0px 10px 0px 0px;
+	padding:0px;
+	cursor:pointer;			
+}
+
+.deletePart		 	{	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -94px -101px; }
+.deletePart:hover 	{	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -71px -101px; }
+.deleteSystem		{	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -94px -101px; }
+.deleteSystem:hover {	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -71px -101px; }
+.includeMe:hover 	{	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -165px -131px; }
+.includeMe		 	{	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -141px -131px; }
+.includeMeNot:hover {	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -141px -131px;	}
+.includeMeNot 		{	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -165px -131px;	}
+.addSystem			{	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -218px -100px; }
+.addSystem:hover	{	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -26px -101px; }
+.addPart			{	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -2px -101px; }
+.addPart:hover		{	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -26px -101px; }
+.moveItem			{	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -190px -133px; }
+
+.statusGreen {
+	float:right;
+	padding:0px 0px 0px 0px;	
+	width:16px;
+	height:16px;
+	margin:0px 10px 0px 0px;
+	border-radius:8px;
+	background-color:green;
+}
+
+.statusRed {
+	float:right;
+	padding:0px 0px 0px 0px;	
+	width:16px;
+	height:16px;
+	margin:0px 10px 0px 0px;
+	border-radius:8px;
+	background-color:#730324;
+}
+
+.systemBlock {
+	float:right;
+	padding:0px 0px 0px 0px;	
+	width:100%;
+	margin:10px 0px;
+	list-style:none;
+}
+
+.systemLine, .systemPermLine {
+	float:right;
+	width:100%;
+	margin:2px 0px;
+	height:22px;
+}
+
+.partLine, .partPermLine {
+	float:right;
+	width:100%;
+	padding:10px 0px 9px;
+	margin:0px;
+	border-top:1px solid #888;
+	color:#888;
+}
+
+.systemLogo, .systemPermLogo {
+	float:left;
+	width:16px;
+	height:16px;
+	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -218px -100px; 
+	cursor:pointer;
+}
+
+.partName, .partPermName {
+	float:left;	
+	padding:0px 0px 0px 10px;
+}
+
+.partLogo, .partPermLogo {
+	float:left;
+	width:16px;
+	height:16px;
+	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -114px -101px; 
+	cursor:pointer;
+}
+
+.systemName, .systemPermName {
+	float:left;	
+	padding:0px 0px 0px 10px;
+	cursor:pointer;
+}
+
+.openSystemName {
+	background-color:#FFF;
+	width:200px;
+	height:25px;
+	border:1px dashed #ccc;
+}
+
+.quantityBlock {
+	float:left;
+	width:20px;
+	height:20px;
+	border:1px dashed #ccc;
+	border-radius:15px;
+	text-align:center;
+	position:relative;
+	top:-4px;
+	margin:0px 5px 0px 0px;
+}
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*								The message relating to deleting parts and systems
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+#deletePart-confirm, #deleteSystem-confirm {
+	display:none;
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*								Items that are related solely to the permissions page on the part tree page.
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+#partPermissionsWrapper {
+	display:none;
+	margin:0px 0px 0px 75px;
+}
+
+#partPermissionBody {
+	width:1000px;
+	margin:50px auto;
+}
+
+#partPermissionContent {
+	width:1000px;
+	margin:auto;
+	float:left;
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*								Items that the addline and the permissions system and parts
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+.permBar {
+	float:right;
+	width:600px;
+}
+
+.permWrapper {
+	float:left;
+	width:150px;
+}
+
+.permWrapperActive {
+	float:left;
+	border-bottom:1px solid #000;
+	padding:0px;
+	height:20px;
+}
+
+.permSelectBox {
+	position:relative;
+	left:150px;
+	top:-38px;
+	z-index:1;
+	background-color:#FFF;
+	text-align:center;
+	width:100px;
+	height:77px;
+}
+
+.permSelectBoxSmall {
+	position:relative;
+	left:150px;
+	top:-24px;
+	z-index:1;
+	background-color:#FFF;
+	text-align:center;
+	width:100px;
+	height:52px;
+}
+
+.permSelectLine {
+	float:left;
+	height:25px;
+	width:100%;	
+}
+
+.permOpen, .permList, .permInherit {
+	float:left;
+	height:25px;
+	width:100%;	
+	padding:4px 0px 0px 0px;
+}
+
+
+.viewPerm, .editPerm, .adminPerm, .usePerm, .openPerm, .listPerm, .inheritPerm {
+	float:left;
+	width:134px;
+	text-align:center;
+	cursor:pointer;
+	background-color:#FFF;
+	z-index:9999;
+}
+
+.openPerm {
+	color:green;
+}
+
+.listPerm {
+	color:#730324;
+}
+
+.inheritPerm {
+	color:#456382;
+}
+
+.permOpen {
+	border-left:3px solid green;
+	border-right:3px solid green;
+	color:green;
+	font-weight:bold;
+	cursor:pointer;
+	background-color:#FFF;
+}
+
+.permOpen:hover {
+	color:#DFE3E5;
+	background-color:green;
+}
+
+.permList {
+	border-left:3px solid #730324;
+	border-right:3px solid #730324;
+	border-bottom:3px solid #730324;
+	color:#730324;
+	font-weight:bold;
+	cursor:pointer;
+	background-color:#FFF;
+}
+
+.permList:hover {
+	color:#DFE3E5;
+	background-color:#730324;
+}
+
+.permInherit {
+	border-left:3px solid #456382;
+	border-top:3px solid #456382;
+	border-right:3px solid #456382;
+	color:#456382;
+	font-weight:bold;
+	cursor:pointer;
+	background-color:#FFF;
+}
+
+.permInherit:hover {
+	color:#DFE3E5;
+	background-color:#456382;
+}
+
+.editList {
+	float:right;
+	width:16px;
+	height:16px;
+	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -49px -101px;
+	cursor:pointer;
+}
+
+.editUserBlock {
+	width:100%;
+	float:right;
+	margin:25px 0px 10px 0px;
+	min-height:50px;
+}
+
+.enterUserLine {
+	float:left;
+	width:90%;
+	text-align:center;
+}
+
+.newUser {
+	text-align:center;
+	height:25px;
+	border:1px solid #ccc;
+	width:300px;
+}
+
+.closeUserBlock {
+	float:right;
+	width:16px;
+	height:16px;
+	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -94px -101px;
+	cursor:pointer;	
+}
+
+.usersBlock {
+	float:left;
+	width:100%;
+}
+
+.userPermLine {
+	float:left;
+	width:100%;
+	padding:10px 0px 10px;
+	border-bottom:1px solid #ccc;
+}
+
+.permUser {
+	float:left;
+	width:200px;
+	text-align:center;
+}
+
+#usersTitles {
+	float:left;
+	width:100%;
+	border-bottom:1px solid #ccc;
+	text-align:center;
+	color:#000;
+	margin:10px 0px;
+	padding:10px 0px;
+}
+
+#usersTitle1 {
+	float:left;
+	width:200px;
+	text-align:center;
+}
+
+#usersTitle2 {
+	float:left;
+	width:150px;
+	text-align:center;
+}
+
+#usersTitle3 {
+	float:left;
+	width:150px;
+	text-align:center;
+}
+
+#usersTitle4 {
+	float:left;
+	width:150px;
+	text-align:center;
+}
+
+#usersTitle5 {
+	float:left;
+	width:150px;
+	text-align:center;
+}
+
+.permYes, .permNo, .permEveryone, .permYesInherit, .permNoInherit {
+	float:left;
+	width:24px;
+	height:24px;
+	cursor:pointer;	
+	margin:0px 63px 0px 63px;
+}
+
+.permYes 			{	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -117px -157px;	}
+.permNo 			{	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -172px -158px;	}
+.permEveryone 		{	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -2px -157px;	}
+.permYesInherit		{	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -60px -158px;	}
+.permNoInherit		{	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -163px -62px;	}
+
+
+.permDelete {
+	float:right;
+	width:16px;
+	height:16px;
+	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -94px -101px;
+	cursor:pointer;	
+}
+
+
+#permKeyBlock {
+	float:left;
+	width:100%;
+	margin:10px 0px;
+}
+
+.permKeyLine {
+	float:left;
+	width:250px;
+	margin:0px 0px 0px 0px;
+}
+
+.permKeyLineText {
+	width:205px;
+	float:left;
+	text-align:right;
+	padding:4px 10px 0px 0px;
+	margin:0px 0px 0px 0px;
+}
+
+.permKeyLinePerm1, .permKeyLinePerm2, .permKeyLinePerm3, .permKeyLinePerm4 {
+	width:24px;
+	height:24px;
+	float:left;
+}
+
+.permKeyLinePerm1 { background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -2px -157px; }
+.permKeyLinePerm2 { background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -117px -157px; }
+.permKeyLinePerm3 { background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -60px -158px; }
+.permKeyLinePerm4 { background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -172px -158px; }
+
+#errorLine {
+	width:100%;
+	float:left;
+	color:#730324;
+	font-size:14px;
+	text-align:center;
+	margin:0px 0px 10px 0px;
+}

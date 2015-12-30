@@ -1,0 +1,823 @@
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------- OVERALL WRAPPERS AND PAGE DISPLAY ---------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*
+For the colors, the "Cherries on the Lake" pattern was used for colors. The "Theme 3" was also looked at.
+Red			-	#730324
+White		-	#DFE3E5
+Light Blue	-	#B4C4D4
+Middle Blue	-	#8BA2BD
+Dark Blue	-	#456382
+
+*/
+html {
+	height:100%;
+	width:100%;
+}
+
+
+body {
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px;
+	background-color:#DFE3E5;
+	font-family:'Lato', sans-serif;
+	font-size:1em;
+	letter-spacing:1px;
+	font-weight:300;
+	height:100%;
+	width:100%;
+}
+
+#container {
+	width:100%;
+	height:100%;
+	min-width:1200px;
+}
+
+p {
+	text-align:justify;
+	line-height:1.75em;
+}
+
+#overall_wrapper {
+	width:100%;
+	height:100%;
+}
+
+.main_section {
+	width:100%;
+	height:100%;
+	display:none;
+	margin:0px 0px 0px 0px;
+}
+
+.main_sectionOuter {
+	width:100%;
+	margin:0px 10px;
+}
+
+.main_sectionInner {
+	width:1000px;
+	margin:0px auto;
+}
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------ END OF WRAPPERS AND PAGE DISPLAY ---------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------- LEFT MENU ITEMS -------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+#menu_wrapper {
+	position:fixed;
+	left:0px;
+	top:0px;
+	width:100%;
+	height:40px;
+	margin:0px 0px 0px 0px;
+	background-color:#456382;
+	border-bottom:2px solid #730324;	
+	overflow:scroll;
+}
+
+#themenu {
+	width:980px;	
+	height:20px;
+	margin:0px auto;
+}
+
+.menuitem_wrapper {
+	float:left;
+	width:140px;
+	height:20px;
+	font-size:1em;
+	padding:10px 0px 10px 0px;
+	color:#DFE3E5;
+	text-transform:uppercase;	
+	cursor:pointer;	
+	text-align:center;
+}
+
+.menuitem_text {
+	width:100%;
+	padding:2px 0px 2px 0px;
+	letter-spacing:2px;
+	height:16px;
+}
+
+.menuitem_hover {
+	height:15px;
+	width:15px;
+	position:relative;
+	left:-10px;
+	top:0px;
+	background-color:#8BA2BD;
+	border-radius:12px;
+}
+
+.menuitem_current {
+	height:15px;
+	width:15px;
+	position:relative;
+	left:-10px;
+	top:0px;
+	background-color:#456382;
+	border-radius:12px;
+}
+
+.menuitem_social {
+	width:145px;
+	padding:10px 20px 0px 20px;
+	margin:20px 0px 0px 40px;
+	border-top:1px solid #ccc;
+}
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------- END OF LEFT MENU ITEMS ----------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------- CENTER SPLASH ITEMS ------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+#landing_wrapper {
+	position:fixed;
+	top:50%;
+	left:50%;
+	margin:0px auto;
+	width:550px;
+	height:500px;
+}
+
+#logo_wrapper {
+	width:550px;
+	height:300px;
+	position:relative;
+	top:-150px;
+	left:-275px;
+}
+
+#logo {
+	width:550px;
+	height:300px;
+	background: url(http://www.cadwolf.com/Images/blacklogo.gif) no-repeat;
+	margin:0px auto;
+}
+
+#slogan_wrapper {
+	width:550px;
+	height:75px;
+	text-align:center;
+	font-size:28px;
+	letter-spacing:5px;
+	margin:0px auto 0px auto;
+	position:relative;
+	top:-150px;
+	left:-275px;
+}
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------ END OF CENTER SPLASH ITEMS ---------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------- RIGHT SIDE SUBMENU ITEMS ----------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+#submenu_wrapper {
+	position:fixed;
+	top:0px;
+	right:0px;
+	height:100%;
+	opacity:0.9;
+}
+
+#submenu_left {
+	height:100%;
+	width:30px;
+	background-color:#456382;	
+}
+
+#submenu_left:after {
+	right: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-color: rgba(69, 99, 130, 0);
+	border-right-color: #456382;
+	border-width: 30px;
+	margin-top: -30px;
+}
+
+#submenu_iconwrapper {
+	height:16px;
+	width:16px;
+	position:relative;
+	float:left;
+	top:50%;
+	left:-16px;
+	z-index:9999;
+}
+
+#submenu_icon {
+	background: url(/Images/homepage_white_sprite.png) no-repeat -2px -2px;
+	height:16px;
+	width:16px;
+	position:relative;
+	float:left;
+	top:-8px;
+	z-index:9999;
+	cursor:pointer;
+}
+
+
+#submenu_content {
+	float:left;
+	height:100%;
+	width:300px;
+	background-color:#456382;	
+	display:none;
+}
+
+#submenu_menu {
+	width:300px;
+	height:100%;
+	color:#DFE3E5;	
+	position:fixed;
+	top:0px;
+	right:0px;
+	padding:50px 0px 0px 0px;
+	background:#456382;
+}
+
+.submenu_title {
+	width:200px;
+	height:30px;
+	margin:20px 50px 0px 50px;
+	text-transform:uppercase;
+	font-size:17px;
+	border-bottom:3px solid #B4C4D4;
+}
+
+.submenu_item {
+	width:200px;
+	margin:0px 50px 0px 50px;
+	font-size:13px;	
+	border-bottom:2px solid #B4C4D4;
+	cursor:pointer;
+	padding:7px 0px 7px 0px;
+	text-transform:uppercase;
+	color:#DFE3E5;
+}
+
+.submenu_social {
+	width:200px;
+	margin:0px 50px 0px 50px;
+	padding:25px 0px 0px 25px;
+}
+
+.submenulink  {
+	text-decoration:none;
+	color:#DFE3E5;
+}
+
+.submenu_item:hover {
+	background-color:#B4C4D4;
+}
+
+.submenulink:hover {
+	color:#456382;
+}
+
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------- RIGHT SIDE SUBMENU ITEMS ---------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------- ITEMS DISPLAYED IN THE TEXT ------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+
+.mastBlock {
+	position:fixed;
+	top:60px;
+	left:60px;
+	width:260px;
+	height:60px;
+	padding:0px 0px 0px 0px;
+	cursor:pointer;
+	display:none;
+	z-index:9999;
+}
+
+#mastImage {
+	float:left;
+	width:60px;
+	height:60px;
+	margin:0px 0px 10px 10px;
+	background-image:url(/Images/blacklogo_face.png);
+	cursor:pointer;
+}
+
+.mastText {
+	float:left;
+	width:180px;
+	height:25px;
+	margin:20px 0px 0px 10px;	
+	font-size:24px;		
+	font-family:Cinzel;
+	letter-spacing:9px;
+	cursor:pointer;
+}
+
+#intro_videoblock {
+	display:none;
+	width:700px;
+	height:394px;	
+	position:absolute;
+	top:-375px;
+	left:-415px;
+}
+
+#intro_video {
+	width:560px;
+	height:316px;	
+	position:absolute;
+	top:50%;
+	-ms-transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	transform:translateY(-50%);
+	left:50%;
+	-ms-transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	-moz-transform: translateX(-50%);
+	-o-transform: translateX(-50%);
+	transform:translateX(-50%);
+}
+
+#intro_videoclose {
+	width:16px;
+	height:16px;	
+	position:absolute;
+	top:0px;
+	right:0px;
+}
+
+#intro_videotext {
+	width:550px;
+	height:25px;
+	text-align:center;
+	font-size:12px;
+	letter-spacing:2px;
+	margin:0px auto 0px auto;
+	position:relative;
+	top:-140px;
+	left:-275px;
+	cursor:pointer;
+}
+
+#intro_videotext:hover {
+}
+
+#loginText {
+	width:50px;
+	height:25px;
+	text-align:center;
+	font-size:10px;
+	letter-spacing:2px;
+	margin:0px auto 0px auto;
+	position:relative;
+	top:-135px;
+	left:-275px;
+	cursor:pointer;
+}
+
+#loginText a {
+	text-decoration:none;
+	color:#000;
+}
+
+.titleBlock {
+	float:left;
+	width:800px;
+	border-bottom:1px solid #ccc;
+	margin:25px 100px 10px 100px;
+}
+
+.titleWrapper {
+	width:400px;
+	margin:25px auto;
+	height:52px;
+}
+
+.titleImageWrapper {
+	float:left;
+	background-color:#456382;
+	margin:0px 18px 0px 0px;
+	border-radius:26px;
+	padding:10px;	
+}
+
+.titleImage{
+	float:left;
+	width:32px;
+	height:32px;
+}
+
+.titleText {
+	width:330px;
+	margin:0px 0px 0px 0px;
+	font-size:26px;
+	float:left;
+	text-align:left;	
+	padding:10px 0px 0px 0px;	
+}
+
+#titlePaw 			{ background: url(/Images/homepage_white_sprite.png) no-repeat -259px -64px; }
+#titleDocument 		{ background: url(/Images/homepage_white_sprite.png) no-repeat -42px -65px; }
+#titleWorkspace 	{ background: url(/Images/homepage_white_sprite.png) no-repeat -2px -64px; }
+#titleDataset 		{ background: url(/Images/homepage_white_sprite.png) no-repeat -86px -66px; }
+#titlePartTree 		{ background: url(/Images/homepage_white_sprite.png) no-repeat -128px -66px; }
+#titleUser 			{ background: url(/Images/homepage_white_sprite.png) no-repeat -173px -61px; }
+#titleDocumentation { background: url(/Images/homepage_white_sprite.png) no-repeat -307px -65px; }
+#titleBenefits 		{ background: url(/Images/homepage_white_sprite.png) no-repeat -214px -65px; }
+
+.section_subtitle{
+	float:left;
+	width:800px;
+	text-align:center;
+	font-size:18px;
+	color:#898989;
+	margin:10px 0px 20px 0px;	
+}
+
+.section_header {
+	float:left;
+	width:800px;
+	text-align:left;
+	font-size:20px;
+	font-weight:bold;
+	color:#000;		
+	line-height:24px;
+	margin:20px 100px 20px 100px;
+	text-transform:uppercase;
+}
+
+.section_text{
+	float:left;
+	width:800px;
+	text-align:justify;
+	font-size:16px;
+	color:#000;		
+	line-height:1.75em;
+	margin:10px 100px 10px 100px;
+}
+
+.videowrapper {
+	width:800px;
+	margin:0px auto;
+}
+
+.video_inner {
+	float:left;
+	margin:50px 0px 0px 0px;
+}
+
+#section_sublinks {
+	float:left;
+	width:200px;
+	margin:70px 0px 0px 0px;	
+}
+
+.section_sublink {
+	float:left;
+	width:170px;
+	cursor:pointer;	
+	margin:10px 20px 0px 0px;	
+	border-top:1px solid #ccc;
+	padding:7px 0px 0px 5px;
+}
+
+#section_exampleBlocks {
+	float:right;
+	width:800px;	
+	margin:50px 0px 0px 0px;	
+}
+
+.section_exampleBlock {
+	float:right;
+	width:800px;	
+	height:600px;
+	background-size:cover;	
+}
+
+#exampleBlock1 { background:url(http://www.cadwolf.com/Images/Screenshots/CADWOLF_SS1.png) no-repeat; background-size:cover; }
+#exampleBlock2 { background:url(http://www.cadwolf.com/Images/Screenshots/CADWOLF_SS3.png) no-repeat; background-size:cover; display:none; }
+#exampleBlock3 { background:url(http://www.cadwolf.com/Images/Screenshots/CADWOLF_SS2.png) no-repeat; background-size:cover; display:none; }
+#exampleBlock4 { background:url(http://www.cadwolf.com/Images/Screenshots/CADWOLF_SS4.png) no-repeat; background-size:cover; display:none; }
+#exampleBlock5 { background:url(http://www.cadwolf.com/Images/Screenshots/CADWOLF_SS5.png) no-repeat; background-size:cover; display:none; }
+#exampleBlock6 { background:url(http://www.cadwolf.com/Images/Screenshots/CADWOLF_SS6.png) no-repeat; background-size:cover; display:none; }
+#exampleBlock7 { background:url(http://www.cadwolf.com/Images/Screenshots/CADWOLF_SS7.png) no-repeat; background-size:cover; display:none; }
+#exampleBlock8 { background:url(http://www.cadwolf.com/Images/Screenshots/CADWOLF_SS8.png) no-repeat; background-size:cover; display:none; }
+#exampleBlock9 { background:url(http://www.cadwolf.com/Images/Screenshots/CADWOLF_SS9.png) no-repeat; background-size:cover; display:none; }
+
+.standAloneImage {
+	float:left;
+	width:800px;
+	height:600px;
+	margin:50px 100px 50px 100px;
+	background-size:cover;
+}
+
+#workspaceImage {	background:url(http://www.cadwolf.com/Images/Screenshots/CADWOLF_SS10.png) no-repeat; background-size:cover; }
+#DatasetImage {	background:url(http://www.cadwolf.com/Images/Screenshots/CADWOLF_SS11.png) no-repeat; background-size:cover; }
+#PartTreeImage {	background:url(http://www.cadwolf.com/Images/Screenshots/CADWOLF_SS12.png) no-repeat; background-size:cover; }
+	
+
+
+
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------- END OF ITEMS DISPLAYED IN THE TEXT ---------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------- TEAM PAGE ITEMS -------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+.banner_main_title {
+	float:left;
+	width:100%;
+	font-size:2.25em;
+	text-align:center;
+	margin:15px 0px;
+	font-family:Lato;
+	letter-spacing:2px;
+}
+
+.Member_Wrapper {
+	width:100%;
+	margin:0px auto;
+	float:left;
+}
+
+.Member_Inner {
+	width:800px;
+	margin:0px auto;
+}
+
+.Member_Left {
+	float:left;
+	width:250px;
+}
+
+.Member_Right {
+	float:right;
+	width:550px;
+}
+
+.Member_Image_Wrapper {
+	border:4px solid #8BA2BD;
+	width:188px;
+	height:188px;
+	border-radius:94px;
+}
+
+.Member_Image {
+	height:180px;
+	width:180px;
+	border-radius:90px;
+	border:4px solid #456382;
+	background:url('http://www.cadwolf.com/Images/mypic.png');
+}
+
+.Member_Line {
+	width:100%;
+	float:left;
+}
+
+.Member_HalfLabel {
+	float:left;
+	width:150px;
+	font-size:1.2em;
+	height:30px;
+	border-bottom:2px solid #456382;
+	padding:8px 0px 0px 0px;
+}
+
+.Member_Label {
+	float:left;
+	width:100%;
+	font-size:1.2em;
+	border-bottom:2px solid #456382;
+	padding:8px 0px;	
+}
+
+.Member_HalfText {
+	width:350px;
+	float:left;
+	height:27px;
+	padding:11px 0px 0px 50px;
+	border-bottom:2px solid #456382;
+}
+
+.Member_Text {
+	width:550px;
+	float:left;
+}
+
+.Value_Wrapper {
+	float:left;
+	width:100%;
+	margin:0px auto;
+}
+
+.Value_Inner {
+	width:800px;
+	margin:0px auto;
+}
+
+.Value_Text {
+	
+}
+.bold_block {
+	font-size:1.25em;
+	font-weight:bold;
+}
+
+
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------- END OF TEAM PAGE ITEMS -----------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------ ICON SELECTOR ----------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+#icons_wrapper {
+	float:left;
+	width:800px;
+	margin:30px 100px 0px 100px;
+	height:150px;
+}
+
+.icon_wrapper {
+	float:left;
+	width:350px;
+	padding:10px 25px;
+}
+
+.icon_text {
+	float:right;
+	font-size:1.25em;
+	border-bottom:2px solid #456382;
+	width:306px;
+	padding:0px 0px 2px 0px;
+	height:25px;
+	position:relative;
+	top:-5px;
+}
+
+.icon_text_current {
+	float:right;
+	font-size:1.25em;
+	border-bottom:2px solid #730324;
+	width:306px;
+	padding:0px 0px 2px 0px;
+	height:25px;
+	position:relative;
+	top:-5px;
+}
+
+.icon_innertext {
+	padding:0px 0px 0px 10px;
+}
+
+.icon_wrap {
+	width:40px;
+	height:40px;
+	border:2px solid #456382;
+	border-radius:25px;
+	float:left;
+	background-color:#456382;
+}
+
+.icon_wrap_current {
+	width:40px;
+	height:40px;
+	border:2px solid #730324;
+	border-radius:25px;
+	float:left;
+	background-color:#730324;
+}
+
+.cadwolf_icon {
+	height:24px;
+	width:24px;
+	margin:3px;
+	padding:5px;
+	cursor:pointer;
+}
+
+.icon_smalltext {
+	float:left;
+	font-size:0.7em;
+	width:295px;
+	padding:2px 0px 0px 10px;
+}
+
+#icon_documentation	{	background: url(http://www.cadwolf.com/Images/homepage_sprite.png) no-repeat -36px -55px;  }
+#icon_examples	{	background: url(http://www.cadwolf.com/Images/homepage_sprite.png) no-repeat -188px -56px;  }
+#icon_sample	{	background: url(http://www.cadwolf.com/Images/homepage_sprite.png) no-repeat -32px -89px;  }
+#icon_accounts	{	background: url(http://www.cadwolf.com/Images/homepage_sprite.png) no-repeat -157px -54px;  }
+
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------- END OF ICON SELECTOR --------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------- EXAMPLE BLOCK SECTION -------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+.example_block {
+	float:left;
+	width:800px;
+	margin:40px 100px;
+}
+
+.example_textBlock {
+	float:left;
+	width:380px;
+	margin:0px 20px 0px 0px;	
+	text-align:justify;
+	letter-spacing:1.5px;
+}
+
+.example_titleLine {
+	float:left;
+	width:100%;		
+	font-size:1.3em;
+	margin:0px 0px 10px 0px;
+	text-align:center;
+	
+}
+
+.example_titleLine a {
+	text-decoration:none;
+	color:#000;
+}
+
+.example_textLine {
+	float:left;
+	width:100%;	
+	margin:0px 0px 20px 0px;	
+}
+
+.example_textFull {
+	float:left;
+	width:100%;	
+	font-size:0.8em;
+	letter-spacing:1.5px;
+	line-height:1.5em;	
+}
+
+.example_videoBlock{
+	float:left;
+	width:400px;		
+}
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------- END OF EXAMPLE BLOCKS -------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/

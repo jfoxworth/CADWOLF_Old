@@ -1,0 +1,246 @@
+/* ---------------------------------------------------------------------
+   This just controls the landing page and a few other greetings pages
+---------------------------------------------------------------------- */
+
+html {
+	height:100%;
+}
+
+body {
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px;
+	height:100%;
+	font-family:sans-serif;
+	font-weight:100;
+	letter-spacing:1px;
+	text-align:justify;
+	color:#464e4f;
+}
+
+a {
+	color:#456382;
+	text-decoration:none;
+	border-bottom:1px dashed #456382;
+	font-weight:bold;
+}
+
+a:hover {
+	color:#730324;
+	text-decoration:none;
+}
+
+p {
+	line-height:20px;
+}
+
+/*------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------- Login Box ------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------------*/
+#login_box {
+	width:30%;
+	margin:0px 35%;
+	height:4%;
+	min-height:27px;
+}
+
+#login {
+	font-size:1.2em;
+	border:1px solid #FFF;
+	padding:3px 0px;
+	border-radius:4px;
+	cursor:pointer;
+}
+
+#login_box a { text-decoration:none; color:#FFF; }
+#login a { text-decoration:none; color:#FFF; }
+
+
+/*------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------- Main Banner and Boxes ------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------------*/
+#container {
+	margin:0 auto;
+	height:100%;
+	width:100%;
+}
+
+#Documentation_Wrapper {
+	margin:0px 0px 0px 100px;
+	padding:0px 15px;
+}
+
+
+#main_wrapper {
+	margin:0px auto;
+	height:100%;
+	width:100%;
+	z-index:9999;
+	float:left;
+	padding:0px;
+}
+
+.right_wrapper {
+	width:1000px;
+	margin:0px auto;
+}
+
+.mainblock {
+	float:left;
+	width:100%;
+	margin:1em 0px;
+}
+/*------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------- Login Items ------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------------*/
+
+#login_wrapper2 {
+	width:90px;
+	margin:15px 5px;
+	float:left;
+	position:fixed;
+	bottom:0px;
+	z-index:99999;
+}
+
+#login_dropwrapper2 {
+	margin:auto;
+	max-width:200px;
+	width:auto;
+}
+
+#login_drop2, #login_anchor2 {
+	margin:auto;
+	padding:4px;
+	border:1px solid #DFE3E6;
+	border-radius:5px;
+	color:#DFE3E6;
+	width:auto;
+	text-align:center;
+	letter-spacing:1px;
+	cursor:pointer;
+}
+
+#login_anchor2 a { color:#DFE3E6; }
+
+#login_drop2:hover, #login_anchor2:hover {
+	color:#000;
+	background-color:#FFF;
+}
+
+#dropbox2 {
+	position:fixed;
+	left:108px;
+	bottom:5px;
+	width: 550px;
+	height: 125px;
+	display:none;
+	background-color:#FFF;
+	border:1px solid #000;
+	z-index:1001;
+	padding:10px;
+	border-radius: 10px;
+	color:#000;
+}
+
+#dropbox2:after {
+	right: 100%;
+	bottom: 10%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-color: rgba(255, 255, 255, 0);
+	border-right-color: #FFFFFF;
+	border-width: 15px;
+	margin-top: -15px;
+}
+
+#droplogin_left {
+	float:left;
+	height:125px;
+	width:199px;
+	border-right:1px solid #000;
+	text-align:center;
+}
+
+#droplogin_right {
+	float:left;
+	height:125px;
+	width:339px;
+	padding:0px 0px 0px 10px;
+}
+
+.droplogin_title {
+	width:90%;
+	text-align:center;
+	border-bottom:1px solid #000;
+	margin:0px 5% 10px 5%;
+	letter-spacing:1px;
+	font-family:arial;
+}
+
+.droplogin {
+	margin:5px 0px 0px 25px;
+}
+
+#facebook_data {
+	font-size:0.85em;
+	font-family:arial;
+}
+
+#fb_connected {
+	padding:5px 5%;
+	text-align:center;
+	width:80%;
+	background-color:#456382;
+	color:#FFF;
+	margin:5px 5%;
+	border-radius:5px;
+	cursor:pointer;
+}
+
+#fb_button {
+	width:22%;
+	margin:0px auto;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------- The examples list --------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+
+.example_block {
+	float:left;
+	width:100%;
+	margin:10px 0px 0px 0px;
+	border-top:1px solid #456382;
+}
+
+.example_link {
+	float:left;
+	height:16px;
+	width:16px;
+	background: url(http://www.cadwolf.com/Images/homepage_sprite.png) no-repeat -13px -247px;  
+	cursor:pointer;	
+	margin:8px 0px;
+}
+
+.example_title {
+	float:left;
+	width:958px;
+	font-size:1.1em;
+	cursor:pointer;
+	height:27px;
+	padding:5px 0px 0px 10px;
+}
+
+.example_description {
+	float:left;
+	width:90%;
+	font-size:0.9em;
+	margin:1% 5%;
+	line-height:20px;
+	display:none;
+}
+/*--------------------------------------------------------------------------------------------------------------------------------------*/

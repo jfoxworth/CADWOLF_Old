@@ -1,0 +1,4868 @@
+/* ---------------------------------------------------------------------
+   This just controls the landing page and a few other greetings pages
+---------------------------------------------------------------------- */
+
+
+/*
+For the colors, the "Cherries on the Lake" pattern was used for colors. The "Theme 3" was also looked at.
+Red			-	#730324
+White		-	#DFE3E5
+Light Blue	-	#B4C4D4
+Middle Blue	-	#8BA2BD
+Dark Blue	-	#456382
+
+*/
+
+
+
+html {
+	height:100%;
+	width:100%
+}
+
+body {
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px;
+	height:100%;
+	font-family:'Arimo', sans-serif !important;
+	font-weight:300;
+	font-size:0.875em;
+	letter-spacing:1px;
+/*	background-image:url(/Images/Pages/white_wall_hash.png); */
+}
+
+p, ul, ol {
+/*	font-size:1.1em Helvetica, arial, freesans, clean, sans-serif; */
+	letter-spacing:1px;
+	line-height:20px;
+	color:#333333;
+}
+
+.bodymain { display:none; }
+
+#MainBody {
+	height:100%;
+	width:845px;
+	margin:5px auto;
+	padding:0px 10px;
+}
+
+h1, .h1edit {
+	border-bottom: 1px solid #ccc;
+	margin:20px 0px 0px 0px;
+	padding:0px;
+	letter-spacing:2px;
+	font-weight:300;
+	font-size:1.85em;
+}
+
+h2, .h2edit {
+	width:100%;
+	float:left;
+	padding:0px 0px 0px 0px;
+	margin:20px 0px 0px 0px;
+	letter-spacing:2px;
+	font-weight:300;
+	border-bottom: 1px dashed #ccc;
+	font-size:1.75em;
+}
+
+h3, .h3edit {
+	width:100%;
+	float:left;
+	padding:0px 0px 0px 0px;
+	margin:10px 0px 0px 0px;
+	letter-spacing:1px;
+	font-weight:300;
+	font-size:1.5em;
+}
+
+h4, .h4edit {
+	width:100%;
+	float:left;
+	padding:0px 0px 0px 0px;
+	margin:10px 0px 0px 0px;
+	letter-spacing:1px;
+	font-weight:300;
+	font-size:1.25em;
+}
+
+h5, .h5edit {
+	width:95%;
+	float:left;
+	padding:0px 0px 0px 0px;
+	margin:0px 0px 0px 5%;
+	letter-spacing:1px;
+	font-weight:300;
+	font-size:1.25em;
+}
+
+h2.inputs { width:1000px; }
+
+.fileheader {
+	width:100%;
+	float:left;
+	padding:25px 0px 10px 0px;
+	margin:25px 0px 15px 0px;
+	border-bottom: 1px solid #ccc;
+	font-size:1.75em;
+}
+
+.titleblock {
+	width:100%;
+	font-size:2.75em;
+	text-align:center;
+	margin:10px 0px;
+	letter-spacing:2px;
+}
+
+.subtitleblock {
+	width:100%;
+	font-size:1.2em;
+	text-align:center;
+	color:#898989;
+	margin:5px 0px 40px 0px;
+}
+
+/*-----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------- The Option bar -----------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------------------------------------------------*/
+.option_save {
+	float:left;
+	width:25px;
+	font-size:12px;
+	margin:5px 0px 0px 25px;
+	text-align:center;
+	padding:2px;
+}
+
+.option_formatitem {
+	float:left;
+	width:75px;
+	font-size:12px;
+	margin:2px 5px 0px 5px;
+	text-align:center;
+	padding:2px;
+}
+
+.option_subitem img{
+	padding:0px 10px 0px 0px;
+	height:18px;
+	line-height:18px;
+}
+
+.widthitem {
+	float:left;
+	width:75px;
+	margin:3px 2px 2px 5px;
+	border:1px solid #000000;
+	padding:1px;
+	text-align:center;
+}
+
+.margintop, .marginbottom, .marginleft, .marginright {
+	float:left;
+	width:75px;
+	margin:3px;
+	border:1px solid #000000;
+	padding:1px;
+	text-align:center;
+}
+
+/*-----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------- End of The Option Bar ----------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------------------------------------------------*/
+#main_wrapper {
+	width:100%;
+	height:100%;
+	position:fixed;
+	top:0px;
+	left:0px;
+	background-color:#FFF;
+}
+
+#content_wrapper {
+	height:100%;
+	text-align:justify;
+	width:99.9%;
+}
+
+#main_column {
+	float:left;
+	width:100%;
+}
+
+#main_contents {
+	margin:0px 0px 0px 250px;
+}
+
+#main_usecontents {
+	margin:0px 0px 0px 100px;
+}
+
+#content {
+	width: 850px;
+	height:100%;
+	margin:82px 0px 0px 300px;
+}
+
+#clicktotopenter {
+	width:100%;
+	height:15px;
+	background: url(/Images/Pages/Plus.png) no-repeat left top;
+	margin:0px 0px 15px 0px;
+	width:15px;
+}
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------ Inputs and text areas -----------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+#tocloneheader { display:none; }	
+
+textarea:focus, input:focus{
+    outline: 0;
+}
+
+input {
+	width:100%;
+	font-size:12px;
+}
+
+.header_block {
+	float:left;
+	width:100%;
+}
+
+.hedit{    border:0px; }
+
+
+.h1edit{  border:0px; 	background-image:url(/Images/Pages/white_wall_hash.png); }
+.h2edit{  border:0px;	background-image:url(/Images/Pages/white_wall_hash.png); }
+.h3edit{  border:0px; 	background-image:url(/Images/Pages/white_wall_hash.png);}
+.h4edit{  border:0px; 	background-image:url(/Images/Pages/white_wall_hash.png);	}
+
+
+
+.hedit_box {
+	border:1px solid #ccc;
+	width:100px;
+	text-align:center;
+	position:relative;
+	top:20px;
+	right:85px;
+	background-color:#FFFFFF;
+}
+
+.hedit_line {
+	width:100px;
+}
+
+.hedit_line:hover {
+	background-color:#CCCCCC;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------- Bug reporting system -----------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+#bugme 	{	
+	cursor:pointer;
+	position:fixed;
+	top:10px;
+	left:210px;
+	width:24px;
+	height:24px;
+	z-index:99999;
+	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -129px -211px; 
+}
+
+#bugme_view	{	
+	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -129px -211px; 
+}
+
+#bugdone 	{	
+	cursor:pointer;
+	width:30%;
+	padding:5px 0px;
+	margin:10px 35%;
+	color: #456382;
+	border:1px solid #456382;
+	border-radius:5px;
+	text-align:center;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+.linebreak_block {
+	float:left;
+	width:100%;
+	height:15px;
+	cursor:vertical-text;
+	margin:4px 0px;
+	clear:both;
+	border-bottom:1px solid #ccc;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------- The main item and cloned items -----------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+.main_item {
+	float:left;			
+	padding:0px 0px 0px 0px;	
+	width:100%;	
+	height:auto;			
+}
+
+.inactive {color:#ccc;}
+
+#toclonevar, #tocloneeq, #toclonesubeq, #toclonesym, #toclonetable, #tocloneforloop, #hidevar, #hideme, #tocloneforloopeq,  #toclonewhileloop,  
+	#toclonewhileloopstatements,  #toclonewhileloopblock, #tocloneifelse, #toclonesubline, #tocloneinput, #toclonetext, #tocloneifelseblock, 
+	#tocloneifelsestatements, #tocloneimage
+{
+    display:none;							
+}
+
+.hidden { display:none; }
+/*-----------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------- Variables and Equations ----------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+.input_error {
+	color: #C83E16;
+}
+
+.input_valid {
+	color:#000000;
+}
+
+.equationblock, .symequationblock, .tableblock {
+	cursor:pointer;
+	float:left;
+	width:99%;
+}
+
+.equationblock, .symequationblock {
+	overflow-x:visible;
+	font-size:0.9em;
+}
+
+.tableblock {
+	overflow-x:hidden;
+}
+
+.plot_block {
+	cursor:pointer;
+	float:left;
+	width:100%;
+	overflow-x:auto;
+}
+
+.plot_pietitletext {
+	float:left;
+	width:75px;
+}
+
+.plot_piecolorpicker
+{
+	
+}
+
+.plot_pielabelinput, .plot_piedatainput, .plot_piextrans, .plot_pieytrans
+{
+	float:left;
+	width:60px;
+	margin:2px 5px 0px 5px;
+	padding:0px;
+	height:20px;
+}
+
+#pieXText
+{
+	position:absolute;
+	left:320px;
+	top:140px;
+	width:63px;
+	font-size:0.8em;
+}
+
+#pieX
+{
+	position:absolute;
+	left:322px;
+	top:155px;
+}
+
+#pieYText
+{
+	position:absolute;
+	left:320px;
+	top:195px;
+	width:62px;
+	font-size:0.8em;
+}
+
+#pieY
+{
+	position:absolute;
+	left:322px;
+	top:210px;
+}
+
+.plot_pieLabelX, .plot_pieLabelY
+{
+	width:50px;
+}
+
+.unusedplot {
+	height:128px;
+	width:128px;
+	background-image:url(/Images/713.GIF);
+}
+
+.eqshow {
+	float:left;
+	width:100%;
+	text-align:center;
+}
+
+.eqparam {
+	width:99%;
+	margin:0px;
+	border:0px;
+	display:none;
+	font-size:18px;
+	font-family: MathJax_Main,MathJax_Size1,MathJax_AMS;
+/*	background-image:url(/Images/Pages/white_wall_hash.png); */
+	text-align:center;
+}
+
+.eqparam_cont {
+	width:100%;
+	margin:0px;
+	padding:0px;
+	z-index:0;
+}
+
+.subequationblock {
+	text-align:left;
+	margin: 0px 0px 0px 5px;
+	padding:0px 0px 5px 0px;
+	width:auto;
+	height:auto;
+	float:left;
+}
+
+.subeqshow {
+	float:left;
+	text-align:left;
+	padding: 0px 5px 0px 15px;
+}
+
+
+.subeqshow {
+	float:left;
+	text-align:left;
+	padding: 0px 5px 0px 15px;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------- Equation box showing various formats ---------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+#hideeq {
+	display:none;
+}
+
+.equationtext  {
+	margin:3px 2px 2px 10px;
+	width:350px
+}
+
+.equation_box {
+	text-align:left;
+}
+
+.edit_box, .full_box, .number_box, .units_box, .var_box {
+	display:none;
+}
+
+.equation_block {
+	float:left;
+	text-align:center;
+}
+
+.tabs_cont {
+	float:left;
+	text-align:left;
+	width:100%;
+}
+
+.equation_cont {
+	float:left;
+	text-align:left;
+	padding:15px 10px 15px 10px;
+}
+
+.tab_edit a, .tab_variables a, .tab_units a, .tab_numbers a, .tab_full a, .tab_equation a, .tab_errors a {
+	float:left;
+	color:#898989;
+	border-top:1px solid #898989;
+	border-left:1px solid #898989;
+	border-right:1px solid #898989;
+	margin: 5px 4px 0px 4px;
+	padding: 2px 4px 0px 4px;
+	text-decoration:none;
+	text-align:center;
+	width:65px;
+	font-size:12px;
+}
+
+.eq_select_area {
+	float:left;
+	width:400px;
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------- The Variable Table ------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+.variables {
+	text-align: center;
+	font-size: 12px;
+	border-collapse: collapse;
+	border: 0px #000 solid;
+	padding: 10px 20px 25px 20px;
+	margin:20px 10px 10px 10px;
+}
+
+table.variables th {
+	font-size: 12px;
+	font-weight: bold;
+	padding: 0px 10px 5px 10px;
+}
+
+table.variables td {
+	border-collapse: collapse;
+	padding: 7px 25px 5px 25px;
+	font-size: 12px;
+}
+
+table.variables tr {
+	border-bottom: 1px #ccc solid;
+}
+
+
+#equationtable, #conversiontable
+{
+	display:none;
+}	
+
+#variabletable
+{
+	float:left;
+}		
+
+#variabletable td
+{
+	width:100px;
+}		
+
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------ Tables --------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+.tableblock {
+	float:left;
+}
+table.contenttable {
+	text-align: center;
+	font-size: 14px;
+	border-collapse: collapse;
+	table-layout:fixed;
+}
+
+table.contenttable th.edit {
+	font-size: 1.15em;
+	font-weight: bold;
+	border: 1px #000 solid;
+	word-wrap: break-word;
+	background:#ECECEC;
+	width:100%;
+}
+
+table.contenttable td {
+	padding: 0px;
+	margin:0px;
+	min-width:15px;
+	min-height:20px;
+	word-wrap: break-word;
+	border: 1px #000 solid;
+}
+
+.toedit {
+	float:left;
+	width:100%;
+	min-height:20px;
+}
+
+table.contenttable td.empty {
+	border: 0px #000 solid;
+}
+
+table.contenttable tr {
+	margin:0px;
+	padding:0px;
+}
+
+
+.tabletext {
+	min-width:10px;
+	min-height:20px;	
+}
+
+#tableinput {
+	float:left;
+	border:0px;
+	margin:0px;
+	padding:0px;
+	text-align: center;
+	width:100%;
+	height:100%;
+	background-color:#B4C4D4;
+}
+
+.label {
+	background-color:#ACACAC;
+	border: 1px #000 solid;
+}
+
+.tradd {
+	float:right;
+	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -323px -66px;
+	width:15px;
+	height:15px;
+	border: 0px #FFF solid;
+	padding:0px;
+	display:none;
+}
+
+.trdelete {
+	float:right;
+	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -323px -99px;
+	width:15px;
+	height:15px;
+	border: 0px #FFF solid;
+	padding: 0px;
+	display:none;
+}
+
+.tcadd {
+	float:right;
+	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -323px -66px;
+	width:15px;
+	height:15px;
+	border: 0px #FFF solid;
+	padding:0px;
+	display:none;
+}
+
+.tcdelete {
+	float:right;
+	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -323px -99px;
+	width:15px;
+	height:15px;
+	border: 0px #FFF solid;
+	padding: 0px;
+	display:none;
+}
+
+.empty {
+	border: 0px #000 solid;
+	padding: 0px;
+	border: 0px #FFF solid;
+	height:15px;
+}
+
+
+.edittable {
+	height:15px;
+	width:35px;
+}
+
+input.thedit {
+	background-color:#ECECEC;
+	width:100%;
+	border:0px;
+	text-align:center;
+	font-size:1.15em;	
+	font-weight: bold;
+	padding:0px;
+	margin:0px;
+}
+
+.fillcolumn {
+	float:right;
+	background: url(/Images/Pages/udarrow.gif) no-repeat left top;
+	width:10px;
+	height:20px;
+}
+
+.filler_holder {
+	float:left;
+	width:15px;
+	height:15px;
+}
+
+.filler_void {
+	float:left;
+	background-color: #FFFFFF;
+	width:5px;
+	height:5px;
+}
+
+.filler_up, .filler_down {
+	float:left;
+	background-color: #8BA2BD;
+	width:5px;
+	height:5px;
+	cursor:pointer;
+}
+
+.filler_left, .filler_right {
+	float:left;
+	background-color: #456382;
+	width:5px;
+	height:5px;
+	cursor:pointer;
+}
+
+.tdcurrent {
+	background-color:#B4C4D4;
+}
+
+#tablehandler {
+	text-align: center;
+	font-size: 16px;
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+
+#tablehandler td {
+	padding: 2px;
+	margin:5px 0px 5px 0px;
+	border: 0px #000 solid;
+	width:auto;
+	text-align: center;
+}
+
+#tablehandler tr {
+	height:40px;
+	padding:0px;
+}
+
+.tableoption {
+	text-align: center;
+	width:75px;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------ For Loops -----------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+.forloop {
+	float:left;
+	padding: 0px 0px 10px 0px;
+	margin: 0px 0px 0px 0px;
+	text-align:left;
+	width:100%;
+}
+
+.forloopcontent {
+	float: left;
+	padding: 0px 0px 0px 0px;
+	margin: 0px 0px 0px 4%;
+	width:96%;
+	height:100%;
+	text-align:left;
+}
+
+.itemcurrent {
+	border-left:2px solid #008000; 
+}
+
+.itemneedsupdate {
+	border-left:2px solid #730324; 
+}
+
+.forloopinput, .whileloopinput, .ifelseinput {
+	border:0px;
+	font-size:1em;
+	background-image:url(/Images/Pages/white_wall_hash.png);
+	position:relative;
+	top:-2px;
+	height:18px;	
+}
+
+.forlooptext {
+	float: left;
+	width:auto;
+	height:35px;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 10px;
+}
+
+.forloopstarttext, .forloopwhiletext, .forloopinctext {
+	float:left;
+	border:1px solid #ccc;
+	border-radius:5px;
+	padding:5px;
+	margin:0px 10px 0px 0px;
+}
+
+.forloopwhilevalue, .forloopwhilevaluetemp { cursor:pointer; }
+
+.forloopfor, .forlooplabel, .forloopequal, .forloopstart, .forloopwhile, .forloopend, .forloopinc, .forloopincrease, .forloopinclabel, .forloopend, .forloopequalselect, .ForInsert, forloopstartvalue, forloopequalvalue, forloopincvalue, forloopendvalue, .separator {
+	float: left;
+	padding: 0px 2px 0px 2px;	
+	font-size:1.25em;
+}
+
+.forloopstartselect, .forloopincselect, .forloopendselect, .forloopwhileselect, .forloopstartinput, .forloopincinput, .forloopendinput, .updateforinput {
+	display:none;
+}	
+
+
+.forloopstart, .forloopend, .forloopincrease {
+	width: auto;
+	margin: 0px 15px 0px 5px;	
+}
+
+.forloopequalselect {
+	width: 50px;
+}
+
+.separator {
+	margin:0px 10px 0px 10px;
+}
+.ForInsert {
+	padding:5px;
+	border:1px solid #000;
+}
+
+select.forloopwhileselect {
+	float:left;
+    border-top:0px solid #000000;
+    border-bottom:0px solid #000000;
+    border-left:0px solid #000000;
+    height:20px;
+    width:50px;
+    COLOR: #000000; 
+    padding:0px;
+    margin: 0px;
+}
+
+
+input.forloopstartinput, input.forloopendinput, input.forloopincinput {
+    COLOR: #000000; 
+    height:16px;
+    width:93px;
+    position:relative;
+    left:0px;
+    top:-2px;
+    padding:0px 0px 0px 5px;
+    margin: 0px;
+    background-color:#FFFFFF;
+}
+
+input.plot_ydatainput, input.plot_xdatainput, input.plot_zdatainput, input.plot_xcategoriesinput, input.plot_ycategoriesinput, input.plot_size,
+input.plot_labels, input.plot_seriesname, input.plot_startangle, input.plot_stopangle, input.plot_location, input.plot_innersize, input.plot_lowlimit,
+input.plot_highlimit, input.plot_colorstops, 
+input.surface_near, input.surface_far, input.surface_viewangle,
+input.surface_XYGridHeight, input.surface_XYGridSpace, input.surface_YZGridHeight, input.surface_YZGridSpace, input.surface_XZGridHeight, input.surface_XZGridSpace,
+input.surface_vyloc, input.surface_vzloc, input.surface_cypos, input.surface_czpos, input.plot_monoColor, input.plot_labelcolor, input.plot_labeldistance,
+input.plot_connectorWidth, input.surface_planecolor, input.surface_planewidth, 
+input.surface_planeheight, input.surface_vplanespacing, input.surface_hplanespacing, input.surface_offset, input.plot_labelBorderWidth, input.plot_labelBorderColor,
+input.plot_labelBGColor, input.plot_labelBorderRadius, input.plot_labelBorderPadding, input.plot_labelRotation, input.plot_labelX, input.plot_labelY,
+input.point_colorpicker, input.point_index, input.point_labelcolor, input.point_labelBorderWidth, input.point_labelBorderColor,
+input.point_labelBGColor, input.point_labelBorderRadius, input.point_labelBorderPadding, input.point_labelRotation, input.point_labelX, input.point_labelY,
+input.point_colorpicker, input.point_fillcolorpicker, input.point_symbolselect, input.point_markersize, input.point_plotlinewidth,
+input.point_slicedselect, input.plot_piedatainput, input.plot_pielabels, input.plot_labelSize, input.point_labelSize, input.surface_planeoffset, 
+input.line_datainput, input.line_closed, input.surface_xplaneoffset, 
+input.surface_yplaneoffset, input.surface_zplaneoffset, input.surface_xstart, input.surface_xstop, input.surface_ystart, input.surface_ystop,
+input.surface_zstart, input.surface_zstop, input.surface_xspacing, input.surface_yspacing, input.surface_zspacing, input.surface_zoffset, input.surface_yoffset,
+input.surface_xoffset, input.data_width, input.data_height, input.data_depth, input.data_widthsegs, input.data_heightsegs, input.data_depsegs, input.data_color,
+input.data_xposition, input.data_yposition, input.data_zposition, input.data_xrotation, input.data_yrotation, input.data_zrotation, input.data_radius,
+input.data_detail, input.data_phistart, input.data_philength, input.data_thetastart, input.data_thetalength, input.data_radtop, input.data_radbottom,
+input.data_radsegs, input.data_tuberad, input.data_tubesegs, input.data_arc, input.data_curve, input.data_segs, input.data_wirecolor, input.data_xlathe, 
+input.data_ylathe, input.line_cdatainput, .data_input  {
+    COLOR: #000000; 
+    height:15px;
+    width:105px;
+    padding:2px 0px 2px 5px;
+    margin: 0px;
+    background-color:#FFFFFF;
+	font-size:1em;
+	border:1px solid #ccc;
+}
+
+input.camerainput{
+    COLOR: #000000; 
+    height:15px;
+    width:105px;
+    padding:2px 0px 2px 5px;
+    margin: 0px;
+    background-color:#FFFFFF;
+	font-size:1em;
+	border:1px solid #ccc;
+}
+
+.surface_legendtext {
+	float:left;
+	width:160px;
+	text-align:center;
+}
+
+.surface_legendselect {
+	float:right;
+	width:110px;
+	margin:0px 10px 0px 0px;
+	text-align:center;
+}
+
+input.surface_datainput{
+    COLOR: #000000; 
+    height:15px;
+    width:100px;
+    padding:2px 0px 2px 5px;
+    margin: 0px 7px 0px 0px;
+    background-color:#FFFFFF;
+	font-size:1em;
+	border:1px solid #ccc;
+}
+
+select.surface_dataselect {
+	float:left;
+	width:110px;
+	margin:5px 5px 5px 10px;	
+}
+
+input.plotsmall {
+    COLOR: #000000; 
+    height:15px;
+    width:40px;
+    padding:2px 0px 2px 5px;
+    margin: 0px;
+    background-color:#FFFFFF;
+	font-size:1em;
+}
+
+select.forloopstartselect, select.forloopendselect, select.forloopincselect {
+	position:absolute;
+    border-top:1px solid #000000;
+    height:20px;
+    width:122px;
+    COLOR: #000000; 
+    padding:0px;
+    margin: 0px;
+    font-size:12px;
+}
+
+.subparam_cont {
+	text-align: left;
+	display:none;
+}
+
+input.plot_percentstack, input.plot_normalstack {
+	font-size:2em;
+	margin:0px 0px 0px 45px;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------- Top add line ------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+#topaddline {
+	float:left;
+	padding: 3px 0px 0px 5px;
+	margin: 2px 10px 0px 10px;
+	width:285px;
+	height: 30px;
+	position:relative;
+	top:3px;
+}
+
+.insert_option {
+	float:left;
+	width: 100%;
+	padding:4px 0px 4px 20px;
+	text-align:left;
+	font-size:14px;	
+	cursor:pointer;
+	letter-spacing:1px;
+	color:#DFE3E6;
+}
+
+.insert_option:hover {
+	background-image:linear-gradient(45deg, rgba(69, 99, 130, 0.95) 0%, rgba(69, 99, 130, 0) 70%);
+}
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------- Adding Sub Items ------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+.current {	border:1px dashed #FFFFFF; border-radius:15px;  }
+.notcurrent {	border: 1px solid rgb(255, 255, 255); border: 1px solid rgba(255, 255, 255, 0);  }
+.update {	border:1px dashed #FFFFFF; border-radius:15px;  }
+#tocloneaddline { display:none; }
+.sublineshow, .sublinehide {
+	float: right;
+	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -157px -60px;
+	width:16px;
+	height: 16px;
+	z-index: 1;
+	cursor:pointer;
+}
+
+.addlineshow, .addlinehide {
+	float: left;
+	background: url(http://www.cadwolf.com/Images/Pages/Plus3.png) no-repeat left top;
+	width:24px;
+	height: 30px;
+	margin: 0px 0px 0px 0px;
+	z-index: 1;
+	display:none;
+	position:relative;
+	right:10px;
+}
+
+.subline {
+	float:left;
+	padding: 5px;
+	border: 1px solid #000;
+	width:25px;
+	position:relative;
+	top:18px;
+	left:-10px;
+	background-color:#FFFFFF;
+}
+
+.addline {
+	float:right;
+	padding: 3px 0px 0px 5px;
+	margin: 0px 0px 0px 0px;
+	border-top: 3px solid #979797;
+	border-left: 3px solid #979797;
+	border-right: 3px solid #979797;
+	border-bottom: 3px solid #979797;
+	border-radius: 5px;
+	width:275px;
+	height: 30px;
+	position:relative;
+	top:3px;
+}
+
+.fulladdline {
+	float:left;
+	padding: 0px;
+	margin: 0px;
+	width:95%;
+	height: 30px;
+}
+
+.addequationsub, .addforloopsub, .addwhileloopsub, .addifelsesub, .pulloutsub, .deleteitem, .deleteme {
+	float: left;
+	height: 25px;
+	width: 24px;
+	margin:0px 0px 4px 0px;
+}
+
+.addequationsub 					{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -57px 0px;  }
+.addwhileloopsub					{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -154px 0px;  }
+.addforloopsub						{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -187px 0px;  }
+.addifelsesub						{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -220px 0px;  }
+.pulloutsub							{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -283px -57px;  }
+.deleteme 							{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -317px -30px;  }
+.deleteblock 						{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -193px -34px; }
+
+#addequation 		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -57px -1px; }
+#addsymbolic 		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -89px -1px;}
+#addforloop 		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -187px -1px; }
+#addwhileloop 		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -155px -1px; }
+#addifelse 			{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -220px -1px; }
+#addplot			{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -285px -1px; }
+#add3Dplot			{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -266px -211px; }
+#addtable 			{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -119px -1px; }
+#addtext 			{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat 0px -1px; }
+#addheader 			{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -26px -1px; }
+#addimage 			{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -253px -1px;}
+#addvideo 			{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -316px -248px;}
+#addline 			{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -90px -210px; }
+#addtext_show 		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat 0px -96px; }
+#addheader_show 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -30px -96px; }
+#addequation_show 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -60px -96px; }
+#addplot_show 		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -286px -95px; }
+#add3Dplot_show 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -286px -95px; }
+#addtable_show 		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -121px -93px; }
+#addforloop_show 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -185px -92px; }
+#addwhileloop_show 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -152px -92px; }
+#addifelse_show 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -221px -92px; }
+#addsymbolic_show 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -91px -96px;}
+#addimage_show 		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -255px -96px;}
+
+#SaveFile, #SaveFile_show 			{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -285px -32px;}
+#SaveCheckinFile, #SaveCheckinFile_show 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -255px -32px; }
+
+#SaveBlock { 
+	float:left;
+	width:200px;
+	margin:0px 25px;
+	height:auto;
+	padding:2px;
+	background-color:#456382;
+	font-size:1.25em;
+	border-radius:5px;
+	text-align:center;
+	letter-spacing:1.5px;
+	cursor:pointer;
+}
+
+#SaveBlock:hover {
+	background-color:#730324;
+}
+
+.deleteblock { 
+	float:left;
+	width:16px;
+	height:16px;
+	cursor:pointer;
+	margin:0px 2px;
+	display:none;
+}
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------- ----------- -----------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------- Symbolic Equations ---------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+.symeqshow {
+	float:left;
+	width:100%;
+}
+
+.symeqparam {
+	width:100%;
+	margin:0px;
+	border:0px;
+	display:none;
+	font-size:18px;
+	font-family: MathJax_Main,MathJax_Size1,MathJax_AMS;
+	background-image:url(/Images/Pages/white_wall_hash.png);
+}
+
+.symeqparam_cont {
+	width:99%;
+	text-align:center;
+	margin:0px;
+	padding:0px;
+	z-index:0;
+	background-image:url(/Images/Pages/white_wall_hash.png);
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------- While Loops -----------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+.equalblock {
+	position:absolute;
+	width:134px;
+	display:none;
+}
+
+.equalline {
+	float:left;
+	width:132px;
+	border:1px solid #000000;
+	border-radius:5px;
+	background-color:#fff;
+	text-align:center;
+	position:relative;
+	top:15px;
+	right:58px;
+}
+
+.equalitem, .forloopequalitem, .whileloopequalitem, .ifelseequalitem, .equalitem2 {
+	float:left;
+	width:18px;
+	padding:2px;
+	cursor:pointer;
+	font-size:0.85em;
+	text-align:center;
+}
+
+.equalitem:hover, .forloopequalitem:hover, .whileloopequalitem:hover, .ifelseequalitem:hover, .equalitem2:hover {
+	background-color:#ccc;
+}
+
+.equalline:after, .equalline:before {
+	bottom: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.equalline:after {
+	border-color: rgba(255, 255, 255, 0);
+	border-bottom-color: #FFFFFF;
+	border-width: 10px;
+	margin-left: -10px;
+}
+
+.equalline:before {
+	border-color: rgba(204, 204, 204, 0);
+	border-bottom-color: #000;
+	border-width: 11px;
+	margin-left: -11px;
+}
+
+.equalblock2 {
+	position:absolute;
+	width:90px;
+	display:none;
+}
+
+.equalline2 {
+	float:left;
+	width:90px;
+	border:1px solid #000000;
+	border-radius:5px;
+	background-color:#fff;
+	text-align:center;
+	position:relative;
+	top:15px;
+	right:38px;
+}
+
+.equalline2:after, .equalline2:before {
+	bottom: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.equalline2:after {
+	border-color: rgba(255, 255, 255, 0);
+	border-bottom-color: #FFFFFF;
+	border-width: 10px;
+	margin-left: -10px;
+}
+
+.equalline2:before {
+	border-color: rgba(204, 204, 204, 0);
+	border-bottom-color: #000;
+	border-width: 11px;
+	margin-left: -11px;
+}
+
+.blockandor {
+	float:left;
+}
+
+.andorstatements, .andorstatementstemp, .ifelseandorst, .ifelseandorsttemp {
+	float:left;
+	margin:0px 5px;
+	padding:3px;
+	cursor:pointer;
+}
+
+.andorblock, .andorblocktemp, .ifelseandorblock, .ifelseandorblocktemp {
+	float:left;
+	margin:7px 5px;
+	padding:3px;
+	cursor:pointer;
+}
+
+.andorsegment {
+	position:absolute;
+	display:none;
+}
+
+.andorline {
+	float:left;
+	width:28px;
+	border:1px solid #000;
+	background-color:#fff;
+	text-align:center;
+	position:relative;
+	top:15px;
+	right:10px;
+}
+
+.andoritem, .ifelseandoritemst, .ifelseandoritemblock {
+	float:left;
+	width:20px;
+	padding:4px;
+	text-align:center;
+	cursor:pointer;
+}
+
+.andoritem:hover {
+	background-color:#ccc;
+}
+
+.andorline:after, .andorline:before {
+	bottom: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.andorline:after {
+	border-color: rgba(255, 255, 255, 0);
+	border-bottom-color: #FFFFFF;
+	border-width: 10px;
+	margin-left: -10px;
+}
+
+.andorline:before {
+	border-color: rgba(204, 204, 204, 0);
+	border-bottom-color: #000000;
+	border-width: 11px;
+	margin-left: -11px;
+}
+
+.andorst {
+	position:absolute;
+	display:none;
+}
+
+.andorlinest {
+	float:left;
+	width:28px;
+	border:1px solid #000;
+	background-color:#fff;
+	text-align:center;
+	position:relative;
+	top:15px;
+	right:10px;
+}
+
+.andoritemst {
+	float:left;
+	width:20px;
+	padding:4px;
+	text-align:center;
+	cursor:pointer;
+}
+
+.andoritemst:hover {
+	background-color:#ccc;
+}
+
+.andorlinest:after, .andorlinest:before {
+	bottom: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.andorlinest:after {
+	border-color: rgba(255, 255, 255, 0);
+	border-bottom-color: #FFFFFF;
+	border-width: 10px;
+	margin-left: -10px;
+}
+
+.andorlinest:before {
+	border-color: rgba(204, 204, 204, 0);
+	border-bottom-color: #000000;
+	border-width: 11px;
+	margin-left: -11px;
+}
+
+.whileloop {
+	float: left;
+	padding: 0px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
+	width:100%;
+	height:auto;
+}
+
+.whileloopcontent {
+	float: left;
+	padding: 0px 0px 0px 0px;
+	margin: 0px 0px 0px 4%;
+	width:96%;
+	height:100%
+}
+
+.whilelooptext {
+	float: left;
+	width:auto;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 10px;
+}
+
+.loopwhile {
+	float:left;
+	width:auto;
+	padding:4px 10px 0px 0px;
+	font-size:1.5em;
+	margin:4px 0px 0px 4px;
+}
+
+.whileloopdependent, .whileloopcondition, .whileloopflag, .whileloopflagvalue, .whileloopconditionvalue, .whileloopdependentvalue {
+	float:left;	
+}
+
+.whileloopconditionvalue, .forloopconditionvalue, .ifelseconditionvalue { cursor:pointer; }
+
+.whileloopflagselect, .whileloopconditionselect, .whileloopdependentselect, .whileloopflaginput, .whileloopconditioninput, .whileloopdependentinput, .whileloopandorselect, #toclonewhileloopadd {
+	display:none;	
+}
+
+
+.whileloopflag {
+	padding: 0px 2px 0px 0px;	
+}
+
+.whileloopflagselect, .whileloopdependentselect {
+	float: left;
+	padding: 0px 2px 0px 2px;	
+}
+
+select.whileloopflagselect, select.whileloopdependentselect {
+	position:absolute;
+    border-top:1px solid #000000;
+    border-bottom:1px solid #000000;
+    border-left:1px solid #000000;
+    height:20px;
+    width:122px;
+    COLOR: #000000; 
+    padding:0px;
+    margin: 0px;
+}
+
+input.whileloopflaginput, input.whileloopdependentinput {
+    border-top:1px solid #000000;
+    border-bottom:1px solid #000000;
+    border-left:0px solid #000000;
+    COLOR: #000000; 
+    height:18px;
+    width:100px;
+    position:relative;
+    left:3px;
+    padding:0px 0px 0px 0px;
+    margin: 0px 20px 0px 0px;
+}
+
+select.whileloopconditionselect {
+	float:left;
+    border-top:0px solid #000000;
+    border-bottom:0px solid #000000;
+    border-left:0px solid #000000;
+    height:20px;
+    width:40px;
+    COLOR: #000000; 
+    padding:0px;
+    margin: 0px;
+}
+
+.whileloopcondition {
+	float:left;
+	width:auto;
+	margin: 0px 0px 0px 0px;
+	padding:0px 2px 0px 2px;	
+}
+
+.whileloopandor, .whileloopandortemp {
+	float:left;
+	margin:2px 10px 0px 10px;
+	text-align:center;
+	width:auto;
+}
+
+.whileloopand, .whileloopor {
+	padding:2px;	
+	color:#ccc;
+	float:left;
+}
+
+.whileloopblock {
+	width:auto;
+	float:left;
+	padding:4px 4px 4px 4px;
+	margin:2px;
+	border:1px solid #ccc;
+	border-radius:5px;
+}
+
+.whileloopaddstatements {
+	float:left;
+	border:1px solid #cccccc;
+	padding:2px 4px 2px 4px;
+	margin:4px 4px 0px 4px;
+	color: #898989;
+	position:relative;
+	top:-2px;
+	cursor:pointer;
+	border-radius:5px;
+}
+
+.whileloopaddblock {
+	float:left;
+	border:1px solid #cccccc;
+	padding:2px 8px 2px 8px;
+	margin:8px 4px 0px 4px;
+	color: #898989;
+	cursor:pointer;
+	font-size:16px;
+	border-radius:12px;
+}
+
+.whileloopstatements {
+	float:left;
+	border:1px solid #ccc;
+	padding:4px;
+	width:auto;
+	border-radius:5px;
+}
+
+.whileloopandorvalue {
+	float:left;
+	margin:5px 0px 0px 0px;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------ If/Else Statements --------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+.ifelse, .subifelse {
+	float: left;
+	padding: 0px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
+	width:100%;
+	height:auto;
+}
+
+.ifelsecontent {
+	float: left;
+	padding: 0px 0px 0px 0px;
+	margin: 0px 0px 0px 4%;
+	width:96%;
+	height:100%
+	position:relative;
+	right:2px;
+}
+
+.ifelsetext {
+	float: left;
+	width:auto;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 10px;
+}
+
+.ifelseif {
+	float:left;
+	width:auto;
+	padding:4px 10px 0px 0px;
+	font-size:2em;
+	margin:0px 0px 0px 4px;
+}
+
+.ifelselabel {
+	float:left;
+}
+
+.ifelsedependent, .ifelsecondition, .ifelseflag, .ifelseflagvalue, .ifelseconditionvalue, .ifelsedependentvalue {
+	float:left;	
+}
+
+.ifelseflagselect, .ifelseconditionselect, .ifelsedependentselect, .ifelseflaginput, .ifelseconditioninput, .ifelsedependentinput, .ifelseandorselect, #tocloneifelseadd {
+	display:none;	
+}
+
+
+.ifelseflag {
+	padding: 0px 2px 0px 0px;	
+}
+
+.ifelseflagselect, .ifelsedependentselect {
+	float: left;
+	padding: 0px 2px 0px 2px;	
+}
+
+select.ifelseflagselect, select.ifelsedependentselect {
+	position:absolute;
+    border-top:1px solid #000000;
+    border-bottom:1px solid #000000;
+    border-left:1px solid #000000;
+    height:20px;
+    width:122px;
+    COLOR: #000000; 
+    padding:0px;
+    margin: 0px;
+}
+
+input.ifelseflaginput, input.ifelsedependentinput {
+    border-top:1px solid #000000;
+    border-bottom:1px solid #000000;
+    border-left:0px solid #000000;
+    COLOR: #000000; 
+    height:18px;
+    width:100px;
+    position:relative;
+    left:3px;
+    padding:0px 0px 0px 0px;
+    margin: 0px 20px 0px 0px;
+}
+
+select.ifelseconditionselect {
+	float:left;
+    border-top:0px solid #000000;
+    border-bottom:0px solid #000000;
+    border-left:0px solid #000000;
+    height:20px;
+    width:40px;
+    COLOR: #000000; 
+    padding:0px;
+    margin: 0px;
+}
+
+.ifelsecondition {
+	float:left;
+	width:auto;
+	margin: 0px 0px 0px 0px;
+	padding:0px 2px 0px 2px;	
+}
+
+.ifelseandor {
+	float:left;
+	margin:0px 10px 0px 10px;
+	text-align:center;
+	width:auto;
+}
+
+.ifelseand, .ifelseor {
+	padding:2px;	
+	color:#ccc;
+	float:left;
+}
+
+.ifelseblock {
+	width:auto;
+	float:left;
+	padding:4px 4px 4px 4px;
+	margin:2px;
+	border:1px solid #ccc;
+	border-radius:5px;
+}
+
+.ifelseaddstatements {
+	float:left;
+	border:1px solid #cccccc;
+	padding:2px 4px 2px 4px;
+	margin:4px 4px 0px 4px;
+	color: #898989;
+	position:relative;
+	top:-2px;
+	cursor:pointer;
+	border-radius:5px;
+}
+
+.ifelseaddblock {
+	float:left;
+	border:1px solid #cccccc;
+	padding:2px 8px 2px 8px;
+	margin:8px 4px 0px 4px;
+	color: #898989;
+	cursor:pointer;
+	font-size:16px;
+	border-radius:12px;
+}
+
+.ifelsestatements {
+	float:left;
+	padding:4px;
+	width:auto;
+}
+
+.truestatements {
+	border:1px solid #008000;
+	border-radius:5px;
+	color: #008000;
+}
+
+.falsestatements {
+	border:1px solid #730324;
+	border-radius:5px;
+	color: #730324;
+}
+
+.ifelseandorvalue {
+	float:left;
+	margin:5px 0px 0px 0px;
+}
+
+.ifelseaddline {
+	float:left;
+	height:20px;
+}
+
+.ifelseaddif, .ifelseaddelse, .ifelsedelete {
+	float:left;
+	cursor:pointer;
+	color:#CCC;
+	font-weight:bold;
+	padding:5px 5px 0px 5px;
+	margin:0px 10px 0px 10px;
+	display:none;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------- Equation Page --------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+#tocloneeqadd, #eqnums, #equnits, #eqdims, .eqerrors, #eqequation, #eqdeps1, #eqdeps2, #symeqspecs_ref, #imagespecs_ref, #eqspecs_ref, #tablespecs_ref, 
+#textspecs_ref, #functioninputs { display:none; }
+
+
+
+#EquationBody, #UnitBody, #ConstantBody, #InputBody, #FileBody, #FunctionBody, #ImportedFunctionBody, #PropertyBody, #NumbersBody, #FunctionList, #FunctionsImported, #TOCBody, #BugBody, #DatasetBody {
+	margin: 5px auto; 
+	height:100%;
+	width:825px;
+}
+
+#RefBody {
+	margin: 5px auto; 
+	height:100%;
+	width:1000px;
+}
+#EquationBody, #ConstantBody, #InputBody,  #FunctionBody, #ImportedFunctionBody, #PropertyBody, #NumbersBody, #FunctionsImported, #TOCBody, #BugBody, #DatasetBody {
+	display:none;
+}
+
+#equation_spec, #loop_spec, #table_spec, #symeq_spec, #image_spec, #text_spec, #plot_spec, #video_spec {
+	position:fixed;
+	top:0px;
+	right:0px;
+	width:48px;
+	height:100%;
+	background-image:url(/Images/moulin.png);
+	z-index:999;
+	display:none;
+	overflow:hidden;
+}
+
+.equationbar {
+	float:left;
+	margin:0px 0px 5px 0px;
+	width:100%;
+	border-bottom:1px solid #898989;
+	padding:5px 0px 5px 0px;
+	padding:5px 0px 5px 0px;
+	background-color:#ECECEC;
+	height:30px;
+	border-radius:15px 15px 0px 0px;
+}
+
+#close_eqspec, #close_loopspec, #close_tablespec, #close_symeqspec, #close_imagespec, #close_textspec, #close_imagespec, #close_videospec {
+	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -320px -30px;
+	width:24px;
+	height:24px;	
+	position:absolute;
+	right:-0px;
+	top:-0px;
+	z-index:9999;
+	cursor:pointer;
+}
+
+#specs_equation {
+	text-align:center;
+	margin:0px 2px 0px 2px;	
+	border:0px;
+	width:99%;
+	padding:0px;
+	font-size:1em;
+	min-height:25px;
+	height:auto;
+	background-color:#ECECEC;
+}
+
+.eqspecs_option, .tablespecs_option, .loopspecs_option, .symeqspecs_option, .imagespecs_option, .textspecs_option, .videospecs_option {
+	width:32px;
+	height:32px;
+	margin:5px 8px;
+	cursor:pointer;	
+}
+
+#eqspecs_showtable 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -38px -245px; }
+#eqspecs_showdisplay{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -162px -246px; }
+#eqspecs_showmodels {	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -82px -245px; }
+#eqspecs_showdeps 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -122px -245px; }
+#eqspecs_showerrors {	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -0px -243px; }
+#eqspecs_showrefs 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -217px -167px; }
+
+#tablespecs_showtable 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -291px -166px; }
+#tablespecs_showrow		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -74px -165px; }
+#tablespecs_showcolumn 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -107px -167px; }
+#tablespecs_showcell 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -178px -167px; }
+#tablespecs_showrefs 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -217px -167px; }
+
+#loopspecs_showinfo 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -291px -166px; }
+
+#symeqspecs_showrefs 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -217px -167px; }
+
+#imagespecs_showselect 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -38px -245px; }
+#imagespecs_showprops	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -162px -246px; }
+#imagespecs_showrefs 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -217px -167px; }
+
+#videospecs_selectoptions{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -291px -166px; }
+
+#textspecs_showrefs 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -217px -167px; }
+
+#symeqspecs_ref:before, #symeqspecs_ref:after, #imagespecs_select:before, #imagespecs_select:after, #textspecs_ref:before, #textspecs_ref:after
+{
+	left: 100%;
+	top: 20%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+#eqspecs_table:after, #eqspecs_table:before, #eqspecs_display:after, #eqspecs_display:before, #eqspecs_models:after, #eqspecs_models:before,
+ #eqspecs_deps:after, #eqspecs_deps:before, #eqspecs_errors:after, #eqspecs_errors:before, #tablespecs_table:after, #tablespecs_table:before,
+ #tablespecs_row:after, #tablespecs_row:before, #tablespecs_column:after, #tablespecs_column:before, #tablespecs_cell:after, #tablespecs_cell:before,
+ #imagespecs_ref:before, #imagespecs_ref:after, #imagespecs_props:before, #imagespecs_props:after, #eqspecs_ref:before, #eqspecs_ref:after,
+ #tablespecs_ref:before, #tablespecs_ref:after, #videospecs_option:before, #videospecs_option:after
+{
+	left: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+#eqspecs_table:after, #eqspecs_display:after, #eqspecs_models:after, #eqspecs_deps:after, #eqspecs_errors:after, #tablespecs_table:after, 
+ #tablespecs_row:after, #tablespecs_column:after, #tablespecs_cell:after, #imagespecs_ref:after, #imagespecs_props:after, #symeqspecs_ref:after,
+ #imagespecs_select:after, #eqspecs_ref:after, #tablespecs_ref:after, #textspecs_ref:after, #videospecs_option:after
+{	border-color: rgba(255, 255, 255, 0);
+	border-left-color: #FFF;
+	border-width: 15px;
+	margin-top: -15px;
+}
+#eqspecs_table:before, #eqspecs_display:before, #eqspecs_models:before, #eqspecs_deps:before, #eqspecs_errors:before, #tablespecs_table:before,
+ #tablespecs_row:before, #tablespecs_column:before, #tablespecs_cell:before, #imagespecs_ref:before, #imagespecs_props:before, #symeqspecs_ref:before,
+ #imagespecs_select:before, #eqspecs_ref:before, #tablespecs_ref:before, #textspecs_ref:before, #videospecs_option:before
+{	border-color: rgba(0, 0, 0, 0);
+	border-left-color: #000000;
+	border-width: 16px;
+	margin-top: -16px;
+}
+
+#loopspecs_table:after, #loopspecs_table:before
+{
+	left: 100%;
+	top: 20%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+#loopspecs_table:after
+{	border-color: rgba(255, 255, 255, 0);
+	border-left-color: #FFF;
+	border-width: 15px;
+	margin-top: -15px;
+}
+#loopspecs_table:before
+{	border-color: rgba(0, 0, 0, 0);
+	border-left-color: #000000;
+	border-width: 16px;
+	margin-top: -16px;
+}
+
+.table_halfitem {
+	float:left;
+	width:150px;
+	border-top:1px solid #ccc;
+	padding:10px 0px 0px 0px;
+	height:20px;
+}
+
+#tablecaptiononoff, #tablecolumnlabels, #tablerowlabels, #tableheaders, #tablecolumnheader { width:20px;	}
+
+#tablecaption, #tableborders, #tablerowheight, #tableleftborder, #tablerightborder, #tabletopcborder, #tablebottomcborder, #tableleftcborder, #tablerightcborder,
+ #tablecolumnwidth, #tabletopborder, #tablebottomborder
+{
+	border:0px;
+	width:150px;
+	text-align:center;
+}
+
+#columnalign, #rowalign, #cellalign {
+	width:65px;
+	margin:0px 40px;
+}
+
+.eqspecs_label, .tablespecs_label, .loopspecs_label, .symeqspecs_label, .imagespecs_label, .textspecs_label, .videospecs_label {
+	width:48px;
+	height:20px;
+	font-size:0.8em;
+	color:#FFF;
+	text-align:center;
+}
+
+.specs_title 
+{
+	width:90%;
+	height:20px;
+	font-size:1.1em;
+	color:#000;
+	text-align:center;
+	border-bottom:1px solid #ccc;
+	padding:0px 0px 10px 0px;
+	margin:5px 5% 10px 5%;
+}	
+
+.specs_line 
+{	width:100%;
+	margin:0px 0px 0px 0px;
+	height:40px;
+}
+
+.specs_text
+{	float:left;
+	width:75px;
+	height:20px;
+	font-size:1.1em;
+	color:#000;
+	text-align:center;
+}	
+
+
+.eqspecs_block, .tablespecs_block, .loopspecs_block, .symeqspecs_block, .imagespecs_block, .textspecs_block, .videospecs_block {
+	margin:0px 0px 20px 0px;	
+}
+
+#eqspecs_main, #tablespecs_main, #loopspecs_main, #symeqspecs_main, #imagespecs_main, #textspecs_main, #videospecs_main {
+	margin:100px 0px 0px 0px;
+	overflow:auto;
+	width:100%;
+	height:100%;
+	padding-right:15px;
+}
+	
+#eqspecs_table {
+	position:fixed;
+	top:51px;
+	right:63px;
+	background-color:#FFF;
+	width:700px;
+	height:130px;
+	display:none;
+	border:1px solid #000;
+	border-radius:15px;
+}
+
+#eqspecs_display {
+	position:fixed;
+	top:117px;
+	right:63px;
+	background-color:#FFF;
+	width:650px;
+	height:150px;
+	display:none;
+	border:1px solid #000;
+	border-radius:15px;
+}
+
+#eqspecs_models {
+	position:fixed;
+	top:120px;
+	right:63px;
+	background-color:#FFF;
+	min-width:650px;
+	width:auto;
+	height:300px;
+	display:none;
+	border:1px solid #000;
+	border-radius:15px;
+}
+
+#eqspecs_deps {
+	position:fixed;
+	top:200px;
+	right:63px;
+	background-color:#FFF;
+	min-width:650px;
+	width:auto;
+	height:300px;
+	display:none;
+	border:1px solid #000;
+	border-radius:15px;
+}
+
+#eqspecs_errors {
+	position:fixed;
+	top:323px;
+	height:200px;
+	width:650px;
+	right:63px;
+	background-color:#FFF;
+	display:none;
+	border:1px solid #000;
+	border-radius:15px;
+}
+
+#eq_info {
+	text-align:center;
+	width:700px;
+}
+
+.eq_info td { margin:0px 5px; }
+.eq_info th { margin:0px 5px; }
+
+.eqspecs_selectline {
+	width:90%;
+	border-bottom:1px solid #ccc;
+	float:left;
+	margin:10px 5%;
+}
+
+.eqspecs_selectopt {
+	float:left;
+	padding:3px;
+	border-left:1px solid #ccc;
+	border-top:1px solid #ccc;
+	border-right:1px solid #ccc;
+	background-color:#ECECEC;
+	margin:0px 5px;
+	cursor:pointer;
+}
+
+.eqspecs_selectopt_active {
+	float:left;
+	padding:3px;
+	border-left:1px solid #ccc;
+	border-top:1px solid #ccc;
+	border-right:1px solid #ccc;
+	background-color:#FFFFFF;
+	margin:0px 5px;
+	cursor:pointer;
+	position:relative;
+	top:1px;
+}
+
+#eqspecs_disp {
+	width:600px;
+	height:110px;
+	margin:20px 25px;
+	overflow-y:auto;
+}
+
+#eqspecs_left {
+	float:left;
+	width:150px;
+	text-align:center;
+}
+
+#eqspecs_middle {
+	float:left;
+	width:150px;
+	text-align:center;
+}
+
+#eqspecs_right {
+	float:left;
+	width:275px;
+	text-align:center;
+}
+
+.unitname {
+	float:left;
+	width:100px;
+	font-size:0.8em;
+	margin:4px 0px 0px 0px;
+}
+
+.unit_select {
+	float:right;
+	width:175px;
+}
+
+.unitline {
+	float:left;
+	height:auto;
+	width:100%;
+	margin:3px 0px;	
+}
+
+.eqspecs_subtitle {
+	font-size:1.2em;
+	margin:0px 0px 20px 0px;
+}
+
+.eqspecs_errorline {
+	width:550px;
+	margin:5px 25px;	
+}
+
+#num_model, #dim_model, #unit_model, #quantity_model, #dep1, #dep2
+{
+	width:90%;
+	margin:10px 5%;
+	height:254px;
+	overflow:scroll;
+}
+
+#dim_model, #unit_model, #quantity_model, #dep2{	display:none; }
+
+.loopspecs_subline {
+	float:left;
+	width:350px;
+	text-align:center;
+	padding:8px 0px 2px 0px;
+}
+
+.loopspecs_subbox {
+	float:left;
+	width:500px;
+	display:none;	
+	text-align:center;
+	margin:0px 0px 20px 0px;
+	border:1px solid #ccc;
+	border-radius:30px;
+	margin:0px 0px 200px 150px;
+}
+
+.loopspecs_left	
+{ 
+	float:left; 
+	width:250px;
+	text-align:left;
+	border-right:2px solid #000;
+	height:300px;
+	cursor:pointer;
+	overflow-y:auto;
+	overflow-x:auto;
+}
+
+.loopspecs_right{ 
+	float:right; 
+	width:378px;
+	text-align:left;
+	overflow-y:auto;
+	height:300px;
+	margin:0px 10px 0px 10px;
+}
+
+.loopspecs_leftline {
+	float:left;
+	width:92%;
+	border-bottom:1px solid #ccc;
+	margin:0px;
+	padding:5px 2% 5px 6%;
+	font-size:1.2em;
+	font-family:cinzel;
+}
+
+.loopspecs_rightline {
+	float:left;
+	margin:8px 10px 8px 5px;
+	overflow:auto;
+	display:none;
+	width:350px;
+}
+
+.loopspecs_sublineleft {
+	float:left;
+	width:150px;
+	text-align:right;
+	white-space:nowrap;
+	font-family:cinzel;
+	font-size:1.1em;
+}
+
+
+.loopspecs_sublineright {
+	float:right;
+	width:175px;
+	text-align:left;
+	font-family:roboto;
+	font-size:1em;
+}
+
+.loopspecs_type { float:left; padding:0px 0px 0px 25px; width:30%; }
+.loopspecs_validstatus { float:right; width:60%; }
+.loopspecs_colon { float:left; padding:0px 2% 0px 2%; }
+
+.loopspecs_counter, .loopspecs_text, .loopspecs_limit, .loopspecs_count, .loopspecs_errors, .loopspecs_value { float:left;	text-align:center; }
+
+.loopspecs_counter 	{ width:75px; }
+.loopspecs_text 	{ width:100px; }
+.loopspecs_limit 	{ width:50px; }
+.loopspecs_count 	{ width:100px; }
+.loopspecs_errors	{ width:350px; }
+.loopspecs_value 	{ width:125px; }
+
+
+.parenth { float:left; width:auto; margin:0px 2px 0px 2px; }
+.slrtext { float:left; width:auto; margin:0px 2px 0px 2px; }
+
+
+#loopspecs_table {
+	position:fixed;
+	top:50px;
+	right:63px;
+	background-color:#FFF;
+	width:650px;
+	height:300px;
+	display:none;
+	border:1px solid #000;
+	border-radius:15px;	
+}
+
+#tablespecs_table {
+	position:fixed;
+	top:8px;
+	right:63px;
+	background-color:#FFF;
+	width:650px;
+	height:220px;
+	display:none;
+	border:1px solid #000;
+	border-radius:15px;	
+}
+
+#tablespecs_row {
+	position:fixed;
+	top:95px;
+	right:63px;
+	background-color:#FFF;
+	width:350px;
+	height:200px;
+	display:none;
+	border:1px solid #000;
+	border-radius:15px;	
+}
+
+#tablespecs_column {
+	position:fixed;
+	top:175px;
+	right:63px;
+	background-color:#FFF;
+	width:350px;
+	height:200px;
+	display:none;
+	border:1px solid #000;
+	border-radius:15px;	
+}
+
+#tablespecs_cell {
+	position:fixed;
+	top:235px;
+	right:63px;
+	background-color:#FFF;
+	width:350px;
+	height:225px;
+	display:none;
+	border:1px solid #000;
+	border-radius:15px;	
+}
+
+#loopspecs_disp {
+	width:650px;
+	height:300px;
+	margin:0px;
+}
+
+#tablespecs_disp {
+	width:600px;
+	height:110px;
+	margin:20px 25px;
+}
+
+#tablespecs_disp2 {
+	width:300px;
+	margin:20px 25px;
+	float:left;
+}
+
+#tablespecs_left, #tablespecs_right {
+	float:left;
+	width:300px;
+	text-align:center;
+}
+
+.tablespecs_subtitle {
+	font-size:1.2em;
+	margin:0px 0px 20px 0px;
+}
+
+#symeqspecs_ref, #eqspecs_ref, #tablespecs_ref, #textspecs_ref {
+	width:510px;
+	height:225px;
+	border:1px solid #000;
+	border-radius:15px;
+	background-color:#FFFFFF;
+}
+
+#symeqspecs_ref {
+	position:fixed;
+	top:75px;
+	right:63px;
+}
+
+#eqspecs_ref {
+	position:fixed;
+	top:405px;
+	right:63px;
+}
+
+#tablespecs_ref {
+	position:fixed;
+	top:405px;
+	right:63px;
+}
+
+#textspecs_ref {
+	position:fixed;
+	top:75px;
+	right:63px;
+}
+
+
+.ref_web, .ref_book, .ref_mag, .ref_enc { 
+	margin:10px 0px 0px 0px;
+	display:none; 
+}
+
+.addref {
+	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -319px -1px;
+	width:24px;
+	height:24px;	
+	position:absolute;
+	left:15px;
+	top:-0px;
+	z-index:9999;
+	cursor:pointer;
+}
+
+.deleteref {
+	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -319px -31px;
+	width:24px;
+	height:24px;	
+	position:absolute;
+	left:65px;
+	top:30px;
+	z-index:9999;
+	cursor:pointer;
+}
+
+.refs_left {
+	float:left;
+	width:59px;
+	height:175px;
+	border-right:1px solid #ccc;	
+	overflow-y:auto;
+	overflow-x:hidden;
+	position:relative;
+	top:25px;
+}
+
+.refs_right {
+	float:right;
+	width:450px;
+	height:200px;	
+}
+
+.ref_typeline {
+	width:425px;
+	border-bottom:1px solid #ccc;
+	font-size:0.8em;
+	margin:5px 0px 0px 5px;
+	height:17px;
+}
+
+.ref_type {
+	float:left;
+	padding:2px 4px;
+	margin:0px 5px;
+	border-top:1px solid #898989;
+	border-left:1px solid #898989;
+	border-right:1px solid #898989;
+	background-color:#ccc;
+	cursor:pointer;
+}
+
+.ref_type_active {
+	float:left;
+	padding:2px;
+	margin:0px 3px;
+	border-top:1px solid #898989;
+	border-left:1px solid #898989;
+	border-right:1px solid #898989;
+	background-color:#FFFFFF;
+	cursor:pointer;
+	position:relative;
+	top:1px;
+}
+
+.ref_line {
+	width:400px;
+	padding:5px 25px;
+	height:20px;
+}
+
+.ref_text {
+	float:left;
+	width:150px;
+	text-align:right;
+	height:17px;
+	padding:3px 25px 0px 0px;
+}
+
+.ref_input {
+	float:right;
+	width:225px;
+	height:20px;
+}
+
+.reference_number {
+	float:left;
+	width:20px;
+	height:20px;
+	padding:10px;
+	border:1px solid #456382;
+	border-radius:30px;
+	cursor:pointer;
+	margin:4px;
+	text-align:center;
+	color:#456382;
+	font-weight:bolder;
+	background-color:#FFF;
+}
+
+.ref_active {
+	background-color:#ccc;
+}
+
+
+input.ref_input {
+	width:215px;
+	border:1px solid #ccc;
+	color:#000;
+	padding:0px 5px;
+}
+
+input.ref_inputactive {
+	width:215px;
+	border:0px;
+	border:1px solid #730324;
+	color:#730324;
+}
+
+#imagespecs_select {
+	position:fixed;
+	top:65px;
+	right:63px;
+	background-color:#FFF;
+	width:440px;
+	height:250px;
+	display:none;
+	border:1px solid #000;
+	border-radius:15px;	
+}
+
+#imagespecs_props {
+	position:fixed;
+	top:140px;
+	right:63px;
+	background-color:#FFF;
+	width:330px;
+	height:100px;
+	display:none;
+	border:1px solid #000;
+	border-radius:15px;	
+}
+
+#imagespecs_ref {
+	width:510px;
+	height:200px;
+	border:1px solid #000;
+	border-radius:15px;
+	position:fixed;
+	top:160px;
+	right:63px;
+	background-color:#FFFFFF;
+}
+
+#videospecs_option {
+	position:fixed;
+	top:0px;
+	right:63px;
+	background-color:#FFF;
+	width:250px;
+	height:250px;
+	display:none;
+	border:1px solid #000;
+	border-radius:15px;	
+}
+
+.video_input 
+{	float:left;
+	width:150px;
+}
+
+
+.refline {
+	float:left;
+	width:100%;
+}
+
+.reficon_wrapper {
+	float:right;
+	border:1px solid #898989;
+	color:#898989;
+	border-radius:10px;
+	margin:0px 2px;
+}
+
+.reficon {
+	float:left;
+	padding:0.25em 0.5em;
+	font-size:0.75em;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------- Bibliography ------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+.bib_line {
+	float:left;
+	width:1000px;
+	border-top:1px solid #ccc;
+	padding:4px 0px;
+}
+
+.bib_num {
+	float:left;
+	width:50px;
+	height:25px;
+	text-align:center;
+	margin:0px 10px 0px 0px;
+}
+
+.bib_author {
+	float:left;
+	width:250px;
+}
+
+.bib_webtitle, .bib_sitetitle, .bib_booktitle, .bib_publisher, .bib_magpapername, .bib_entryname, .bib_encname {
+	float:left;
+	width:250px;
+}
+
+.bib_date, .bib_page, .bib_year, .bib_edition, .bib_page {
+	float:left;
+	width:100px;
+}
+
+.ref_book, .ref_mag, .ref_enc, .ref_web {
+	float:left;
+	height:150px;
+	overflow-x:hidden;
+	overflow-y:auto;
+}
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------- ICONS --------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+.icon_holder {
+	display:none;
+	margin:0px 0px 0px 0px;
+	position:absolute;	
+	width:825px;
+	height:0px;
+	z-index:1;
+}
+
+.videoicon_holder {
+	margin:0px 0px 0px 0px;
+	position:absolute;	
+	width:825px;
+	height:0px;
+	z-index:1;
+}
+
+.updateitem_holder, .equationspecs_holder, .loopspecs_holder, .deletebutton_holder, .headerbutton_holder, .imagespecs_holder, .expandbutton_holder, .videospecs_holder
+{
+	float:right;
+	width:20px;
+	height:20px;
+}
+
+.updateforloop, .updatewhileloop, .updateifelse, .equationspecs, .loopspecs, .deletebutton, .subdeletebutton, .headerbutton, 
+.imagespecs, .expandbutton, .expandsurface, .tablespecs, .symeq_specs, .text_specs, .videospecs
+{
+	float:right;
+	height:16px;
+	width:16px;
+	z-index:0;
+	cursor:pointer;
+}
+
+.updateforloop, .updatewhileloop, .updateifelse {			background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -193px -60px; }
+.loopspecs, .equationspecs, .videospecs, .imagespecs, .headerbutton, .tablespecs, .symeq_specs, .text_specs {	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -156px -33px; }
+.deletebutton {	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -193px -34px; }
+.subdeletebutton {	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -193px -34px; }
+.expandbutton {	background: url(http://www.cadwolf.com/Images/icons/fit-to-width-16.png) no-repeat left top; }
+.expandsurface {	background: url(http://www.cadwolf.com/Images/icons/fit-to-width-16.png) no-repeat left top; }
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------- Units Table --------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+table.units {
+	margin: 0px 0px 0px 25px;
+	text-align:center;
+	font-size:12px;
+	width:90%;
+	display:block;
+}
+
+table.units tr {
+	width:100%;
+}
+
+table.units td {
+	padding:2px 5px;
+	border-bottom:1px solid #ccc;
+}
+
+table.units th {
+	font-size:14px;
+	border-bottom:2px solid #ccc;
+}
+
+.units_showhide {
+	margin:2px 0px 0px 25px;
+	background-color:#898989;
+	color:#FFFFFF;
+	padding:4px 2px 4px 10px;
+	width:90%;
+	cursor:pointer;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------- Popups for adding -------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+#addeqbox, #addtextbox, #addheaderbox, #addplotbox, #add3Dplotbox, #addtablebox, #addforloopbox, #addwhileloopbox, #addifelsebox, #addsymbox, #deleteitembox, #addimagebox {
+  display: none;
+  position: absolute;
+  top:45px;
+  color:#fff;
+}
+/*
+#addtextsub { left:-5px; }
+#addtextsub {   background-image: linear-gradient(to top, rgb(9, 22, 27), rgb(13, 64, 80)); border: 1px solid #1a1a1a; position: relative; padding: 5px 8px 5px 8px; border-radius: 5px;} 
+#addtextsub:after, .arrow_box:before { bottom: 100%; border: solid transparent; content: " "; height: 0; width: 0; position: absolute; pointer-events: none; } 
+#addtextsub:after { border-color: rgba(136, 183, 213, 0); border-bottom-color: #0D4050; border-width: 10px; left: 50%; margin-left: -10px; } 
+#addtextsub:before { border-color: rgba(194, 225, 245, 0); border-bottom-color: #0D4050; border-width: 16px; left: 50%; margin-left: -16px; }
+
+#addeqsub {	left:5px; }
+#addeqsub {   background-image: linear-gradient(to top, rgb(9, 22, 27), rgb(13, 64, 80)); border: 1px solid #1a1a1a; position: relative; padding: 5px 8px 5px 8px; border-radius: 5px;} 
+#addeqsub:after, .arrow_box:before { bottom: 100%; border: solid transparent; content: " "; height: 0; width: 0; position: absolute; pointer-events: none; } 
+#addeqsub:after { border-color: rgba(136, 183, 213, 0); border-bottom-color: #0D4050; border-width: 10px; left: 50%; margin-left: -10px; } 
+#addeqsub:before { border-color: rgba(194, 225, 245, 0); border-bottom-color: #0D4050; border-width: 16px; left: 50%; margin-left: -16px; }
+
+#addplotbox {	left:60px; }
+#addplotsub {   background-image: linear-gradient(to top, rgb(9, 22, 27), rgb(13, 64, 80)); border: 1px solid #1a1a1a; position: relative; padding: 5px 8px 5px 8px; border-radius: 5px;} 
+#addplotsub:after, .arrow_box:before { bottom: 100%; border: solid transparent; content: " "; height: 0; width: 0; position: absolute; pointer-events: none; } 
+#addplotsub:after { border-color: rgba(136, 183, 213, 0); border-bottom-color: #0D4050; border-width: 10px; left: 50%; margin-left: -10px; } 
+#addplotsub:before { border-color: rgba(194, 225, 245, 0); border-bottom-color: #0D4050; border-width: 16px; left: 50%; margin-left: -16px; }
+
+#addtablebox {	left:83px; }
+#addtablesub {   background-image: linear-gradient(to top, rgb(9, 22, 27), rgb(13, 64, 80)); border: 1px solid #1a1a1a; position: relative; padding: 5px 8px 5px 8px; border-radius: 5px;} 
+#addtablesub:after, .arrow_box:before { bottom: 100%; border: solid transparent; content: " "; height: 0; width: 0; position: absolute; pointer-events: none; } 
+#addtablesub:after { border-color: rgba(136, 183, 213, 0); border-bottom-color: #0D4050; border-width: 10px; left: 50%; margin-left: -10px; } 
+#addtablesub:before { border-color: rgba(194, 225, 245, 0); border-bottom-color: #0D4050; border-width: 16px; left: 50%; margin-left: -16px; }
+
+#addforloopbox {	left:100px; }
+#addforloopsub {   background-image: linear-gradient(to top, rgb(9, 22, 27), rgb(13, 64, 80)); border: 1px solid #1a1a1a; position: relative; padding: 5px 8px 5px 8px; border-radius: 5px; } 
+#addforloopsub:after, .arrow_box:before { bottom: 100%; border: solid transparent; content: " "; height: 0; width: 0; position: absolute; pointer-events: none; } 
+#addforloopsub:after { border-color: rgba(136, 183, 213, 0); border-bottom-color: #0D4050; border-width: 10px; left: 50%; margin-left: -10px; } 
+#addforloopsub:before { border-color: rgba(194, 225, 245, 0); border-bottom-color: #0D4050; border-width: 16px; left: 50%; margin-left: -16px; }
+
+#addwhileloopbox {	left:120px; }
+#addwhileloopsub {   background-image: linear-gradient(to top, rgb(9, 22, 27), rgb(13, 64, 80)); border: 1px solid #1a1a1a; position: relative; padding: 5px 8px 5px 8px; border-radius: 5px; } 
+#addwhileloopsub:after, .arrow_box:before { bottom: 100%; border: solid transparent; content: " "; height: 0; width: 0; position: absolute; pointer-events: none; } 
+#addwhileloopsub:after { border-color: rgba(136, 183, 213, 0); border-bottom-color: #0D4050; border-width: 10px; left: 50%; margin-left: -10px; } 
+#addwhileloopsub:before { border-color: rgba(194, 225, 245, 0); border-bottom-color: #0D4050; border-width: 16px; left: 50%; margin-left: -16px; }
+
+#addifelsebox {	left:170px; }
+#addifelsesub {   background-image: linear-gradient(to top, rgb(9, 22, 27), rgb(13, 64, 80)); border: 1px solid #1a1a1a; position: relative; padding: 5px 8px 5px 8px; border-radius: 5px; } 
+#addifelsesub:after, .arrow_box:before { bottom: 100%; border: solid transparent; content: " "; height: 0; width: 0; position: absolute; pointer-events: none; } 
+#addifelsesub:after { border-color: rgba(136, 183, 213, 0); border-bottom-color: #0D4050; border-width: 10px; left: 50%; margin-left: -10px; } 
+#addifelsesub:before { border-color: rgba(194, 225, 245, 0); border-bottom-color: #0D4050; border-width: 16px; left: 50%; margin-left: -16px; }
+
+#addsymbox {	left:190px; }
+#addsymsub {   background-image: linear-gradient(to top, rgb(9, 22, 27), rgb(13, 64, 80)); border: 1px solid #1a1a1a; position: relative; padding: 5px 8px 5px 8px; border-radius: 5px; } 
+#addsymsub:after, .arrow_box:before { bottom: 100%; border: solid transparent; content: " "; height: 0; width: 0; position: absolute; pointer-events: none; } 
+#addsymsub:after { border-color: rgba(136, 183, 213, 0); border-bottom-color: #0D4050; border-width: 10px; left: 50%; margin-left: -10px; } 
+#addsymsub:before { border-color: rgba(194, 225, 245, 0); border-bottom-color: #0D4050; border-width: 16px; left: 50%; margin-left: -16px; }
+
+#deleteitemsub { left:-5px; }
+#deleteitemsub {   background-image: linear-gradient(to top, rgb(9, 22, 27), rgb(13, 64, 80)); border: 1px solid #1a1a1a; position: relative; padding: 5px 8px 5px 8px; border-radius: 5px;} 
+#deleteitemsub:after, .arrow_box:before { bottom: 100%; border: solid transparent; content: " "; height: 0; width: 0; position: absolute; pointer-events: none; } 
+#deleteitemsub:after { border-color: rgba(136, 183, 213, 0); border-bottom-color: #0D4050; border-width: 10px; left: 50%; margin-left: -10px; } 
+#deleteitemsub:before { border-color: rgba(194, 225, 245, 0); border-bottom-color: #0D4050; border-width: 16px; left: 50%; margin-left: -16px; }
+*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------- Plots CSS ----------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+#tocloneplot { display:none; }	
+
+#Plot_Outer {
+	width:48px;
+	position:fixed;
+	right:0px;
+	top:0px;
+	z-index:9999;
+	display:none;
+	height:100%;
+	background-image:url(/Images/moulin.png);
+}
+
+#plot_mainselectwrapper {
+	margin:75px 0px 0px 0px;
+	overflow:auto;
+	width:100%;
+	height:100%;
+	padding-right:15px;
+}
+
+.plot_mainselector {
+	float:left;
+	height:32px;
+	width:32px;
+	padding:3px;
+	margin:20px 5px 0px 5px;
+	cursor:pointer;
+}
+
+.mainselecttext {
+	float:left;
+	width:48px;
+	text-align:center;
+	color:#fff;
+	font-size:0.75em;
+	padding:5px 0px 0px 0px;
+}
+
+#plotselect { background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -1px -166px;	 }
+#dataselect { background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -36px -165px;	 }
+#cameraselect { background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -246px 9px;	 }
+#yaxisselect { background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -105px -165px;	 }
+#xaxisselect { background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -71px -165px;	 }
+#titleselect { background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -140px -165px;	 }
+#formatselect { background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -176px -165px; }
+#legendselect { background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -215px -165px; }
+#surface_legendselect { background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -215px -165px; }
+#bandselect { background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -289px -165px;	 }
+#lineselect { background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -252px -165px;	 }
+#surface_planeselect { background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -289px -165px;	 }
+#surface_axesselect { background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -71px -165px;	 }
+
+#Plot_Wrapper {
+	width:100%;
+	padding:0px 0;
+	float:left;
+	background-color:#ECECEC;
+	border:1px solid #000;
+	border-radius: 10px;
+	box-shadow: 1px 2px 3px rgba(0,0,0,.5);
+	min-height:350px;
+	background-image:url("/Images/Pages/grain.png");
+}
+
+.plot_tab {
+	background-color:#ACACAC;
+	background-image:url("/Images/Pages/grain.png");
+	border-bottom:1px solid #000;
+	border-top:1px solid #000;
+	border-left:1px solid #000;
+	border-right:1px solid #000;
+	padding:5px;
+	float:right;
+	margin:0 5px;
+	border-radius:10px 10px 0px 0px;
+	cursor:pointer;
+	position:relative;
+	top:1px;
+}
+
+.plot_tab_active {
+	background-color:#ECECEC;
+	background-image:url("/Images/Pages/grain.png");
+	border-top:1px solid #000;
+	border-bottom:1px solid #ECECEC;
+	border-left:1px solid #000;
+	border-right:1px solid #000;
+	padding:5px;
+	float:right;
+	border-radius:10px 10px 0px 0px;
+}
+
+.plot_datasetdatasection, .plot_datasetappearancesection, .plot_datasetcamerasection, #surface_planesection, .plot_pointappearancesection {
+	float:left;
+	padding:0px 0px 0px 0px;
+	height:225px;
+	width:100%;
+	overflow-y:auto;
+	overflow-x:hidden;
+}
+
+#surface_planesection {
+	padding:0px 0px 0px 0px;
+	height:225px;
+	width:250px;
+	margin:20px 0px 0px 20px;
+	float:left;
+}
+
+.top_section {
+	position:absolute;
+	width:450px;
+	height:400px;
+}
+
+.top_header {
+	float:left;
+	width:90%;
+	font-size:20px;
+	font-weight:bold;
+	padding: 0px 0px 3px 10%;
+	border-bottom:2px solid #898989;
+	padding:0 0 5px;
+	margin:0 5%;
+}
+
+.plot_selectplottype {
+	float: left;
+	height: 32px;
+	width: 32px;
+	margin:10px 10px;
+	cursor:pointer;
+}
+
+#select_lineplot 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -77px -130px;  }
+#select_columnchart {	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -38px -130px;  }
+#select_piechart 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -115px -130px;  }
+#select_areachart 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -230px -129px;  }
+#select_scatterchart{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -192px -130px;  }
+#select_splineplot	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -309px -130px;  }
+#select_combochart 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -1px -130px;  }
+#select_heatmap 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -270px -130px;  }
+#select_barchart 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -1px -209px;  }
+#select_bubblechart	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -35px -209px;  }
+#select_surface 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -82px -244px;  }
+
+
+#plot_datablock1, #plot_datablock2, #plot_datablock3, #plot_datablock4, #plot_datablock5, #plot_datablock6, #plot_datablock6
+{ 
+	float:left;
+	display:none; 
+}
+
+#plot_typedisplay {
+	width:100%;
+	height:20px;
+	font-size:1.2em;
+	text-align:center;	
+}
+
+.top_third {
+	float:left;
+	width:300px;
+	padding:0px 0px 0px 0px;
+}
+
+#chartoptionssection, #chartxaxessection, #chartyaxessection, #chartdatasection, #plot_exampleblock, .plot_iconblock, #chartoptionstemplate, #plot_xaxistemplate, #plot_yaxistemplate {
+	display:none;
+}
+
+#plot_adddatawrapper, #plot_addbandwrapper, #plot_addlinewrapper, #surface_addplanewrapper {
+	width:100%;
+	height:50px;
+	float:left;
+	margin:auto;
+	text-align:center;
+}
+
+.plot_datanames, #plot_xaxisnames, #plot_yaxisnames, .surface_planenames {
+	float:left;
+	height:250px;
+	width:150px;
+	padding:0px 0px 0px 0px;
+	overflow-y:auto;
+	overflow-x:hidden;
+}
+
+
+.plot_adddata, #plot_addxaxis, #plot_addyaxis, #plot_addplotband, #plot_addplotline, .surface_adddata, .surface_addplane {
+	font-size:12px;
+	width:105px;
+	padding:10px 10px 8px 10px;
+	border: 1px solid #000;
+	border-radius: 15px;
+	margin:10px auto;
+	background-color:#ECECEC;
+	cursor:pointer;
+}
+
+#plot_adddata:hover, #plot_addxaxis:hover, #plot_addyaxis:hover, #plot_addplotband:hover, #plot_addplotline:hover, .surface_adddata:hover, .surface_addplane:hover {
+	background-color:#898989;
+	color:#ECECEC;
+}
+
+#plot_dataseriestemplate {
+	display:none;
+}
+
+.plot_holder {
+	width:825px;
+}
+
+.plot_xaxisline {
+	float:left;
+	padding:5px 0px 0px 5px;
+}
+
+.plot_axislabel {
+	float:left;
+	font-size:12px;
+	padding:2px 0px 0px 2px;
+	width:70px;
+}
+
+.plot_xaxisselect {
+	
+}
+
+.xaxischeck {
+	float:left;
+	margin:0px 10px 0px 0px;
+}
+
+.plot_dataline, .plot_yaxisline, .plot_xaxisline, .surface_planeline {
+	float:left;
+	padding:8px 0px 8px 10px;
+	font-size:14px;
+	width:140px;
+	margin:0 0;
+	cursor:pointer;
+}
+
+.plot_xaxisline { display:none; }
+
+.plot_dataline_active, .plot_yaxisline_active, .plot_xaxisline_active, .surface_planeline_active {
+	background-color:#ECECEC;
+}
+
+.plot_optiontext {
+	width:100%
+	height:15px;
+	text-align:center;
+	font-weight:bold;
+	padding:0px 0px 10px 0px;
+}
+
+.plot_datalabel {
+	float:left;
+	font-size:12px;
+	margin:0px 0px 2px 5px;
+	padding:2px 0px 0px 2px;
+	width:50px;
+}
+
+.plot_selectwrap {
+	float:left;
+	margin:0px 0px 0px 0px;
+	width:130px;
+	padding:0px 0px 0px 0px;
+}
+
+.plot_ydataselect, .plot_xdataselect, .plot_labelselect. .plot_xcategoriesselect {
+	width:145px;
+}
+
+.option_line {
+	float:left;
+	width:100%;
+}
+
+.plot_datasets {
+	float:right;
+	width:250px;
+	height:279px;
+	overflow-y:auto;
+}
+
+.plot_subclass {
+	float:left;	
+}
+
+.plot_dataoptionblock {
+	float:left;
+	margin:10px 0px 10px 0px;
+}
+
+.plot_dataname, .plot_yaxisname, .plot_xaxisname, .surface_planename {
+	float:left;
+	font-weight:bold;
+	padding:0px 0px 0px 0px;
+	width:100px;
+}
+
+.plot_optionline { 
+	float:left; 
+	padding:5px 10px;
+	width:240px;
+}
+
+.plot_axisoptions { width:210px; }
+.plot_checkoptions { margin:5px 0px 0px 45px; }
+.plot_appearanceoptions {  }
+.plot_dataoptions { width:250px; }
+
+.plot_optionblock {
+	padding:10px;
+	position:fixed;
+	right:63px;
+	display:none;
+	z-index:9999;
+	border:1px solid #000;
+	border-radius:15px;
+	background-color:#FFF;
+}
+
+.plot_optionblock:after, .plot_optionblock:before {
+	left: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.plot_optionblock:after {
+	border-color: rgba(255, 255, 255, 0);
+	border-left-color: #FFF;
+	border-width: 15px;
+	margin-top: -15px;
+}
+.plot_optionblock:before {
+	border-color: rgba(0, 0, 0, 0);
+	border-left-color: #000000;
+	border-width: 16px;
+	margin-top: -16px;
+}
+
+#plot_typeblock {
+	position:fixed;
+	top:40px;
+	background-color:#FFF;
+	width:260px;
+}
+
+#plot_typeblock:before {
+	margin-top: -40px;
+}
+
+#plot_typeblock:after {
+	margin-top: -39px;
+}
+
+#surface_camerablock {
+	position:fixed;
+	top:170px;
+	background-color:#FFF;
+	width:280px;
+}
+
+#surface_camerablock:before {
+	margin-top: -40px;
+}
+
+#surface_camerablock:after {
+	margin-top: -39px;
+}
+
+.activeplottype {
+	background-color:#ccc !important;
+}
+
+#plot_datablock {
+	position:fixed;
+	top:30px;
+	height:310px;
+	width:400px;
+}
+
+.plot_errorblock {
+	float:left;
+	width:80%;
+	margin:10px 10%;
+	font-size:0.75em;
+	color:#730324;
+	text-align:justify;
+	letter-spacing:1px;
+}
+
+#plot_xaxesblock {
+	position:fixed;
+	top:360px;
+	background-color:#FFF;
+}
+
+#plot_yaxesblock {
+	position:fixed;
+	top:425px;
+	background-color:#FFF;
+}
+
+#plot_titleblock {
+	position:fixed;
+	top:215px;
+	background-color:#FFF;
+}
+
+#plot_formatblock {
+	position:fixed;
+	top:230px;
+	background-color:#FFF;
+}
+
+#plot_legendblock {
+	position:fixed;
+	top:305px;
+	background-color:#FFF;
+}
+
+
+#surface_legendblock {
+	position:fixed;
+	top:240px;
+	background-color:#FFF;
+}
+
+#plot_bandblock {
+	position:fixed;
+	top:495px;
+	background-color:#FFF;
+}
+
+#plot_lineblock {
+	position:fixed;
+	top:570px;
+	background-color:#FFF;
+}
+
+#surface_planeblock {
+	position:fixed;
+	top:190px;
+	background-color:#FFF;
+}
+
+.active_plot {
+	border:5px solid #CCC;
+}
+
+
+#surface_axesblock {
+	position:fixed;
+	top:250px;
+	background-color:#FFF;
+}
+
+.plot_optionlabel {
+	float:left;
+	margin:0px 0px 0px 5px;
+	width:90px;
+	font-size:12px;
+}
+
+.plot_optionbox {
+	float:left;
+	width:auto;
+}
+
+.plot_deletedata, .plot_deletexaxis, .plot_deleteyaxis, .surface_deletedata, .surface_deleteplane {
+	float:left;
+	width:20px;
+	height:20px;
+	margin:0px;
+	background: url(http://www.cadwolf.com/Images/Pages/closebutton.png) no-repeat left top;
+}
+
+.plot_selectplot {
+	padding : 15px 70px;
+	float:left;
+}
+
+.plot_chartline {
+	float:left;	
+	padding:10px 0 0 5%;
+	width:95%;
+}
+
+.plot_chartlabel {
+	float:left;	
+	width:145px;
+}
+
+.plot_chartformatlabel {
+	float:left;	
+	width:100px;
+}
+
+.plot_chartitem {
+	float:left;	
+}
+
+#plot_selecttext {
+	font-size:20px;
+	padding:75px 0px 0px 0px;
+	width:100%;
+	text-align:center;
+}
+
+.nopadcheck {
+	float:left;
+	margin:0px;
+	padding:0px;
+	height:auto;
+	width:auto;
+}
+
+.plot_chartoption {
+	float:right;
+	width:90px;
+	margin:0 10px 0 0;
+	padding:0px;
+	height:auto;
+	border:1px solid #000000;	
+	text-align:center;
+}
+
+.plot_chartoptionstitle {
+	float:left;
+	width:80%;
+	padding:5px 0;
+	border-bottom:1px solid #ACACAC;
+	margin:0 10% 15px 10%;
+	font-weight:bold;
+	text-align:center;
+}
+
+.plot_suboptions {
+	float:left;
+	padding:0px 0px 0px 0px;
+	width:100%;
+}
+
+.plot_suboptionbox {
+	float:left;
+	padding:5px 0px 5px 0px;
+}
+
+.plot_charttextbox {
+	float:right;
+}
+
+.plot_legendtextwide {
+	float:left;
+	width:150px;
+}
+
+.plot_legendtext {
+	float:left;
+	padding:2px 0px 0px 0px;
+}
+
+.plot_legendselect {
+	float:right;
+	margin:0px 10px 0px 0px;
+}
+
+.plot_legendinput {
+	float:right;
+	margin:0px 10px 0px 0px;
+	width:75px;
+	height:12px;
+	border:1px solid #000000;
+	text-align:center;
+}
+
+.plot_optionaxisonoff, .plot_optionaxisopposite, .plot_optionmarkersonoff, .point_optionmarkersonoff, .plot_optionlabelsonoff, .plot_serieslegendonoff, .point_serieslegendonoff, .point_optionlabelsonoff  {
+	float:left;
+	padding:0px;
+	margin:0px 0px 0px 45px;
+	height:auto;
+	width:auto;
+	font-size:2em;
+}
+
+.plot_axistypeselect, .plot_xaxistypeselect, .plot_yaxisreverse, .plot_xaxisreverse, .plot_xaxisshowhide {
+	float:right;
+}
+
+.plot_label75 {
+	float:left;
+	margin:0px 0px 2px 5px;
+	padding:2px 0px 0px 2px;
+	width:75px;
+}
+
+.plot_label85 {
+	float:left;
+	margin:0px 0px 0px 0px;
+	padding:5px 0px 0px 0px;
+	width:85px;
+}
+
+.plot_label95 {
+	float:left;
+	margin:0px 0px 2px 5px;
+	padding:2px 0px 0px 2px;
+	width:95px;
+}
+
+.plot_label50 {
+	float:left;
+	margin:0px 0px 2px 5px;
+	padding:2px 0px 0px 2px;
+	width:50px;
+}
+
+.plot_label35 {
+	float:left;
+	margin:0px 0px 2px 5px;
+	padding:2px 0px 0px 2px;
+	width:35px;
+}
+
+
+#plot_yaxislabel, #plot_yaxismin, #plot_yaxismax, #plot_yaxisoffset, #plot_axisoffset, #plot_yaxiswidth, #plot_xaxislabel, 
+#plot_xaxismin, #plot_xaxismax, #plot_xaxisoffset, #plot_yaxistickinterval, #plot_yaxisticklength, #plot_yaxistickwidth,
+#plot_xaxistickinterval, #plot_xaxisticklength, #plot_xaxistickwidth, #plot_xaxiswidth, #plot_yaxisminortickinterval, #plot_xaxisminortickinterval,
+#plot_ygridlinewidth, #plot_yminorgridlinewidth, #plot_xgridlinewidth, #plot_xminorgridlinewidth  {
+	float:left;
+	border:1px solid #000000;
+	padding:0px;
+	margin:0px 15px 0px 0px;
+	text-align:center;
+	width:100px;
+	height:15px;
+}
+
+.plot_click {
+	height:20px;
+	width:100%;
+	text-align:right;
+	background: url(http://www.cadwolf.com/Images/Pages/wolfpaw20.gif) no-repeat left top;
+}
+
+.plot_tabledata {
+	float:left;
+	width:18px;
+	height:18px;
+	background: url(http://www.cadwolf.com/Images/Pages/tabledata.gif) no-repeat left top;
+	border-left:0px solid #000000;
+	border-right:0px solid #000000;
+	border-top:0px solid #000000;
+	border-bottom:0px solid #000000;
+	margin:0px 10px 0px 0px
+}
+
+select.plot_ydataselect, select.plot_xdataselect, select.plot_labelselect, select.plot_xcategoriesselect {
+	position:absolute;
+    border-top:1px solid #000000;
+    border-bottom:1px solid #000000;
+    border-left:1px solid #000000;
+    height:20px;
+    width:145px;
+    COLOR: #000000; 
+    padding:0px;
+    margin: 0px;
+    font-size:10px;
+}
+
+
+#Plot_Maximize {
+	float:left;
+	width:100%;
+	background-color:#ECECEC;
+	background-image:url("/Images/Pages/grain.png");	
+	border-bottom:2px solid #898989;
+	display:none;
+	text-align:center;
+	padding:15px 0px;
+	height:11px;
+	font-weight:bold;
+}
+
+#Plot_Minimize {
+	position:absolute;
+	right:0px;
+	top:30px;
+	width:20px;
+	height:20px;
+	margin:5px 0px 0px 0px;
+	background:url(http://www.cadwolf.com/Images/Pages/closebutton.png) no-repeat left top;
+	cursor:pointer;
+}
+
+
+#plot_options {
+	float:left;
+	width:150px;
+}
+
+#plot_optionsleft {
+	float:left;
+	width:150px;
+	position:absolute;
+	height:300px;
+	padding:50px 0px 0px 0px;
+	background-color:#ACACAC;
+	border-radius:10px 0px 0px 10px;
+	background-image:url('/Images/Pages/grain.png');	
+}
+
+#plot_optionsright {
+	float:right;
+	width:300px;
+	height:230px;
+}
+
+.plot_optionlist {
+	float:left;
+	width:140px;
+	padding:10px 0px 10px 10px;
+	cursor:pointer;
+	font-weight:bold;
+}
+
+.plot_optionlistactive {
+	background-color:#ECECEC;
+	background-image:url('/Images/Pages/grain.png');
+	cursor:pointer;
+}
+
+.plot_axiscolorbox {
+	float:left;
+	padding:0px 0px 0px 50px;
+}
+
+.plot_piebox {
+	float:left;
+	width:165px;
+	height:225px;
+}
+
+.inactive_pieinput {
+	background-color:#ccc;
+}
+
+.active_pieinput {
+	background-color:#fff;
+}
+
+.plot_addpiebox {
+	position:absolute;
+	top:55px;
+	right:70px;
+	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -319px -5px; 
+	height:20px; 
+	width:20px;	
+	cursor:pointer;	
+}
+
+.plot_deletepiebox {
+	position:absolute;
+	top:55px;
+	right:40px;
+	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -319px -33px; 
+	height:20px; 
+	width:20px;	
+	cursor:pointer;	
+}
+
+.plot_subappbox {
+	position:absolute;
+	right:40px;
+	top:85px;
+}
+
+.plot_appbox {
+	float:left;
+	text-align:center;	
+	width:100%;
+/*	width:220px; */
+	height:32px;
+	margin:5px 0px 0px 10px;
+}
+
+.plot_appbox2 {
+	float:left;
+	text-align:center;	
+	width:250px;
+	height:32px;
+	margin:5px 0px 0px 10px;
+}
+
+.plot_pieappbox {
+	float:left;
+	text-align:center;	
+	width:165px;
+	margin:2px 0px 0px 0px;
+}
+
+.plot_appeartext {
+	float:left;
+	text-align:center;	
+	font-size:1em;
+	min-width:100px;
+	padding:5px 0px 5px 0px;
+}
+
+.plot_markersize {
+	width:25px;
+}
+
+.plot_plotlinewidth {
+	width:25px;
+}
+
+.plot_narrowselectwrap {
+	float:left;
+	width:55px;
+}
+
+select.plot_symbolselect, select.plot_surfaceselect {
+	float:left;
+	width:85px;
+	margin-top:5px;
+}
+
+#plot_seriestypeselect, #plot_xaxistemplate, #plot_yaxistemplate , #plot_dataseries{ display:none;}
+
+#plot_seriestype {
+	float:left;	
+}
+
+#plot_axisdata {
+	float:left;
+	margin:0px 0px 0px 50px;
+}
+
+#plot_markerslabels {
+	float:left;
+	width:150px;
+}
+
+.plot_subtabline {
+	float:left;
+	border-bottom:1px solid #898989;
+	width:85%;
+	margin:10px 5% 0px 5%;
+	padding:0px 0px 0px 5%;
+	height:23px;
+}
+
+.xplot_subtab, .yplot_subtab, .dataplot_subtab {
+	float:left;
+	padding:3px 5px;
+	margin:0px 10px 0px 0px;
+	border-left:1px solid #898989;
+	border-right:1px solid #898989;
+	border-top:1px solid #898989;
+	background-color:#ACACAC;
+	cursor:pointer;
+}
+
+.xplot_subtab_active, .yplot_subtab_active, .dataplot_subtab_active {
+	position:relative;
+	top:1px;
+	background-color:#FFFFFF;
+}
+
+.plot_datasetappearancesection, .plot_datasettrendlinesection, #plot_yaxisappearancesection, #plot_yaxistickmarkssection, 
+#plot_xaxisappearancesection, #plot_xaxistickmarkssection, #plot_bandtemplate, #plot_linetemplate,
+.plot_pointappearancesection {
+	display:none;
+}
+
+#plot_bandnames, #plot_linenames {
+	float:left;
+	width:100px;
+	height:175px;
+	padding:8px 10px 0px 10px;
+}
+
+#plot_bandoptions, #plot_lineoptions {
+	float:right;
+	width:150px;
+	padding:0% 0px 0px 10px;
+}
+
+.plot_bandline, .plot_lineline {
+	float:left;
+	margin:10px 0px 10px 0px;
+}
+
+.plot_bandtext, .plot_linetext {
+	float:left;
+	width:65px;
+	padding:8px 0px 0px 0px;
+}
+
+.plot_bandtextbox, .plot_linetextbox {
+	float:right;
+	width:50px;
+}
+
+.plot_bandname, .plot_linename {
+	float:left;
+	width:80px;
+	padding:5px 0px 5px 5px;
+}
+
+.plot_bandnameline, .plot_linenameline {
+	float:left;
+	width:120px;
+	padding:3px 0px 3px 0px;
+	cursor:pointer;
+	background-color:#CCCCCC;
+}
+
+.plot_bandnameline_active, .plot_linenameline_active {	background-color:#CCCCCC;  }
+
+.plot_deleteband, .plot_deleteline {
+	float:left;
+	background: url(http://www.cadwolf.com/Images/Pages/closebutton.png) no-repeat left top;
+	width:30px;
+	height:20px;
+}
+
+#plot_xgridsonoff, #plot_ygridsonoff, #plot_xminorgridsonoff, #plot_yminorgridsonoff, .surface_XYonoff, .surface_XZonoff, .surface_YZonoff
+{
+	float:left;
+	width:25px;
+	margin:8px 0px 0px 20px;
+	padding:0px;
+}
+
+.surface_axisselectline {
+	width:100%;
+}
+
+.surface_axisselect {
+	background-color:#CCC;
+	cursor:pointer;
+	border-bottom:1px solid #ccc;
+	border-left:1px solid #ccc;
+	border-right:1px solid #ccc;
+	border-top:1px solid #ccc;
+}
+
+.surface_axisselect_active {
+	background-color:#FFF;
+	cursor:pointer;
+	border-bottom:1px solid #ccc;
+	border-left:1px solid #ccc;
+	border-right:1px solid #ccc;
+	border-top:1px solid #ccc;
+}
+
+.surface_axiswrapper {
+	float:left;
+	width:200px;
+	padding:5px;
+	margin:5px 0px 5px 0px;
+	text-align:center;
+}
+
+#surface_axessection {
+	width:250px;
+}
+
+.surface_axesbox {
+	width:600px;
+	display:none;
+}
+
+.surface_axeshalfbox {
+	width:300px;
+	float:left;
+}
+
+.axisline {
+	float:left;
+	width:300px;
+	height:30px;	
+}
+
+.surface_axistext {
+	width:150px;
+	float:left;
+	text-align:center;
+}
+
+.surface_axisproperty {
+	width:100px;
+	float:left;
+}
+
+.surface_halflinetitle {
+	border-bottom:1px solid #ccc;
+	padding:3px 0px;
+	margin:0px 15px;
+	text-align:center;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+.ui-selecting { background: #ccffee; }
+  .ui-selected { background: #cceeff; }
+  
+*:focus {
+    outline: 0;
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------ The inputs page and associated items --------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+#Input_line { 
+	float:left;
+	width:825px;
+	margin:25px auto; 
+}
+
+.Input_Desc {
+	float:left;
+	width:825px;
+	line-height:22px;
+	padding:5px 0px;
+}
+
+#Inputs_showinputfile {
+	width:250px;
+	margin:auto;
+	background-color:#456382;
+	color: #DFE3E6;
+	text-align:center;
+	padding:10px;
+	font-size:18px;
+	cursor:pointer;
+	border-radius:5px;
+}
+
+#Inputs_currentinputs {
+	float:left;	
+	width:825px;
+}
+
+
+#Inputs_files {
+	float:left;
+	width:100%;
+	border:1px solid #ECECEC;
+	margin:10px 0px 10px 0px;
+	padding:10px 0px 10px 0px;
+	border-radius:15px;
+	display:none;
+}
+
+
+#Inputs_location {
+	float:left;
+	width:100%;
+	text-align:center;
+	margin:0px 0px 10px 0px;	
+}
+
+#Inputs_currentlocation {
+	width:700px;
+	background-color:#FFFFFF;
+}
+
+#Inputs_folderwindow {
+	width:40%;
+	height:400px;
+	border:1px solid #ECECEC;
+	float:left;
+	margin:0px 5%;
+	overflow:auto;
+}
+
+#Inputs_equationwindow {
+	width:40%;
+	height:400px;
+	border:1px solid #ECECEC;
+	float:right;
+	margin:0px 4%;
+	overflow:auto;
+}
+
+.Inputs_smalldesc {
+	float:left;
+	width:50%;
+	text-align:center;	
+	margin:10px 0px 10px 0px;
+}
+
+.Inputs_largedesc {
+	width:100%;
+	text-align:center;	
+}
+
+
+.folderline {
+	width:85%;
+	background: url(/Images/Pages/folder.gif) no-repeat 10px 8px;	
+	padding:10px 0px 10px 15%;
+	margin:0px 0px 0px 0px;
+	border-bottom:1px solid #ECECEC;
+	cursor:pointer;
+}
+
+.fileline {
+	width:85%;
+	background: url(/Images/Pages/file.jpg) no-repeat 10px 8px;	
+	padding:10px 0px 10px 15%;
+	margin:0px 0px 0px 0px;
+	border-bottom:1px solid #ECECEC;
+	cursor:pointer;
+}
+
+.currentfileline {
+	background-color:#ECECEC;
+}
+
+.equationline {
+	float:left;
+	width:100%;
+	padding:0px 0px 5px 0px;
+	margin:5px 0px 5px 0px;
+	border-bottom:1px solid #ECECEC;
+	cursor:pointer;
+}
+
+
+.equationlinecheckbox {
+	float:left;
+	width:50px;
+	text-align:center;
+}
+
+.equationlinename {
+	float:left;
+	width:100px;
+	text-align:center;
+}
+
+.equationlinevalue {
+	float:left;
+	width:150px;
+	text-align:center;
+}
+
+.equationlineunits {
+	float:left;
+	width:50px;
+}
+
+.equationlinelabel {
+	font-weight:bold;
+}
+
+.equationlinehide {
+	display:none;
+}
+
+
+.Inputs_altname {
+	background-color:#FFFFFF;
+	display:none;
+}
+
+
+table.inputs {
+	margin: 10px 0px 20px 30px;
+	text-align:center;
+	font-size:12px;
+}
+
+table.inputs tr {
+	width:100%;
+}
+
+table.inputs td {
+	padding:2px 5px;
+	border-bottom:1px solid #ECECEC;
+}
+
+table.inputs th {
+	font-size:14px;
+	border-bottom:2px solid #898989;
+}  
+
+.inputcheckbox {
+	margin:0px 0px 0px 15px;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------ The inputs page and associated items --------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+.spinner {
+	background: url(/Images/Pages/480.GIF) no-repeat center center;
+	width:auto;
+	height:auto;
+}
+
+.solving {
+	width:100%;
+	height:100%;
+	background-color:#FFFFFF;
+	opacity:0.2;
+}
+
+.forloopsolving {
+	display:none;
+	width:100%;
+	height:100%;
+	position:absolute;
+}
+
+.forloopa, .forloopb, .forloopc {
+	float:left;
+}
+
+.description {
+	width:825px;
+	margin:25px 0px;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------ The left bar items such as save file --------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+#nosavemessage {
+	background-color:#730324;
+	font-size:1.2em;
+	text-align:center;
+	margin:0px 15px 10px 15px;
+	padding:5px;
+	border-radius:5px;
+	color:#DFE3E6;
+}
+
+#checkout {
+	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -222px -32px; height:24px; width:24px;
+}
+
+.small_navline {
+	width:220px;
+	height:30px;
+	margin:10px 15px;
+}
+
+.small_nav {
+	float:left;
+	margin:0px 6px;
+	background-color:#8BA2BD;
+	border-radius:5px;
+	height:32px;
+	width:32px;
+	cursor:pointer;
+}
+
+.current_small_nav {
+	float:left;
+	margin:0px 6px;
+	background-color:#730324;
+	border-radius:5px;
+	height:32px;
+	width:32px;
+	cursor:pointer;
+}
+
+#show_worksheet {	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -0px -32px; 	height:24px; width:24px;	}
+#show_toc 		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -30px -32px; 	height:24px; width:24px;	}
+#show_file		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -60px -34px; 	height:24px; width:24px;	}
+#show_inputs	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -5px -292px; height:24px; width:24px;		}
+#show_faf		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -68px -290px; height:24px; width:24px;	}
+#show_functions {	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -89px -32px; 	height:24px; width:24px;	}
+#show_ifuns		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -34px -290px; height:24px; width:24px;	}
+#show_numbers 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -103px -292px; height:24px; width:24px;	}
+#show_constants	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -120px -32px; height:24px; width:24px;	}
+#show_refs		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -137px -292px; height:24px; width:24px;	}
+#show_datasets	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -198px -212px; height:24px; width:24px;	}
+#show_bugs		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -129px -211px; height:24px; width:24px;	}
+
+#show_worksheet_current {	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -0px -60px; 	height:24px; width:24px;	}
+#show_toc_current 		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -30px -60px; 	height:24px; width:24px;	}
+#show_file_current		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -62px -60px; 	height:24px; width:24px;	}
+#show_inputs_current 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -169px -290px; height:24px; width:24px;	}
+#show_faf_current 		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -234px -288px; height:24px; width:24px;	}
+#show_functions_current {	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -90px -60px; 	height:24px; width:24px;	}
+#show_ifuns_current 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -199px -288px; height:24px; width:24px;	}
+#show_numbers_current 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -269px -290px; height:24px; width:24px;	}
+#show_refs_current 		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -302px -291px; height:24px; width:24px;	}
+#show_constants_current {	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -120px -57px; height:24px; width:24px;	}
+#show_datasets_current	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -231px -212px; height:24px; width:24px;	}
+#show_bugs_current		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -163px -211px; height:24px; width:24px;	}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------ The File Page shown with properties  --------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+.file_info {
+	float:left;
+	width:100%;
+}
+
+#addfileinput, #addfileoutput {
+	float:left;
+	width:250px;
+	margin:15px 300px;
+	padding:5px;
+	text-align:center;
+	background-color:#456382;
+	border-radius:5px;
+	cursor:pointer;
+	color:#DFE3E6;
+}
+
+.file_infoline {
+	float:left;
+	width:100%;
+}
+
+.file_infoleft {
+	float:left;
+	width:50%;
+	padding:10px 25px;
+	width:350px;
+	text-align:right;	
+	font-weight:bold;
+}
+
+.file_inforight {
+	float:left;
+	padding:10px 25px;
+	width:350px;
+	text-align:left;	
+}
+
+#filefunctionname {
+	float:left;
+	cursor:pointer;
+}
+
+#fileinputs {
+	float:left;
+}
+
+#FileInputList, #FileOutputList {
+	float:left;
+}
+
+.functioninputline, .functionoutputline {
+	float:left;
+	width:100%;
+	line-height:25px;
+	padding:5px 0px;
+}
+
+.functioninputnumber, .functionoutputnumber {
+	float:left;
+	width:150px;
+}
+
+.functioninputname, .functionoutputname, .functioninputtemp {
+	float:left;
+	width:600px;
+	cursor:pointer;
+}
+
+.functioninputdelete, .functionoutputdelete {
+	float:left;
+	width:24px;
+	height:24px;
+	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -317px -30px;
+	cursor:pointer;
+}
+
+.file_description {
+	padding:5px 0px;
+	line-height:22px;
+}
+
+#addfileinput:hover, #addfileoutput:hover {
+	background-color:#730324;	
+}
+
+
+.itemproperties, .plotdata, .plotaxis, .plotband, .plotline { display:none; }
+
+
+.file_nameline {
+	width:100%;	
+}
+
+.file_nametext {
+	float:left;
+	width:250px;
+	margin:0px 0px 0px 100px;
+	padding:5px 0px 0px 0px;
+}
+
+.file_nameinput {
+	float:right;
+}
+
+#file_functionname {
+	float:left;
+	padding:2px;
+	width:400px;
+}
+
+#filename_error {
+	color:#730324;
+	text-align:center;
+	padding:10px 0px;
+}
+
+#equationrelations, #plotrelations { display:none; }
+
+#titleoption, #subtitleoption { cursor:pointer; }
+
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------- The File used as a function  --------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+.FileAsFunction {
+	float:left;
+	width:100%;
+	border-top:1px solid #456382;
+}
+
+.FAFLine {
+	float:left;
+	width:100%;
+	text-align:center;
+	font-weight:bold;
+	border-bottom:1px solid #456382;
+	padding:5px 0px;
+}
+
+.FAFname {
+	float:left;
+	width:350px;
+	padding:2px 0px;
+}
+
+.FAFinputs, .FAFoutputs {
+	float:left;
+	width:234px;
+	padding:2px 0px;
+}
+
+.FAFequations_flag, .FAFinstances_flag {
+	float:left;
+	width:98px;
+	padding:2px 0px;
+	border:1px solid #8BA2BD;
+}
+
+.FAFequations_flag:hover, .FAFinstances_flag:hover {
+	background-color:#8BA2BD;
+	color:#FFF;
+}
+
+.FAFname { border-radius:8px 0px 0px 8px;}
+.FAFequations_flag { border-radius:0px 8px 8px 0px;}
+
+.FAFequations_flag, .FAFinstances_flag { cursor:pointer;}
+
+.FAFequations, .FAFinstances { display:none;	}
+
+.instanceline {
+	float:left;
+	width:1000px;
+	border-top:1px solid #ccc;
+	border-bottom:1px solid #ccc;
+	margin:15px 0px;
+	padding:5px 0px;
+}
+
+.instancename {
+	float:left;
+	font-weight:bold;
+	padding:0px 5px;
+	margin:0px 5px 0px 0px;
+	width:275px;
+}
+
+.instanceinputs, .instanceoutputs {
+	float:left;
+	width:250px;
+}
+
+.instancelabel {
+	float:left;
+	font-weight:bold;
+	width:100px;
+}
+
+.instanceinput, .instanceoutput {
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------- The Table of Contents  --------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+#TOC_holder {	width:100%; }
+
+.TOC_1, .TOC_2, .TOC_3, .TOC_4 { float:left; }
+
+.TOC_1 { margin:15px 0px 3px 0px; width:100%; font-size:1.6em; border-bottom:1px solid #ccc; }
+.TOC_2 { margin:3px 0px 3px 3%; width:97%; font-size:1.2em; }
+.TOC_3 { margin:3px 0px 3px 6%; width:94%; font-size:1.1em; }
+.TOC_4 { margin:3px 0px 3px 9%; width:91%; font-size:1.1em; }
+
+.TOC_num {
+	float:left;
+	width:30px;
+}
+
+.TOC_title {
+	float:left;
+	width:auto;
+}
+
+.TOC_line:hover {
+	cursor:pointer;
+}
+
+.TOC_line:hover {
+	background-color:#ccc;
+}
+
+#viewalldoc {
+	width:50%;
+	font-weight:bold;
+	text-align:left;
+	float:left;
+	cursor:pointer;
+}
+
+#tocviewblock {
+	width:825px;
+	position:absolute;
+}
+
+#viewalldoc:hover { text-decoration:underline; }
+
+#viewtocsections {
+	width:50%;
+	float:right;
+	text-align:right;
+	font-weight:bold;
+	cursor:pointer;
+}
+
+#tocsections {
+	display:none;
+	border-left:1px solid #ccc; 
+	border-right:1px solid #ccc; 
+	border-top:1px solid #ccc; 
+	border-radius:5px;
+	width:100px;
+	position:relative;
+	right:5px;
+	float:right;
+	background-color:#FFF;
+}
+
+.viewtocs {
+	padding:2px;
+	border-bottom:1px solid #ccc;
+	cursor:pointer;
+	text-align:center;
+}
+
+.viewtocs:hover {
+	background-color:#ccc;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------- The Image Editor  --------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+#imageselect_address {
+	width:420px;
+	margin:10px 10px 10px 7px;
+}
+
+#imgselect {
+	
+}
+
+#imageselect_images {
+	height:200px;
+	overflow:auto;
+}
+
+.image_prop {
+	width:75%;
+	text-align:center;
+	vertical-align:middle;
+	padding:12px 12%;	
+}
+
+#imgwidth, #imgheight {
+	float:right;
+	width:50px;
+	border:0px;
+}
+.imagepropsline {
+	height:20px;
+	padding:5px 0px;
+}
+
+.imageprops_folder {
+	float:left;
+	margin:0px 10px 0px 10px;
+	height:24px;
+	width:24px;
+	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -288px -321px;	
+	cursor:pointer;
+}
+
+.imageprops_image {
+	float:left;
+	margin:0px 10px 0px 10px;
+	height:24px;
+	width:24px;
+	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -252px -3px;	
+	cursor:pointer;
+}
+
+.imageprops_name {
+	float:left;
+	width:300px;
+	font-size:1.2em;
+	padding:3px 0px 0px 5px;
+}
+
+.imagepropsline:hover {
+	background-color:#ccc;
+}
+
+#importlist {
+	margin:10px auto;
+	width:400px;
+	font-size:1em;
+	text-align:center;
+	padding:4px;
+	border-radius:5px;
+	background-color:#8BA2BD;
+	color:#FFF;
+	cursor:pointer;
+}
+
+#imgselect {
+	border-radius:5px;
+	font-size:1.2em;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------ ITEMS RELATED TO Subnavigation ------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+.subnav_wrapper {
+	width:825px;
+	margin:25px auto;
+}
+
+.subnav {
+	width:500px;
+	height:30px;
+	margin:auto;
+	color:#8BA2BD;
+	font-size:1.25em;
+	letter-spacing:2px;
+}
+
+.subnavitem {
+	float:left;
+	padding:4px 10px;
+	border-top:1px solid #8BA2BD;
+	border-bottom:1px solid #8BA2BD;
+	border-right:1px solid #8BA2BD;
+	cursor:pointer;
+}
+
+.subnavitem_left {
+	float:left;
+	padding:4px 10px;
+	border-top:1px solid #8BA2BD;
+	border-bottom:1px solid #8BA2BD;
+	border-left:1px solid #8BA2BD;
+	border-right:1px solid #8BA2BD;
+	border-radius:5px 0px 0px 5px;
+	cursor:pointer;
+}
+
+.subnavitem_right {
+	float:left;
+	padding:4px 10px;
+	border-top:1px solid #8BA2BD;
+	border-bottom:1px solid #8BA2BD;
+	border-right:1px solid #8BA2BD;
+	border-radius:0px 5px 5px 0px;
+	cursor:pointer;
+}
+
+.subnavitem:hover, .subnavitem_left:hover, .subnavitem_right:hover {
+	background-color:#456382;
+	color:#DFE3E6;
+}
+
+.subnav_current {
+	background-color:#456382;
+	color:#DFE3E6;
+}
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------ ITEMS RELATED TO The LOGO and the login ---------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+#Format_Wrapper {
+	height: 50px;
+	z-index:999;
+	display:none;
+	width:auto;
+	position:fixed;
+	top:0px;
+	left:250px;
+	width:100%;
+}
+
+#Format_Bar {
+	float:left;
+	width:90%;
+	margin:0 5%;
+}
+
+#NicEdit_Wrapper {	margin:auto; background-color:#FFF; }
+#myNicPanel { float:left; }
+
+
+#cktoolbar {
+	margin:auto;
+	padding:0px 0px 0px 0px;
+}
+
+.cke_chrome {	border:0px !important; }
+
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------ ITEMS RELATED TO The messages  ------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+#GoodMessageWrapper, #BadMessageWrapper {
+	position:fixed;
+	top:0px;
+	left:0px;
+	width:100%;
+	display:none;
+	text-align:center;
+	padding:5px 0px 5px 115px;
+	font-size:1.5em;
+	font-family:cinzel;
+	letter-spacing:1.5px;
+	color:#FFF;
+	z-index:9999;
+}
+
+#BadMessageWrapper {
+	background-color:#730324;
+}
+
+#GoodMessageWrapper {
+	background-color:#228008;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------- ITEMS RELATED TO THE FILE AS FUNCTION  ------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+#Profile_FAF {
+	float:left;
+	width:100%;
+	margin:10px 0px;
+	border-top:1px solid #ccc;
+}
+
+.Profile_FAF_line {
+	width:100%;
+	height:30px;
+	border-bottom:1px solid #ccc;
+	padding:10px 0px 0px 0px;
+}
+
+.Profile_FAF_addressholder {
+	float:left;
+	width:60%;
+	cursor:pointer;	
+	text-align:center;
+}
+
+.FAF_input {
+	width:90%;
+}
+
+#FAFHeaderRow {
+	float:left;
+	width:100%;
+	text-align:center;
+}
+
+.FAFHeader {
+	font-size:1.2em;
+}
+
+.Profile_FAF_nameholder {
+	float:left;
+	width:35%;
+	padding:0px;
+	margin:0px;
+	padding:0px 0px 0px 0px;
+	text-align:center;
+}
+
+.FAF_input {
+	width:90%;
+}
+
+.Profile_FAF_header1 {
+	float:left;
+	width:30%;
+}
+
+.Profile_FAF_header2 {
+	float:left;
+	width:65%;
+}
+
+.File_FAF_delete {
+	float:left;
+	width:24px;
+	height:24px;
+	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -317px -33px;
+	cursor:pointer;
+}
+
+#AddFAFLine, #AddDataset {
+	width:30%;
+	background-color:#8BA2BD;
+	cursor:pointer;
+	border-radius:5px;
+	padding:5px 0px;
+	margin:20px 35% 40px;
+	color:#FFF;
+	text-align:center;
+}
+
+#References {
+	float:left;
+	margin:30px 0px 0px 0px;
+	border-bottom:1px solid #ccc;
+}
+
+.dataset_line {
+	width:100%;
+}
+
+.datasetname_holder {
+	float:left;
+	width:20%;
+	margin:10px 5%;
+	height:24px;
+}
+
+.dataseturl_holder {
+	float:left;
+	width:55%;
+	margin:10px 5%;
+	height:24px;
+}
+
+.dataset_name {
+	float:left;
+}
+
+.dataset_delete {
+	float:left;
+	width:24px;
+	height:24px;
+	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -317px -30px;
+	cursor:pointer;
+	margin:7px 0px 0px 0px;
+}
+
+
+#Legend_Wrapper {
+	height:75px;
+	position:fixed;
+	bottom:0px;
+	z-index:0;
+}
+
+#Legend {
+	width:800px;
+	height:50px;
+	margin:auto;
+}
+
+#Legend_Ticks {
+	width:800px;
+	height:25px;
+	margin:auto;
+}
+
+.Legend_Tick {
+	float:left;
+	width:10px;
+	height:25px;
+	margin:auto;
+	text-align:center;
+}
+
+.delete_input {
+	float:left;
+	width:24px;
+	height:24px;
+	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -317px -30px;
+	cursor:pointer;
+	margin:0px 0px 0px 0px;
+}
+
+
+/* Things relating to surface data options */
+
+#line_datablock, #cube_datablock, #icosahedron_datablock, #tetrahedron_datablock, #octahedron_datablock, #sphere_datablock, #cylinder_datablock,
+#torus_datablock, #lathe_datablock, #plane_datablock, #grid_datablock {
+	display:none;
+}
+
+/*--------------------------------------------------------- VIDEO STUFF -----------------------------------------------------*/
+.youtube-container { display: block; margin: 20px auto; width: 100%; max-width: 600px; }
+.youtube-player { display: block; width: 100%; /* assuming that the video has a 16:9 ratio */ padding-bottom: 56.25%; overflow: hidden; position: relative; width: 100%; height: 100%; cursor: hand; cursor: pointer; display: block; }
+img.youtube-thumb { bottom: 0; display: block; left: 0; margin: auto; }
+div.play-button { height: 72px; width: 72px; left: 50%; top: 50%; margin-left: -36px; margin-top: -36px; position: absolute; background: url("http://i.imgur.com/TxzC70f.png") no-repeat; }
+#youtube-iframe { width: 100%; height: 100%;  }
+.video_block { margin:20px auto 0px auto; }
+.default_video { background: url("http://i.imgur.com/TxzC70f.png"); }
+
+
+
+#checkinButton, #checkoutButton {
+	float:left;
+	margin:0px 20px 0px 0px;
+	border:1px solid #456382;
+	padding:5px;
+	color:#456382;
+	border-radius:5px;
+	background-color:#B4C4D4;
+}
+
+#checkinButton:hover, #checkoutButton:hover {
+	border:1px solid ##B4C4D4;
+	color:#DFE3E5;
+	background-color:#456382;
+	cursor:pointer;
+}

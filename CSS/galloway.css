@@ -1,0 +1,606 @@
+/* ---------------------------------------------------------------------
+   This just controls the landing page and a few other greetings pages
+---------------------------------------------------------------------- */
+
+html {
+	height:100%;
+	width:100%;
+}
+
+body {
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px;
+	height:100%;
+	width:100%;
+	min-width:1100px;
+	font-weight:100;
+	letter-spacing:1px;
+	text-align:justify;
+	color:#464e4f;
+	font-family:Lato;
+}
+
+#container {
+	margin:0 auto;
+}
+
+.logo_wrapper {
+	float:left;	
+	margin:20px;
+	border:4px solid #A07F42;
+	padding:10px;
+	background-image:url('http://newgreekmarble.com/wp-content/uploads/2011/01/VOLAKAS-ARABESCATO.jpg');
+	background-size:210px;
+}
+
+.logo_wrapper2 {
+	float:left;	
+	margin:20px;
+	border:4px solid #A07F42;
+	padding:10px;
+	background-image:url('http://www.countryfloors.com/wp-content/uploads/2012/primages/TL90729-l.jpg');
+}
+
+.logo_line {
+	float:left;	
+}
+
+#background2 {
+	background-color:#000;
+	float:left;
+}
+/*---------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------  LOGO 1 ------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------*/
+.star_wrapper1 {
+	float:left;
+	width:64px;
+	height:64px;	
+}
+
+.star_icon1 {
+	float:left;
+	width:64px;
+	height:64px;
+	background:url('http://www2.psd100.com/ppp/2013/11/2701/Pentagram-1127233239.png');
+	background-size:64px 64px;
+	background-repeat:no-repeat;
+}
+
+.text_wrapper1 {
+	float:right;
+	margin:0px 0px 0px 10px;
+	border-left:2px solid #A07F42;
+}
+
+.top_wrapper1 {
+	width:190px;
+	text-align:center;
+	font-size:30px;
+	border-bottom:2px solid #A07F42;
+	font-family:'Open Sans';
+	letter-spacing:2px;
+	color:#A07F42;
+}
+.bottom_wrapper1 {
+	width:190px;
+	text-align:center;
+	font-size:15px;
+	margin:5px 0px 0px 0px;
+	font-family:'Open Sans';
+	color:#A07F42;
+}
+
+/*---------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------  LOGO 2 ------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------*/
+.text_wrapper2 {
+	float:right;
+	margin:0px 0px 0px 10px;
+	border-left:2px solid #A07F42;
+}
+
+.top_wrapper2 {
+	letter-spacing:2px;
+	width:190px;
+	text-align:center;
+	font-size:30px;
+	border-bottom:2px solid #A07F42;
+	font-family:'Roboto';
+	color:#A07F42;
+}
+
+.bottom_wrapper2 {
+	width:190px;
+	text-align:center;
+	font-size:15px;
+	margin:5px 0px 0px 0px;
+	font-family:'Roboto';
+	color:#A07F42;
+}
+
+/*---------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------  LOGO 3 ------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------*/
+.text_wrapper3 {
+	float:right;
+	margin:0px 0px 0px 10px;
+	border-left:2px solid #A07F42;
+}
+
+.top_wrapper3 {
+	width:190px;
+	text-align:center;
+	font-size:30px;
+	border-bottom:2px solid #A07F42;
+	font-family:'Lato';
+	letter-spacing:2px;
+	color:#A07F42;
+}
+.bottom_wrapper3 {
+	width:190px;
+	text-align:center;
+	font-size:15px;
+	margin:5px 0px 0px 0px;
+	font-family:'Lato';
+	color:#A07F42;
+}
+
+
+/*---------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------  LOGO 4 ------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------*/
+.text_wrapper4 {
+	float:right;
+	margin:0px 0px 0px 10px;
+	border-left:2px solid #A07F42;
+}
+
+.top_wrapper4 {
+	width:190px;
+	text-align:center;
+	font-size:32px;
+	border-bottom:2px solid #A07F42;
+	font-family:'Source Sans Pro';
+	letter-spacing:2px;
+	color:#A07F42;
+}
+.bottom_wrapper4 {
+	width:190px;
+	text-align:center;
+	font-size:15px;
+	margin:5px 0px 0px 0px;
+	font-family:'Source Sans Pro';
+	color:#A07F42;
+}
+
+/*---------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------  Star 2 ------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------*/
+.star_wrapper2 {
+	float:left;
+	width:64px;
+	height:64px;	
+}
+
+.star_icon2 {
+	float:left;
+	width:64px;
+	height:64px;
+	background:url('http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=58886554') -6px -4px;
+	background-size:76px 76px;
+	background-repeat:no-repeat;
+}
+
+/*---------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------  Star 3 ------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------*/
+.star_wrapper3 {
+	float:left;
+	width:64px;
+	height:64px;	
+}
+
+.star_icon3 {
+	float:left;
+	width:64px;
+	height:64px;
+	background:url('https://lh6.googleusercontent.com/-GqAecLcjZFs/U3xIezDREII/AAAAAAAAByM/vc5xwoY56wk/s256-no/star-7-256.png') -6px -4px;
+	background-size:76px 76px;
+	background-repeat:no-repeat;
+}
+
+/*---------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------  Star 4 ------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------*/
+.star_wrapper4 {
+	float:left;
+	width:64px;
+	height:64px;	
+}
+
+.star_icon4 {
+	float:left;
+	width:64px;
+	height:64px;
+	background:url('http://www.clipartpal.com/_thumbs/00200025563_tns.png') ;
+	background-size:64px 64px;
+	background-repeat:no-repeat;
+}
+
+/*---------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------  Star 5 ------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------*/
+.star_wrapper5 {
+	float:left;
+	width:70px;
+	height:70px;	
+}
+
+.star_icon5 {
+	float:left;
+	width:70px;
+	height:70px;
+	background:url('http://www.cadwolf.com/Images/goldstar2.png') ;
+	background-size:70px 70px;
+	background-repeat:no-repeat;
+}
+
+
+/*---------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------  Star 6 ------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------*/
+.star_wrapper6 {
+	float:left;
+	width:64px;
+	height:64px;	
+}
+
+.star_icon6 {
+	float:left;
+	width:64px;
+	height:64px;
+	background:url('http://wiki.urbandead.com/images/thumb/8/8f/Black-Star-psd37243.png/120px-Black-Star-psd37243.png') ;
+	background-size:64px 64px;
+	background-repeat:no-repeat;
+}
+
+
+/*---------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------  Star 7 ------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------*/
+.star_wrapper7 {
+	float:left;
+	width:64px;
+	height:64px;	
+}
+
+.star_icon7 {
+	float:left;
+	width:64px;
+	height:64px;
+	background:url('http://simpleicon.com/wp-content/uploads/star1.png') -6px -8px;
+	background-size:76px 76px;
+	background-repeat:no-repeat;
+}
+
+
+/*---------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------  Star 8 ------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------*/
+.star_wrapper8 {
+	float:left;
+	width:64px;
+	height:64px;	
+}
+
+.star_icon8 {
+	float:left;
+	width:64px;
+	height:64px;
+	background:url('http://rlv.zcache.com/black_star_icon_army_classic_round_sticker-r217087cb58294a9ba0b43c1bc8b84a90_v9waf_8byvr_512.jpg') -6px -8px;
+	background-size:76px 76px;
+	background-repeat:no-repeat;
+}
+
+/*---------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------  Star 9 ------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------*/
+.star_wrapper8 {
+	float:left;
+	width:64px;
+	height:64px;	
+}
+
+.star_icon8 {
+	float:left;
+	width:64px;
+	height:64px;
+	background:url('http://cliparts.co/cliparts/kcM/X5k/kcMX5kkcj.png') -6px -8px;
+	background-size:76px 76px;
+	background-repeat:no-repeat;
+}
+
+
+
+/*---------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------  LOGO 5 ------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------*/
+.text_wrapper5 {
+	float:right;
+	margin:0px 0px 0px 10px;
+	border-left:2px solid #A07F42;
+}
+
+.top_wrapper5 {
+	width:190px;
+	text-align:center;
+	font-size:30px;
+	border-bottom:2px solid #A07F42;
+	font-family:'Open Sans';
+	letter-spacing:2px;
+	color:#A07F42;
+}
+.bottom_wrapper5 {
+	width:190px;
+	text-align:center;
+	font-size:15px;
+	margin:5px 0px 0px 0px;
+	font-family:'Open Sans';
+	color:#A07F42;
+}
+
+/*---------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------  LOGO 6 ------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------*/
+.text_wrapper6 {
+	float:right;
+	margin:0px 0px 0px 10px;
+	border-left:2px solid #A07F42;
+}
+
+.top_wrapper6 {
+	letter-spacing:2px;
+	width:190px;
+	text-align:center;
+	font-size:30px;
+	border-bottom:2px solid #A07F42;
+	font-family:'Roboto';
+	color:#A07F42;
+}
+.bottom_wrapper6 {
+	width:190px;
+	text-align:center;
+	font-size:15px;
+	margin:5px 0px 0px 0px;
+	font-family:'Roboto';
+	color:#A07F42;
+}
+
+/*---------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------  LOGO 7 ------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------*/
+.text_wrapper7 {
+	float:right;
+	margin:0px 0px 0px 10px;
+	border-left:2px solid #A07F42;
+}
+
+.top_wrapper7 {
+	width:190px;
+	text-align:center;
+	font-size:28px;
+	border-bottom:2px solid #A07F42;
+	font-family:'Lato';
+	letter-spacing:2px;
+	color:#A07F42;
+}
+.bottom_wrapper7 {
+	width:190px;
+	text-align:center;
+	font-size:14px;
+	margin:5px 0px 0px 0px;
+	font-family:'Lato';
+	color:#A07F42;
+}
+
+
+/*---------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------  LOGO 8 ------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------*/
+.text_wrapper8 {
+	float:right;
+	margin:0px 0px 0px 10px;
+	border-left:2px solid #A07F42;
+}
+
+.top_wrapper8 {
+	width:190px;
+	text-align:center;
+	font-size:32px;
+	border-bottom:2px solid #A07F42;
+	font-family:'Source Sans Pro';
+	letter-spacing:2px;
+	color:#A07F42;
+}
+.bottom_wrapper8 {
+	width:190px;
+	text-align:center;
+	font-size:15px;
+	margin:5px 0px 0px 0px;
+	font-family:'Source Sans Pro';
+	color:#A07F42;
+}
+
+
+/*---------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------  LOGO 9 ------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------*/
+.text_wrapper9 {
+	float:right;
+	margin:0px 0px 0px 10px;
+	border-left:2px solid #A07F42;
+}
+
+.top_wrapper9 {
+	width:210px;
+	text-align:center;
+	font-size:36px;
+	border-bottom:2px solid #A07F42;
+	font-family:'Source Sans Pro';
+	letter-spacing:2px;
+	color:#A07F42;
+	background:-webkit-linear-gradient(#C29F64, #A07F42);
+	-webkit-background-clip:text;
+	-webkit-text-fill-color:transparent;
+}
+.bottom_wrapper9 {
+	width:210px;
+	text-align:center;
+	font-size:15px;
+	margin:5px 0px 0px 0px;
+	font-family:'Source Sans Pro';
+	color:#A07F42;
+}
+
+
+/*---------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------  LOGO 10 ------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------*/
+.text_wrapper10 {
+	float:right;
+	margin:0px 0px 0px 10px;
+	border-left:2px solid #000;
+}
+
+.top_wrapper10 {
+	width:190px;
+	text-align:center;
+	font-size:32px;
+	border-bottom:2px solid #000;
+	font-family:'Source Sans Pro';
+	letter-spacing:2px;
+	color:#A07F42;
+}
+.bottom_wrapper10 {
+	width:190px;
+	text-align:center;
+	font-size:15px;
+	margin:5px 0px 0px 0px;
+	font-family:'Source Sans Pro';
+	color:#A07F42;
+}
+
+
+/*---------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------  LOGO 11 ------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------*/
+.text_wrapper11 {
+	float:right;
+	margin:0px 0px 0px 10px;
+	border-left:2px solid #A07F42;
+}
+
+.top_wrapper11 {
+	width:190px;
+	text-align:center;
+	font-size:32px;
+	border-bottom:2px solid #A07F42;
+	font-family:'Source Sans Pro';
+	letter-spacing:2px;
+	color:#000;
+}
+.bottom_wrapper11 {
+	width:190px;
+	text-align:center;
+	font-size:15px;
+	margin:5px 0px 0px 0px;
+	font-family:'Source Sans Pro';
+	color:#000;
+}
+
+/*---------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------  LOGO 12 ------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------*/
+.text_wrapper12 {
+	float:right;
+	margin:0px 0px 0px 10px;
+	border-left:2px solid #A07F42;
+}
+
+.top_wrapper12 {
+	width:210px;
+	text-align:center;
+	font-size:36px;
+	border-bottom:2px solid #A07F42;
+	font-family:'Source Sans Pro';
+	letter-spacing:2px;
+	color:#A07F42;
+	background:-webkit-linear-gradient(#C29F64, #A07F42);
+	-webkit-background-clip:text;
+	-webkit-text-fill-color:transparent;
+}
+.bottom_wrapper12 {
+	width:210px;
+	text-align:center;
+	font-size:15px;
+	margin:5px 0px 0px 0px;
+	font-family:'Source Sans Pro';
+	color:#A07F42;
+}
+
+
+/*---------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------  LOGO 13 ------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------*/
+.text_wrapper13 {
+	float:right;
+	margin:0px 0px 0px 10px;
+	border-left:2px solid #FFF;
+}
+
+.top_wrapper13 {
+	width:190px;
+	text-align:center;
+	font-size:32px;
+	border-bottom:2px solid #FFF;
+	font-family:'Source Sans Pro';
+	letter-spacing:2px;
+	color:#A07F42;
+}
+.bottom_wrapper13 {
+	width:190px;
+	text-align:center;
+	font-size:15px;
+	margin:5px 0px 0px 0px;
+	font-family:'Source Sans Pro';
+	color:#A07F42;
+}
+
+
+/*---------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------  LOGO 14 ------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------*/
+.text_wrapper14 {
+	float:right;
+	margin:0px 0px 0px 10px;
+	border-left:2px solid #A07F42;
+}
+
+.top_wrapper14 {
+	width:190px;
+	text-align:center;
+	font-size:32px;
+	border-bottom:2px solid #A07F42;
+	font-family:'Source Sans Pro';
+	letter-spacing:2px;
+	color:#FFF;
+}
+.bottom_wrapper14 {
+	width:190px;
+	text-align:center;
+	font-size:15px;
+	margin:5px 0px 0px 0px;
+	font-family:'Source Sans Pro';
+	color:#FFF;
+}

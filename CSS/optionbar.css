@@ -1,0 +1,69 @@
+/* 
+ * This CSS is for the bar that holds the options to add / delete sections
+ *
+------------------------------------------------------------------------------------- */
+
+div.optionbar { 	
+	float:left;
+	height: auto;
+	overflow: auto;
+	text-align: justify;
+	padding: 2px;
+}
+
+
+div.optionbar a.words,
+div.optionbar a.addvariable,
+div.optionbar a.video,
+div.optionbar a.delete { 
+	float: left;	
+	width: 30px;
+	height: 23px;
+	padding: 0px 2px 0px 0px;
+	background: url(http://www.cadwolf.com/Images/Pages/websiteicons2.jpg);
+}
+
+div.optionbar a.words {
+	background-position:-200px -75px;
+}
+
+div.optionbar a.delete {
+	background-position:-150px -75px;
+}
+
+div.optionbar a.addvariable {
+	background-position:-110px -125px;
+}
+
+div.optionbar a.video {
+	background-position:-60px -22px;
+}
+
+/*--- Now handle the equation image ---*/
+div.optionbar a.equation { 
+	float: left;	
+	width: 30px;
+	height: 23px;
+	padding: 0px 2px 0px 0px;
+	background: url(http://www.cadwolf.com/Images/Pages/schoolicons.jpg);
+}
+
+div.optionbar a.equation {
+	background-position:-115px -65px;
+}
+/*-------------------------------------*/
+
+
+/*--- Now handle the plot image ---*/
+div.optionbar a.plot { 
+	float: left;	
+	width: 30px;
+	height: 23px;
+	padding: 0px 2px 0px 0px;
+	background: url(http://www.cadwolf.com/Images/Pages/websiteicons1.jpg);
+}
+
+div.optionbar a.plot {
+	background-position:-105px -75px;
+}
+/*--------------------------------*/

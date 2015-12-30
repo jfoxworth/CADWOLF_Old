@@ -1,0 +1,150 @@
+/* ---------------------------------------------------------------------
+   This just controls the landing page and a few other greetings pages
+---------------------------------------------------------------------- */
+
+body {
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px;
+	background-color:#FFF;
+}
+
+
+/*--- Landing ---*/
+#landing {
+	margin: 0px;
+	padding: 0px;
+	width: 1024px;
+	height: 860px;
+}
+
+h1.landing {
+	color: #266096;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 10px 0px;
+	font: 30px Arial;
+	letter-spacing: 0px;
+	text-decoration: none;
+}
+
+#page_right {
+	float: right;
+	width: 400px;
+	margin: 200px 50px 0px 0px;
+	padding: 0px 0px 0px 0px;
+	color: #OCOCOC;
+	font: 14px Arial;
+}
+
+
+#greeting_wrapper {
+    margin:40px auto;
+    float:left;
+}
+
+#greeting {
+	background: url(/Images/Greeting/blackwolfsnowlarge4.jpg) no-repeat left top;
+	width:1600px;
+	height:215px;
+	margin:0px auto;
+	opacity:0.65;	
+    border-bottom:4px solid #898989;
+    border-top:4px solid #898989;
+    opacity:0.85;
+/*	margin:65px 0px 10px 0px;
+	width:1000px;
+	height:600px;
+	background: url(/Images/Greeting/wolf_logo4.jpg) no-repeat left top;
+	border: 3px solid #266096;
+	border: 5px solid #454545;
+	border-radius: 30px 30px 30px 30px;
+*/
+}
+
+#greetingtext {
+	position:absolute;
+	left:150px;
+	top:50px;
+	margin:0px 0px 0px 20px;
+	width:700px;
+}
+
+h2.greeting {
+	color:#454545;
+	font-size:36px;
+	width: 415px;
+	text-decoration:none;
+	float:left;
+	text-align:center;
+}
+
+#header_wrapper {
+    position:fixed;
+    left:0;
+    right:0;
+    z-index:1;
+    height:40px;
+	background-color: rgb(11, 49, 61);
+	background-image: linear-gradient(to top, rgb(9, 22, 27), rgb(13, 64, 80));
+}
+
+#header {
+	min-width:1000px;
+	margin-left:auto;
+	margin-right:auto;
+    height:40px;
+}
+
+#toolbar_wrapper {
+	float:left;
+	width: 100%;
+	height:40px;
+	margin:0px 0px 0px 0px;
+}
+
+
+/*--- This is the CAD Wolf logo at the top. ---*/
+#logo_figure {
+	float: left;
+	margin: 0px 0px 0px 100px;
+	padding: 0px 0px 0px 0px;
+}
+
+
+#logo {
+	float: left;
+	width: 200px;
+	height: 40px;
+	margin: 3px 0px 0px 150px;
+	padding: 0px 0px 0px 0px;
+	text-decoration: none;
+	color: #FFFFFF;
+	height:36px;
+	font-family: 'Cinzel Decorative', cursive;
+	font-size: 28px;
+	text-decoration: none;
+}
+/*--------------------------------------------*/
+
+
+#Triple_Wrapper {
+	margin:0 auto;
+	width:100%
+}
+
+#Triple_Title {
+	float:left;
+	text-align:center;
+}
+
+.Single_Wrapper {
+	float:left;
+	text-align:justify;
+}
+
+.Single_Title {
+	
+}
+
+.Single_Text {
+	
+}

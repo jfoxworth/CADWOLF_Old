@@ -1,0 +1,118 @@
+
+html {
+	height:100%;
+	width:100%
+}
+
+body {
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px;
+	height:100%;
+	font-family:'Arimo', sans-serif !important;
+	font-weight:300;
+	font-size:0.875em;
+	letter-spacing:1px;
+/*	background-image:url(/Images/Pages/white_wall_hash.png); */
+}
+
+p, ul, ol {
+/*	font-size:1.1em Helvetica, arial, freesans, clean, sans-serif; */
+	letter-spacing:1px;
+	line-height:20px;
+	color:#333333;
+}
+
+.bodymain { display:none; }
+
+#MainBody {
+	height:100%;
+	width:100%;
+}
+
+
+#Left_Column {
+	width:400px;
+	height:100%;
+	background-color:#000;
+	position:fixed;
+	left:0px;
+	top:0px;
+}
+
+
+#Main_Column {
+	margin:0px 0px 0px 75px;
+}
+
+#Feature_System, #Bug_System {
+	width:800px;
+	margin:75px auto 50px auto;
+}
+
+.SystemTitle {
+	font-size:2em;
+	color:#000;
+	font-family:Lato;
+	margin:5px 0px;
+}
+
+.SystemText {
+	font-size:1em;
+	font-family:Lato;
+	line-height:25px;
+	float:left;
+	width:100%;
+	margin:10px 0px;
+}
+
+.textentry {
+	
+}
+
+.EntryButton {
+	width:200px;
+	text-align:center;
+	background-color:#456382;
+	color:#FFF;
+	padding:5px;
+	margin:10px 0px;
+	cursor:pointer;
+}
+
+.EntryButton:hover {
+	background-color:#730324;
+	color:#FFF;
+}
+
+
+#bugaddress {
+	width:98%;
+	height:20px;
+}
+
+#bugtext, #featuretext {
+	
+}
+
+#GoodMessageWrapper, #BadMessageWrapper {
+	position:fixed;
+	top:0px;
+	left:0px;
+	width:100%;
+	display:none;
+	text-align:center;
+	padding:5px 0px 5px 115px;
+	font-size:1.5em;
+	font-family:cinzel;
+	letter-spacing:1.5px;
+	color:#FFF;
+	z-index:9999;
+}
+
+#BadMessageWrapper {
+	background-color:#730324;
+}
+
+#GoodMessageWrapper {
+	background-color:#228008;
+}

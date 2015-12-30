@@ -1,0 +1,94 @@
+#login_drop {
+	float:right;
+	color:#fff;
+	text-decoration:none;
+	margin:10px 0px 0px 0px;
+	padding:2px 5px 2px 5px;
+	z-index:1000;
+	border-radius: 5px 5px 5px 5px;
+	border: 1px solid #fff;
+}
+
+#login_drop:hover {
+	background-color:#FFF;
+	color:#000;
+	border-radius: 5px 5px 0px 0px;
+}
+
+#login_wrapper:hover > #login_drop {
+		background-color:#FFF;
+		color:#000;
+		border-radius: 5px 5px 0px 0px;		
+}
+
+
+#login_wrapper {
+	position:fixed;
+	right:20px;
+	top:0px;
+	width:200px;
+}
+
+#login_anchor {
+	float:right;
+	color:#fff;
+	text-decoration:none;
+	margin:0px 50px 0px 0px;
+}
+
+#login_drop a{
+	float:right;
+	color:#000;
+	text-decoration:none;
+	padding:12px 0px 0px 0px;
+}
+
+#login_anchor a{
+	float:right;
+	color:#fff;
+	text-decoration:none;
+	padding:12px 0px 0px 0px;
+}
+
+#dropbox {
+	position:relative;
+	right:71px;
+	top:32px;
+	width: 250px;
+	height: 145px;
+	display:none;
+	background-color:#FFF;
+	border-right:1px solid #000;
+	border-left:1px solid #000;
+	border-bottom:1px solid #000;
+	z-index:1001;
+	padding:10px;
+	border-radius: 10px 0px 10px 10px;
+	color:#000;
+}
+
+
+#droplogin_image {
+	float:left;	
+	width:100px;
+	height:120px;
+}
+
+.droplogin_line {
+	float:right;	
+	width:100px;
+	margin:5px 5px 5px 5px;
+}
+
+.droplogin_line a{
+	text-decoration:none;
+	color:#000;
+	padding:5px;	
+	width:100px;
+	margin:5px 5px 5px 5px;
+}
+
+.droplogin_line a:hover, .droplogin_line hover{
+	background-color:#ACACAC;
+	color:#fff;
+}
