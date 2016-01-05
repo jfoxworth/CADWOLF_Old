@@ -481,61 +481,61 @@ Equation.prototype.Solve_Equation = function(equation, callback)																
 //-------------------------------------------------------------------------------------------------------------------------------------//
 //---------------------------------------------------- POPULATE EQUATION --------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------//
-/*	This function takes the equation and populates the components of the equation object necessary to solve the equations.				\
-	Case 1 - the equation starts with an equal sign this is usually in a table element													\
-	Case 2 - a show equation																											\
-	Case 3 - a matrix component																											\
-	Case 4 - A standard equation with no inputs																							\
-	Case 5 - The case where the user is calling  [a, b] = Function(inputs)																\
+/*	This function takes the equation and populates the components of the equation object necessary to solve the equations.				|
+	Case 1 - the equation starts with an equal sign this is usually in a table element													|
+	Case 2 - a show equation																											|
+	Case 3 - a matrix component																											|
+	Case 4 - A standard equation with no inputs																							|
+	Case 5 - The case where the user is calling  [a, b] = Function(inputs)																|
 //-------------------------------------------------------------------------------------------------------------------------------------*/
-Equation.prototype.Populate_Equation = function(equation)																			//	\
-{																																	//	\  
-	var temp='', split_eq='', re='', num=0;																							//	\
-	this.Format_equation=equation.replace(/^\s+|\s+$/g, '');																		//	\
-	this.Format_showequation="Error";																								//	\
-	this.Errors_errors=new Array();																									//	\
-	this.Errors_flag=0;																												//	\
-	if (this.Page_parentid===undefined) { this.Page_parentid='none'; }																//	\
-	if (this.Page_topparentid===undefined) { this.Page_topparentid='none'; }														//	\
-	if (this.Format_showtype=="subequation")																						//	\--- Case 1
-	{																																//	\
-		this.Parse_Inputs();																										//	\
-																																	//	\
-	}else if (this.Format_equation.match(/\=$/)	)																					//	\--- Case 2 
-	{	temp=this.Format_equation.replace(/\=$/, '');																				//	\
-		temp=temp.replace(/^\s+|\s+$/g, '');																						//	\
-		this.Format_left=temp;																										//	\
-		this.Format_right=temp;																										//	\
-		this.Format_name=temp;																										//	\
-		this.Format_equation=temp;																									//	\
-		this.Format_equationinuse=temp;																								//	\
-		this.Format_type='5';																										//	\
-	}else if (this.Format_equation.match(/\]=/))																					//	\--- Case 3
-	{																																//	\
-		split_eq=equation.split('=');		  																						//	\
-		this.Format_left=split_eq[0].replace(/^\s+|\s+$/g, '');																		//	\
-		this.Format_right=split_eq[1];																								//	\
-		this.Format_equationinuse=split_eq[1];																						//	\
-		this.Format_name=this.Format_left.replace(/\[[\+\-\*\\0-9,a-z,A-Z]+\]/g,'');														//	\
-		this.Format_type='3';																										//	\
-	}else																															//	\--- Case 4 
-	{	this.Format_type='1';																										//	\
-		if (!this.Format_equation.match(/\=/)) {	Set_Error(this.Original_id, "Format7");											//	\
-		}else																														//	\ 
-		{	temp=equation.match(/([^=]*)=(.*)/);																					//	\
-			this.Format_left=temp[1].replace(/^\s+|\s+$/g, '');																		//	\
-			this.Format_right=temp[2].replace(/^\s+|\s+$/g, '');																	//	\
-			this.Format_name=temp[1].replace(/\[[0-9,a-z,A-Z]+\]/g,'');																//	\
-//			this.Format_equation=temp[2].replace(/^\s+|\s+$/g, '');																	//	\
-			this.Format_equationinuse=this.Format_right;																			//	\
-			re=/\=/;	num=equation.match(re); if (num.length===0) { Set_Error(this.Original_id, "Format15"); }					//	\
-		}																															//	\
-		if (this.Format_equation.match(/^\[/)) { this.Format_type='6';	}															//	\--- Case 5 
-	}																																//	\
-	this.Units_showunits='';																										//	\
-	this.Models_numerical=''; this.Models_units=''; this.Models_dimensions=''; this.Models_quantities='';							//	\
-	if (DOM_Object[this.Format_id]!==undefined) { DOM_Object[this.Format_id]['name']=this.Format_name;	}							//	\
-};																																	//	\
+Equation.prototype.Populate_Equation = function(equation)																			//	|
+{																																	//	|  
+	var temp='', split_eq='', re='', num=0;																							//	|
+	this.Format_equation=equation.replace(/^\s+|\s+$/g, '');																		//	|
+	this.Format_showequation="Error";																								//  |
+	this.Errors_errors=new Array();																									//  |
+	this.Errors_flag=0;																												//  |
+	if (this.Page_parentid===undefined) { this.Page_parentid='none'; }																//  |
+	if (this.Page_topparentid===undefined) { this.Page_topparentid='none'; }														//  |
+	if (this.Format_showtype=="subequation")																						//  |--- Case 1
+	{																																//  |
+		this.Parse_Inputs();																										//  |
+																																	//  |
+	}else if (this.Format_equation.match(/\=$/)	)																					//  |--- Case 2 
+	{	temp=this.Format_equation.replace(/\=$/, '');																				//  |
+		temp=temp.replace(/^\s+|\s+$/g, '');																						//  |
+		this.Format_left=temp;																										//  |
+		this.Format_right=temp;																										//  |
+		this.Format_name=temp;																										//  |
+		this.Format_equation=temp;																									//  |
+		this.Format_equationinuse=temp;																								//  |
+		this.Format_type='5';																										//  |
+	}else if (this.Format_equation.match(/\]=/))																					//  |--- Case 3
+	{																																//  |
+		split_eq=equation.split('=');		  																						//  |
+		this.Format_left=split_eq[0].replace(/^\s+|\s+$/g, '');																		//  |
+		this.Format_right=split_eq[1];																								//  |
+		this.Format_equationinuse=split_eq[1];																						//  |
+		this.Format_name=this.Format_left.replace(/\[[\:\+\-\*\\0-9,a-z,A-Z]+\]/g,'');												//  |
+		this.Format_type='3';																										//  |
+	}else																															//  |--- Case 4 
+	{	this.Format_type='1';																										//  |
+		if (!this.Format_equation.match(/\=/)) {	Set_Error(this.Original_id, "Format7");											//  |
+		}else																														//  | 
+		{	temp=equation.match(/([^=]*)=(.*)/);																					//  |
+			this.Format_left=temp[1].replace(/^\s+|\s+$/g, '');																		//  |
+			this.Format_right=temp[2].replace(/^\s+|\s+$/g, '');																	//  |
+			this.Format_name=temp[1].replace(/\[[0-9,a-z,A-Z]+\]/g,'');	      														//  |
+//			this.Format_equation=temp[2].replace(/^\s+|\s+$/g, '');																	//  |
+			this.Format_equationinuse=this.Format_right;																			//  |
+			re=/\=/;	num=equation.match(re); if (num.length===0) { Set_Error(this.Original_id, "Format15"); }					//  |
+		}																															//  |
+		if (this.Format_equation.match(/^\[/)) { this.Format_type='6';	}															//  |--- Case 5 
+	}																																//  |
+	this.Units_showunits='';																										//  |
+	this.Models_numerical=''; this.Models_units=''; this.Models_dimensions=''; this.Models_quantities='';							//  |
+	if (DOM_Object[this.Format_id]!==undefined) { DOM_Object[this.Format_id]['name']=this.Format_name;	}							//  |
+};																																	//  |
 //-------------------------------------------------------------------------------------------------------------------------------------//
 
 //-------------------------------------------------------------------------------------------------------------------------------------//
@@ -1406,13 +1406,13 @@ function MatchClosestEquation(thisname, thislocation, thisid, index, insert)				
 		{	 parenttype="none";	}else { parenttype=DOM_Object[DOM_Object[thisid]['parent']]['type']; parent=DOM_Object[thisid]['parent']; }									//	\
 		for (i in DOM_Object) 																																				//	\
 		{	
-console.log('Comparing '+DOM_Object[i]['name']+' to '+thisname+' with names of '+self[thisid].Format_id+' and '+i);			
+//console.log('Comparing '+DOM_Object[i]['name']+' to '+thisname+' with names of '+self[thisid].Format_id+' and '+i);			
 			if ((i!==undefined)&&(i.length>0))																																//	\
 			{	file=self[thisid].Format_id.match(/^File[0-9]+/); var test=new RegExp("^"+file,"g");																		//	\
 				if (i.match(test))																																			//	\
 				{	iname=DOM_Object[i]['name'];		iloc=parseInt(DOM_Object[i]['location'], 10);	thislocation=DOM_Object[self[thisid].Original_id]['location'];		//	\
 					active=DOM_Object[i]['active'];		ifile=parseInt(i.replace(/^File/,'').match(/^[0-9]+/), 10);															//	\
-console.log('The ifile and thisfile are '+ifile+' - '+thisfile+', the names are '+iname+' - '+thisname+', and the locations are '+iloc+' - '+thislocation+', the active is '+active+', and the parent is '+parenttype);					
+//console.log('The ifile and thisfile are '+ifile+' - '+thisfile+', the names are '+iname+' - '+thisname+', and the locations are '+iloc+' - '+thislocation+', the active is '+active+', and the parent is '+parenttype);					
 					if ((iname==thisname)&&(DOM_Object[i]['DatasetID']!==undefined))																						//	\
 					{	answer=i;	console.log('Matched Dataset');																											//	\
 					}else if ((parenttype=="none")||(parenttype=="ifelse")||(parenttype=="elseif")||(parenttype=="else")&&(thisfile==ifile))								//	\
@@ -1470,87 +1470,87 @@ console.log('The ifile and thisfile are '+ifile+' - '+thisfile+', the names are 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 /*	
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-Equation.prototype.Replace_Matrix_Pieces = function(callback)																												//	\--- This function takes care of the case where the user is selecting  
-{	var index=0, thiseq='', indobj={}, ansobj={}, matrixtext='', flag=0, index2=0, ends=new Array(), matsize=1, mult=1, range={}, key='', indices='', sizes=[];				//	\
-	var a=0, b=0, thisindex='', eqobj={}, id='', newid='', i=0;																												//	\
-	for (index=0; index<this.Solution_variable_array.length; index++)																										//	\
-	{	if ((this.Solution_variable_array[index]=='[')&&(index>0))																											//	\
-		{	thiseq=MatchClosestEquation(this.Solution_variable_array[index-1], DOM_Object[this.Format_id]['location'], this.Format_id);										//	\
-			if (typeof(self[thiseq])=="object") 																															//	\ 
-			{	indobj={};	ansobj={};																																		//	\
-				matrixtext=''; flag=0;	 index2=index; 																														//	\
-				while ((flag===0)&&(index2<=this.Solution_variable_array.length))																							//	\
-				{	matrixtext=matrixtext+this.Solution_variable_array[index2];																								//	\--- Combine the entered items
-					if (((this.Solution_variable_array[index2]=="]")&&(this.Solution_variable_array[index2+1]!="["))||(index2>=this.Solution_variable_array.length)) 		//	\
-					{ flag=1; }																																				//	\
-					this.Solution_variable_array[index2]='deleteme';																										//	\
-					index2=index2+1;																																		//	\
-				}																																							//	\
-				indices=matrixtext.match(/\[[0-9,a-z,A-Z,\:,\.,\-]+\]/g, '');																								//	\
-				sizes=self[thiseq].Format_size.split('x');																													//	\
-				for (a=0; a<indices.length; a=a+1)																															//	\
-				{	indobj[a]={};	ansobj[a]={};																															//	\
-					thisindex=indices[a].replace("[","");																													//	\
-					thisindex=thisindex.replace("]","");																													//	\--- Parse out the indexes
-					if ((thisindex.match(":"))&&(thisindex.length==1)) {  indobj[a]['0']=":"; indobj[a]['1']=":";															//	\
-					}else if (thisindex.match(":"))	{	ends=thisindex.split(":"); indobj[a]['0']=ends[0]; indobj[a]['1']=ends[1];											//	\
-					}else { indobj[a]['0']=thisindex; indobj[a]['1']='&'; }																									//	\
-				}																																							//	\					
-				for (a in indobj)																																			//	\
-				{	if ((indobj[a]['0']==':')&&(indobj[a]['1']==':')){ ansobj[a]['0']=0;	ansobj[a]['1']=parseInt(sizes[parseInt(a, 10)], 10)-1;							//	\
-					}else if(indobj[a]['1']=='&') 																															//	\
-					{	eqobj={Page_position:DOM_Object[this.Format_id]['location'], Format_showtype:"InnerFunction", Page_parentid:this.Page_parentid, 					//	\
-						Page_topparentid:this.Page_topparentid, Original_id:this.Format_id, equation:"TempEq="+indobj[a]['0']};												//	\
-						id=CreateEq(this.fileid, 1, eqobj);																													//	\	
-						ansobj[a]['0']=self[id].Solution_real['0-0'];		ansobj[a]['1']=self[id].Solution_real['0-0'];													//	\
-						delete DOM_Object[id];	delete self[id];																											//	\
-					}else																																					//	\
-					{	eqobj={Page_position:DOM_Object[this.Format_id]['location'], Format_showtype:"InnerFunction", Page_parentid:this.Page_parentid, 					//	\
-						Page_topparentid:this.Page_topparentid, Original_id:this.Format_id, equation:"TempEq="+indobj[a]['0']};												//	\
-						id=CreateEq(this.fileid, 1, eqobj);																													//	\--- Solve the index values being asked for
-						this.Solution_temps.push(id);																														//	\
-						ansobj[a]['0']=self[id].Solution_real['0-0'];																										//	\
-						delete DOM_Object[id];	delete self[id];																											//	\
-						eqobj={Page_position:DOM_Object[this.Format_id]['location'], Format_showtype:"InnerFunction", Page_parentid:this.Page_parentid, 					//	\
-						Page_topparentid:this.Page_topparentid, Original_id:this.Format_id, equation:"TempEq="+indobj[a]['1']};												//	\
-						id=CreateEq(this.fileid, 1, eqobj);																													//	\
-						self[id].Format_showequation=indobj[a]['1'];																										//	\
-						this.Solution_temps.push(id);																														//	\
-						ansobj[a]['1']=self[id].Solution_real['0-0'];																										//	\
-						delete DOM_Object[id];	delete self[id];																											//	\
-					}																																						//	\
-				}																																							//	\
-				eqobj={Page_position:DOM_Object[this.Format_id]['location'], Format_showtype:"matrixcomponent", Page_parentid:this.Page_parentid, 							//	\
-				Page_topparentid:this.Page_topparentid, Original_id:this.Format_id, equation:"TempEq=0"};																	//	\
-				id=CreateEq(this.fileid, 0, eqobj);																															//	\
-				this.Solution_temps.push(id);																																//	\
-				for (a in self[thiseq].Solution_real) 																														//	\
-				{	flag=0; 	key='';																																		//	\--- Loop through the old solution array and pull out
-					splitkey=a.split('-');																																	//	\--- any items within the specified range
-					for (b=0; b<splitkey.length; b++) { if ((splitkey[b]>=ansobj[b]['0'])&&(splitkey[b]<=ansobj[b]['1'])){ }else { flag=1; } }								//	\
-					if (flag===0) 																																			//	\
-					{	for (b=0; b<splitkey.length; b++) { key=key+'-'+parseInt(parseInt(splitkey[b], 10)-parseInt(ansobj[b]['0'], 10), 10); } 							//	\
-						key=key.replace(/^\-/,''); 																															//	\
-						self[id].Solution_real[key]=self[thiseq].Solution_real[a];																							//	\
-						self[id].Solution_imag[key]=self[thiseq].Solution_imag[a];																							//	\
-					}																																						//	\
-				}																																							//	\
-				self[id].Get_Size();																																		//	\
-				newid=SquashMatrix(id);																																		//	\--- The Matrix is squashed to remove single indices
-				self[newid].Format_showequation=self[this.Solution_variable_array[index-1]].Format_showequation+''+matrixtext;												//	\
-				self[id].Format_showequation=self[this.Solution_variable_array[index-1]].Format_showequation+''+matrixtext;													//	\
-				DOM_Object[newid]['real']=self[newid].Solution_real;		DOM_Object[newid]['imag']=self[newid].Solution_imag;											//	\
-				this.Solution_temps.push(newid);																															//	\
-				this.Solution_variable_array[index-1]=newid;																												//	\
-	}	}	}																																								//	\ 
-	for (i = 0; i < this.Solution_variable_array.length; i++) 																												//	\ 
-	{ 	if (this.Solution_variable_array[i] == 'deleteme') 																													//	\ 
-		{	this.Solution_variable_array.splice(i, 1); 																														//	\
-			this.Solution_key_array.splice(i,1);																															//	\
-			i--;																																							//	\
-	}	}																																									//	\ 	
-	if (typeof(callback)=="function") { callback();	}																														//	\
-};																																											//	\ 
+Equation.prototype.Replace_Matrix_Pieces = function(callback)																												//  |  
+{	var index=0, thiseq='', indobj={}, ansobj={}, matrixtext='', flag=0, index2=0, ends=new Array(), matsize=1, mult=1, range={}, key='', indices='', sizes=[];				//  |
+	var a=0, b=0, thisindex='', eqobj={}, id='', newid='', i=0;																												//  |
+	for (index=0; index<this.Solution_variable_array.length; index++)																										//  |
+	{	if ((this.Solution_variable_array[index]=='[')&&(index>0))																											//  |
+		{	thiseq=MatchClosestEquation(this.Solution_variable_array[index-1], DOM_Object[this.Format_id]['location'], this.Format_id);										//  |
+			if (typeof(self[thiseq])=="object") 																															//  | 
+			{	indobj={};	ansobj={};																																		//  |
+				matrixtext=''; flag=0;	 index2=index; 																														//  |
+				while ((flag===0)&&(index2<=this.Solution_variable_array.length))																							//  |
+				{	matrixtext=matrixtext+this.Solution_variable_array[index2];																								//  |--- Combine the entered items
+					if (((this.Solution_variable_array[index2]=="]")&&(this.Solution_variable_array[index2+1]!="["))||(index2>=this.Solution_variable_array.length)) 		//  |
+					{ flag=1; }																																				//  |
+					this.Solution_variable_array[index2]='deleteme';																										//  |
+					index2=index2+1;																																		//  |
+				}																																							//  |
+				indices=matrixtext.match(/\[[0-9,a-z,A-Z,\:,\.,\-]+\]/g, '');																								//  |
+				sizes=self[thiseq].Format_size.split('x');																													//  |
+				for (a=0; a<indices.length; a=a+1)																															//  |
+				{	indobj[a]={};	ansobj[a]={};																															//  |
+					thisindex=indices[a].replace("[","");																													//  |
+					thisindex=thisindex.replace("]","");																													//  |--- Parse out the indexes
+					if ((thisindex.match(":"))&&(thisindex.length==1)) {  indobj[a]['0']=":"; indobj[a]['1']=":";															//  |
+					}else if (thisindex.match(":"))	{	ends=thisindex.split(":"); indobj[a]['0']=ends[0]; indobj[a]['1']=ends[1];											//  |
+					}else { indobj[a]['0']=thisindex; indobj[a]['1']='&'; }																									//  |
+				}																																							//  |					
+				for (a in indobj)																																			//  |
+				{	if ((indobj[a]['0']==':')&&(indobj[a]['1']==':')){ ansobj[a]['0']=0;	ansobj[a]['1']=parseInt(sizes[parseInt(a, 10)], 10)-1;							//  |
+					}else if(indobj[a]['1']=='&') 																															//  |
+					{	eqobj={Page_position:DOM_Object[this.Format_id]['location'], Format_showtype:"InnerFunction", Page_parentid:this.Page_parentid, 					//  |
+						Page_topparentid:this.Page_topparentid, Original_id:this.Format_id, equation:"TempEq="+indobj[a]['0']};												//  |
+						id=CreateEq(this.fileid, 1, eqobj);																													//  |	
+						ansobj[a]['0']=self[id].Solution_real['0-0'];		ansobj[a]['1']=self[id].Solution_real['0-0'];													//  |
+						delete DOM_Object[id];	delete self[id];																											//  |
+					}else																																					//  |
+					{	eqobj={Page_position:DOM_Object[this.Format_id]['location'], Format_showtype:"InnerFunction", Page_parentid:this.Page_parentid, 					//  |
+						Page_topparentid:this.Page_topparentid, Original_id:this.Format_id, equation:"TempEq="+indobj[a]['0']};												//  |
+						id=CreateEq(this.fileid, 1, eqobj);																													//  |--- Solve the index values being asked for
+						this.Solution_temps.push(id);																														//  |
+						ansobj[a]['0']=self[id].Solution_real['0-0'];																										//  |
+						delete DOM_Object[id];	delete self[id];																											//  |
+						eqobj={Page_position:DOM_Object[this.Format_id]['location'], Format_showtype:"InnerFunction", Page_parentid:this.Page_parentid, 					//  |
+						Page_topparentid:this.Page_topparentid, Original_id:this.Format_id, equation:"TempEq="+indobj[a]['1']};												//  |
+						id=CreateEq(this.fileid, 1, eqobj);																													//  |
+						self[id].Format_showequation=indobj[a]['1'];																										//  |
+						this.Solution_temps.push(id);																														//  |
+						ansobj[a]['1']=self[id].Solution_real['0-0'];																										//  |
+						delete DOM_Object[id];	delete self[id];																											//  |
+					}																																						//  |
+				}																																							//  |
+				eqobj={Page_position:DOM_Object[this.Format_id]['location'], Format_showtype:"matrixcomponent", Page_parentid:this.Page_parentid, 							//  |
+				Page_topparentid:this.Page_topparentid, Original_id:this.Format_id, equation:"TempEq=0"};																	//  |
+				id=CreateEq(this.fileid, 0, eqobj);																															//  |
+				this.Solution_temps.push(id);																																//  |
+				for (a in self[thiseq].Solution_real) 																														//  |
+				{	flag=0; 	key='';																																		//  |--- Loop through the old solution array and pull out
+					splitkey=a.split('-');																																	//  |--- any items within the specified range
+					for (b=0; b<splitkey.length; b++) { if ((splitkey[b]>=ansobj[b]['0'])&&(splitkey[b]<=ansobj[b]['1'])){ }else { flag=1; } }								//  |
+					if (flag===0) 																																			//  |
+					{	for (b=0; b<splitkey.length; b++) { key=key+'-'+parseInt(parseInt(splitkey[b], 10)-parseInt(ansobj[b]['0'], 10), 10); } 							//  |
+						key=key.replace(/^\-/,''); 																															//  |
+						self[id].Solution_real[key]=self[thiseq].Solution_real[a];																							//  |
+						self[id].Solution_imag[key]=self[thiseq].Solution_imag[a];																							//  |
+					}																																						//  |
+				}																																							//  |
+				self[id].Get_Size();																																		//  |
+				newid=SquashMatrix(id);																																		//  |--- The Matrix is squashed to remove single indices
+				self[newid].Format_showequation=self[this.Solution_variable_array[index-1]].Format_showequation+''+matrixtext;												//  |
+				self[id].Format_showequation=self[this.Solution_variable_array[index-1]].Format_showequation+''+matrixtext;													//  |
+				DOM_Object[newid]['real']=self[newid].Solution_real;		DOM_Object[newid]['imag']=self[newid].Solution_imag;											//  |
+				this.Solution_temps.push(newid);																															//  |
+				this.Solution_variable_array[index-1]=newid;																												//  |
+	}	}	}																																								//  | 
+	for (i = 0; i < this.Solution_variable_array.length; i++) 																												//  | 
+	{ 	if (this.Solution_variable_array[i] == 'deleteme') 																													//  | 
+		{	this.Solution_variable_array.splice(i, 1); 																														//  |
+			this.Solution_key_array.splice(i,1);																															//  |
+			i--;																																							//  |
+	}	}																																									//  | 	
+	if (typeof(callback)=="function") { callback();	}																														//  |
+};																																											//  | 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
 
@@ -2356,58 +2356,343 @@ function SolveMath (operator, pop1, pop2, id)																							//	\
 /*-----------------------------------------------------------------------------------------------------------------------------------------*/
 /*------------------------------------------ SOLVE MATRIX SUBCOMPONENTS -------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------------------------------------*/
-/*	This function is called to solve the case where a certain index of matrix is solved for. This is the case where the equation is 		\
-	Matrix1[1][2]=5. It is not the case where the equation is test=Matrix1[1][2]. To accomplish the task, the program finds the most 		\
-	recent incarnation of the matrix in question and sets this Solution array equal to that. 												\
-	It then solves for the indices to be set. Finally, it sets the index in question to the value in question. So if you enter 				\
-	Matrix1[a][b+1]=a+b+c, the previous portion of the solver would have already solved for the right side and this equation sets the 		\
-	matrix to Matrix1, solves for a and b+1 and then sets the index of [a][b+1] to the solution.											\
+/*	This function is called to solve the case where a certain index of matrix is solved for. This is the case where the equation is 	    |
+	Matrix1[1][2]=5. It is not the case where the equation is test=Matrix1[1][2]. To accomplish the task, the program has three steps.      |
+    1.  Find the most recent incarnation of the matrix in question and set this Solution array equal to that. 		       					|    
+    2.  Split the indices sent to be set up into the individual brackets in an array. i.e. "[1][2][3]" becomes "[1], [2], [3]"              |
+    3.  For each of these indices:                                                                                                          |
+            a. Split the text up by the colons to see of it is a span i.e. 3:8 becomes [3], [8]                                             |
+            b. If the span has a length of 1                                                                                                |
+                I.  If it is a number, set the key to that and the size of that index to 1                                                  |
+                II. If it is not a number, solve the equation and set the key to that value and the size to 1                               |
+            c. If the span is not 3, set an error it should be a "[something]" "[:]" "[something]"                                          |
+            d. If the span is indeed 3                                                                                                      |
+                I.   If the first item is a number, set the first part of the key                                                           |
+                II.  If it is not a number, solve the equation and set the key                                                              |
+                III. If the third part is a number, set the second part of the key                                                          |
+                IV.  If the third part is not a number, solve and set the key                                                               |
+                V.   Set the length for the segment by subtracting the first key from the second                                            |
+    4.  Check the indexes for the solution and for the indices that the solution is to be assigned to.                                      |
+            a. Check each index to see if the size at that index is the same for both sides                                                 |
+                I. One additional index is allowed on the left side, but it must have a size of 1. This is the case where the user is       |
+                   growing the matrix by one dimension. For an already 2 D matrix, a third dimension could be added.                        |
+            b. Check again to ensure that the number of indices being assingned on the left is equal to the size of the right               |
+            C. Check again to ensure that the same number of indices exist on both sides of the equation                                    |
+    5.  				|
 /*-----------------------------------------------------------------------------------------------------------------------------------------*/
-Equation.prototype.Matrix_SubComp = function(callback)																					//	\
-{	//console.log('In matrix subcomp with '+this.Format_id+' and a type of '+this.Format_type);																																	//	\
-	if (!this.Format_left.match(/^\[/))																									//	\
-	{	if (this.Format_type=="3")																										//	\
-		{	var num1=this.Solution_real['0-0']; var num2=this.Solution_imag['0-0']; var sizes=this.Format_size.split('x');				//	\
-			if (this.Page_parentid=="none")																								//	\
-			{	var thiseq=MatchClosestEquation(this.Format_name, DOM_Object[this.Format_id]['location'], this.Format_id);				//	\
-				if (DOM_Object[thiseq]!==undefined) 																					//	\
-				{	console.log('The returned item is '+thiseq+'-'+this.Format_id+' and the parameters are '+DOM_Object[this.Format_id]['numinds']+' and '+DOM_Object[thiseq]['numinds']);
-					DOM_Object[this.Format_id]['numinds']=JSON.parse(JSON.stringify(DOM_Object[thiseq]['numinds']));					//	\
-					DOM_Object[this.Format_id]['size']=JSON.parse(JSON.stringify(DOM_Object[thiseq]['size']));							//	\
-					DOM_Object[this.Format_id]['real']=JSON.parse(JSON.stringify(DOM_Object[thiseq]['real']));							//	\
-					DOM_Object[this.Format_id]['imag']=JSON.parse(JSON.stringify(DOM_Object[thiseq]['imag']));							//	\
-					this.tempsolr=JSON.parse(JSON.stringify(DOM_Object[thiseq]['real']));												//	\
-					this.tempsoli=JSON.parse(JSON.stringify(DOM_Object[thiseq]['imag']));												//	\
-				}else	{ 	Set_Error(this.Format_id, "Format10"); }																	//	\
-			}																															//	\
-			var theseindexes=this.Format_left.match(/\[[\+\-\*\\0-9,a-z,A-Z,\.]+\]/g,'');												//	\
-			for (var index=0; index<theseindexes.length; index++)																		//	\
-			{	var thisindex=theseindexes[index].replace(/[\[,\]]+/g,'');																//	\ 
-				if (isNumber(thisindex))	 																							//	\
-				{	if (index===0) { var key=parseInt(thisindex); }else { key=key+"-"+parseInt(thisindex); } 							//	\
-				}else																													//	\
-				{	var eqobj={Page_position:DOM_Object[this.Format_id]['location'], Format_showtype:"InnerFunction", 					//	\
-					Page_parentid:DOM_Object[this.Format_id]['parent'], Page_topparentid:DOM_Object[this.Format_id]['topparent'], 		//	\
-					Original_id:this.Format_id,	equation:"NewEq="+thisindex};															//	\
-					var id=CreateEq(DOM_Object[this.Format_id]['fileid'], 1, eqobj);													//	\
-					DOM_Object[id]['location']=DOM_Object[this.Format_id]['location'];													//	\
-					this.Solution_temps.push(id);																						//	\
-					if (index===0) { var key=DOM_Object[id]['real']['0-0']; }else { key=key+"-"+DOM_Object[id]['real']['0-0']; } 		//	\
-					delete DOM_Object[id];	delete self[id];																			//	\	
-				}																														//	\
-			}																															//	\
-			if (theseindexes.length==1) { key="0-"+key; }																				//	\
-console.log('Setting the key '+key+' to '+num1);
-			this.tempsolr[key]=num1;		this.tempsoli[key]=num2;																	//	\
-			DOM_Object[this.Format_id]['real']=JSON.parse(JSON.stringify(this.tempsolr));												//	\
-			DOM_Object[this.Format_id]['imag']=JSON.parse(JSON.stringify(this.tempsoli));												//	\
-			this.Solution_real=JSON.parse(JSON.stringify(this.tempsolr));																//	\
-			this.Solution_imag=JSON.parse(JSON.stringify(this.tempsoli));																//	\
-		}																																//	\
-	}																																	//	\
-	if (typeof(callback)=="function") { callback();	}																					//	\
-};																																		//	\
+Equation.prototype.Matrix_SubComp = function(callback)																					//	|
+{	var key={}, index=0, thisNumInd=1, newNumInd=1, theseIndexes=[], thisIndex='', sizeIndex={}, splitIndex=[], leftSizes=[];           //  |
+    var stepFlag=0, thisKey='', readKey={}, indexFlag=0, newSizes=[], newKeySize='', newIndexFlag=0, bigMatrixFlag=0, solSizes=[];      //  |
+    if (!this.Format_left.match(/^\[/))																									//	|
+	{	if (this.Format_type=="3")																										//	|
+		{	if (this.Page_parentid=="none")																								//	|
+			{	var thiseq=MatchClosestEquation(this.Format_name, DOM_Object[this.Format_id]['location'], this.Format_id);				//	|
+				if (DOM_Object[thiseq]!==undefined) 																					//	|
+				{	DOM_Object[this.Format_id]['numinds']=JSON.parse(JSON.stringify(DOM_Object[thiseq]['numinds']));					//	|
+					DOM_Object[this.Format_id]['size']=JSON.parse(JSON.stringify(DOM_Object[thiseq]['size']));							//	|(1)
+					DOM_Object[this.Format_id]['real']=JSON.parse(JSON.stringify(DOM_Object[thiseq]['real']));							//	|
+					DOM_Object[this.Format_id]['imag']=JSON.parse(JSON.stringify(DOM_Object[thiseq]['imag']));							//	|
+					this.tempsolr=JSON.parse(JSON.stringify(DOM_Object[thiseq]['real']));												//	|
+					this.tempsoli=JSON.parse(JSON.stringify(DOM_Object[thiseq]['imag']));												//	|
+				}else	{ 	Set_Error(this.Format_id, "Format10"); }																	//  |
+			}																															//  |
+            theseIndexes=splitBrackets(this.Format_left);                                                                               //  |(2)
+            solSizes=this.Format_size.split('x');                                                                                      //  |
+            leftSizes=DOM_Object[thiseq]['size'].split('x');                                                                             //  |
+            for (var index=0; index<theseIndexes.length; index++)																		//  |
+			{	key[index]={};                                                                                                          //  |
+                thisIndex=splitColons(theseIndexes[index]);			                                    								//  |(3a)
+                if (thisIndex.length==1)                                                                                                //  |
+                {   if (isNumber(thisIndex[0]))	 																				     	//  |(3bI)
+                    {	key[index]['a']=parseInt(thisIndex[0]);                                                                         //  |
+                        key[index]['b']=parseInt(thisIndex[0]);                                                                         //  |
+                        key[index]['length']=1;                                                                                        	//  |
+                    }else if(thisIndex[0]==":")                                                                                         //  |
+                    {   key[index]['a']=0;                                                                                              //  |
+                        key[index]['b']=leftSizes[index]-1;                                                                             //  |
+                        key[index]['length']=leftSizes[index];                                                                          //  |
+                    }else																							   	       			//  |
+                    {	var eqobj={Page_position:DOM_Object[this.Format_id]['location'], Format_showtype:"InnerFunction",     			//  |
+                        Page_parentid:DOM_Object[this.Format_id]['parent'], Page_topparentid:DOM_Object[this.Format_id]['topparent'],   //  |
+                        Original_id:this.Format_id,	equation:"NewEq="+thisIndex[0]};			    									//  |
+                        var id=CreateEq(DOM_Object[this.Format_id]['fileid'], 1, eqobj);		      									//  |
+                        this.Solution_temps.push(id);													     							//  |
+                        key[index]['a']=DOM_Object[id]['real']['0-0'];                                                                  //  |
+                        key[index]['b']=DOM_Object[id]['real']['0-0'];                                                                  //  |
+                        key[index]['length']=1;                                                                                         //  |
+                        delete DOM_Object[id];	delete self[id];											     						//  |	
+                        sizeIndex[index]=1;                                                                            					//  |
+                    }																									     			//  |
+                }else if (thisIndex.length!=3)																							//  |(3c)
+			    {    Set_Error(this.Format_id, "Indices1", index, thisIndex.length);                                                    //  |
+                }else if (thisIndex.length==3)                                                                                          //  |
+                {   if (isNumber(thisIndex[0])) {	key[index]['a']=parseInt(thisIndex[0]);                                 			//  |(3dI)
+                    }else                                                                                                               //  |
+                    {	var eqobj={Page_position:DOM_Object[this.Format_id]['location'], Format_showtype:"InnerFunction",     			//  |
+                        Page_parentid:DOM_Object[this.Format_id]['parent'], Page_topparentid:DOM_Object[this.Format_id]['topparent'],   //  |
+                        Original_id:this.Format_id,	equation:"NewEq="+thisindex[0]};			    									//  |(3DII)
+                        var id=CreateEq(DOM_Object[this.Format_id]['fileid'], 1, eqobj);		      									//  |
+                        this.Solution_temps.push(id);													     							//  |
+                        key[index]['a']=DOM_Object[id]['real']['0-0'];                                                                  //  |
+                        delete DOM_Object[id];	delete self[id];											     						//  |	
+                    }                                                                                                                   //  |
+                    if (isNumber(thisIndex[2]))                                                                                         //  |(3dIII)
+                    {	key[index]['b']=parseInt(thisIndex[2]);                                                                         //  |
+                        key[index]['length']=key[index]['b']-key[index]['a']+1;                           	                       		//  |
+                    }else                                                                                                               //  |
+                    {	var eqobj={Page_position:DOM_Object[this.Format_id]['location'], Format_showtype:"InnerFunction",     			//  |
+                        Page_parentid:DOM_Object[this.Format_id]['parent'], Page_topparentid:DOM_Object[this.Format_id]['topparent'],   //  |
+                        Original_id:this.Format_id,	equation:"NewEq="+thisindex[2]};			    									//  |
+                        var id=CreateEq(DOM_Object[this.Format_id]['fileid'], 1, eqobj);		      									//  |(3dIV)
+                        this.Solution_temps.push(id);													     							//  |
+                        key[index]['b']=DOM_Object[id]['real']['0-0'];                                                                  //  |
+                        key[index]['length']=key[index]['b']-key[index]['a']+1;                                                         //  |
+                        delete DOM_Object[id];	delete self[id];											     						//  |	
+                    }                                                                                                                   //  |(3dV)
+                }                                                                                                                       //  |
+            }                                                                                                                           //  |
+            for (var index=0; index<theseIndexes.length; index++){   console.log('Multiplying '+newNumInd+' times '+parseInt(key[index]['length'])); newNumInd=newNumInd*parseInt(key[index]['length']); }              //  |(4)
+            for (var index=0; index<solSizes.length; index++) {   console.log('Multiplying '+thisNumInd+' times '+parseInt(solSizes[index]));thisNumInd=thisNumInd*parseInt(solSizes[index]);     }              //  | 
+            for (var index=0; index<Object.keys(key).length; index++){ newKeySize=newKeySize+'x'+key[index]['length']; }                //  |
+            newKeySize=newKeySize.replace(/^x/,'');                                                                                     //  |
+console.log('The numbers of indices are newNumInd - '+newNumInd+' and thisNumInd - '+thisNumInd);
+console.log('The sizes are newKeySize - '+newKeySize+' and this.Format_size - '+this.Format_size);
+            for (var index=0; index<theseIndexes.length; index++)                                                                       //  |
+            {   if (key[index]['b']>=leftSizes[index])                                                                                  //  |
+                {   bigMatrixFlag=1; }                                                                                                  //  |
+            }                                                                                                                           //  |
+            for (var index=0; index<theseIndexes.length; index++)                                                                       //  |
+            {   if (key[index]['length']!=solSizes[index])                                                                              //  |
+                {   if (Object.keys(key).length==leftSizes.length){ indexFlag=1;     }                                                  //  |
+                    if ((key[index]['length']==1)&&(index==theseIndexes.length-1)&&(theseIndexes.length==leftSizes.length+1))           //  |
+                    {  newIndexFlag=1; }else { indexFlag=1; }                                                                           //  |
+                }                                                                                                                       //  |(4A)
+            }                                                                                                                           //  |
+            if ((theseIndexes.length!=leftSizes.length)&&(theseIndexes.length!=leftSizes.length+1))                                     //  |
+            {   Set_Error(this.Format_id, "Indices2", theseIndexes.length, leftSizes.length);                                           //  |
+            }else if (indexFlag==1)                                                                                                     //  |(4B)
+            {   Set_Error(this.Format_id, "Indices4", newKeySize, this.Format_size);                                                    //  |
+            }else if (newNumInd!=thisNumInd)                                                                                            //  |(4C)
+            {   Set_Error(this.Format_id, "Indices3", thisNumInd, newNumInd);                                                           //  |
+            }else                                                                                                                       //  |(4D)
+            {   var numKeys=1;                                                                                                          //  |
+                for (a=0; a<Object.keys(key).length; a++)                                                                               //  |
+                {   key[a]['count']=key[a]['a'];                                                                                        //  |
+                    numKeys=numKeys*(parseInt(key[a]['b'])-parseInt(key[a]['a'])+1);                                                    //  |
+                }                                                                                                                       //  |   
+                for (a=0; a<solSizes.length; a++)                                                                                      //  |
+                {   readKey[a]={};                                                                                                      //  |
+                    readKey[a]['a']=0;                                                                                                  //  |
+                    readKey[a]['b']=solSizes[a]-1;                                                                                     //  |
+                    readKey[a]['count']=0;                                                                                              //  |
+                }                                                                                                                       //  |   
+console.log('The number of keys is '+numKeys);
+                for (index=0; index<numKeys; index++)                                                                                   //  |
+                {   thisKey='';     showKey='';                                                                                         //  |
+                    stepFlag=0;                                                                                                         //  |
+                    for (a=Object.keys(key).length-1; a>=0; a--)                                                                        //  |
+                    {   if (a==Object.keys(key).length-1)                                                                               //  |
+                        {  thisKey=key[a]['count']; }else{ thisKey=key[a]['count']+'-'+thisKey; }                                       //  |
+                    }                                                                                                                   //  |
+                    for (a=Object.keys(readKey).length-1; a>=0; a--)                                                                    //  |
+                    {   if (a==Object.keys(readKey).length-1)                                                                           //  |
+                        {  showKey=readKey[a]['count']; }else{ showKey=readKey[a]['count']+'-'+showKey; }                               //  |
+                    }                                                                                                                   //  |
+                    showKey=showKey.replace(/\-$/,'');                                                                                  //  |
+console.log('Setting the key '+thisKey+' to the value at '+showKey+' of '+this.Solution_real[showKey]);                    
+                    for (a=Object.keys(key).length-1; a>=0; a--)                                                                        //  |
+                    {   if (a==Object.keys(key).length-1)                                                                               //  |
+                        {   key[a]['count']=parseInt(key[a]['count'])+1;                                                                //  |
+                            if (key[a]['count']>parseInt(key[a]['b']))                                                                  //  |
+                            {   stepFlag=1;                                                                                             //  |
+                                key[a]['count']=parseInt(key[a]['a']);                                                                  //  |
+                            }                                                                                                           //  |
+                        }else                                                                                                           //  |
+                        {   if (stepFlag==1)                                                                                            //  |
+                            {   key[a]['count']=parseInt(key[a]['count'])+1;                                                            //  |
+                                if (key[a]['count']>parseInt(key[a]['b']))                                                              //  |
+                                {   stepFlag=1;                                                                                         //  |
+                                    key[a]['count']=parseInt(key[a]['a']);                                                              //  |
+                                }else{ stepFlag=0; }                                                                                    //  |
+                            }                                                                                                           //  |
+                        }                                                                                                               //  | 
+                    }                                                                                                                   //  |
+                    for (a=Object.keys(readKey).length-1; a>=0; a--)                                                                    //  |
+                    {   if (a==Object.keys(readKey).length-1)                                                                           //  |
+                        {   readKey[a]['count']=parseInt(readKey[a]['count'])+1;                                                        //  |(5)
+                            if (readKey[a]['count']>parseInt(readKey[a]['b']))                                                          //  |
+                            {   stepFlag=1;                                                                                             //  |
+                                readKey[a]['count']=0;                                                                                  //  |
+                            }                                                                                                           //  |
+                        }else                                                                                                           //  |
+                        {   if (stepFlag==1)                                                                                            //  |
+                            {   readKey[a]['count']=parseInt(readKey[a]['count'])+1;                                                    //  |
+                                if (readKey[a]['count']>parseInt(readKey[a]['b']))                                                      //  |
+                                {   stepFlag=1;                                                                                         //  |
+                                    readKey[a]['count']=0;                                                                              //  |
+                                }else{ stepFlag=0; }                                                                                    //  |
+                            }                                                                                                           //  |
+                        }                                                                                                               //  | 
+                    }                                                                                                                   //  |
+                    this.tempsolr[thisKey]=this.Solution_real[showKey];                                                                 //  |
+                    this.tempsoli[thisKey]=this.Solution_imag[showKey];                                                                 //  |
+                }                                                                                                                       //  |
+            }                                                                                                                           //  |
+            DOM_Object[this.Format_id]['real']=JSON.parse(JSON.stringify(this.tempsolr));												//  |
+			DOM_Object[this.Format_id]['imag']=JSON.parse(JSON.stringify(this.tempsoli));												//  |
+            this.Solution_real=JSON.parse(JSON.stringify(this.tempsolr));																//  |
+			this.Solution_imag=JSON.parse(JSON.stringify(this.tempsoli));																//  |
+			if ((newIndexFlag==1)||(bigMatrixFlag==1)){  resolveMatrix(this.Format_id);  }                                              //  |
+		}																																//  |
+	}																																	//  |
+	if (typeof(callback)=="function") { callback();	}																					//  |
+};																																		//  |
 /*-----------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*-----------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------ SPLIT THE INDEXES UP BY THEIR BRACKETS -------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------------------------------------*/
+/*  This function takes in the string that is sent as the series of indexes in the above function and then returns the contents of each     |
+    bracket as an array. This is done by simply breaking up the text and then recombining the parts inside the brackets.                    |
+/*-----------------------------------------------------------------------------------------------------------------------------------------*/
+function splitBrackets(text)																											//	|
+{	var inputArray=new Array(), numArray=new Array(), flip=0, bcount=0, pcount=0;		                   								//	|
+    text=text.replace(/^[a-zA-Z0-9\_]+/,'');                                                                                            //  |
+    inputArray=SplitText(text)																											//	|
+	for (var a=0; a<inputArray.length; a++)																								//	|
+	{	if (inputArray[a]=="(") { flip=1; bcount=parseInt(bcount, 10)+1; }																//	| 
+		if (inputArray[a]=="[") { flip=1; pcount=parseInt(pcount, 10)+1; }																//	|
+		if (inputArray[a]==")") { bcount=bcount-1; }																					//	|
+		if (inputArray[a]=="]") { pcount=pcount-1; }																					//	|
+		if (((inputArray[a]==")")||(inputArray[a]=="]"))&&((bcount===0)&&(pcount===0))) { flip=0; }								       	//	|
+		if (flip==1) { numArray[a]=1; }else{ numArray[a]=0; }																		    //	|
+	}																																	//	|
+	for (var i = inputArray.length; i >0; i--) 																							//	| 
+	{	if (((numArray[i] == '1')&&(numArray[parseInt(i, 10)-1] == '1'))||((numArray[parseInt(i, 10)-1] == '1')&&(inputArray[i]=="]"))||((numArray[parseInt(i, 10)-1] == '1')&&(inputArray[i]==")")))
+		{	inputArray[i-1]=inputArray[i-1]+inputArray[i];																				//	|
+			inputArray.splice(i, 1); 																									//	|
+			numArray.splice(i, 1); 																										//	| 
+	}	}																																//	| 	
+	for (var i = inputArray.length; i >=0; i--)                                                                                         //  |
+    {   if ((inputArray[i]==',')||(inputArray[i]==' ')||(inputArray[i]===''))                                                           //  |
+        {   inputArray.splice(i, 1);                                                                                                    //  |
+    }	}	                                                                                                                            //	| 	
+	return inputArray;																													//	|
+}																																		//	|
+/*-----------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*-----------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------ CHECK INPUT FOR MULTIPLE ENTRIES -------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------------------------------------*/
+/*  This function takes in the string that is sent as an index to the function above. The function takes the string and splits it at the    |
+    semicolons. It then recombines the string to ensure that an entry is not parsed at an inappropriate part.                               |
+/*-----------------------------------------------------------------------------------------------------------------------------------------*/
+function splitColons(text)																												//	|
+{	text=text.replace(/^\[/,'').replace(/\]$/,'');                                                                                      //  |
+    var inputArray=new Array(), numArray=new Array(), flip=0, bcount=0, pcount=0;		                   								//	|
+    inputArray=SplitText(text)																											//	|
+	for (var a=0; a<inputArray.length; a++)																								//	|
+	{	if (inputArray[a]=="(") { flip=1; bcount=parseInt(bcount, 10)+1; }																//	| 
+		if (inputArray[a]=="[") { flip=1; pcount=parseInt(pcount, 10)+1; }																//	|
+		if (inputArray[a-1]==")") { bcount=bcount-1; }																					//	|
+		if (inputArray[a-1]=="]") { pcount=pcount-1; }																					//	|
+		if (((inputArray[a-1]==")")||(inputArray[a-1]=="]"))&&((bcount===0)&&(pcount===0))) { flip=0; }									//	|
+		if (flip==1) { numArray[a]=1; }																									//	|
+	}																																	//	|
+	for (var i = inputArray.length; i >0; i--) 																							//	| 
+	{	if ((numArray[i] == '1')&&(numArray[parseInt(i, 10)-1] == '1'))																	//	|
+		{	inputArray[i-1]=inputArray[i-1]+inputArray[i];																				//	|
+			inputArray.splice(i, 1); 																									//	|
+			numArray.splice(i, 1); 																										//	| 
+	}	}																																//	| 	
+	for (var i = inputArray.length; i >=0; i--)                                                                                         //  |
+    {   if ((inputArray[i]==',')||(inputArray[i]==' ')||(inputArray[i]===''))                                                           //  |
+        {   inputArray.splice(i, 1);                                                                                                    //  |
+    }	}	                                                                                                                            //	| 	
+	for (var i = inputArray.length-1; i >0; i--)                                                                                        //  |
+    {   if ((inputArray[i]!=':')&&(inputArray[i-1]!=':'))                                                                               //  |
+        {   inputArray[i-1]=inputArray[i-1]+''+inputArray[i];                                                                           //  |
+            inputArray.splice(i, 1);                                                                                                    //  |
+    }	}	                                                                                                                            //	| 	
+	return inputArray;																													//	|
+}																																		//	|
+/*-----------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*-----------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------- RESOLVE MATRIX --------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------------------------------------*/
+/*	This function takes in an equation id and looks at the matrix to see if its size is correct and that every index has an entry.			|
+	This is done by looping through each index and finding the highest value for each index. Once that is done, the matrix is looped 		|
+	through again and any unset indices are set. The size is also reset. This function is called whenever a matrices indices are changed.   |
+/*-----------------------------------------------------------------------------------------------------------------------------------------*/
+function resolveMatrix(id, callback)	           	               																		//	| 
+{	console.log('The resolve matrix function was called.');
+    var thisIndex='', sizeObj={}, newSize='', numIndices=1, thisKey='', stepFlag=0, numIndices=1, tempKey='', tempIndex=0;              //  |
+    for (var realNum in self[id]['Solution_real'])	     	       																		//	| 
+	{   thisIndex=realNum.split('-');                                                                                                   //  |
+        for (var a in thisIndex)                                                                                                        //  |
+        {   if (sizeObj[a]===undefined)     { sizeObj[a]={};          sizeObj[a]['count']=0;         sizeObj[a]['size']=0; }            //  |
+            if (thisIndex[a]>sizeObj[a]['size'])    { sizeObj[a]['size']=thisIndex[a]; }                                                //  |
+        }                                                                                                                               //  |
+    }                                                                                                                                   //  |
+    for (var a=0; a<Object.keys(sizeObj).length; a++)                                                                                   //  |
+    {   if (a==0){ newSize=parseInt(sizeObj[a]['size'])+1; }else{ newSize=newSize+'x'+(parseInt(sizeObj[a]['size'])+1); }  }            //  |
+    for (var a=0; a<Object.keys(sizeObj).length; a++){ numIndices=numIndices*(parseInt(parseInt(sizeObj[a]['size'])+1));  }             //  |
+    for (index=0; index<numIndices; index++)                                                                                            //  |
+    {   thisKey='';                                                                                                                     //  |
+        stepFlag=0;                                                                                                                     //  |
+        for (a=Object.keys(sizeObj).length-1; a>=0; a--)                                                                                //  |
+        {   if (a==Object.keys(sizeObj).length-1){thisKey=sizeObj[a]['count']; }else{ thisKey=sizeObj[a]['count']+'-'+thisKey; }  }     //  |
+        if (self[id]['Solution_real'][thisKey]===undefined)                                                                             //  |
+        {   tempKey=thisKey.replace(/\-[0-9]+$/,'');                                                                                    //  |
+            if (self[id]['Solution_real'][tempKey]===undefined)                                                                         //  |
+            {       self[id]['Solution_real'][thisKey]=self[id]['Solution_realdefault'];                                                //  |
+            }else                                                                                                                       //  |
+            {   tempIndex=thisKey.match(/[0-9]+$/);                                                                                     //  |
+                if (tempIndex[0]==0)                                                                                                    //  |
+                {       self[id]['Solution_real'][thisKey]=self[id]['Solution_real'][tempKey];                                          //  |
+                }else { self[id]['Solution_real'][thisKey]=self[id]['Solution_realdefault'];      }                                     //  |
+            }                                                                                                                           //  |
+        }else { self[id]['Solution_real'][thisKey]=self[id]['Solution_real'][thisKey];        }                                         //  |
+        if (self[id]['Solution_imag'][thisKey]===undefined)                                                                             //  |
+        {   tempKey=thisKey.replace(/\-[0-9]+$/,'');                                                                                    //  |
+            if (self[id]['Solution_imag'][tempKey]===undefined)                                                                         //  |
+            {       self[id]['Solution_imag'][thisKey]=self[id]['Solution_imagdefault'];                                                //  |
+            }else                                                                                                                       //  |
+            {   tempIndex=thisKey.match(/[0-9]+$/);                                                                                     //  |
+                if (tempIndex[0]==0)                                                                                                    //  |
+                {       self[id]['Solution_imag'][thisKey]=self[id]['Solution_imag'][tempKey];                                          //  |
+                }else { self[id]['Solution_imag'][thisKey]=self[id]['Solution_imagdefault'];      }                                     //  |
+            }                                                                                                                           //  |
+        }else { self[id]['Solution_imag'][thisKey]=self[id]['Solution_imag'][thisKey];        }                                         //  |
+        for (a=Object.keys(sizeObj).length-1; a>=0; a--)                                                                                //  |
+        {   if (a==Object.keys(sizeObj).length-1)                                                                                       //  |
+            {   sizeObj[a]['count']=parseInt(sizeObj[a]['count'])+1;                                                                    //  |
+                if (sizeObj[a]['count']>parseInt(sizeObj[a]['size']))                                                                   //  |
+                {   stepFlag=1;                                                                                                         //  |
+                    sizeObj[a]['count']=0;                                                                                              //  |
+                }                                                                                                                       //  |
+            }else                                                                                                                       //  |
+            {   if (stepFlag==1)                                                                                                        //  |
+                {   sizeObj[a]['count']=parseInt(sizeObj[a]['count'])+1;                                                                //  |
+                    if (sizeObj[a]['count']>parseInt(sizeObj[a]['size']))                                                               //  |
+                    {   stepFlag=1;                                                                                                     //  |
+                        sizeObj[a]['count']=0;                                                                                          //  |
+                    }else{ stepFlag=0; }                                                                                                //  |
+                }                                                                                                                       //  |
+            }                                                                                                                           //  | 
+        }                                                                                                                               //  |
+    }                                                                                                                                   //  |
+    DOM_Object[id]['real']=JSON.parse(JSON.stringify(self[id]['Solution_real']));						         						//  |
+	DOM_Object[id]['imag']=JSON.parse(JSON.stringify(self[id]['Solution_imag']));				          								//  |
+    self[id]['Format_size']=newSize;                                                                                                    //  |
+    DOM_Object[id]['size']=newSize;                                                                                                     //  |
+ if (typeof(callback)=="function") { callback();	}																					//	|
+}																																		//	| 
+/*-----------------------------------------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------------------------------------*/
+
 
 /*-----------------------------------------------------------------------------------------------------------------------------------------*/
 /*---------------------------------------------- FORMAT FRACTIONS -------------------------------------------------------------------------*/
@@ -3079,13 +3364,16 @@ function MultMatrices (id1, id2, operator, thisid)																										//	\
 }																																						//	\
 //---------------------------------------------------------------------------------------------------------------------------------------------------------//
 
-//---------------------------------------------------------------------------------------------------------------------------------------------------------//
-//------------------------------------------------------- Convert input string to array -------------------------------------------------------------------//
-//---------------------------------------------------------------------------------------------------------------------------------------------------------//
-function InputArray(text)																																//	\--- This function is used on built-in functions. It is given the 
-{	var inputarray=new Array();	var numarray=new Array();	var flip=0;	var bcount=0; var pcount=0;														//	\--- string which is sent to the functions. It takes this string
-	inputarray=SplitText(text);																															//	\--- and splits it view commas. It then recombines the matrices, 
-	for (var a=0; a<inputarray.length; a++)	{ if (inputarray[a]!=",") { numarray[a]=1;}else { numarray[a]=0; } }										//	\--- other built in functions, other item that also uses commas.
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------- Convert input string to array -------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*  This function is used on built-in functions. It is given the string which is sent to the functions. It takes this string and splits it view commas.     |
+    It then recombines the matrices, other built in functions, other item that also uses commas.                                                            |
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------*/
+function InputArray(text)																																//	\
+{	var inputarray=new Array();	var numarray=new Array();	var flip=0;	var bcount=0; var pcount=0;														//	\
+	inputarray=SplitText(text);																															//	\
+	for (var a=0; a<inputarray.length; a++)	{ if (inputarray[a]!=",") { numarray[a]=1;}else { numarray[a]=0; } }										//	\
 	for (var a=0; a<inputarray.length; a++)																												//	\
 	{	if (inputarray[a]=="(") { flip=1; bcount=parseInt(bcount, 10)+1; }																				//	\ 
 		if (inputarray[a]=="[") { flip=1; pcount=parseInt(pcount, 10)+1; }																				//	\
@@ -10961,6 +11249,12 @@ function Set_Error(thisid, Error_Num, id1, id2)
 	if (Error_Num=="IfElse1") { self[thisid].Errors_errors.push("The IfElse function cannot receive more than 5 inputs"); }
 	if (Error_Num=="IfElse2") { self[thisid].Errors_errors.push("The IfElse function cannot receive less than 4 inputs"); }
 	if (Error_Num=="IfElse3") { self[thisid].Errors_errors.push("The test string in the IfElse function must be ==, !=, >=, <=, >, or <"); }
+
+	if (Error_Num=="Indices1") { self[thisid].Errors_errors.push("You sent "+id2+" numbers to index "+id1+" of a matrix. There must be only 1 number or three entries of [number:number]"); }
+	if (Error_Num=="Indices2") { self[thisid].Errors_errors.push("You are attempting to set "+id1+" dimensions on a variable that has "+id2+" dimensions. "); }
+	if (Error_Num=="Indices3") { self[thisid].Errors_errors.push("You are attempting to set "+id1+" numbers to a matrix that has only "+id2+" numbers on the left side."); }
+	if (Error_Num=="Indices4") { self[thisid].Errors_errors.push("You are attempting to set a matrix with a size of "+id1+" to a matrix the size of "+id2+"."); }
+
 }
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/

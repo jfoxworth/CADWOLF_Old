@@ -101,7 +101,7 @@ function FormatItems(callback)																													//	\--- This function
 			}else 																																//	\
 			{	$('#'+id).find('.eqshow').html('$$'+window[id].Format_left+"="+window[id].Format_showequation+"="+window[id].Format_showsolution+'$$');	
 				$('#'+id).find('.eqshow').css("color","black");	}																				//	\
-			$('#'+id).find('.eqparam').val(window[id].Format_name+"="+window[id].Format_right);													//	\
+			$('#'+id).find('.eqparam').val(window[id].Format_left+"="+window[id].Format_right);													//	\
 			for (eqID in window[id].connected_ids){ $('#'+eqID).closest('.main_item').hide(); }													//	\
 			if (window[id]['inputID']!=='') { $('#'+id).closest('.main_item').hide(); }	}														//	\
 	});																																			//	\
@@ -1322,7 +1322,7 @@ function Find_Deps(itemid, callback)																									//	\
 	delete DOM_Object[''];																												//	\
 	var fileid=$('#filenumber').attr('filenumber');																						//	\
 	var flag=0, domLoc={}; CADWOLF_Deps={};																								//	\
-	for (var i in DOM_Object) 																											//	\ 
+	for (var i in DOM_Object) 																											//	\ (1)
 	{ 	if (DOM_Object[i]['status']===undefined){ DOM_Object[i]['status']=0;  } 														//	\
 		CADWOLF_Deps[DOM_Object[i]['location']]={};																						//	\
 		CADWOLF_Deps[DOM_Object[i]['location']]['equation']=i;																			//	\
@@ -1336,16 +1336,18 @@ function Find_Deps(itemid, callback)																									//	\
 	{	if ((CADWOLF_Deps[a]!==undefined)&&(flag==0))																					//	\
 		{	if (DOM_Object[CADWOLF_Deps[a]['equation']]['type']=="equation")															//	\
 			{	if (DOM_Object[CADWOLF_Deps[a]['equation']]['name']==DOM_Object[itemid]['name'])										//	\
-				{	CADWOLF_Deps[DOM_Object[CADWOLF_Deps[a]['equation']]['location']]['update']=1;										//	\
-					DOM_Object[CADWOLF_Deps[a]['equation']]['status']=1;																//	\
+				{	
+//                  CADWOLF_Deps[DOM_Object[CADWOLF_Deps[a]['equation']]['location']]['update']=1;										//	\
+//					DOM_Object[CADWOLF_Deps[a]['equation']]['status']=1;																//	\ (2)
 					for (var b in DOM_Object[CADWOLF_Deps[a]['equation']]['Dependents']) 												//	\
 					{	console.log('The dependent is '+b);
 						if (b.match(/^Table/)) { b="File"+fileid+""+b; }																//	\
 						if (DOM_Object[b]!==undefined) 																					//	\
 						{	if (CADWOLF_Deps[DOM_Object[b]['location']]!==undefined) 													//	\
-							{	CADWOLF_Deps[DOM_Object[CADWOLF_Deps[a]['equation']]['location']]['update']=1;							//	\
-								DOM_Object[CADWOLF_Deps[a]['equation']]['status']=1;													//	\
-	}	}	}flag=1;}	}	}	}																										//	\
+							{	if (DOM_Object[b]['location']>DOM_Object[itemid]['location'])                                           //  |
+                                {   CADWOLF_Deps[DOM_Object[CADWOLF_Deps[a]['equation']]['location']]['update']=1;						//	\
+								    DOM_Object[CADWOLF_Deps[a]['equation']]['status']=1;												//	\
+	}	}   }	}flag=1;}	}	}	}   																								//	\
 	for (var a=thisloc; a<Object.keys(CADWOLF_Deps).length; a++)																		//	\
 	{	if (CADWOLF_Deps[a]!==undefined)																								//	\
 		{	if (DOM_Object[CADWOLF_Deps[a]['equation']]['type']=="equation")															//	\
