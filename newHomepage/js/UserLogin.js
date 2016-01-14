@@ -325,10 +325,10 @@ function GrabUserInfo(id) {																														//	\
 //------------------------------------------------- WHEN A NEW ACCOUNT PIECE OF INFO CHANGES ------------------------------------------------------//  
 //-------------------------------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------//
-$("#create_username, #create_pass, #create_pass2, #create_email, #create_firstname, #create_lastname").on('change keyup',function(e)			//	\
-{	if (((e.type=="keyup")&&((e.keyCode == 13)||(e.which == 13)))||(e.type=="change")) 															//	\
-	{ 	Check_Account();	}																													//	\
-});																																				//	\
+$("#create_username, #create_pass, #create_pass2, #create_email, #create_firstname, #create_lastname").on('change keyup',function(e)			//	|
+{	if (((e.type=="keyup")&&((e.keyCode == 13)||(e.which == 13)))||(e.type=="change")) 															//	|
+	{ 	$('.alert').hide();     Check_Account();	}																							//	|
+});																																				//	|
 //-------------------------------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------//
@@ -351,16 +351,17 @@ $("#create_username, #create_pass, #create_pass2, #create_email, #create_firstna
 function Check_Account() 																														//	\ 
 {	var flag1=0; 		var flag2=0; var flag3=0; var flag4=0;	var flag5=0; var flag6=0; 														//	\
 	var duplicate=0;	var ret=0;																												//	\
-	var fb=$('#create_facebook').attr('valid');																									//	\
+	var fb=.attr('valid');																									//	\
 	$('#name_error, #pass_error1, #pass_error2, #email_error, #name_duplicate').hide();															//	\
 	$('#cu1, #cu2, #cu3, #cu4').addClass('left_error');																							//	\
 																																				//	\
-	var text=$("#create_username").val();																										//	\
+	$("#create_username, #create_pass, #create_pass2, #create_email, #create_firstname, #create_lastname").closest('.form-group').removeClass('has-error');
+    var text=$("#create_username").val();																										//	\
 	var name=text.replace(/\s+$/, '').replace(/^\s/,'');																						//	\
 	var re=/[a-z,A-Z,0-9,\s]+/;																													//	\
 	var testname=name.match(re);																												//	\
 	if (testname==name){ flag1=1; $('#cu1').removeClass('left_error'); 																			//	\
-	}else { if (name.length>0) { $('#name_error').show(); flag=0;} }																			//	\
+	}else { if (name.length>0) { $("#create_username").closest('.form-group').addClass('has-error'); $('#name_error').show(); flag=0;} }		//	\
 	if (name.length>=5){ 	flag1=1;  																											//	\
 	}else {  if (name.length>0){ $('#cu1').addClass('left_error'); $('#name_error').show(); flag1=0; } }										//	\
 	if (flag1==1)																																//	\
@@ -368,7 +369,7 @@ function Check_Account() 																														//	\
 			success: function(data) {duplicate=data},error: function () 																		//	\
 			{ alert('There was an error checking the user name.');}	});																			//	\
 		if (duplicate==1){ flag1=1;  																											//	\
-		}else { flag1=0; if (name.length>0) { $('#name_duplicate').show();}	}																	//	\
+		}else { flag1=0; if (name.length>0) { $("#create_username").closest('.form-group').addClass('has-error'); $('#name_duplicate').show();}}//	\
 	}																																			//	\
 																																				//	\
 	var pass1=$("#create_pass").val();																											//	\
@@ -376,7 +377,7 @@ function Check_Account() 																														//	\
 	}else{ if (pass1.length>0) { $('#pass_error1').show(); } }																					//	\
 	var pass2=$("#create_pass2").val();																											//	\	
 	if (pass1==pass2){ flag3=1; $('#cu3').removeClass('left_error'); 																			//	\
-	}else { flag2=0; if (pass2.length>0) { $('#pass_error2').show(); } }																		//	\
+	}else { flag2=0; if (pass2.length>0) { $("#create_pass").closest('.form-group').addClass('has-error'); $('#pass_error2').show(); } }	    //	\
 																																				//	\
 	var email=$("#create_email").val();																											//	\	
 //	var pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;																							//	\
@@ -387,19 +388,19 @@ function Check_Account() 																														//	\
 			success: function(data) {duplicate=data},error: function () 																		//	\
 			{ alert('There was an error checking the email.');}	});																				//	\
 		if (duplicate==1){ flag4=1;  $('#cu4').removeClass('left_error');	$('#email_error2').hide();											//	\
-		}else { flag4=0; if (email.length>0) { $('#email_error2').show();}	}																	//	\
-	}else { if (email.length>0) { $('#email_error').show(); } }																					//	\
+		}else { flag4=0; if (email.length>0) { $("#create_email").closest('.form-group').addClass('has-error'); $('#email_error2').show();}	}	//	\
+	}else { if (email.length>0) { $("#create_email").closest('.form-group').addClass('has-error'); $('#email_error').show(); } }				//	\
 																																				//	\
 	var fname=$("#create_firstname").val();																										//	\	
 	var pattern=/^[a-zA-Z-\']+$/;																												//	\
 	var testname=fname.match(pattern);																											//	\
 	if ((testname==fname)&&(fname.length>0)){ flag5=1; $('#cu5').removeClass('left_error'); 													//	\
-	}else{ if (fname.length>0) { $('#firstname_error').show(); } }																				//	\
+	}else{ if (fname.length>0) { $("#create_firstname").closest('.form-group').addClass('has-error'); $('#firstname_error').show(); } }		    //	\
 	var lname=$("#create_lastname").val();																										//	\	
 	var pattern=/^[a-zA-Z-\']+$/;																												//	\
 	var testname=lname.match(pattern);																											//	\
 	if ((testname==lname)&&(lname.length>0)){ flag6=1; $('#cu6').removeClass('left_error'); 													//	\
-	}else{ if (lname.length>0) { $('#lastname_error').show(); } }																				//	\
+	}else{ if (lname.length>0) { $("#create_lastname").closest('.form-group').addClass('has-error'); $('#lastname_error').show(); } }			//	\
 																																				//	\
 	if ((flag1==1)&&(flag2==1)&&(flag3==1)&&(flag4==1)&&(flag5==1)&&(flag6==1)&&(fb==1))														//	\
 	{	$('#create_button').show();		ret=1;	}else { $('#create_button').hide(); }															//	\
@@ -453,17 +454,29 @@ $(document).on('click', '#create_button', function(event)																						/
 //--------------------------------------------------- KEEP TRACK OF THE LOGIN PARAMETERS ----------------------------------------------------------//  
 //-------------------------------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------//
-$("#login_name").on('change keyup',function(e)																									//	\
-{	if (((e.type=="keyup")&&((e.keyCode == 13)||(e.which == 13)))||(e.type=="change")) 															//	\
-	{ 	var name=$("#login_name").val();																										//	\
-		$.ajax ({ type:"POST",	url:"/Users/TestActive",async: false, data: { name:name	},   													//	\
-			success: function(data) {active=data},error: function () 																			//	\
-			{ alert('There was an error checking the user name.');}	});																			//	\
-		if (active==0){ $('#login_inactive').show(); $('#loginsubmit').hide(); 	$('#login_noname').hide();										//	\
-		}else if (active==1){ $('#login_inactive').hide(); $('#loginsubmit').show(); $('#login_name').find('form-group').addClass('has-error');	//	\
-		}else if (active==2){ $('#login_inactive').hide(); $('#loginsubmit').hide(); $('#login_name').find('form-group').addClass('has-error');}//	\
-	}																																			//	\
-});																																				//	\
+$("#login_name").on('change keyup',function(e)																									//	|
+{	if (((e.type=="keyup")&&((e.keyCode == 13)||(e.which == 13)))||(e.type=="change")) 															//	|
+	{ 	var name=$("#login_name").val();																										//	|
+        $('#login_name').closest('.form-group').removeClass('has-error');                                                                       //  |
+		$.ajax ({ type:"POST",	url:"/Users/TestActive",async: false, data: { name:name	},   													//	|
+			success: function(data) {active=data},error: function () 																			//	|
+			{ alert('There was an error checking the user name.');}	});																			//	|
+		if (active==0)                                                                                                                          //  |
+        {   $('#login_inactive').show();                                                                                                        //  |
+            $('#loginsubmit').hide(); 	                                                                                                        //  |
+            $('#login_noname').hide();										                                                                    //	|
+            $('#login_name').closest('.form-group').addClass('has-error');                                                                      //  |
+        }else if (active==1)                                                                                                                    //  |
+        {   $('#login_inactive').hide();                                                                                                        //  |
+            $('#loginsubmit').show();                                                                                                           //  |
+		}else if (active==2)                                                                                                                    //  |
+        {   $('#login_inactive').hide();                                                                                                        //  |
+            $('#loginsubmit').hide();                                                                                                           //  |
+            $('#login_noname').show();										                                                                    //	|
+            $('#login_name').closest('.form-group').addClass('has-error');                                                                      //  |
+        }                                                                                                                                       //	|
+	}																																			//	|
+});																																				//	|
 //-------------------------------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------//

@@ -5,32 +5,62 @@ $(function(){
 //---------------------------------------------------------------- ON DOCUMENT READY ------------------------------------------------------------------//
 //-----------------------------------------------------------------------------------------------------------------------------------------------------//
 //-----------------------------------------------------------------------------------------------------------------------------------------------------//
-$(document).ready(function() 																													  //	|
-{	var config =																																	//	\
-    {   skin: 'kama',	uiColor:'#ECECEC',	extraPlugins : 'autogrow', extraPlugins : 'sharedspace', removePlugins : 'elementspath',				//	\
-	    toolbarCanCollapse : false, width:'750', resize_enabled: false, sharedSpaces :  {  top : 'cktoolbar' },										//	\
-		toolbar :  [ [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Bold', 'Italic', 'Underline', 'Strike', 							//	\
-		'-', 'RemoveFormat', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'Link', 'Unlink', 						//	\
-		'Image', 'Table', 'HorizontalRule', 'ShowBlocks', 'TextColor', 'BGColor', 'FontSize' ] ] 													//	\
-	}; 																																				//	\
-	$('#workspace_description_edit').attr('contenteditable','true');																				//	\
-   	$('#workspace_description_edit').ckeditor(config);																								//	\
-	for (var a=1;a<=$('.workspace_wrapper').length; a++)																							//	\
-	{	$('.workspace_rankselect').append($("<option></option>").attr("value",a).text(a)); 		}													//	\
+$(document).ready(function() 																													    //	|
+{	var config =																																	//  |
+    {   skin: 'kama',	uiColor:'#ECECEC',	extraPlugins : 'autogrow', extraPlugins : 'sharedspace', removePlugins : 'elementspath',				//  |
+	    toolbarCanCollapse : false, width:'750', resize_enabled: false, sharedSpaces :  {  top : 'cktoolbar' },										//  |
+		toolbar :  [ [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Bold', 'Italic', 'Underline', 'Strike', 							//  |
+		'-', 'RemoveFormat', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'Link', 'Unlink', 						//  |
+		'Image', 'Table', 'HorizontalRule', 'ShowBlocks', 'TextColor', 'BGColor', 'FontSize' ] ] 													//  |
+	}; 																																				//  |
+	$('#workspace_description_edit').attr('contenteditable','true');																				//  |
+   	$('#workspace_description_edit').ckeditor(config);																								//  |
+	for (var a=1;a<=$('.workspace_wrapper').length; a++)																							//	|
+	{	$('.workspace_rankselect').append($("<option></option>").attr("value",a).text(a)); 		}													//	|
 	$('.workspace_wrapper').each(function( index ) { $(this).find('.workspace_rankselect').prepend($("<option></option>").attr("value",index+1).text(index+1));});
-	parsePermissionInfo();																															//	\
-});																																					//	\
+	parsePermissionInfo();																															//	|
+    checkRank();                                                                                                                                    //  |
+});																																					//	|
 //-----------------------------------------------------------------------------------------------------------------------------------------------------//
 
+/*-----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------- CHECK THE RANKS OF DOWNLOADED ITEMS --------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*  This function is called on the load of the page. It looks at the ranks that were sent with the workspace and checks to ensure that each one has     |
+    a unique number and is in the proper order. When it comes across a bad order, it calls an ajax function to replace the rank.                        |
+/*-----------------------------------------------------------------------------------------------------------------------------------------------------*/
+function checkRank()																		      													//  |
+{   $('#workspace_foldercontents').find('.workspace_wrapper').each(function(index)                                                                  //  |
+    {  	var fileName=$(this).find('.workspace_filenameblock').html();			                                                        			//	|
+        var thisRank=$(this).attr('data-rank');                                                                                                     //  |
+        if ((index+1)!=thisRank)                                                                                                                    //  |
+        {   $.ajax ({																																//	|
+                type:"POST",																														//	|
+                url:"/Workspaces/setRank",																											//	| 
+                data: { fileName:fileName.replace(/ /g,'_'),	page:window.location.pathname, rank:parseInt(index)+1                				//	|
+                },																																	//	|
+                error: function () { alert('There was an error updating the ranks');},																//	|
+                success: function (data)  																											//	|
+                {	var myData=JSON.parse(data);																									//	|
+                    if (myData.error!==undefined){	$('#message_line').html(myData['error']);	}													//	|
+                }																																	//	|
+            });																																		//	|
+        }                                                                                                                                           //  |
+    });                                                                                                                                             //  |
+}                                                                                                                                                   //  |
+/*-----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+    
 //-------------------------------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------//
-$(document).on('mouseover', '#leftColumnIconsWrapper', function(event) 																			//	\
-{	$('#leftColumnTextWrapper').fadeIn('500');																									//	\
-});																																				//	\
-$(document).on('mouseout', '#leftColumnIconsWrapper, #leftColumnTextWrapper, .leftNavText, .leftNav, #saveFile, #saveFileText, #user, #userText, #logo, #logoText', function(event) 				//	\
-{	if (event.pageX>200){	$('#leftColumnTextWrapper').fadeOut('500');		}																	//	\
-});																																				//	\
+$(document).on('mouseover', '#leftColumnIconsWrapper', function(event) 																			//  |
+{	$('#leftColumnTextWrapper').fadeIn('500');																									//  |
+});																																				//  |
+$(document).on('mouseout', '#leftColumnIconsWrapper, #leftColumnTextWrapper, .leftNavText, .leftNav, #saveFile, #saveFileText, #user, #userText, #logo, #logoText', function(event) 				//  |
+{	if (event.pageX>200){	$('#leftColumnTextWrapper').fadeOut('500');		}																	//  |
+});																																				//  |
 //-------------------------------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------//
 

@@ -36,7 +36,7 @@ echo('<div id="leftColumnWrapper">');																														//	\
 				echo('<div class="userLine"><a class="userItem" href="http://www.cadwolf.com/users/logout">Log Out</a></div>');								//	\
 			echo('</div>');																																	//	\
 		} else 																																				//	\
-		{	echo('<div id="userText"><a class="userAnchor" href="http://www.cadwolf.com/Users/">Login</a></div>');		}									//	\
+		{	echo('<div id="userText"><a class="userAnchor" href="http://www.cadwolf.com/Users">Login</a></div>');		}									//	\
 		echo('<div class="leftColumnWrapper">');																											//	\
 			echo('<div id="leftColumnText">');																												//	\
 				echo('<div class="leftNavTextCurrent" id="viewProfileText">Profile</div>');																	//	\
@@ -56,7 +56,7 @@ echo('<div id="Main_Wrapper">');
 			echo('<div class="profiletitle">User Profile - "'.$UserData['User']['username'].'"</div>');
 			if ($UserData['User']['active']==0) 
 			{	echo('<div id="activate_account_wrapper"><div id="activate_description">Enter code in the input area and press enter</div><input id="activate_account" type="text"></div>');
-				echo('<div id="activate_success">Your account is now active. You can now <a href="http://www.cadwolf.com/Users/">log on</a> and start working.</div>'); 
+				echo('<div id="activate_success">Your account is now active. You can now <a href="http://www.cadwolf.com/Users">log on</a> and start working.</div>'); 
 				echo('<div id="validationError">The code you entered was not valid for this user.</div>'); 
 			}
 			echo('<div id="left_wrapper">');
@@ -177,7 +177,7 @@ echo('<div id="Main_Wrapper">');
 				echo('<div id="passInner">');
 					echo('<div class="profiletitle">Change the password</div>');
 					echo('<div id="passSection">');
-						echo('<div class="profile_text">This page lets the user change their password. If you have forgotten your password, go to the <a href="http://www.cadwolf.com/Users/">user page</a> and enter your email.</div>');
+						echo('<div class="profile_text">This page lets the user change their password. If you have forgotten your password, go to the <a href="http://www.cadwolf.com/Users">user page</a> and enter your email.</div>');
 						echo('<div class="passLine">');
 							echo('<div id="passErrorBox"></div>');
 							echo('<div class="passLeft">New Password</div>');

@@ -1,3 +1,80 @@
+
+    
+    
+<div id="imageWrapper"></div>
+
+<div id="landingWrapper">
+
+    <div id="landingContent">
+        <div id="largeLogo">
+            <div class="logo_wrapper2">
+                <div class="star_wrapper5"><div class="star_icon5"></div></div>
+                <div class="text_wrapper12">
+                    <div class="top_wrapper12">GALLOWAY</div>
+                    <div class="bottom_wrapper12">ENERGY CONSULTING, LLC</div>
+                </div>
+           </div>
+        </div>
+
+        <div id="menuLine">
+            <div id="menuBar">
+                <div class="menuItem" id="menuAbout"><div class="menuImage" id="aboutImage"></div><div class="menuText">About Us</div></div>
+                <div class="menuItem" id="menuServices"><div class="menuImage" id="servicesImage"></div><div class="menuText">Services</div></div>
+                <div class="menuItem" id="menuContact"><div class="menuImage" id="contactImage"></div><div class="menuText">Contact Us</div></div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div id="aboutWrapper" class="mainComponent">
+
+    <div id="aboutContent">
+
+        <div class="sectionHeader">
+            <div class="sectionIcon" id="aboutIcon"></div>
+            <div class="sectionTitle">About Galloway Energy Consulting</div>
+        </div>
+
+    
+    </div>
+
+</div>
+
+<div id="contactWrapper" class="mainComponent">
+
+    <div id="contactContent">
+
+        <div class="sectionText">The best way to contact me is at jgalloway at gallowayconsulting (dot) com</div>
+    
+    </div>
+
+</div>
+
+
+<div id="servicesWrapper" class="mainComponent">
+
+    <div id="servicesContent">
+
+        <div class="sectionHeader">Right of Way</div>
+        <div class="sectionText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+        <div class="sectionHeader">Agreement negotiation</div>
+        <div class="sectionText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+        <div class="sectionHeader">Well Drilling</div>
+        <div class="sectionText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+        <div class="sectionHeader">Survey Management</div>
+        <div class="sectionText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+
+
+    
+    </div>
+
+</div>
+
+
+
+
 <?php
 /*
 echo('<div class="logo_line">');
@@ -401,6 +478,10 @@ echo('</div>');
 
 */
 
+
+/*
+This are the valid logos
+
 echo('<div class="logo_line">');
 	echo('<div class="logo_wrapper">');
 		echo('<div class="star_wrapper5"><div class="star_icon5"></div></div>');
@@ -418,7 +499,7 @@ echo('<div class="logo_line">');
 		echo('</div>');
 	echo('</div>');
 echo('</div>');
-
+*/
 
 
 ?>
