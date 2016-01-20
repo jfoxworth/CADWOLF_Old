@@ -222,6 +222,7 @@ if ($UserName=="The Wolf")
 		echo $this->fetch('meta');
 		echo $this->fetch('script');
 		echo $this->Html->script('jquery');
+		echo $this->Html->script('big.min');
 		echo $this->Html->script('documents_view');
 		echo $this->Html->script('Three');
 		echo $this->Html->script('Spectrum');

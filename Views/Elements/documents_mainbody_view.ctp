@@ -19,7 +19,6 @@ $width="845";
 if (array_key_exists('0', $FileData)) { if (array_key_exists('mainwidth',$FileData['0']['Document'])) { $width=$FileData['0']['Document']['mainwidth']; }}
 echo('<div id="MainBody" class="bodymain" style="width: '.$width.'px;">');
 
-	echo('<div id="bugme">&nbsp</div>');
 	echo('<div id="filenumber" username="'.$UserName.'" filenumber="'.$DirInfo['ID'].'"></div>');
 	echo('<div id="currentitem" itemid="top"></div>');
 	echo('<div id="clicktotopenter" class="top_item notcurrent">&nbsp</div>');
@@ -158,7 +157,7 @@ echo('<div id="MainBody" class="bodymain" style="width: '.$width.'px;">');
 				
 				}elseif ($value['Document']['vartype']=="9")
 				{
-					echo('<div id="" class="main_item" fileid="'.$DirInfo['ID'].'" type="9" location="'.$value['Document']['location'].'" style="width: '.$value['Document']['width'].'px; margin-top:'.$value['Document']['margintop'].'px; margin-bottom:'.$value['Document']['marginbottom'].'px; margin-left:'.$value['Document']['marginleft'].'px; margin-right:'.$value['Document']['marginright'].'px;">');
+					echo('<div id="" class="main_item top_item notcurrent" fileid="'.$DirInfo['ID'].'" type="9" location="'.$value['Document']['location'].'" style="width: '.$value['Document']['width'].'px; margin-top:'.$value['Document']['margintop'].'px; margin-bottom:'.$value['Document']['marginbottom'].'px; margin-left:'.$value['Document']['marginleft'].'px; margin-right:'.$value['Document']['marginright'].'px;">');
 						echo('<div class="icon_holder" style="width: '.$value['Document']['width'].'px;"><div class="expandbutton"></div></div>');
 						echo('<div class="plot_block" id="'.$value['Document']['itemid'].'" parent="none">');
 							echo('<div class="plot_holder">');

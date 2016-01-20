@@ -1,8 +1,7 @@
-<?php
 
-echo('<div id="fb-root"></div>');
-echo('<div id="fbdata"></div>');
-?>
+<div id="fb-root"></div>
+<div id="fbdata"></div>
+
 <body id="page-top">
 
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
@@ -59,7 +58,8 @@ echo('<div id="fbdata"></div>');
                 <div class="col-md-4 col-md-offset-2">
                     <div class="panel panel-primary text-center">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Beta License</h3>
+                            <h3 class="panel-title">Student/Research License<span class="label label-success">Beta</span></h3>
+                            
                         </div>
                         <div class="panel-body">
                             <span class="price"></span>
@@ -120,6 +120,8 @@ echo('<div id="fbdata"></div>');
                     <div class="alert alert-danger" role="alert" id="lastname_error">The last name must have only letters, dashes, apostrophes, and spaces.</div>            
                     <div class="alert alert-danger" role="alert" id="login_inactive">Account not yet active</div>            
                     <div class="alert alert-danger" role="alert" id="login_noname">No account by that name</div>            
+                    <div class="alert alert-success" role="alert" id="passReset1">Account reset and email sent</div>            
+                    <div class="alert alert-danger" role="alert" id="passReset2">No account found with that email</div>            
                 </div>
             </div>          
             <div class="container">

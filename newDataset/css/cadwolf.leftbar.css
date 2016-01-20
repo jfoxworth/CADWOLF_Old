@@ -62,7 +62,6 @@ Dark Blue	-	#456382
 	font-family:sans-serif;
 	font-size:12px;
 	letter-spacing:1.5px;
-	display:none;
 }
 
 #leftColumnText {
@@ -149,6 +148,25 @@ Dark Blue	-	#456382
 	height:16px;
 	width:16px;	
 }
+
+.view_paste_current, .view_results_current, .view_info_current, .view_settings_current, .view_paste, .view_results, .view_info, .view_settings  
+{   float:left;
+	margin:8px 24px;
+	cursor:pointer;
+	height:16px;
+	width:16px;	    
+}
+
+
+.view_paste_current 	{ background: url(http://www.cadwolf.com/Images/dataset_sprite.png) no-repeat -27px -60px; }
+.view_results_current 	{ background: url(http://www.cadwolf.com/Images/dataset_sprite.png) no-repeat -96px -60px; }
+.view_info_current	 	{ background: url(http://www.cadwolf.com/Images/dataset_sprite.png) no-repeat -3px -60px; }				
+.view_settings_current 	{ background: url(http://www.cadwolf.com/Images/dataset_sprite.png) no-repeat -75px -61px; }				
+.view_paste				{ background: url(http://www.cadwolf.com/Images/dataset_sprite.png) no-repeat -27px -36px; }
+.view_results 			{ background: url(http://www.cadwolf.com/Images/dataset_sprite.png) no-repeat -95px -37px; }
+.view_info				{ background: url(http://www.cadwolf.com/Images/dataset_sprite.png) no-repeat -3px -36px; }				
+.view_settings  		{ background: url(http://www.cadwolf.com/Images/dataset_sprite.png) no-repeat -75px -37px; }				
+
 
 .leftNavText {
 	float:left;
@@ -241,15 +259,6 @@ Dark Blue	-	#456382
 #show_refs		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -233px -521px; 	}
 #show_datasets	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -187px -521px; 	}
 #show_bugs		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -210px -521px; 	}
-
-#view_main_current 		{ background: url(http://www.cadwolf.com/Images/dataset_sprite.png) no-repeat -27px -60px; }
-#view_results_current 	{ background: url(http://www.cadwolf.com/Images/dataset_sprite.png) no-repeat -96px -60px; }
-#view_info_current	 	{ background: url(http://www.cadwolf.com/Images/dataset_sprite.png) no-repeat -3px -60px; }				
-#view_settings_current 	{ background: url(http://www.cadwolf.com/Images/dataset_sprite.png) no-repeat -75px -61px; }				
-#view_main				{ background: url(http://www.cadwolf.com/Images/dataset_sprite.png) no-repeat -27px -36px; }
-#view_results 			{ background: url(http://www.cadwolf.com/Images/dataset_sprite.png) no-repeat -95px -37px; }
-#view_info				{ background: url(http://www.cadwolf.com/Images/dataset_sprite.png) no-repeat -3px -36px; }				
-#view_settings  		{ background: url(http://www.cadwolf.com/Images/dataset_sprite.png) no-repeat -75px -37px; }				
 
 #viewStructure_current	{ background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -182px -191px; }
 #viewList_current		{ background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -28px -190px; }

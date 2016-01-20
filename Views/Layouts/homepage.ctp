@@ -59,14 +59,12 @@
     <!-- Go to www.addthis.com/dashboard to customize your tools -->
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-544ab34c65dd3a23" async="async"></script>
 
-<body>
 <?php
 ?>
 <?php 	echo $this->element('analyticstracking'); 
 		$thisurl=Router::url(null, true);
 		echo $this->element('homebody');
 ?>
-</body>
 </html>
 
 <?php

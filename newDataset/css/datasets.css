@@ -1,0 +1,209 @@
+/*------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------- THE DIVS THAT HOLD THE MAIN CONTENT ---------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------------*/
+#dataset_wrapper {
+	float:left;
+	width:100%;
+}
+
+#main_content {
+	margin:0px 0px 0px 75px;
+	font-family:Lato;
+}
+
+#settings_wrapper, #paste_wrapper, #results_wrapper, #info_wrapper, #create_wrapper {
+	width:800px;
+	margin:auto;
+	font-size:0.9em;
+	letter-spacing:1px;
+}
+
+#create_wrapper, #paste_wrapper, #results_wrapper, #settings_wrapper {  }
+/*------------------------------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------- COMMON ITEMS FOR ALL DATASETS ------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------------*/
+.dataset_mainheader {
+	font-size:2.2em;
+	margin:20px 0px 20px 0px;
+	letter-spacing:1px;
+	text-align:center;
+}
+
+.dataset_header {
+	font-size:2em;
+	margin:20px 0px 20px 0px;
+	letter-spacing:1px;
+}
+
+.datasets_text {
+	line-height:25px;
+	text-align:justify;
+	letter-spacing:1px;
+}
+/*------------------------------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------ ITEMS IN THE SETTINGS BIN ---------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------------*/
+.settings_line {
+	width:100%;
+	margin:10px 0px;
+	min-height:24px;
+}
+
+.settings_line_current {
+	background-color:#456382;
+}
+
+.settings_text {
+	float:left;
+	width:45%;
+	margin:0px 5% 0px 0px;
+	text-align:right;
+	letter-spacing:1px;
+}
+
+.settings_select {
+	float:left;
+	width:40%;
+}
+
+.settings_delete {
+	float:left;
+	height:24px;
+	width:10%;
+	background: url(http://www.cadwolf.com/Images/dataset_sprite.png) no-repeat -148px -2px;
+	cursor:pointer;
+}
+
+#settings_add {
+	text-align:center;
+	width:200px;
+	background-color:#456382;
+	color:#FFFFFF;
+	padding:5px 0px 8px 0px;
+	margin:20px auto;
+	border-radius:5px;
+	cursor:pointer;
+}
+/*------------------------------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------ THE SPACE FOR THE PASTE BIN -------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------------*/
+#dataset_paste_holder {
+	
+}
+
+#dataset_paste {
+	width:100%;
+	min-height:500px;
+}
+
+#parse_dataset {
+	text-align:center;
+	width:200px;
+	background-color:#456382;
+	color:#FFFFFF;
+	padding:5px 0px 8px 0px;
+	margin:20px auto;
+	border-radius:5px;
+	cursor:pointer;
+}
+
+#parse_dataset:hover {
+	background-color:#730324;
+}
+/*------------------------------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------- THE SAVE BUTTONS -----------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------------*/
+#save_button {
+	text-align:center;
+	width:200px;
+	background-color:#730324;
+	color:#FFFFFF;
+	padding:8px 0px 6px 0px;
+	margin:20px auto;
+	border-radius:5px;
+	cursor:pointer;
+	letter-spacing:1px;
+	font-size:1.2em;
+}
+#save_description {
+	width:200px;
+	text-align:center;
+	background-color:#456382;
+	color:#FFFFFF;
+	padding:5px 0px 8px 0px;
+	margin:20px auto;
+	border-radius:5px;
+	cursor:pointer;
+	letter-spacing:1px;
+	font-size:1.2em;
+	display:none;
+}
+/*------------------------------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------- ITEMS RELATED TO The messages  -------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------------*/
+#GoodMessageWrapper, #BadMessageWrapper {
+	position:fixed;
+	top:0px;
+	left:0px;
+	width:100%;
+	display:none;
+	text-align:center;
+	padding:5px 0px 5px 115px;
+	font-size:1.5em;
+	font-family:cinzel;
+	letter-spacing:1.5px;
+	color:#FFF;
+	z-index:9999;
+}
+
+#BadMessageWrapper {
+	background-color:#730324;
+}
+
+#GoodMessageWrapper {
+	background-color:#228008;
+}
+/*------------------------------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------- SELECTING THE ACTION FOR THE DATA  ---------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------------*/
+
+#data_actionline {
+	border-top:2px solid #456382;
+	border-bottom:2px solid #456382;
+	width:100%;
+	height:30px;
+	text-align:center;
+}
+
+.data_actionitem {
+	float:left;
+	width:182px;
+	height:25px;
+	padding:5px 42px 0px;
+}
+
+.data_actionlabel {
+	float:left;
+	margin:0px 10px;
+}
+
+.data_actionradio {
+	float:left;
+	width:20px;
+	height:20px;
+	position:relative;
+	top:-2px;
+}
+/*------------------------------------------------------------------------------------------------------------------------*/

@@ -545,7 +545,7 @@ a.scroll-arrow {
 
 .alert { display:none }
 
-#facebook_data {
+#facebook_data, #fbtext {
 	font-size:0.85em;
 }
 

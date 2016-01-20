@@ -453,17 +453,30 @@ $(document).on('click', '#create_button', function(event)																						/
 //--------------------------------------------------- KEEP TRACK OF THE LOGIN PARAMETERS ----------------------------------------------------------//  
 //-------------------------------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------//
-$("#login_name").on('change keyup',function(e)																									//	\
-{	if (((e.type=="keyup")&&((e.keyCode == 13)||(e.which == 13)))||(e.type=="change")) 															//	\
-	{ 	var name=$("#login_name").val();																										//	\
-		$.ajax ({ type:"POST",	url:"/Users/TestActive",async: false, data: { name:name	},   													//	\
-			success: function(data) {active=data},error: function () 																			//	\
-			{ alert('There was an error checking the user name.');}	});																			//	\
-		if (active==0){ $('#login_inactive').show(); $('#loginsubmit').hide(); 	$('#login_noname').hide();										//	\
-		}else if (active==1){ $('#login_inactive').hide(); $('#loginsubmit').show(); $('#login_name').find('form-group').addClass('has-error');	//	\
-		}else if (active==2){ $('#login_inactive').hide(); $('#loginsubmit').hide(); $('#login_name').find('form-group').addClass('has-error');}//	\
-	}																																			//	\
-});																																				//	\
+$("#login_name").on('change keyup',function(e)																									//	|
+{	if (((e.type=="keyup")&&((e.keyCode == 13)||(e.which == 13)))||(e.type=="change")) 															//	|
+	{ 	var name=$("#login_name").val();																										//	|
+		$.ajax ({ type:"POST",	url:"/Users/TestActive",async: false, data: { name:name	},   													//	|
+			success: function(data) {active=data},error: function () 																			//	|
+			{ alert('There was an error checking the user name.');}	});																			//	|
+		if (active==0)                                                                                                                          //  |
+        {   $('#login_inactive').show();                                                                                                        //  |
+            $('#loginsubmit').hide(); 	                                                                                                        //  |
+            $('#login_noname').hide();                                                                  										//	|
+            $('#login_name').closest('.form-group').addClass('has-error');                                                                      //	|
+		}else if (active==1)                                                                                                                    //  |
+        {   $('#login_inactive').hide();                                                                                                        //  |
+            $('#login_noname').hide();                                                                                                          //  |
+            $('#loginsubmit').show();                                                                                                           //  |
+            $('#login_name').closest('.form-group').removeClass('has-error');	                                                                //	|
+		}else if (active==2)                                                                                                                    //  |
+        {   $('#login_inactive').hide();                                                                                                        //  |
+            $('#loginsubmit').hide();                                                                                                           //  |
+            $('#login_noname').show();                                                                  										//	|
+            $('#login_name').closest('.form-group').addClass('has-error');                                                                      //	|
+        }																																		//	|
+	}																																			//	|
+});																																				//	|
 //-------------------------------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------//
@@ -476,10 +489,12 @@ $("#login_name").on('change keyup',function(e)																									//	\
 $("#passReset").on('keyup',function(e)																											//	\
 {	if (((e.type=="keyup")&&((e.keyCode == 13)||(e.which == 13)))) 																				//	\
 	{ 	var email=$("#passReset").val();																										//	\
+		$("#passReset1").hide();                          		                               													//	\
+		$("#passReset2").hide(); 	                                                               												//	\
 		$.ajax ({ type:"POST",	url:"/Users/resetPass", data: { email:email	},  			 													//	\
 			success: function(data) 																											//	\
-			{	if (data=="1"){ $("#passReset").val('Account reset and email sent'); }															//	\
-				if (data=="0"){ $("#passReset").val('No account found with email - '+email); }													//	\
+			{	if (data=="1"){ $("#passReset1").show(); }		                               													//	\
+				if (data=="0"){ $("#passReset2").show(); }	                                     												//	\
 			},																																	//	\
 			error: function () { alert('There was an error checking that email.');}																//	\
 		});																																		//	\

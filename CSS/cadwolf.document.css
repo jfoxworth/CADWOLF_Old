@@ -2923,9 +2923,9 @@ table.units th {
 #cameraselect { background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -246px 9px;	 }
 #yaxisselect { background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -105px -165px;	 }
 #xaxisselect { background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -71px -165px;	 }
-#titleselect { background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -140px -165px;	 }
+#textselect { background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -140px -165px;	 }
 #formatselect { background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -176px -165px; }
-#legendselect { background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -215px -165px; }
+/*  #legendselect { background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -215px -165px; }  */
 #surface_legendselect { background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -215px -165px; }
 #bandselect { background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -289px -165px;	 }
 #lineselect { background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -252px -165px;	 }
@@ -3050,7 +3050,7 @@ table.units th {
 	display:none;
 }
 
-#plot_adddatawrapper, #plot_addbandwrapper, #plot_addlinewrapper, #surface_addplanewrapper {
+#plot_adddatawrapper, #plot_addbandwrapper, #plot_addlinewrapper, #plot_addtextwrapper, #surface_addplanewrapper {
 	width:100%;
 	height:50px;
 	float:left;
@@ -3058,7 +3058,7 @@ table.units th {
 	text-align:center;
 }
 
-.plot_datanames, #plot_xaxisnames, #plot_yaxisnames, .surface_planenames {
+.plot_datanames, #plot_xaxisnames, #plot_yaxisnames, #plot_textnames, .surface_planenames {
 	float:left;
 	height:250px;
 	width:150px;
@@ -3068,7 +3068,7 @@ table.units th {
 }
 
 
-.plot_adddata, #plot_addxaxis, #plot_addyaxis, #plot_addplotband, #plot_addplotline, .surface_adddata, .surface_addplane {
+.plot_adddata, #plot_addxaxis, #plot_addyaxis, #plot_addplottext, #plot_addplotband, #plot_addplotline, .surface_adddata, .surface_addplane {
 	font-size:12px;
 	width:105px;
 	padding:10px 10px 8px 10px;
@@ -3079,7 +3079,7 @@ table.units th {
 	cursor:pointer;
 }
 
-#plot_adddata:hover, #plot_addxaxis:hover, #plot_addyaxis:hover, #plot_addplotband:hover, #plot_addplotline:hover, .surface_adddata:hover, .surface_addplane:hover {
+#plot_adddata:hover, #plot_addxaxis:hover, #plot_addyaxis:hover, #plot_addplottext:hover, #plot_addplotband:hover, #plot_addplotline:hover, .surface_adddata:hover, .surface_addplane:hover {
 	background-color:#898989;
 	color:#ECECEC;
 }
@@ -3282,25 +3282,25 @@ table.units th {
 
 #plot_xaxesblock {
 	position:fixed;
-	top:360px;
+	top:290px;
 	background-color:#FFF;
 }
 
 #plot_yaxesblock {
 	position:fixed;
-	top:425px;
+	top:355px;
 	background-color:#FFF;
 }
 
-#plot_titleblock {
+#plot_textblock {
 	position:fixed;
-	top:215px;
+	top:118px;
 	background-color:#FFF;
 }
 
 #plot_formatblock {
 	position:fixed;
-	top:230px;
+	top:213px;
 	background-color:#FFF;
 }
 
@@ -3319,13 +3319,13 @@ table.units th {
 
 #plot_bandblock {
 	position:fixed;
-	top:495px;
+	top:415px;
 	background-color:#FFF;
 }
 
 #plot_lineblock {
 	position:fixed;
-	top:570px;
+	top:490px;
 	background-color:#FFF;
 }
 
@@ -3358,7 +3358,7 @@ table.units th {
 	width:auto;
 }
 
-.plot_deletedata, .plot_deletexaxis, .plot_deleteyaxis, .surface_deletedata, .surface_deleteplane {
+.plot_deletedata, .plot_deletexaxis, .plot_deletetext, .plot_deleteyaxis, .surface_deletedata, .surface_deleteplane {
 	float:left;
 	width:20px;
 	height:20px;
@@ -3742,7 +3742,7 @@ select.plot_symbolselect, select.plot_surfaceselect {
 	height:23px;
 }
 
-.xplot_subtab, .yplot_subtab, .dataplot_subtab {
+.xplot_subtab, .yplot_subtab, .dataplot_subtab, .textplot_subtab {
 	float:left;
 	padding:3px 5px;
 	margin:0px 10px 0px 0px;
@@ -3753,26 +3753,26 @@ select.plot_symbolselect, select.plot_surfaceselect {
 	cursor:pointer;
 }
 
-.xplot_subtab_active, .yplot_subtab_active, .dataplot_subtab_active {
+.xplot_subtab_active, .yplot_subtab_active, .dataplot_subtab_active, .textplot_subtab_active {
 	position:relative;
 	top:1px;
 	background-color:#FFFFFF;
 }
 
 .plot_datasetappearancesection, .plot_datasettrendlinesection, #plot_yaxisappearancesection, #plot_yaxistickmarkssection, 
-#plot_xaxisappearancesection, #plot_xaxistickmarkssection, #plot_bandtemplate, #plot_linetemplate,
-.plot_pointappearancesection {
+#plot_xaxisappearancesection, #plot_xaxistickmarkssection, #plot_bandtemplate, #plot_linetemplate, #plot_texttemplate,
+.plot_pointappearancesection, #plot_formatSection, #plot_legendSection {
 	display:none;
 }
 
-#plot_bandnames, #plot_linenames {
+#plot_bandnames, #plot_linenames, #plot_textnames {
 	float:left;
 	width:100px;
 	height:175px;
 	padding:8px 10px 0px 10px;
 }
 
-#plot_bandoptions, #plot_lineoptions {
+#plot_bandoptions, #plot_lineoptions, #plot_textoptions {
 	float:right;
 	width:150px;
 	padding:0% 0px 0px 10px;
@@ -3783,34 +3783,38 @@ select.plot_symbolselect, select.plot_surfaceselect {
 	margin:10px 0px 10px 0px;
 }
 
-.plot_bandtext, .plot_linetext {
+.plot_textline {
+	float:left;
+	margin:5px 0px 0px 0px;
+}
+
+.plot_bandtext, .plot_linetext, .plot_texttext {
 	float:left;
 	width:65px;
 	padding:8px 0px 0px 0px;
 }
 
-.plot_bandtextbox, .plot_linetextbox {
+.plot_bandtextbox, .plot_linetextbox, .plot_texttextbox {
 	float:right;
 	width:50px;
 }
 
-.plot_bandname, .plot_linename {
+.plot_bandname, .plot_linename, .plot_textname {
 	float:left;
 	width:80px;
 	padding:5px 0px 5px 5px;
 }
 
-.plot_bandnameline, .plot_linenameline {
+.plot_bandnameline, .plot_linenameline, .plot_textnameline {
 	float:left;
 	width:120px;
 	padding:3px 0px 3px 0px;
 	cursor:pointer;
-	background-color:#CCCCCC;
 }
 
-.plot_bandnameline_active, .plot_linenameline_active {	background-color:#CCCCCC;  }
+.plot_bandnameline_active, .plot_linenameline_active, .plot_textnameline_active {	background-color:#CCCCCC;  }
 
-.plot_deleteband, .plot_deleteline {
+.plot_deleteband, .plot_deleteline, .plot_deletetext {
 	float:left;
 	background: url(http://www.cadwolf.com/Images/Pages/closebutton.png) no-repeat left top;
 	width:30px;

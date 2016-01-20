@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="datasetApp">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CADWOLF - Create a dataset</title>
+
+    <!-- Custom Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Cinzel' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/datasets.css" type="text/css">
+    <link rel="stylesheet" href="css/cadwolf.leftbar.css" type="text/css">
+
+    <!-- Javascript Files -->
+    <script src="js/angular.js"></script>
+    <script src="js/httpBackend.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/directives.js"></script>
+
+</head>
+
+    
+<body ng-controller="mainController">
+    <div id="datasetid" setid=""></div>
+    <div id="GoodMessageWrapper"><div id="goodmessage"></div></div>
+    <div id="BadMessageWrapper"><div id="badmessage"></div></div>
+
+    <div id="container">																														
+    <div id="leftColumnWrapper" ng-mouseenter="leftNav=true;" ng-mouseleave="leftNav=false;">																														
+        <div id="leftColumnIconsWrapper">																												
+            <div class="logoWrapper">																													
+                <div id="logo">&nbsp</div>																												
+            </div>																																		
+            <div class="userWrapper">																												
+                <div id="user">&nbsp</div>																											                    																								
+            </div>																																	
+            <div class="leftColumnWrapper">																											
+                <div id="leftColumnIcons">																												
+                    <div ng-class="infoDisplay" ng-click="showMain(1)">&nbsp</div>																			
+                    <div ng-class="settingsDisplay" id="view_settings" ng-click="showMain(2)">&nbsp</div>																				
+                    <div ng-class="pasteDisplay" id="view_main" ng-click="showMain(3)">&nbsp</div>																					
+                    <div ng-class="resultsDisplay" id="view_results" ng-click="showMain(4)">&nbsp</div>																					
+                    <div id="saveFile">&nbsp</div>																		
+                </div>																																	
+            </div>																																		
+        </div>																																			
+        <div id="leftColumnTextWrapper" ng-show="leftNav">																												
+            <div class="logoWrapper">																													
+                <div id="logoText">CADWOLF</div>																										
+            </div>																																		
+            <div id="userText"><a class="userAnchor" href="http://www.cadwolf.com/Users/">Login</a></div>										
+            <div class="leftColumnWrapper">																											
+                <div id="leftColumnText">																												
+                    <div ng-class="infoClass" ng-click="showMain(1)">Information</div>																
+                    <div ng-class="settingsClass" ng-click="showMain(2)">Settings</div>																		
+                    <div ng-class="pasteClass" ng-click="showMain(3)">Input</div>																			
+                    <div ng-class="resultsClass" ng-click="showMain(4)">Results</div>																		
+                </div>																																	
+            </div>																																		
+        </div>																																			
+    </div>																																		
+
+
+    <div id="main_wrapper">
+        <div id="content_wrapper">
+
+            <div id="main_content">
+                <div class="dataset_mainheader">Create a Dataset</div>
+
+                <div id="info_wrapper" ng-show="displayInfo">
+                    <div class="dataset_header">Dataset information</div>
+                    <div class="datasets_text"><p>This page lets you create a dataset by either pasting text into the area provided, selecting a text file, selecting an excel file, or selecting a web page.</p></div>
+                    <div class="settings_line"><div class="settings_text">Date Created</div><div class="settings_select">{{Data.dateCreated}}</div></div>
+                    <div class="settings_line"><div class="settings_text">Date Last Modified</div><div class="settings_select">{{Data.dateModified}}</div></div>
+                    <div class="settings_line"><div class="settings_text">Size of Data</div><div id="results_size">{{Data.size}}</div></div>
+                    <div id="dataset_description_holder"><div id="dataset_description">{{Data.description}}</div></div>	
+                    <div id="save_description">Save Description</div>
+                </div>
+
+                <div id="settings_wrapper" ng-show="displaySettings">
+                    <div class="dataset_header">Settings to parse datasets</div>
+                    <div class="datasets_text"><p>This window lets users paste raw text into an input box and then parses that text to create an nth dimensional object. This object can then be pulled 
+                    into a document and used as a variable. There is a limit of 5 dimensions to the pasted data. The values are merely parsed and not solved, meaning that there is no way to enter complex 
+                    data. This window is merely meant to allow users to paste test data and other types of raw data.</p>
+                    <p>When text is pasted into the main window, it is divided into rows, columns, pages, and any number of dimensions based upon the settings on this page. 
+                    You can add or remove symbols to be used to divide any dimension. The default is that commas separate columns and semicolons separate rows.</p></div>
+<!--                    <div class="settings_line"><div class="settings_text">Ignore text or warn</div><div class="settings_select"><select id="settings_parsetext"><option value="1">Remove Text</option><option value="2">Text Creates Errors</option></select></div></div>-->
+                    <div class="settings_line"><div class="settings_text">Ignore text or warn</div>
+                        <div class="settings_select"><select ng-options="item.label for item in parseOptions track by item.id" ng-model="parseType"></select>
+                    </div></div>
+                    <div class="settings_line"><div class="settings_text">Columns</div><div class="settings_select"><input type="text" class="settings_parse" width="20px" ng-model="Parsers['0']"></div></div>
+                    <div class="settings_line"><div class="settings_text">Rows</div><div class="settings_select"><input type="text" class="settings_parse" width="20px" ng-model="Parsers['1']"></div></div>
+                    <div class="settings_line"><div class="settings_text">Pages</div><div class="settings_select"><input type="text" class="settings_parse" width="20px" ng-model="Parsers['2']"></div></div>
+                    <div class="settings_line"><div class="settings_text">Fourth Dimension</div><div class="settings_select"><input type="text" class="settings_parse" width="20px" ng-model="Parsers['3']"></div></div>
+                    <div class="settings_line"><div class="settings_text">Fifth Dimension</div><div class="settings_select"><input type="text" class="settings_parse" width="20px" ng-model="Parsers['4']"></div></div>
+                </div>
+
+                <div id="paste_wrapper" ng-show="displayPaste">
+                    <div class="dataset_header">Paste raw data</div>
+                    <div class="datasets_text"><p>This page lets the user create a new dataset or add to the current dataset. Select the desired action by checking the appropriate radio button. 
+                    Then, paste the data into the text area and click the "Parse Data" button. You can see the current dataset on the "Results" page and see the details in the "info" page.</p></div>
+                    <div id="data_actionline">
+                        <div class="data_actionitem"><div class="data_actionlabel">Overwrite Dataset</div><input type="radio" class="data_actionradio" name="parseType" value="radio_overwrite" ng-model="dataAction" ></div>
+                        <div class="data_actionitem"><div class="data_actionlabel">Add Row</div><input type="radio" class="data_actionradio" name="parseType" value="radio_addrow" ng-model="dataAction"></div>
+                        <div class="data_actionitem"><div class="data_actionlabel">Add Column</div><input type="radio" class="data_actionradio" name="parseType" value="radio_addcolumn" ng-model="dataAction"></div>
+                    </div>
+                    <div class="settings_line"><div id="parse_dataset">Parse Data</div></div>
+                    <div id="dataset_paste_holder"><textarea id="dataset_paste">{{Data.string}}</textarea></div>
+                </div>
+
+                <div id="results_wrapper" ng-show="displayResults">
+                    <div class="dataset_header">Results of pasted data</div>
+                    <div class="datasets_text"><p>This page shows the results of parsing the data that was pasted into the appropriate window using the rules set in the settings window. If the data has more than two dimensions, it is not shown.</p></div>
+                    <div id="parse_results">$${{Data.formattedData}}$$</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+    
+</body>
+</html>

@@ -11,13 +11,12 @@ $(function(){
 //-------------------------------------------------------------------------------------------------------------------------------------------------//
 $(document).ready(function(){ 																													//	\--- This function is called on page load. It places all
 																																				//	\--- relevant items in memory, creates the necessary
-	var fileid=$('#filenumber').attr('filenumber');			APLOT='';																			//	\--- variables, and initializes the text objects. 
+	var fileid=$('#filenumber').attr('filenumber');			APLOT='';	CPLOT='';																//	\--- variables, and initializes the text objects. 
 	PlaceInMemory('MainBody', function() { PlaceItems('MainBody', function () { FormatWhileLoops(function () { 									//	\
 		FormatIfElseStatements(function () { HandleTOC( function() { BuildScaleUnits(function() { 												//	\
-		BuildParseUnits(function(){ GetDependents(fileid, function(){ PlaceRefs (function(){ MakeBigChart(function(){ FormatItems( function(){ 	//	\
-		}); }); }); }); }); }); }); }); }); }); });	Big.DP=16;																					//	\
+		BuildParseUnits(function(){ PlaceRefs (function(){ FormatItems(function(){ MakeBigChart( function(){ 	                            	//	\
+		}); }); }); }); }); }); });  }); }); }); 	Big.DP=16;				                                               						//	\
 });																																				//	\
-//-------------------------------------------------------------------------------------------------------------------------------------------------//
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------//
@@ -37,20 +36,6 @@ $(document).on('mouseout', '#leftColumnIconsWrapper, #leftColumnTextWrapper, .le
 function FormatItems(callback)																													//	\--- This function is the last called on page load. It 
 {																																				//	\--- initializes all the text items, and formats the 
 	$('.main_item').addClass('notcurrent');																										//	\--- equatons and symbolics with MathJax.
-	$(".text_block").each(function(index) 																										//	\
-	{	if ($(this).parent().attr("id")!="toclonetext")																							//	\
-		{	var config =																														//	\
- 	          {   skin: 'kama',	uiColor:'#ECECEC',	extraPlugins : 'autogrow', extraPlugins : 'sharedspace', removePlugins : 'elementspath',	//	\
-			    toolbarCanCollapse : false, width:'750', resize_enabled: false, sharedSpaces :  {  top : 'cktoolbar' },							//	\
-				toolbar :  [ [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Bold', 'Italic', 'Underline', 'Strike', 				//	\
-				'-', 'RemoveFormat', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'Link', 'Unlink', 			//	\
-				'Image', 'Table', 'HorizontalRule', 'ShowBlocks', 'TextColor', 'BGColor', 'FontSize' ] ] 										//	\
-			}; 																																	//	\
-    	    var id=$(this).attr('id');																											//	\
-			$('#'+id).attr('contenteditable','true');																							//	\
-    	    $('#'+id).ckeditor(config);																											//	\
-		}																																		//	\
-	});																																			//	\
 	$(".equationblock, .subequationblock").each(function(index) {																				//	\
 		var id=$(this).attr('id');																												//	\
 		if (id!=='') { 																															//	\
@@ -73,7 +58,7 @@ function FormatItems(callback)																													//	\--- This function
 		if (DOM_Object[PlotID]!==undefined) { delete DOM_Object[PlotID]['show'];	}															//	\
 	});																																			//	\
 																																				//	\
-	$('#MainBody').show();																														//	\
+	$('#MainBody, .icon_holder').show();																										//	\
 	$('.itemproperties').remove();																												//	\
 																																				//	\
 	for (var itemid in DOM_Object)																												//	\
@@ -136,6 +121,11 @@ function PlaceInMemory(section, callback)																										//	\--- This 
 			window[id] = new IfElse(id);																										//	\
 			temp=JSON.parse($('#'+id).siblings('.itemproperties').html());																		//	\
 			for (prop in temp) {window[id][prop]=temp[prop]; }																					//	\
+		}else if ($(this).attr('type')=="12")																									//	\
+		{	id=$(this).find('.video_block').attr('id');																							//	\
+			window[id] = new Video(id);																											//	\
+			temp=JSON.parse($('#'+id).siblings('.itemproperties').html());																		//	\
+			for (prop in temp) {window[id][prop]=temp[prop]; }																					//	\
 		}else if ($(this).attr('type')=="9")																									//	\
 		{	PlotID=$(this).find('.plot_block').attr('id');																						//	\
 			window[PlotID] = new Plot(PlotID);																									//	\
@@ -182,11 +172,32 @@ function PlaceInMemory(section, callback)																										//	\--- This 
 				window[PlotID] = new Surface(PlotID);																							//	\
 				temp=JSON.parse($('#'+PlotID).siblings('.itemproperties').html());																//	\
 				window[PlotID]['Chart_dataobj']=temp['Chart_dataobj'];																			//	\
+				window[PlotID]['Chart_axesobj']=temp['Chart_axesobj'];																			//	\
 				window[PlotID]['Props']=temp['Props'];																							//	\
 				window[PlotID]['Planes']=temp['Planes'];																						//	\
+				window[PlotID]['axisHelper']=temp['axisHelper'];																				//	\
 				CPLOT=PlotID;																													//	\
 				window[PlotID].Initialize(2);																									//	\
-				window[PlotID].reDraw(2);			 																							//	\
+				for (var DataID in window[PlotID]['Chart_dataobj'])																				//	\
+				{	if ((window[PlotID]['Chart_dataobj'][DataID]['type']=="Surface")||(window[PlotID]['Chart_dataobj'][DataID]['type']=="PointCloud"))
+					{	window[PlotID].setSurfaceVertices(DataID, 																				//	\
+							function(){window[PlotID].setSurfaceColors(DataID, 																	//	\
+							function(){window[PlotID].setMeshes(DataID,																			//	\
+							function(){window[PlotID].setPositions() })} )} );																	//	\
+					}else if (window[PlotID]['Chart_dataobj'][DataID]['type']=="Line") 															//	\
+					{	window[PlotID].removeItem(DataID, 																						//	\
+							function(){window[PlotID].setLineColors( DataID, 																	//	\
+							function(){window[PlotID].setMeshes( DataID )} )} );																//	\
+					}else if (window[PlotID]['Chart_dataobj'][DataID]['type']=="Grid") 															//	\
+					{	window[PlotID].makeGrids(DataID);																						//	\
+					}else if (window[PlotID]['Chart_dataobj'][DataID]['type']=="Axis") 															//	\
+					{	window[PlotID].makeAxes(DataID);																						//	\
+					}else  																														//	\
+					{	window[PlotID].createShape(window[PlotID]['Chart_dataobj'][DataID]['type'], DataID, 0);									//	\
+					}																															//	\
+				}																																//	\
+				window[PlotID].setPositions( function() { window[PlotID].setLegend( function(){window[PlotID].Render(PlotID)} )} );				//	\
+				animate();																														//	\
 			}																																	//	\
 		}																																		//	\
 	});																																			//	\
@@ -2311,6 +2322,7 @@ function Plot(id) 																																					//	\
 																																									//	\
 	this.Chart_bandsobj={};																																			//	\
 	this.Chart_linesobj={};																																			//	\
+	this.Chart_textobj={};																																			//	\
 }																																									//	\
 																																									//	\
 function PlotData (id, plotid)																																		//	\
@@ -2415,6 +2427,19 @@ function PlotLine (id, plotid)																																		// 	\
 	this.Line_width=1;																																				// 	\
 	this.color="#FCFFC5";																																			// 	\
 }																																									//	\
+function PlotText (id, plotid)		        																														//	\
+{																																									//	\
+	this.Format_id=id;																																				// 	\
+	this.Format_plotid=plotid;																																		// 	\
+	this.textRawText='';																																			//	\
+	this.textFormattedText='';																																		//	\
+	this.textXLoc=10;																																				//	\
+	this.textYLoc=10;																																				//	\
+	this.textRotAng=0;																																				//	\
+	this.textSize='14px';																																			//	\
+	this.textColor="000000";																																		// 	\
+	this.textElement={};			        																														// 	\
+}																																									// 	\
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 function rgb2hex(rgb){
  rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
@@ -2721,6 +2746,7 @@ function CreatePlot(PlotID, callback)																																//	\
 	window[window[PlotID].Chart_Name]=new Highcharts.Chart( thischart );																							//	\
 	window[window[PlotID].Chart_Name].container.onclick = null;																										//	\
 	window[window[PlotID].Chart_Name].credits.hide();																												//	\
+    for (var textID in window[PlotID].Chart_textobj){ DrawPlotText(PlotID, textID); }                                                                               //  \
 	if (typeof(callback)=="function") { callback();	} 																												//	\
 }																																									//	\
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------//
@@ -2977,6 +3003,12 @@ function PopulatePlotData (PlotID, DataID)																															//	\---
 	{	var temp=$('#plot_linetemplate').clone();																													//	\
 		temp.attr('id',BandID).find('.plot_linename').html("Line "+index);																							//	\
 		temp.appendTo($('#plot_linenames'));																														//	\
+		index=index+1;																																				//	\																																								//	\
+	}																																								//	\
+	for (var TextID in window[PlotID].Chart_textobj)																												//	\
+	{	var temp=$('#plot_texttemplate').clone();																													//	\
+		temp.attr('id',TextID).find('.plot_textname').html("Text "+index);																							//	\
+		temp.appendTo($('#plot_textnames'));																														//	\
 		index=index+1;																																				//	\																																								//	\
 	}																																								//	\
 	PopulateSeriesData (PlotID, window[PlotID].Chart_dataobj[0]);																									//	\
@@ -3709,6 +3741,22 @@ function MinorGridLineWidth(PlotID, AxisID)																															//	\
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+//------------------------------------------------------------------- ADD A TEXT ITEM ---------------------------------------------------------------------------------//
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+function DrawPlotText(PlotID, TextID)																																//	|
+{	if(window[PlotID].Chart_textobj[TextID]['textElement']!==undefined)                                                                                             //  |
+    {   if (Object.keys((window[PlotID].Chart_textobj[TextID]['textElement'])).length>0){ window[PlotID].Chart_textobj[TextID]['textElement'].destroy(); }	  }    	//	|
+	var thisText=window[PlotID].Chart_textobj[TextID]['textFormattedText'];                                                                                         //  |
+    var X=window[PlotID].Chart_textobj[TextID]['textXLoc'];                                                                                                         //  |
+    var Y=window[PlotID].Chart_textobj[TextID]['textYLoc'];                                                                                                         //  |
+    var color=window[PlotID].Chart_textobj[TextID]['textColor'];                                                                                                    //  |
+    var size=window[PlotID].Chart_textobj[TextID]['textSize'];                                                                                                      //  |
+    var rot=window[PlotID].Chart_textobj[TextID]['textRotAng'];                                                                                                     //  |
+    window[PlotID].Chart_textobj[TextID]['textElement']=window[window[PlotID]['Chart_Name']].renderer.text(thisText, X, Y).css({color: '#'+color, fontSize: size }).attr({rotation:rot, zIndex:9999}).add();
+}																																									//	|
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 //---------------------------------------------------------------- POPULATE PLOT BAND DATA ----------------------------------------------------------------------------//
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 function PopulateBandData (PlotID, BandID)																															//	\
@@ -3848,7 +3896,10 @@ function MakeBigChart(callback)																																		//	\
 		$('#main_contents').css('margin-left','0px').css('margin-right','0px');																						//	\
 		$('#OpenLeft, #main_leftcolumn, #clicktotopenter').hide();																									//	\
 		$('#'+PlotID).css('width','');																																//	\
+		$('.titleblock, .subtitleblock, .icon_holder').hide();																										//	\
 		CreatePlot(PlotID, function() { ResizeChart(PlotID)});																										//	\
+		$('#MainBody').show();																																		//	\
+		document.title=window[PlotID].Title_text;																													//	\
 	}else { callback(); }																																			//	\
 }																																									//	\
 function ResizeChart(PlotID)																																		//	\
@@ -4477,7 +4528,7 @@ function Show_Surface_Options(PlotID) 																																//	\
 {	$('.plot_plotdatablock, #plot_seriestypeselect').hide(); 																										//	\
 	$('#plot_spec, #plot_datablock9').show(); 																														//	\
 	$('#equation_spec, #image_spec, #loop_spec, #symeq_spec, #text_spec').hide();																					//	\
-	$('#formatselect, #xaxisselect, #yaxisselect, #bandselect, #lineselect, #titleselect, #legendselect').closest('.simplewrap').hide();							//	\
+	$('#formatselect, #xaxisselect, #yaxisselect, #bandselect, #lineselect, #textselect').closest('.simplewrap').hide();	              	      					//	\
 	$('#dataselect, #typeselect, #surface_legendselect, #surface_planeselect').closest('.simplewrap').show('500');													//	\
 }																																									//	\
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------//
