@@ -6,26 +6,33 @@ class DatasetsController extends AppController {
 /*----------------------------------------------------------- Index Function -----------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
     public function index() {																														//
-		$DirInfo=$this->Get_FileID(Router::url(null, true));																						//
+		$DirInfo=$this->Get_FolderID(Router::url(null, true));																						//
         $this->layout = 'datasets';																													//
-    	$Perm_Heirarchy=$this->Permissions_Heirarchy($DirInfo['ID']);																				//
-    	$Permissions=$this->Get_Permissions($this->Auth->user('id'), $Perm_Heirarchy, $this->Auth->user('username'));								//
-		$this->set('DirInfo', $DirInfo);																											//	
-		$this->set('Perm_Heirarchy',$Perm_Heirarchy);																								//	
+    	$editPermissions=$this->Get_Permissions('edit', $this->Auth->user('id'), Router::url(null, true));		               						//
+    	$usePermissions=$this->Get_Permissions('use', $this->Auth->user('id'), Router::url(null, true));		               						//
+    	$viewPermissions=$this->Get_Permissions('view', $this->Auth->user('id'), Router::url(null, true));		               						//
+		$Permissions=array();																														//
+		$Permissions['edit']=$editPermissions;																										//
+		$Permissions['use']=$usePermissions;																										//
+		$Permissions['view']=$viewPermissions;																										//
+        $this->set('DirInfo', $DirInfo);																											//	
+		$this->set("FileData", $this->GetFileData($DirInfo));																						//	
 		$this->set('Permissions',$Permissions);																										//	
 		$this->set("UserName", $this->Auth->user('username'));																						//	
-		$this->set("FileData", $this->GetFileData($DirInfo));																						//	
 		$this->set("DatasetData", $this->GetDataset($DirInfo));																						//	
     }																																				//
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
+
 
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------- Take URL Slug and produce the file id --------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
 	public function Get_FileID($slug) {																														//
 		Controller::loadModel('Workspace');																													//
-		$slug=str_replace("http://www.cadwolf.com/Datasets/",'',$slug);																						//
+        $slug=str_replace("http://www.cadwolf.com/Datasets/",'',$slug);																						//
+        $slug=str_replace("http://www.cadwolf.com/Datasets",'',$slug);																						//
 		$slug=str_replace("/Datasets/",'',$slug);																											//
+		$slug=str_replace("/Datasets",'',$slug);																											//
 		$slug=preg_replace('/[\/]+$/','',$slug);																											//
 		$slug=preg_replace('/^\//','',$slug);																												//
 		$slug_array=explode('/',$slug);																														//
@@ -42,11 +49,104 @@ class DatasetsController extends AppController {
 		$DirInfo['Name']=str_replace("_"," ",$slug_array[$i-1]);																							//
 		$DirInfo['IDArr']=$idarr;																															//
 		$tempdata=$this->Workspace->find('first', array('conditions' => array('id' => $id)));																//
-		$DirInfo['checkedout']=$tempdata['Workspace']['CheckedOut'];																						//
+        $DirInfo['checkedout']=$tempdata['Workspace']['CheckedOut'];																						//
 		$DirInfo['checkoutID']=$tempdata['Workspace']['checkoutID'];																						//
 		return $DirInfo;																																	//
 	}																																						//
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------- GET THE PERMISSIONS FOR A GIVEN USER FOR A GIVEN FILE OR FOLDER --------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*	This is the new algorithm for determining permissions for a user on a specific file and folder. It takes in a permission type, a user ID, and a URL for the file.	\
+	It then looks to see if there are permissions set for that permission type or if it is inherited. If permissions are indeed set and are set for everyone then a 1 	\
+	is returned. If permissions are set with a list of users then the list is searched. If the user is on the list and given permission then a 1 is returned as well.	\
+	If the user is on the list and denied permission then a 0 is returned. If the permission inherits from above then the final chunk of the address is removed and 	\
+	the function is called again.																																		\
+	permType 	- the type of permission being looked at - admin, edit, use, or view																					\
+	userID		- the ID of the user being looked at																													\
+	fileURL		- the URL of the file being looked at. It is in the form of PartTree/The_Wolf/My_Part_Tree																\
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+	public function Get_Permissions($permType, $userID, $fileURL) 																									//	\
+	{  	$DirInfo=$this->Get_FolderID($fileURL);																														//	\
+		Controller::loadModel('Workspace');																															//	\
+		$FileData=$this->Workspace->find('first', array('conditions' => array('id' => $DirInfo['ID'])));															//	\
+		if ($DirInfo['exists']=='1')																																//	\
+		{	if ($FileData['Workspace'][$permType.'_status']==2)																										//	\
+			{	$newFile=preg_replace('/\/[0-9A-Za-z-_]+$/','',$fileURL);																							//	\
+				return $this->Get_Permissions($permType, $userID, $newFile);																						//	\
+			}elseif	($FileData['Workspace'][$permType.'_status']==1)																								//	\
+			{	return 1;																																			//	\
+			}elseif	($FileData['Workspace'][$permType.'_status']==0)																								//	\
+			{	Controller::loadModel('Permission');																												//	\
+				if ($this->Permission->hasAny(array('workspace_id' => $DirInfo['ID'], 'userid'=>$userID, $permType=>'1')))											//  \
+				{	return 1; 																																		//	\
+				}else																																				//	\
+				{	$flag=0;																																		//	\
+//					Controller::loadModel('Groupuser');																												//	\
+//					$groupData=$this->Groupuser->find('all', array('conditions' => array('userid' => $userID )));													//	\
+//					if (isset($groupData))																															//	\
+//					{	foreach ($goupData as $index=>$thisFolder)																									//	\
+//						{	if ($this->Permission->hasAny(array('workspace_id' => $DirInfo['ID'], 'userid'=>$thisFolder[$index]['Groupuser']['groupid'], $permType=>'1')));	
+//							{	$flag=1;	}																														//	\
+//					}	}																																			//	\
+//					if ($flag==1){ return 1; }else { return 0; }																									//	\
+					return 0;
+				}																																					//	\
+			}else { return 0; }		 																																//	\
+		}else { echo($fileURL); }																																	//	\
+	}																																								//	\
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------- This gets the id of a folder based on a url slug ----------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+public function Get_FolderID($slug) {																																//	\
+	Controller::loadModel('Workspace');																																//	\
+	$slug=str_replace("http://www.cadwolf.com/Datasets/",'',$slug);																						      		//	\
+	$slug=str_replace("www.cadwolf.com/Datasets/",'',$slug);																										//	\
+	$slug=str_replace("/Datasets/",'',$slug);																														//	\
+	$slug=str_replace("Datasets/",'',$slug);																														//	\
+	$slug=preg_replace('/^\//','',$slug);																															//	\
+	$slug=preg_replace('/\/$/','',$slug);																															//	\
+	$slug=preg_replace('/_/',' ',$slug);																															//	\
+	$slug_array=explode('/',$slug);																																	//	\
+	$idarr='';																																						//	\
+	$parentID=NULL;																																					//	\
+	$prev_id=0;																																						//	\	
+	for ($i = 0; $i < count($slug_array); $i=$i+1) {																												//	\	
+	    if ($i==0) { $id=$this->Workspace->field('id', array('name' => preg_replace("/_/"," ",$slug_array[$i]), 'parent_id'=>Null )); 								//	\
+	    }else	  	 $id=$this->Workspace->field('id', array('name' => preg_replace("/_/"," ",$slug_array[$i]), 'parent_id'=>$prev_id)); 							//	\
+		$parentID=$prev_id;																																			//	\
+		$prev_id=$id;																																				//	\
+		$idarr=$idarr.'-'.$id; 																																		//	\
+	}																																								//	\
+	$DirInfo=array();																																				//	\
+	$DirInfo['ID']=$id;																																				//	\
+	$DirInfo['parentID']=$parentID;																																	//	\
+	$DirInfo['Name']=preg_replace("/_/"," ",$slug_array[$i-1]);																										//	\
+	$DirInfo['IDArr']=$idarr;																																		//	\
+	$tempdata=$this->Workspace->find('first', array('conditions' => array('id' => $id)));																			//	\
+	if (array_key_exists("Workspace",$tempdata))																													//	\
+	{	$DirInfo['checkedout']=$tempdata['Workspace']['CheckedOut'];																								//	\
+		$DirInfo['checkoutID']=$tempdata['Workspace']['checkoutID'];																								//	\
+		$DirInfo['exists']=1;																																		//	\
+	}else																																							//	\
+	{	$DirInfo['checkedout']=0;																																	//	\
+		$DirInfo['checkoutID']=0;																																	//	\
+		$DirInfo['exists']=0;																																		//	\
+	}																																								//	\
+	return $DirInfo;																																				//	\
+}																																									//	\
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -100,53 +200,6 @@ class DatasetsController extends AppController {
 	}																																									//
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*----------------------------------- This function is given the user id and the folder ID and returns an array noting the permissions ---------------------------------*/
-/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-	public function Get_Permissions($userid, $Perm_Heirarchy, $username) {																								//
-		$perm_array['view']=0; $perm_array['edit']=0; $perm_array['admin']=0;	$perm_array['use']=0; 																	//
-		$Perm_Heirarchy=array_reverse($Perm_Heirarchy);																													//
-		$editflag=0; $viewflag=0; $adminflag=0;		$useflag=0;																											//
-		foreach ($Perm_Heirarchy as $index=>$thisfolder)																												//
-		{																																								//
-			if (($thisfolder['edit']=='1')&&($editflag==0))		{	$perm_array['edit']=1;	$editflag=1;																//
-			}elseif ($thisfolder['edit']=='0')																															//
-			{	if (array_key_exists('editgroups',$thisfolder)) 																										// This is the function that actually tells you whether or not
-				{ 	for ($i = 0; $i < count($thisfolder['viewgroups']); ++$i) 																							// a user has permission to view, edit, or is the admin for a
-					{    $this->loadModel('Groupuser');																													// folder. It takes in the username and the permission tree created
-						if ($this->Groupuser->hasAny(array('userid' => $userid, 'groupid' => $thisfolder['editids'][$i]))) { $perm_array['edit']=1; }					// above. Starting at the bottom, it goes up until it finds a folder
-			}	}	$editflag=1;	}																																	// with specific permissions set. It then checks to see if the user
-			if (($thisfolder['view']=='1')&&($viewflag==0))		{	$perm_array['view']=1;	$viewflag=1;																// has permission based on those settings.
-			}elseif ($thisfolder['view']=='0')	{																														//
-				if (array_key_exists('viewgroups',$thisfolder)) 																										// It also checks to see if the user is in any groups that have 
-				{ 																																						// permission.
-					for ($i = 0; $i < count($thisfolder['viewgroups']); ++$i) 																							//
-					{    $this->loadModel('Groupuser');																													//
-						if ($this->Groupuser->hasAny(array('userid' => $userid, 'groupid' => $thisfolder['viewids'][$i]))) 	{ $perm_array['view']=1; }					//
-			}	}	$viewflag=1; }																																		//
-			if (($thisfolder['admin']=='1')&&($adminflag==0))	{	$perm_array['admin']=1;	$adminflag=1;																//
-			}elseif ($thisfolder['admin']=='0')	{																														//
-				if (array_key_exists('admingroups',$thisfolder)) 																										//
-				{ 	for ($i = 0; $i < count($thisfolder['admingroups']); ++$i) 																							//
-					{   $this->loadModel('Groupuser');																													//
-						if ($this->Groupuser->hasAny(array('userid' => $userid, 'groupid' => $thisfolder['adminids'][$i])))	{ $perm_array['admin']=1; }					//
-			}	}	$adminflag=1; }																																		//
-			if (($thisfolder['use']=='1')&&($useflag==0))	{	$perm_array['use']=1;	$useflag=1;																		//
-			}elseif ($thisfolder['use']=='0')	{																														//
-				if (array_key_exists('usegroups',$thisfolder)) 																											//
-				{ 	for ($i = 0; $i < count($thisfolder['usegroups']); ++$i) 																							//
-					{   $this->loadModel('Groupuser');																													//
-						if ($this->Groupuser->hasAny(array('userid' => $userid, 'groupid' => $thisfolder['useids'][$i])))	{ $perm_array['use']=1; }					//
-			}	}	$useflag=1; }																																		//
-		}																																								//
-		if ($Perm_Heirarchy[count($Perm_Heirarchy)-1]['folder']==$username) { 	$perm_array['use']=1; $perm_array['view']=1; 											//
-		$perm_array['edit']=1; $perm_array['admin']=1; }																												//	
-		return $perm_array;																																				//
-	}																																									//
-/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*------------------------------------------ THIS FUNCTION GETS THE DATA FROM THE WORKSPACE DATABASE -------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -170,59 +223,63 @@ class DatasetsController extends AppController {
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*------------------------------------------------------------ GET DATA FROM DATABASE ----------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
-    public function getData() {																	        													//
+/*  This is the function that is called whenever a page is loaded and sends all of the information to the user. The data object is pulled directly from     |
+    the dataset database.                                                                                                                                   |
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    public function getMyData() {																        													//
  	    if ($this->request->is('get')) {  throw new MethodNotAllowedException(); }																			//
 		$this->autorender = false;																															//
 	 	$this->layout = null;																																//
   		$this->render('ajax');																																//
-		$thisURL=$this->request->data('url');			     																								//
-		$DirInfo=$this->Get_FileID($thisURL);	                										           											//
-    	$Perm_Heirarchy=$this->Permissions_Heirarchy($DirInfo['ID']);												          								//
-    	$Permissions=$this->Get_Permissions($this->Auth->user('id'), $Perm_Heirarchy, $this->Auth->user('username'));		        						//
-    	$ReturnData=$this->Dataset->find('first', array('conditions' => array('id' => $DirInfo['ID']))); 													//
-		echo(json_encode($ReturnData));																														//
+		$params = json_decode(file_get_contents('php://input'),true);                                                                                       //
+        $thisURL=$params['myURL'];			                   																								//
+		$DirInfo=$this->Get_FolderID($thisURL);	                										           											//
+    	$datasetData=$this->Dataset->find('first', array('conditions' => array('id' => $DirInfo['ID']))); 	    											//
+    	$workspaceData=$this->Workspace->find('first', array('conditions' => array('id' => $DirInfo['ID']))); 												//
+    	$editPermissions=$this->Get_Permissions('edit', $this->Auth->user('id'), $thisURL);		                             		          				//
+    	$usePermissions=$this->Get_Permissions('use', $this->Auth->user('id'), $thisURL);		                                       						//
+    	$viewPermissions=$this->Get_Permissions('view', $this->Auth->user('id'), $thisURL);		                     			                  			//
+        $Permissions=array();																			          											//
+		$Permissions['edit']=$editPermissions;																	           									//
+		$Permissions['use']=$usePermissions;																				          						//
+		$Permissions['view']=$viewPermissions;																						          				//
+		$datasetData['Dataset']['description']=$workspaceData['Workspace']['description'];                                                                  //
+        $datasetData['Dataset']['Permissions']=$Permissions;                                                                                                //
+        if ($viewPermissions==1)                                                                                                                            //
+        {   echo(json_encode($datasetData));																												//
+        }else                                                                                                                                               //
+        {   echo('0');		}                        																										//
     }																									          											//
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
+    
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*-------------------------------------------- THIS FUNCTION GETS THE DATA FROM THE DATASET DATABASE -------------------------------------------------------*/
+/*-------------------------------------- THIS FUNCTION SAVES THE INFORMATION TO THE DATABASES FROM THE WEB PAGE --------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
-    public function UploadData() {																															//
+/*  This is the function that is called to save all of the data when the user hits the "Save Dataset" button. All of the information is saved as a JSON     |
+    object in the dataset database. The description is also saved in the folders database as it is seen in the workspace as the description.                |
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    public function saveDataset() {																															//
  	    if ($this->request->is('get')) {  throw new MethodNotAllowedException(); }																			//
 		$this->autorender = false;																															//
 	 	$this->layout = null;																																//
   		$this->render('ajax');																																//
-		$thisdata=$this->request->data('thisdata');																											//
-		$setid=$this->request->data('setid');																												//
-    	$Perm_Heirarchy=$this->Permissions_Heirarchy($setid);																								//
-   		$Permissions=$this->Get_Permissions($this->Auth->user('id'), $Perm_Heirarchy, $this->Auth->user('username'));										//
-	    if (!$setid) { throw new NotFoundException(__('No File ID')); }																						//
-	    $this->Dataset->id=$setid;																															// 
-		if ($Permissions['edit']=='1')	{	$this->Dataset->saveField('dataobj', $thisdata);																//   
+		$params = json_decode(file_get_contents('php://input'),true);                                                                                       //
+        $thisURL=$params['myURL'];			                   																								//
+        $thisData=$params['myData'];		                  																								//
+        $parseData=json_decode($params['myData'], true);       																								//
+		$DirInfo=$this->Get_FolderID($thisURL);	                										           											//
+    	$editPermissions=$this->Get_Permissions('edit', $this->Auth->user('id'), $thisURL);		                             		          				//
+        if (!$DirInfo['ID']) { throw new NotFoundException(__('No File ID')); }																				//
+	    $this->Dataset->id=$DirInfo['ID'];																	    											// 
+		if ($editPermissions==1)	       	                                                																//   
+        {   $this->Dataset->id=$DirInfo['ID'];																    											// 
+            $this->Dataset->saveField('dataobj', $thisData);                                                                                                //
+            Controller::loadModel('Workspace');																												//
+            $this->Workspace->id=$DirInfo['ID'];																    										// 
+            $this->Workspace->saveField('description', $parseData['Data']['description']);                                                                  //
 		}else																																				//
 		{	echo('0');	}																																	//
     }																																						//				
-/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*------------------------------------------------------- THIS FUNCTION SAVES THE DESCRIPTION --------------------------------------------------------------*/
-/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
-	public function SaveDescription() {																														//
- 	    if ($this->request->is('get')) {  throw new MethodNotAllowedException(); }																			//
-		$this->autorender = false;																															//
-	 	$this->layout = null;																																//
-  		$this->render('ajax');																																//
-		$description=$this->request->data('description');																									//
-		$setid=$this->request->data('setid');																												//
-    	$Perm_Heirarchy=$this->Permissions_Heirarchy($setid);																								//
-   		$Permissions=$this->Get_Permissions($this->Auth->user('id'), $Perm_Heirarchy, $this->Auth->user('username'));										//
-	    if (!$setid) { throw new NotFoundException(__('No File ID')); }																						//
-		Controller::loadModel('Workspace');																													//
-	    $this->Workspace->id=$setid;																														// 
-		if ($Permissions['edit']=='1')	{	$this->Workspace->saveField('description', $description);														//   
-		}else																																				//
-		{	echo('0');	}																																	//
-	}																																						//
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 

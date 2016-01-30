@@ -1,0 +1,1213 @@
+/* ---------------------------------------------------------------------
+   This just controls the landing page and a few other greetings pages
+---------------------------------------------------------------------- */
+
+body {
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px;
+	background-color:#FFFFFF;
+	font-family:'Lato', sans-serif;
+	font-size:0.85em;
+	letter-spacing:1px;
+	font-weight:300;
+/*	background-image:url(/Images/Pages/white_wall_hash.png);   */
+}
+
+p {
+	line-height:1.75em;	
+}
+
+#main_wrapper {
+	
+}
+
+#content_wrapper {
+	height:100%;
+}
+
+#left_wrapper {
+	float:left;
+	width:250px;
+}
+
+textarea:focus, input:focus{
+    outline: 0;
+}
+
+*:focus {
+    outline: 0;
+}
+	
+
+#addfolder 			{ background: url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -47px -96px; }
+#addfile 			{ background: url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -70px -96px; }
+#addimage			{ background: url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -92px -98px; }
+#adddataset			{ background: url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -115px -96px; }
+#uponefolder 		{ background: url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -163px -3px; }
+#addparttree		{ background: url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -135px -97px; }
+.workspace_file 	{ background: url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -2px -33px; }
+.workspace_folder	{ background: url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -36px -31px; }
+.workspace_file 	{ background: url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -2px -33px; }
+.workspace_folder	{ background: url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -36px -31px; }
+.workspace_image 	{ background: url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -71px -3px; }
+.workspace_dataset 	{ background: url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -36px -63px; }
+.workspace_parttree	{ background: url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -101px -2px; }
+.workspace_copy 	{ background:url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -102px -31px; }
+.workspace_move 	{ background:url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -71px -34px; }
+.workspace_permissions { background:url("http://www.cadwolf.com/Images/icons/permissions_small.png") no-repeat center top; width:100px; }
+.workspace_delete 	{ background:url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -134px -29px; }
+.checkin_block 		{ background:url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -164px -32px; }
+.workspace_checkout	{ background:url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -189px -32px; }
+.workspace_showinfo { background:url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -196px -4px; }
+.replaceImage 		{ background: url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -105px -64px; }
+
+
+.workspace_info, .workspace_imagewrapper {
+	display:none;
+	float:left;
+	width:90%;
+	margin:20px 5%;
+}
+
+#workspace_optionswrapper {
+	margin:10px auto 0px auto;
+	height:35px;	
+} 
+
+#workspace_options {
+	width:1100px;
+	margin:auto;
+}
+
+#workspace_foldercontentstag, #workspace_foldertreetag {
+	float:left;
+	padding:5px 10px;
+	border-top:1px solid #000;
+	border-left:1px solid #000;
+	border-right:1px solid #000;
+	margin:0px 20px 0px 10px;
+	border-radius:5px 5px 0px 0px;
+	font-size:18px;
+	cursor:pointer;
+}
+
+.tag_active { position:relative; top:2px; z-index:9; background-color:#ffffff; }
+
+#message_line { 
+	height:25px; 
+	width:100%;
+	float:left;
+	color:#730324;	
+}
+
+#workspace_description, #workspace_description_edit {
+	float:left;
+	width:100%;
+	margin:0px auto 0px auto;
+}
+
+#workspace_description_save {
+	float:left;
+	width:15%;
+	margin:0px 84% 0px 0px;
+	color: #ccc;
+	font-size:0.85em;
+	margin:10px auto 10px auto;
+	cursor:pointer;
+	padding:5px;
+	display:none;
+	border:1px solid #FFF;
+	text-align:center;
+}
+
+#workspace_description_save:hover {
+	border:1px solid #ccc;
+}
+
+#workspace_title_input {
+	float:left;
+	width:100%;
+	font-size:1.5em;
+	text-align:center;
+
+}
+
+#workspace_title_edit, #workspace_title {
+	float:left;
+	width:100%;
+	font-size:1.5em;
+	text-align:center;
+}
+
+.workspace_title {
+	float:left;
+	width:100%;
+	font-size:1.5em;
+	text-align:center;
+	margin:0px 0px 20px 0px;
+}
+
+#workspace_permDescription {
+	width:1000px;
+	font-size:1em;
+	text-align:justify;
+	margin:0px auto 20px auto;
+	line-height:20px;
+}
+/*---------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------*/
+
+/*---------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------- Workspace Section ---------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------*/
+#perm_message {
+	float:left;
+	width:auto;
+	margin:25px auto;	
+}
+
+#workspace_wrapper {
+	margin:auto;	
+	width:100%;
+}
+
+#workspace_body {
+	margin:50px 0px 0px 75px;
+}
+
+#workspace_inner {
+	width:825px;
+	margin:0px auto;
+}
+
+#workspace_bodywide, #workspace_permissions {
+	margin:50px 0px 0px 250px;
+	padding:0px 20px;
+}
+
+#workspace_permissions { display:none; }
+
+#workspace_contents {
+	float:left;
+	height:100%;
+	width:950px;
+}
+
+#workspace_contentswide {
+	height:100%;
+	width:1150px;
+	margin:40px auto;
+}
+
+.workspace_line {
+	float:left;
+	width:100%;
+	border-bottom:1px solid #8BA2BD;
+	padding:4px 0px 2px 0px;
+}
+.workspace_line:hover { background-color:#DFE3E6; }
+
+#workspace_header1, #workspace_header2, #workspace_header3, #workspace_header4, #workspace_header5, #workspace_header6, #workspace_header7, #workspace_header8, #workspace_header9, #workspace_header10, #workspace_header11 { 
+	float:left;
+	font-weight:600;
+	text-align:center;
+	font-size:1.2em;
+	letter-spacing:1.5px;
+	font-family:Roboto;
+}
+
+#workspace_header1 { width:30px; }
+#workspace_header2 { width:300px; }
+#workspace_header3 { width:200px; }
+#workspace_header4 { width:200px; }
+#workspace_header5 { width:150px; }
+#workspace_header6 { width:150px; }
+#workspace_header7 { width:64px; }
+#workspace_header8 { width:64px; }
+#workspace_header9 { width:64px; }
+#workspace_header10 { width:84px; }
+#workspace_header11 { width:64px; }
+
+.workspace_folder {
+	float:left;
+	height:24px;
+	width:24px;
+	margin:0px 10px 0px 0px;
+	cursor:pointer;
+}
+
+.workspace_file {
+	float:left;
+	height:24px;
+	width:24px;
+	margin:0px 10px 0px 0px;
+	cursor:pointer;
+}
+
+.workspace_image {
+	float:left;
+	height:24px;
+	width:24px;
+	margin:0px 10px 0px 0px;
+	cursor:pointer;
+}
+
+.workspace_dataset {
+	float:left;
+	height:24px;
+	width:24px;
+	margin:0px 10px 0px 0px;
+	cursor:pointer;
+}
+
+.workspace_parttree {
+	float:left;
+	height:24px;
+	width:24px;
+	margin:0px 10px 0px 0px;
+	cursor:pointer;
+}
+
+.workspace_filename {
+	float:left;
+	width:300px;
+	padding:2px 0px 0px 0px;
+	margin:3px 0px 0px 0px;
+	cursor:pointer;
+}
+
+.workspace_filename_dummy {
+	float:left;
+	width:300px;
+	padding:2px 0px 0px 0px;
+	margin:3px 0px 0px 0px;
+}
+
+.workspace_time {
+	float:left;
+	width:200px;
+	padding:2px 0px 0px 0px;
+	margin:0px 0px 0px 0px;
+	text-align:center;
+}
+.workspace_viewstatus, .workspace_editstatus {
+	float:left;
+	width:150px;
+	padding:2px 0px 0px 0px;
+	margin:0px 0px 0px 0px;
+	text-align:center;
+	cursor:pointer;
+}
+
+.workspace_costatus {
+	float:left;
+	width:150px;
+	padding:2px 0px 0px 0px;
+	margin:0px 0px 0px 0px;
+	text-align:center;
+}
+
+.workspace_checkout {
+	float:left;
+	width:24px;
+	height:24px;
+	cursor:pointer;	
+	margin:0px 25px;
+}
+
+.checkout_space {
+	float:left;
+	width:20px;
+	height:20px;
+}
+
+.checkin_block, .workspace_showinfo, .replaceImage {
+	float:left;
+	width:24px;
+	height:24px;
+	cursor:pointer;	
+	margin:0px 25px;
+}
+
+.workspace_showinfo {
+	float:left;
+	width:24px;
+	height:24px;
+	cursor:pointer;	
+	margin:0px 20px;
+}
+
+.imageview {
+	float:left;
+	width:24px;
+	height:24px;
+	cursor:pointer;	
+	margin:0px 25px;
+	background:url("http://www.cadwolf.com/Images/icons/image-24.png") no-repeat left top;
+}
+
+
+.workspace_copy, .workspace_move, .workspace_permissions, .workspace_delete {
+	float:left;
+	width:24px;
+	height:24px;
+	padding:0px 0px 0px 0px;
+	margin:0px 20px 0px 20px;
+	text-align:left;
+	cursor:pointer;
+}
+
+.workspace_viewusers, .workspace_editusers {
+	float:left;
+	width:20px;
+	background:url("http://www.cadwolf.com/Images/Groups/check.png") no-repeat center top;
+	cursor:pointer;
+}
+
+#inputtohide {
+	float:left;
+	width:250px;
+	border:0px;
+	font-size:1em;
+	padding:0px 0px 0px 0px;
+	margin:0px;
+	font-family:'Arimo', sans-serif;
+	font-weight:300;
+	letter-spacing:1px;
+}
+
+
+.usersdata_line {
+	float:left;	
+	width:100%;
+}
+
+.usersdata_view, .usersdata_edit {
+	float:left;
+	width:96%;
+	background-color:#B4C4D4;
+	border-top:2px solid #456382;
+	border-bottom:2px solid #456382;
+	padding:10px 2% 10px 2%;
+}
+
+.userdataclose_holder {
+	height:25px;
+	width:30%;
+	float:left;
+	margin:0px 0px 10px 0px;
+}
+
+.userdataclose {
+	float:right;
+	height:15px;
+	width:20px;
+	background: url(http://www.cadwolf.com/Images/Pages/closebutton.png) no-repeat right top;
+	cursor:pointer;
+}
+
+.adduser_holder {
+	float:left;
+	width:100%;
+	margin:10px 0px 10px 0px;
+}
+
+.adduser {
+	float:left;
+	height:15px;
+	cursor:pointer;
+	font-size:1.2em;
+	width:100%;
+	text-align:right;
+}
+
+.usersdata_nameholder {
+	float:left;
+	width:300px;
+}
+
+.usersdata_delete {
+	float:left;
+	width:20px;
+	height:20px;
+	margin:0px 15px 0px 0px;
+	background: url(http://www.cadwolf.com/Images/Pages/closebutton.png) no-repeat right top;
+	cursor:pointer;
+}
+
+.usersdata_title {
+	float:left;
+	width:70%;
+	font-size:1.3em;
+	height:25px;
+	margin:0px 0px 10px 0px;
+}
+
+.error {
+	color:red;
+}
+/*---------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------*/
+
+
+/*---------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------- Permissions Box -------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------*/
+.Perm_line {
+	float:left;
+	width:930px;
+	padding:5px 0px;
+}
+
+.Perm_folder {
+	float:left;
+	width:300px;
+	background:url("http://www.cadwolf.com/Images/icons/folder-24.png") no-repeat left top;
+	padding:0px 0px 0px 25px;
+	height:24px;
+}
+
+.Perm_perm {
+	float:right;
+	width:590px;
+	border-left:1px solid #ccc;
+	padding:0px 0px 0px 10px;
+}
+
+#permission_box {
+	width:1000px;
+	height:100%;
+	margin:50px auto;
+}
+
+
+#permission_options {
+	float:left;
+	padding:0px 0px 0px 10px;
+}
+
+.permission_tab {
+	float:left;
+	border-top:1px solid #ccc;
+	border-left:1px solid #ccc;
+	border-right:1px solid #ccc;
+	padding:2px 6px;
+	margin:0px 5px;
+	border-radius:5px 5px 0px 0px;
+	background-color:#ccc;
+	cursor:pointer;
+}
+
+#permission_details {
+	float:left;
+	border:1px solid #ccc;
+	padding:10px;
+	width:930px;
+	border-radius:5px;
+}
+
+#viewpermissions, #editpermissions, #adminpermissions, #usepermissions {
+	float:left;
+}
+
+#viewpermissions, #editpermissions, #adminpermissions, #changepermissions, #usepermissions {
+	display:none;
+}
+
+.activetab {
+	background-image:url(/Images/Pages/white_wall_hash.png);
+	position:relative;
+	top:1px;
+}
+
+.perm_title {
+	float:left;
+	width:100%;
+	font-size:1.4em;
+	border-bottom:1px solid #ccc;
+	margin:15px 0px 10px 0px;
+}
+
+.checkboxline {
+	float:left;
+	width:100%;
+}
+
+.checkboxlabel {
+	float:left;
+	width:150px;
+	text-align:center;
+}
+
+.checkbox {
+	float:left;
+	width:85px;
+	text-align:center;
+	margin:0px 0px 0px 65px;	
+}
+
+input.permbox {
+	float:left;
+	margin:10px 0px 10px 0px;
+}
+
+.group, .user {
+	float:left;
+}
+
+.viewgroupholder {
+	float:left;
+	width:100%;	
+}
+
+.group a {
+	color:#456382;	
+	text-decoration:none;	
+}
+
+.user a {
+	color:#730324;
+	text-decoration:none;	
+}
+
+.removegroup {
+	float:left;
+	width:20px;
+	height:20px;
+	margin:0px 15px 0px 0px;
+	background: url(http://www.cadwolf.com/Images/Pages/closebutton.png) no-repeat right top;
+	cursor:pointer;
+}
+
+.viewgroups, .editgroups { 
+	float:left;	
+	width:100%;
+	margin:10px 0px 10px 0px;
+}
+
+
+.move_line {
+	float:left;
+	width:100%;
+	padding:15px;
+}
+
+input.moveaddress {
+	font-size:1.2em;
+	width:95%;
+}
+/*---------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------- Items to Hide -------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------*/
+#inputtoclone { display:none; }
+
+#upfolderline{
+	float:right;
+	width:50%;
+}
+
+
+#uponefolder {
+	float:right;
+	width:24px;
+	height:24px;
+	cursor:pointer;
+}
+
+
+.checkin_space {
+	float:left;
+	width:74px;
+}
+
+
+#imagedisplay_holder {
+	position:fixed;
+	left:50%;
+	top:50%;
+	width:auto;
+	height:auto;
+	background-color:#FFF;
+	padding:10px;
+	border:1px solid #ccc;
+	border-radius:5px;	
+	display:none;
+}
+
+#imagedisplay {
+	width:auto;
+	height:auto;
+}
+
+#imagedisplay_closeholder {
+	width:100%;
+	height:20px;
+}
+
+#imagedisplay_close {
+	float:right;
+	width:20px;
+	height:20px;
+	cursor:pointer;
+	background: url(http://www.cadwolf.com/Images/Pages/closebutton.png) no-repeat left top;
+}
+
+#image_uploader {
+	float:left;
+	display:none;
+	border-top:1px solid #ccc;
+	border-bottom:1px solid #ccc;	
+	padding:1%;
+	margin: 0px 0px 10px 0px;
+	width:98%;
+}
+
+#image_to_upload { float:left; }
+
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------ ITEMS RELATED TO The LOGO and the login ---------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+#Format_Wrapper {
+	height: 50px;
+	z-index:999;
+	display:none;
+	width:auto;
+	position:fixed;
+	top:0px;
+	left:250px;
+	width:100%;
+}
+
+#Format_Bar {
+	float:left;
+	width:90%;
+	margin:0 5%;
+}
+
+#NicEdit_Wrapper {	margin:auto; background-color:#FFF; }
+#myNicPanel { float:left; }
+
+
+#cktoolbar {
+	margin:auto;
+	padding:0px 0px 0px 0px;
+}
+
+.cke_chrome {	border:0px !important; }
+
+
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------ ITEMS RELATED TO THE DISPLY DROPDOWN ------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+#orderbyline {
+	float:left;
+	width:50%;
+}
+
+#orderbyholder {
+	
+}
+
+#orderby {
+	
+}
+
+.workspace_rank {
+	float:left;
+	width:50px;
+	margin:-1px 0px 0px 30px;
+}
+
+
+#workspace_permissionTree, #workspace_fulldata {
+	display:none;
+}
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*								Items that the addline and the permissions system and parts
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+.permBar {
+	float:right;
+	width:600px;
+}
+
+.permWrapper {
+	float:left;
+	width:150px;
+}
+
+.permWrapperActive {
+	float:left;
+	border-bottom:1px solid #000;
+	padding:0px;
+	height:20px;
+}
+
+.permSelectBox {
+	position:relative;
+	left:150px;
+	top:-38px;
+	z-index:1;
+	background-color:#FFF;
+	text-align:center;
+	width:100px;
+	height:77px;
+}
+
+.permSelectBoxSmall {
+	position:relative;
+	left:150px;
+	top:-24px;
+	z-index:1;
+	background-color:#FFF;
+	text-align:center;
+	width:100px;
+	height:52px;
+}
+
+.permSelectLine {
+	float:left;
+	height:25px;
+	width:100%;	
+}
+
+.permOpen, .permList, .permInherit, .permOpenShort, .permListShort {
+	float:left;
+	height:25px;
+	width:100%;	
+	padding:4px 0px 0px 0px;
+}
+
+
+.viewPerm, .editPerm, .adminPerm, .usePerm, .openPerm, .listPerm, .inheritPerm, .listPermDemo, .inheritPermDemo, .openPermDemo {
+	float:left;
+	width:134px;
+	text-align:center;
+	cursor:pointer;
+	background-color:#FFF;
+	z-index:9999;
+	padding:5px 0px 0px 0px;
+}
+
+.openPerm, .openPermShort {
+	color:green;
+}
+
+.listPerm, .listPermShort {
+	color:#730324;
+}
+
+.inheritPerm {
+	color:#456382;
+}
+
+.permOpen {
+	border-left:3px solid green;
+	border-right:3px solid green;
+	color:green;
+	font-weight:bold;
+	cursor:pointer;
+	background-color:#FFF;
+}
+
+.permOpenShort {
+	border-top:3px solid green;
+	border-left:3px solid green;
+	border-right:3px solid green;
+	color:green;
+	font-weight:bold;
+	cursor:pointer;
+	background-color:#FFF;
+}
+
+.permOpen:hover {
+	color:#DFE3E5;
+	background-color:green;
+}
+
+.permList {
+	border-left:3px solid #730324;
+	border-right:3px solid #730324;
+	border-bottom:3px solid #730324;
+	color:#730324;
+	font-weight:bold;
+	cursor:pointer;
+	background-color:#FFF;
+}
+
+.permList:hover {
+	color:#DFE3E5;
+	background-color:#730324;
+}
+
+.permInherit {
+	border-left:3px solid #456382;
+	border-top:3px solid #456382;
+	border-right:3px solid #456382;
+	color:#456382;
+	font-weight:bold;
+	cursor:pointer;
+	background-color:#FFF;
+}
+
+.permInherit:hover {
+	color:#DFE3E5;
+	background-color:#456382;
+}
+
+.editList {
+	float:right;
+	margin:5px 0px 0px 0px;
+	width:16px;
+	height:16px;
+	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -49px -101px;
+	cursor:pointer;
+}
+
+.editUserBlock {
+	width:100%;
+	float:right;
+	margin:25px 0px 10px 0px;
+	min-height:50px;
+}
+
+.enterUserLine {
+	float:left;
+	width:90%;
+	text-align:center;
+}
+
+.newUser {
+	text-align:center;
+	height:25px;
+	border:1px solid #ccc;
+	width:300px;
+}
+
+.closeUserBlock {
+	float:right;
+	width:16px;
+	height:16px;
+	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -94px -101px;
+	cursor:pointer;	
+}
+
+.usersBlock {
+	float:left;
+	width:100%;
+}
+
+.userPermLine {
+	float:left;
+	width:100%;
+	padding:10px 0px 10px;
+}
+
+.permUser {
+	float:left;
+	padding:5px 10px;
+	text-align:center;
+	color:#456382;
+	border-radius:5px;
+	padding:5px 10px;
+	border:1px solid #456382;
+	margin:0px 5px;
+}
+
+.permUser:hover {
+	float:left;
+	padding:5px 10px;
+	text-align:center;
+	color:#DFE3E5;
+	border-radius:5px;
+	padding:5px 10px;
+	border:1px solid #456382;
+	background-color:#456382;
+}
+
+#usersTitles {
+	float:left;
+	width:100%;
+	border-bottom:1px solid #ccc;
+	text-align:center;
+	color:#000;
+	margin:10px 0px;
+	padding:10px 0px;
+}
+
+#usersTitle1 {
+	float:left;
+	width:200px;
+	text-align:center;
+}
+
+#usersTitle2 {
+	float:left;
+	width:150px;
+	text-align:center;
+}
+
+#usersTitle3 {
+	float:left;
+	width:150px;
+	text-align:center;
+}
+
+#usersTitle4 {
+	float:left;
+	width:150px;
+	text-align:center;
+}
+
+#usersTitle5 {
+	float:left;
+	width:150px;
+	text-align:center;
+}
+
+.permYes, .permNo, .permEveryone, .permYesInherit, .permNoInherit {
+	float:left;
+	width:24px;
+	height:24px;
+	cursor:pointer;	
+	margin:0px 63px 0px 63px;
+}
+
+.permYes 			{	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -117px -157px;	}
+.permNo 			{	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -172px -158px;	}
+.permEveryone 		{	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -2px -157px;	}
+.permYesInherit		{	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -60px -158px;	}
+.permNoInherit		{	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -163px -62px;	}
+
+
+.permDelete {
+	float:right;
+	width:16px;
+	height:16px;
+	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -94px -101px;
+	cursor:pointer;	
+	margin:0px 0px 0px 10px;
+}
+
+
+#permKeyBlock {
+	float:left;
+	width:100%;
+	margin:10px 0px;
+}
+
+.permKeyLine {
+	float:left;
+	width:250px;
+	margin:0px 0px 0px 0px;
+}
+
+.permKeyLineText {
+	width:205px;
+	float:left;
+	text-align:right;
+	padding:4px 10px 0px 0px;
+	margin:0px 0px 0px 0px;
+}
+
+.permKeyLinePerm1, .permKeyLinePerm2, .permKeyLinePerm3, .permKeyLinePerm4 {
+	width:24px;
+	height:24px;
+	float:left;
+}
+
+.permKeyLinePerm1 { background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -2px -157px; }
+.permKeyLinePerm2 { background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -117px -157px; }
+.permKeyLinePerm3 { background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -60px -158px; }
+.permKeyLinePerm4 { background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -172px -158px; }
+
+#errorLine {
+	width:100%;
+	float:left;
+	color:#730324;
+	font-size:14px;
+	text-align:center;
+	margin:0px 0px 10px 0px;
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*								Items that are related solely to the permissions page on the part tree page.
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+#partPermissionsWrapper {
+	margin:auto;
+	width:1000px;
+}
+
+#partPermissionBody {
+	width:1000px;
+	margin:50px auto;
+}
+
+#partPermissionContent {
+	width:1000px;
+	margin:auto;
+	float:left;
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*								Items that the addline and the add system and parts
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+#topAddLine {
+	
+}
+
+.editBar {
+	float:right;
+	width:100px;
+}
+
+.addLine {
+	width:100%;	
+}
+
+.addSystem, .addPart, .deletePart, .deleteSystem, .includeMe, .includeMeNot, .dummyBlock {
+	float:right;
+	width:16px;
+	height:16px;
+	margin:0px 10px 0px 0px;
+	padding:0px;
+	cursor:pointer;			
+}
+
+.deletePart		 	{	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -94px -101px; }
+.deletePart:hover 	{	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -71px -101px; }
+.deleteSystem		{	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -94px -101px; }
+.deleteSystem:hover {	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -71px -101px; }
+.includeMe:hover 	{	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -165px -131px; }
+.includeMe		 	{	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -141px -131px; }
+.includeMeNot:hover {	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -141px -131px;	}
+.includeMeNot 		{	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -165px -131px;	}
+.addSystem			{	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -218px -100px; }
+.addSystem:hover	{	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -26px -101px; }
+.addPart			{	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -2px -101px; }
+.addPart:hover		{	background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -26px -101px; }
+
+.systemBlock {
+	float:right;
+	padding:4px 0px 4px 2%;	
+	width:98%;
+	margin:0px 0px;
+	list-style:none;
+	border-bottom:1px solid #456382;
+}
+
+.systemLine, .systemPermLine {
+	float:right;
+	width:100%;
+	margin:2px 0px;
+}
+
+.partLine, .partPermLine {
+	float:right;
+	width:100%;
+	padding:10px 0px 9px;
+	margin:0px;
+	border-top:1px solid #888;
+	color:#888;
+}
+
+.systemLogo, .systemPermLogo {
+	float:left;
+	width:24px;
+	height:24px;
+	background: url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -36px -31px; 
+	cursor:pointer;
+}
+
+.partName, .partPermName {
+	float:left;	
+	padding:0px 0px 0px 10px;
+}
+
+.partLogo, .partPermLogo {
+	float:left;
+	width:24px;
+	height:24px;
+	background: url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -2px -33px; 
+	cursor:pointer;
+}
+
+.systemName, .systemPermName {
+	float:left;	
+	padding:6px 0px 0px 10px;
+	cursor:pointer;
+}
+
+.openSystemName {
+	background-color:#FFF;
+	width:200px;
+	height:25px;
+	border:1px dashed #ccc;
+}
+
+.quantityBlock {
+	float:left;
+	width:20px;
+	height:20px;
+	border:1px dashed #ccc;
+	border-radius:15px;
+	text-align:center;
+	position:relative;
+	top:-4px;
+	margin:0px 5px 0px 0px;
+}
+
+.imagePermLogo {
+	float:left;
+	width:24px;
+	height:24px;
+	background: url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -71px -3px; 
+	cursor:pointer;
+}
+
+.parttreePermLogo {
+	float:left;
+	width:24px;
+	height:24px;
+	background: url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -101px -2px; 
+	cursor:pointer;
+}
+
+.datasetPermLogo {
+	float:left;
+	width:24px;
+	height:24px;
+	background: url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -36px -63px; 
+	cursor:pointer;
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+/*								The message relating to deleting parts and systems
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+#deleteItem-confirm {
+	display:none;
+}
+

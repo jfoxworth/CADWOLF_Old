@@ -45,29 +45,62 @@
 /*------------------------------------------------------------------------------------------------------------------------*/
 
 /*------------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------- ITEMS IN THE INFORMATION BIN ---------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------------*/
+.info_line {
+    float:left;
+	width:100%;
+	padding:15px 0px 5px 0px;
+	min-height:30px;
+}
+
+.info_block_left {
+    float:left;
+    width:48%;
+    text-align:right;
+    padding:0px 2% 0px 0px;
+}
+
+.info_block_right {
+    float:right;
+    width:48%;
+    text-align:left;
+    padding:0px 0px 0px 2%;
+}
+
+/*------------------------------------------------------------------------------------------------------------------------*/
 /*------------------------------------------ ITEMS IN THE SETTINGS BIN ---------------------------------------------------*/
 /*------------------------------------------------------------------------------------------------------------------------*/
 .settings_line {
+    float:left;
 	width:100%;
-	margin:10px 0px;
-	min-height:24px;
+	padding:15px 0px 5px 0px;
+	min-height:30px;
+    border-bottom:1px solid #456382;
+    border-top:1px solid #456382;
 }
 
 .settings_line_current {
 	background-color:#456382;
 }
 
+.settings_block {
+    float:left;
+    text-align:center;
+    padding:0px 10px;
+}
+
 .settings_text {
 	float:left;
-	width:45%;
-	margin:0px 5% 0px 0px;
-	text-align:right;
+	margin:2px 11px 0px 20px;
+	text-align:center;
 	letter-spacing:1px;
 }
 
 .settings_select {
 	float:left;
-	width:40%;
+	width:39px;
+    text-align:center;
 }
 
 .settings_delete {
@@ -88,13 +121,28 @@
 	border-radius:5px;
 	cursor:pointer;
 }
+
+.settings_parse {
+    width:35px;
+    padding:2px;
+    margin:0px;
+    text-align:center;
+}
 /*------------------------------------------------------------------------------------------------------------------------*/
 
 /*------------------------------------------------------------------------------------------------------------------------*/
 /*------------------------------------------ THE SPACE FOR THE PASTE BIN -------------------------------------------------*/
 /*------------------------------------------------------------------------------------------------------------------------*/
-#dataset_paste_holder {
-	
+.dataSection {
+    float:left;
+    width:100%;
+    margin:20px 0px;
+    text-align:center;
+}
+
+.dataset_holder {
+	margin:0px auto;
+    line-height:35px;
 }
 
 #dataset_paste {
@@ -111,11 +159,105 @@
 	margin:20px auto;
 	border-radius:5px;
 	cursor:pointer;
+    font-size:16px;
 }
 
 #parse_dataset:hover {
 	background-color:#730324;
 }
+
+#parseStop, #parseGo {
+	text-align:center;
+	width:200px;
+	background-color:#456382;
+	color:#FFFFFF;
+	padding:5px 0px 8px 0px;
+	margin:20px 100px;
+	border-radius:5px;
+	cursor:pointer;
+    font-size:16px;
+    float:left;
+}
+
+#parseStop:hover, #parseGo:hover {
+	background-color:#730324;
+}
+
+.dataOption {
+    float:left;
+    color:##456382;
+    padding:5px 10px;
+    margin:0px 0px 0px 0px;
+    cursor:pointer;
+    width:180px;
+}
+
+.dataOptionCurrent {
+    float:left;
+    color:#FFF;
+    background-color:#456382;
+    padding:5px 10px;
+    margin:0px;
+    width:180px;
+}
+
+#dataset_html {
+    width:400px;   
+    height:40px;
+    margin:0px auto;
+    padding:0px 15px;
+}
+
+.pasteSection {
+    
+}
+
+.fileSection {
+    width:203px;   
+}
+
+#dataset_file, #dataset_excel {
+    margin:0px 0px 0px 25px;
+}
+
+.htmlSection {
+    
+}
+
+.excelSection {
+    width:160px;
+}
+
+
+#messageLine {
+    width:100%;
+    height:65px;
+    float:left;
+}
+
+.errorMessage {
+    color:#a94442;
+    background-color:#f2dede;
+    border-color:#ebccd1;
+    padding:15px;
+    border:1px solid transparent;
+    border-radius:4px;
+    width:800px;
+    margin:auto;
+}
+
+.successMessage{
+    color:#3c763d;
+    background-color:#dff0d8;
+    border-color:#d6e9c6;
+    padding:15px;
+    border:1px solid transparent;
+    border-radius:4px;
+    width:800px;
+    margin:auto;
+}
+
+
 /*------------------------------------------------------------------------------------------------------------------------*/
 
 /*------------------------------------------------------------------------------------------------------------------------*/
@@ -149,39 +291,14 @@
 /*------------------------------------------------------------------------------------------------------------------------*/
 
 /*------------------------------------------------------------------------------------------------------------------------*/
-/*--------------------------------------------- ITEMS RELATED TO The messages  -------------------------------------------*/
-/*------------------------------------------------------------------------------------------------------------------------*/
-#GoodMessageWrapper, #BadMessageWrapper {
-	position:fixed;
-	top:0px;
-	left:0px;
-	width:100%;
-	display:none;
-	text-align:center;
-	padding:5px 0px 5px 115px;
-	font-size:1.5em;
-	font-family:cinzel;
-	letter-spacing:1.5px;
-	color:#FFF;
-	z-index:9999;
-}
-
-#BadMessageWrapper {
-	background-color:#730324;
-}
-
-#GoodMessageWrapper {
-	background-color:#228008;
-}
-/*------------------------------------------------------------------------------------------------------------------------*/
-
-/*------------------------------------------------------------------------------------------------------------------------*/
 /*--------------------------------------------- SELECTING THE ACTION FOR THE DATA  ---------------------------------------*/
 /*------------------------------------------------------------------------------------------------------------------------*/
 
 #data_actionline {
-	border-top:2px solid #456382;
-	border-bottom:2px solid #456382;
+	float:left;
+    padding:10px 0px;
+    border-top:1px solid #456382;
+	border-bottom:1px solid #456382;
 	width:100%;
 	height:30px;
 	text-align:center;
@@ -189,9 +306,9 @@
 
 .data_actionitem {
 	float:left;
-	width:182px;
+	width:200px;
 	height:25px;
-	padding:5px 42px 0px;
+	padding:5px 0px 0px 50px;
 }
 
 .data_actionlabel {
@@ -207,3 +324,199 @@
 	top:-2px;
 }
 /*------------------------------------------------------------------------------------------------------------------------*/
+
+#displayHolder {
+    width:100%;
+    overflow-x:scroll;
+}
+
+.displayTable {
+    width:100%;
+}
+
+.displayRow {
+    width:100%;
+    height:30px;
+    padding:5px 0px
+}
+
+.displayData {
+    text-align:center;
+    width:10%;
+    min-width:50px;
+}
+
+.clickRow {
+    width:100%;
+    height:50px;
+    float:left;
+}   
+
+.clickItem {
+    width:150px;
+    float:left;
+}
+
+.headerData {
+    text-align:center;
+    font-weight:bold;
+    font-size:1.25em;
+    background-color:#B4C4D4;
+}
+
+.headerRow {
+}
+
+/*------------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------- TEXT BLOCKS AVAILABLE AFTER FILE IS PARSED ------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------------*/
+.possibleTextBlock{
+    float:left;
+    width:100%;
+    margin:20px 0px 0px 0px;
+    text-align:left;
+}
+
+.deleteBlockWrapper{
+    float:left;
+    width:30px;
+    height:100%;
+}
+
+.deleteBlock{
+    width:15px;
+    height:15px;
+    border-radius:20px;
+    border:1px solid #a94442;
+    color:#a94442;
+    cursor:pointer;
+    padding:5px 3px 6px 10px;
+}
+
+.deleteBlock:hover{
+    background-color:#FFF;
+}
+
+.validTextBlock {
+    float:left;
+    width:100%;
+    margin:0px 15px;
+    color:#3c763d;
+    background-color:#dff0d8;
+    border-color:#d6e9c6;
+    padding:15px;
+    border:1px solid transparent;
+    border-radius:4px; 
+    cursor:pointer;
+    word-wrap:break-word;
+}
+
+.invalidTextBlock {
+    float:left;
+    width:100%;
+    margin:0px 15px;
+    color:#a94442;
+    background-color:#f2dede;
+    border-color:#ebccd1;
+    padding:15px;
+    border:1px solid transparent;
+    border-radius:4px; 
+    cursor:pointer;
+    word-wrap:break-word;
+}
+
+.parseOptionLine {
+    width:100%;
+    height:30px;
+    float:left;
+    margin:10px 0px 0px 100px;
+}
+
+.parseOption{
+    float:left;
+    width:150px;
+    font-size=1.5em;
+}
+
+
+.data_line{
+    width:700px;
+    float:left;
+    padding:25px 50px;
+    border-bottom:1px solid #456382;
+}
+
+.data_leftSection{
+    float:left;
+    width:199px;
+    border-right:1px solid #456382;
+    text-align:center;
+}
+
+.data_rightSection{
+    float:right;
+    width:500px;
+}
+
+.dataBlock {
+    float:left;
+    width:500px;
+    padding:20px 40px;
+    height:35px;
+}
+
+.badSelect{
+    background-color:#FF8888;
+}
+
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
+
+input[type=checkbox]:not(old),
+input[type=radio   ]:not(old){
+  margin  : 0;
+  padding : 0;
+  opacity : 0;
+}
+
+input[type=checkbox]:not(old) + label,
+input[type=radio   ]:not(old) + label{
+  display      : inline-block;
+  margin-left  : -28px;
+  line-height  : 24px;
+}
+
+input[type=checkbox]:not(old) + label > span,
+input[type=radio   ]:not(old) + label > span{
+  display      : inline-block;
+  background   : url('http://www.cadwolf.com/Images/dataset_sprite.png') no-repeat -149px -35px;
+  width:20px;
+  height:20px;
+    margin:0px 10px 0px 0px;
+    position:relative;
+    top:4px;
+}
+
+input[type=checkbox]:not(old):checked + label > span,
+input[type=radio   ]:not(old):checked + label > span{
+  display      : inline-block;
+  background   : url('http://www.cadwolf.com/Images/dataset_sprite.png') no-repeat -122px -35px;
+  width:20px;
+  height:20px;
+    margin:0px 10px 0px 0px;
+    position:relative;
+    top:4px;
+}
+
+input {
+    padding:0px 0px 5px 0px;
+    border-top:0px;
+    border-left:0px;
+    border-right:0px;
+    border-bottom:2px solid #456382;
+}
+
+textarea:focus, input:focus{
+    outline: none;
