@@ -1,0 +1,37 @@
+<div class="filler_holder">
+    <div class="filler_void"></div>
+    <div class="filler_up" ng-dblclick="$parent.fillTable(obj, 'up')"></div>
+    <div class="filler_void"></div>
+    <div class="filler_left" ng-dblclick="$parent.fillTable(obj, 'left')"></div>
+    <div class="filler_void"></div>
+    <div class="filler_right" ng-dblclick="$parent.fillTable(obj, 'right')"></div>
+    <div class="filler_void"></div>
+    <div class="filler_down" ng-dblclick="$parent.fillTable(obj, 'down')"></div>
+    <div class="filler_void"></div>
+</div>
+
+<div class="icon_wrapper" ng-if="editPerm" ng-show="showIcons">
+    <div class="icon_holder">
+        <div class="deletebutton" ng-click="$parent.deleteItem(obj)"></div>
+        <div ng-click="showSpecs(obj.itemid, 'table')" class="tablespecs"></div>
+    </div>
+</div>
+
+<div class="tableblock">
+    <table class="contenttable" style="width: {{obj.width}}px; text-align:{{obj.props.tableAlign}}" >
+        <caption ng-show="obj.props.captionOn"><span ng-show="!obj.props.captionEdit" ng-dblclick="obj.props.captionEdit=true">{{obj.props.caption}}</span><span ng-show="obj.props.captionEdit"><input class="tableinput" ng-enter="obj.props.captionEdit=false" ng-model="obj.props.caption"/></span></caption>
+        <tbody>
+            <tr table-add-delete-cols numcols="obj.props.data[0].length" tableid="obj.itemid" showlabels="obj.props.rowLabels"></tr>
+            <tr table-show-col-headers numcols="obj.props.data[0].length" tableid="obj.itemid" showlabels="obj.props.rowLabels" ng-if="obj.props.colLabels"></tr>
+            <tr ng-repeat="row in obj.props.data track by $index" class="normalrow" ng-init="row.showEdits=false" ng-mouseover="row.showEdits=true" ng-mouseout="row.showEdits=false">
+                <td class="empty"><div ng-show="row.showEdits" class="trdelete" ng-click="$parent.deleteTableRow(obj.itemid, $index)">&nbsp</div></td>
+                <td class="empty"><div ng-show="row.showEdits" class="tradd" ng-click="$parent.addTableRow(obj.itemid, $index)"></div></td>
+                <td class="label" ng-if="obj.props.rowLabels" style="border:{{obj.props.borderWidth}}px solid #000;">{{$index}}</td>
+                <td toggle-table-data ng-repeat="col in row track by $index" style="border:{{obj.props.borderWidth}}px solid #000;">
+                    <div class="tableShow" ng-show="!obj.props.data[$parent.$index][$index]['showEquation']" ng-click="obj.props.currentRow=$parent.$index; obj.props.currentCol=$index;" ng-dblclick="obj.props.data[$parent.$index][$index]['showEquation']=true"><span>{{obj['props']['data'][$parent.$index][$index]['real']}}</span><span ng-if="obj['props']['data'][$parent.$index][$index]['imag']!=0">+{{obj['props']['data'][$parent.$index][$index]['imag']}}i</span> <span ng-if="obj['props']['data'][$parent.$index][$index]['units']!=''">{{obj['props']['data'][$parent.$index][$index]['units']}}</span></div>
+                    <div class="tableEquation" ng-show="obj.props.data[$parent.$index][$index]['showEquation']" ng-click="obj.props.currentRow=$parent.$index; obj.props.currentCol=$index;"><input class="tableinput" ng-model="obj['props']['data'][$parent.$index][$index]['equation']" ng-enter="obj['props']['data'][$parent.$index][$index]['showEquation']=false; obj['props']['data'][$parent.$index][$index]['needsUpdateFlag']=1; obj.solveCol=$parent.$index; obj.solveRow=$index; runEquationDigest();" /></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

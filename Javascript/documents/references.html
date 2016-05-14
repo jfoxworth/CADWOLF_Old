@@ -1,0 +1,49 @@
+<!-- Show all of the references to let the user select which one(s) they want to have -->
+<div ng-repeat="obj in cadwolf_references | orderBy:obj.refNum track by obj.refID">
+    <div ng-if="obj['type']=='web'" ng-click="addDeleteReference(obj['refID'], currentItem)" class="setRefLine"><div class="bib_num">{{obj['refNum']+1}}</div>{{obj['author']}}. <a href="{{address}}">{{obj['webtitle']}}</a>.<u>{{obj['pagetitle']}}</u> - {{obj['sitetitle']}}. Date accessed : {{obj['dateaccessed']}}</div>
+    <div ng-if="obj['type']=='book'" ng-click="addDeleteReference(obj['refID'], currentItem)" class="setRefLine"><div class="bib_num">{{obj['refNum']+1}}</div>{{obj['author']}}. <u>{{obj['booktitle']}}</u>. {{obj['publisher']}}. {{obj['datepublished']}}. Edition - {{obj['edition']}}. Page - {{obj['page']}}.</div>
+    <div ng-if="obj['type']=='mag'" ng-click="addDeleteReference(obj['refID'], currentItem)" class="setRefLine"><div class="bib_num">{{obj['refNum']+1}}</div>{{obj['author']}}. {{obj['pagetitle']}}. {{obj['magpapername']}}. {{obj['datepublished']}}. Page - {{obj['page']}}.</div>
+    <div ng-if="obj['type']=='enc'" ng-click="addDeleteReference(obj['refID'], currentItem)" class="setRefLine"><div class="bib_num">{{obj['refNum']+1}}</div>{{obj['author']}}. {{obj['entryname']}}. {{obj['encname']}}. Edition - {{obj['edition']}} {{obj['year']}}. Page - {{obj['page']}}.</div>
+</div>
+
+
+<!--
+    <div class="addref">&nbsp</div>
+    <div class="deleteref">&nbsp</div>
+    <div class="refs_left"></div>
+    <div class="refs_right">
+        <div class="ref_typeline">
+            <div class="ref_type ref_showweb">Website</div>
+            <div class="ref_type ref_showbook">Book</div>
+            <div class="ref_type ref_showmag">Journal, Mag, Paper</div>
+            <div class="ref_type ref_showenc">Encyclopedia</div>
+        </div>
+        <div class="ref_web">
+            <div class="ref_line"><div class="ref_text">Author</div><div class="ref_input"><input class="ref_author ref_input"></div></div>
+            <div class="ref_line"><div class="ref_text">Address</div><div class="ref_input"><input class="ref_address ref_input"></div></div>
+            <div class="ref_line"><div class="ref_text">Page Title</div><div class="ref_input"><input class="ref_pagetitle ref_input"></div></div>
+            <div class="ref_line"><div class="ref_text">Website Title</div><div class="ref_input"><input class="ref_sitetitle ref_input"></div></div>
+            <div class="ref_line"><div class="ref_text">Date Accessed</div><div class="ref_input"><input class="ref_date ref_input"></div></div>
+        </div>
+        <div class="ref_book">
+            <div class="ref_line"><div class="ref_text">Author</div><div class="ref_input"><input class="ref_author ref_input"></div></div>
+            <div class="ref_line"><div class="ref_text">Book Title</div><div class="ref_input"><input class="ref_booktitle ref_input"></div></div>
+            <div class="ref_line"><div class="ref_text">Publisher</div><div class="ref_input"><input class="ref_publisher ref_input"></div></div>
+            <div class="ref_line"><div class="ref_text">Date Published</div><div class="ref_input"><input class="ref_publishdate ref_input"></div></div>
+        </div>
+        <div class="ref_mag">
+            <div class="ref_line"><div class="ref_text">Author</div><div class="ref_input"><input class="ref_author ref_input"></div></div>
+            <div class="ref_line"><div class="ref_text">Title</div><div class="ref_input"><input class="ref_magtitle ref_input"></div></div>
+            <div class="ref_line"><div class="ref_text">Mag or Paper Name</div><div class="ref_input"><input class="ref_name ref_input"></div></div>
+            <div class="ref_line"><div class="ref_text">Date Published</div><div class="ref_input"><input class="ref_publishdate ref_input"></div></div>
+            <div class="ref_line"><div class="ref_text">Page</div><div class="ref_input"><input class="ref_page ref_input"></div></div>
+        </div>
+        <div class="ref_enc">
+            <div class="ref_line"><div class="ref_text">Author</div><div class="ref_input"><input class="ref_author ref_input"></div></div>
+            <div class="ref_line"><div class="ref_text">Entry Name</div><div class="ref_input"><input class="ref_entryname ref_input"></div></div>
+            <div class="ref_line"><div class="ref_text">Encyclopedia Name</div><div class="ref_input"><input class="ref_encname ref_input"></div></div>
+            <div class="ref_line"><div class="ref_text">Edition</div><div class="ref_input"><input class="ref_edition ref_input"></div></div>
+            <div class="ref_line"><div class="ref_text">Year</div><div class="ref_input"><input class="ref_year ref_input"></div></div>
+        </div>
+    </div>
+-->

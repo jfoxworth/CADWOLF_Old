@@ -1,0 +1,34 @@
+<!--
+    This is the directive that supports the specifics window for the video items. This is the window that pops up on the right side of the window and
+    lets the user change the height, width, id, and other items. The items are linked to the model of the currenVideo item on the parent scope. This 
+    currentVideo is set whenever a user clicks on the specifics item.
+-->
+
+
+<div id="video_spec" class="top_spec">
+    <div id="close_videospec"></div>
+    <div id="videospecs_main">
+        <div ng-click="videoSpecsShowInfo=!videoSpecsShowInfo;" class="videospecs_block"><div class="videospecs_option" id="videospecs_selectoptions"></div><div class="videospecs_label">Video Options</div></div>
+    </div>
+
+    <div ng-show="videoSpecsShowInfo" id="videospecs_option">	
+        <div class="specs_title">Video Options</div>
+        <div class="specs_line"><div class="specs_text">ID</div><input class="video_input" id="video_id" ng-model="currentVideo.data.videoID" ng-change="currentVideo.isDirty=true"></div>
+        <div class="specs_line"><div class="specs_text">Height</div><input class="video_input" id="video_height" ng-model="currentVideo.data.videoHeight" ng-change="currentVideo.isDirty=true"></div>
+        <div class="specs_line"><div class="specs_text">Width</div><input class="video_input" id="video_width" ng-model="currentVideo.data.videoWidth" ng-change="currentVideo.isDirty=true"></div>
+        <div class="specs_line"><div class="specs_text">Start</div><input class="video_input" id="video_start" ng-model="currentVideo.data.videoStart" ng-change="currentVideo.isDirty=true"></div>
+        <div class="specs_line"><div class="specs_text">Stop</div><input class="video_input" id="video_stop" ng-model="currentVideo.data.videoStop" ng-change="currentVideo.isDirty=true"></div>
+    </div>
+</div>
+
+<!--
+        <div class="video_line"><div class="video_text">Autoplay</div><select class="videoselect" id="selectautoplay"><option value="Disabled">Disabled</option><option value="Enabled">Enabled</option></div>
+        <div class="video_line"><div class="video_text">Loop</div><select class="videoselect" id="selectloop"><option value="Disabled">Disabled</option><option value="Enabled">Enabled</option></div>
+        <div class="video_line"><div class="video_text">Show Related</div><select class="videoselect" id="selectrelated"><option value="Disabled">Disabled</option><option value="Enabled">Enabled</option></div>
+        <div class="video_line"><div class="video_text">Show Info</div><select class="videoselect" id="selectinfo"><option value="Disabled">Disabled</option><option value="Enabled">Enabled</option></div>
+        <div class="video_line"><div class="video_text">Keyboard</div><select class="videoselect" id="selectkeyboard"><option value="Disabled">Disabled</option><option value="Enabled">Enabled</option></div>
+        <div class="video_line"><div class="video_text">Controls</div><select class="videoselect" id="selectcontrols"><option value="Disabled">Disabled</option><option value="Enabled">Enabled</option></div>
+        <div class="video_line"><div class="video_text">Color</div><select class="videoselect" id="selectcolor"><option value="Red">Red</option><option value="White">White</option></div>
+        <div class="video_line"><div class="video_text">Logo</div><select class="videoselect" id="selectlogo"><option value="Show">Show Logo</option><option value="Hide">Hide</option></div>
+        <div class="video_line"><div class="video_text">Theme</div><select class="videoselect" id="selecttheme"><option value="Dark">Dark</option><option value="Light">Light</option></div>
+-->
