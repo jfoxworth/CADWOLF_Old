@@ -233,7 +233,7 @@ the DOM. This info is read into memory on page load and deleted.
                                         <span if-else-object="obj"></span>
                                     </div>                                    
                                     <div class="switchWrapper" ng-switch-when="9" ng-click="$parent.$parent.formatDisplay=false;" ng-mouseover="showIcons=true;" ng-mouseout="showIcons=false" ng-if="obj.location>=showStartLoc&&obj.location<showEndLoc">
-                                        <div ng-if="editPerm" ng-show="showIcons" class="icon_wrapper"><div class="icon_holder"><div class="deletebutton" ng-click="$parent.deleteItem(obj)"></div><div ng-click="showSpecs(obj.itemid, 'plot')" class="plot_specs"></div><a class="expandbutton" ng-href="http://www.cadwolf.com/Charts/{{obj.itemid}}" target="_blank"></a></div></div>
+                                        <div ng-if="editPerm" ng-show="showIcons" class="icon_wrapper"><div class="icon_holder"><div class="deletebutton" ng-click="$parent.deleteItem(obj)"></div><div ng-click="showSpecs(obj.itemid, 'plot')" class="plot_specs"></div><a class="expandbutton" ng-href="http://www.cadwolf.com/Plots/{{obj.itemid}}" target="_blank"></a></div></div>
                                         <div class="plot_block"><div id="{{obj.itemid}}" class="plot_holder" ng-style="{height:obj.Chart_height, width:obj.Chart_width}"><span plot-bind="obj.Plot"></span></div></div>
                                         <span ref-num="obj.Values.References"></span>
                                     </div>                                    

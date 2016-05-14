@@ -137,6 +137,8 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
                 if ($scope.currentItem['vartype']=='3'){            dataObject=JSON.stringify($scope.currentItem['Equation']); 
                 }else if ($scope.currentItem['vartype']=='5'){      dataObject=JSON.stringify($scope.currentItem['props']);
                 }else if ($scope.currentItem['vartype']=='9'){      dataObject=JSON.stringify($scope.currentItem['Plot']);
+                }else if ($scope.currentItem['vartype']=='13'){     dataObject=JSON.stringify($scope.currentItem['Surface']);
+                }else if ($scope.currentItem['vartype']=='1'){      dataObject=$scope.currentItem['data'];
                 }else {                                             dataObject=JSON.stringify($scope.currentItem['data']); }
                 if ($scope.currentItem['vartype']=='3')
                 {   values['size']=$scope.currentItem['Equation']['Format_size'];
