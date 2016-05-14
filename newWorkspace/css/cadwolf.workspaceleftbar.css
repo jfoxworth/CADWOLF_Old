@@ -1,0 +1,607 @@
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------- ITEMS RELATED TO THE MINIMAL LEFTBAR LAYOUT -----------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+For the colors, the "Cherries on the Lake" pattern was used for colors. The "Theme 3" was also looked at.
+Red			-	#730324
+White		-	#DFE3E5
+Light Blue	-	#B4C4D4
+Middle Blue	-	#8BA2BD
+Dark Blue	-	#456382
+
+*/
+
+#leftColumnWrapper {
+	position:fixed;
+	top:0px;
+	left:0px;
+	width:64px;
+	height:100%;
+	font-size:1em;
+	font-family:'Arimo', sans-serif;
+	font-weight:300;
+	margin:0px;
+	padding:10px 0px;
+	color:#DFE3E5;
+	background-color:#0e1a21;
+	z-index:9999;
+}
+
+.leftColumnWrapper {
+	float:left;
+}
+
+
+#leftColumnIconsWrapper {
+	height:100%;
+	width:64px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	background-color:#0e1a21;
+}
+
+#leftColumnIcons {
+	width:64px;
+	float:left;
+	margin:50px 0px 0px 0px;
+}
+
+#leftColumnTextWrapper {
+	height:100%;
+	width:150px;
+	position:absolute;
+	left:64px;
+	top:0px;
+	background-color:#0e1a21;
+	font-family:sans-serif;
+	font-size:12px;
+	letter-spacing:1.5px;
+}
+
+#leftColumnText {
+	width:150px;
+	float:left;
+	margin:50px 0px 0px 0px;
+}
+
+.logoWrapper {
+	float:left;	
+	margin:20px 0px 0px 0px;
+}
+
+#logo {
+	float:left;
+	width:32px;
+	height:32px;
+	background:url("http://www.cadwolf.com/Images/whitelogo_32.png") no-repeat left top;
+	background-size:32px;
+	margin:0px 16px 30px 16px;
+}
+
+#logoText {
+	float:left;
+	width:150px;
+	height:32px;
+	font-family:Cinzel;
+	letter-spacing:3px;
+	font-size:1.5em;
+	padding:10px 0px 0px 0px;
+	margin:0px 0px 30px 0px;
+}
+
+.userWrapper {
+	float:left;	
+}
+
+#user {
+	float:left;
+	width:24px;
+	height:24px;
+	margin:8px 20px;
+	cursor:pointer;
+	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -370px -324px;;
+}
+
+#userText {
+	float:left;
+	width:150px;
+	height:24px;
+	padding:0px 0px 0px 0px;
+	margin:4px 0px 4px 0px;
+}
+
+.userAnchor {
+	text-decoration:none;
+	color:#DFE3E5;
+}
+
+
+#saveFile {
+	float:left;
+	width:16px;
+	height:16px;
+	margin:8px 24px;
+	cursor:pointer;
+	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -306px -499px;;
+}
+
+#saveFileText {
+	float:left;
+	width:150px;
+	height:16px;
+	padding:0px 0px 0px 0px;
+	margin:8px 0px 8px 0px;
+	color:#730324;
+	cursor:pointer;
+}
+
+.leftNav {
+	float:left;
+	margin:8px 24px;
+	cursor:pointer;
+	height:16px;
+	width:16px;	
+}
+
+.view_paste_current, .view_results_current, .view_info_current, .view_settings_current, .view_paste, .view_results, .view_info, .view_settings, .permissions, .folders, .permissions_current, .folders_current 
+{   float:left;
+	margin:8px 24px;
+	cursor:pointer;
+	height:16px;
+	width:16px;	    
+}
+
+.show_worksheet_current, .show_toc_current, .show_file_current, .show_inputs_current, .show_faf_current, .show_functions_current, 
+.show_ifuns_current, .show_numbers_current, .show_constants_current, .show_refs_current, .show_datasets_current, .show_bugs_current,
+.show_worksheet, .show_toc, .show_file, .show_inputs, .show_faf, .show_functions, .show_ifuns, .show_numbers, .show_constants, .show_refs, .show_datasets, .show_bugs
+{
+	float:left;
+	margin:8px 24px;
+	cursor:pointer;
+	height:16px;
+	width:16px;	
+}
+
+
+
+
+.view_info_current	 	{ background: url(http://www.cadwolf.com/Images/dataset_sprite.png) no-repeat -3px -60px; }				
+.view_paste_current 	{ background: url(http://www.cadwolf.com/Images/dataset_sprite.png) no-repeat -75px -61px; }
+.view_results_current 	{ background: url(http://www.cadwolf.com/Images/dataset_sprite.png) no-repeat -27px -60px; }
+.view_info				{ background: url(http://www.cadwolf.com/Images/dataset_sprite.png) no-repeat -3px -36px; }				
+.view_paste				{ background: url(http://www.cadwolf.com/Images/dataset_sprite.png) no-repeat -75px -37px; }
+.view_results 			{ background: url(http://www.cadwolf.com/Images/dataset_sprite.png) no-repeat -27px -36px; }
+.folders_current 		{ background: url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -3px -118px; }
+.permissions_current	{ background: url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -26px -117px; }
+.folders				{ background: url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -3px -97px; }
+.permissions			{ background: url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -25px -96px; }
+/*
+.view_settings_current 	{ background: url(http://www.cadwolf.com/Images/dataset_sprite.png) no-repeat -75px -61px; }				
+.view_settings  		{ background: url(http://www.cadwolf.com/Images/dataset_sprite.png) no-repeat -75px -37px; }				
+*/
+
+.leftNavText {
+	float:left;
+	cursor:pointer;
+	width:150px;
+	height:16px;
+	padding:0px 0px 0px 0px;
+	margin:8px 0px 8px 0px;
+	color:#456382;
+}
+
+.leftNavTextCurrent {
+	float:left;
+	width:150px;
+	height:16px;
+	padding:0px 0px 0px 0px;
+	margin:8px 0px 8px 0px;
+	color:#DFE3E5;
+}
+
+.left_subcolumn {
+	height:100%;
+	width:180px;
+	position:fixed;
+	top:0px;
+	left:64px;
+}
+
+.left_subcolumnInner {
+	width:180px;
+	position:absolute;
+	top:50%;
+	-ms-transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	transform:translateY(-50%);
+}
+
+.left_subcolumnInnerShort {
+	width:180px;
+	position:absolute;
+	top:25%;
+}
+
+.leftMask {
+	opacity:0.15;
+}
+.leftMask:hover {
+	opacity:1;
+}
+/*
+#show_worksheet {	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -2px -324px; 	 height:24px; width:24px;	}
+#show_toc 		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -34px -322px;  height:24px; width:24px;	}
+#show_file		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -65px -325px;  height:24px; width:24px;	}
+#show_inputs	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -128px -325px; height:24px; width:24px;	}
+#show_faf		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -100px -324px; height:24px; width:24px;	}
+#show_functions {	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -188px -321px; height:24px; width:24px;	}
+#show_ifuns		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -252px -322px; height:24px; width:24px;	}
+#show_numbers 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -311px -323px; height:24px; width:24px;	}
+#show_constants	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -156px -322px; height:24px; width:24px;	}
+#show_refs		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -340px -325px; height:24px; width:24px;	}
+#show_datasets	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -219px -322px; height:24px; width:24px;	}
+#show_bugs		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -280px -322px; height:24px; width:24px;	}
+*/
+
+#show_worksheet_current {	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -4px -500px; 	 }
+#show_toc_current 		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -28px -500px;  }
+#show_file_current		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -51px -501px;  }
+#show_inputs_current	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -99px -500px;  }
+#show_faf_current		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -75px -501px;  }
+#show_functions_current {	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -142px -500px; }
+#show_ifuns_current		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -165px -500px; }
+#show_numbers_current 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -258px -499px; }
+#show_constants_current	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -120px -500px; }
+#show_refs_current		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -234px -500px; }
+#show_datasets_current	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -186px -500px; }
+#show_bugs_current		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -210px -499px; }
+
+
+#show_worksheet {	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -0px -523px; 		}
+#show_toc 		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -28px -523px; 	}
+#show_file		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -51px -523px; 	}
+#show_inputs	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -98px -523px; 	}
+#show_faf		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -75px -523px; 	}
+#show_functions {	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -142px -522px; 	}
+#show_ifuns		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -163px -521px; 	}
+#show_numbers 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -258px -520px; 	}
+#show_constants	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -121px -521px; 	}
+#show_refs		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -233px -521px; 	}
+#show_datasets	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -187px -521px; 	}
+#show_bugs		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -210px -521px; 	}
+
+.show_worksheet_current {	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -4px -500px; 	 }
+.show_toc_current 		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -28px -500px;  }
+.show_file_current		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -51px -501px;  }
+.show_inputs_current	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -99px -500px;  }
+.show_faf_current		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -75px -501px;  }
+.show_functions_current {	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -142px -500px; }
+.show_ifuns_current		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -165px -500px; }
+.show_numbers_current 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -258px -499px; }
+.show_constants_current	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -120px -500px; }
+.show_refs_current		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -234px -500px; }
+.show_datasets_current	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -186px -500px; }
+.show_bugs_current		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -210px -499px; }
+
+
+.show_worksheet {	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -0px -523px; 		}
+.show_toc 		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -28px -523px; 	}
+.show_file		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -51px -523px; 	}
+.show_inputs	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -98px -523px; 	}
+.show_faf		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -75px -523px; 	}
+.show_functions {	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -142px -522px; 	}
+.show_ifuns		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -163px -521px; 	}
+.show_numbers 	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -258px -520px; 	}
+.show_constants	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -121px -521px; 	}
+.show_refs		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -233px -521px; 	}
+.show_datasets	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -187px -521px; 	}
+.show_bugs		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -210px -521px; 	}
+
+#viewStructure_current	{ background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -182px -191px; }
+#viewList_current		{ background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -28px -190px; }
+#viewPermissions_current{ background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -95px -190px; }
+#viewStructure			{ background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -140px -190px; }
+#viewList				{ background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -1px -192px; }
+#viewPermissions		{ background: url(http://www.cadwolf.com/Images/parttree_sprite.png) no-repeat -73px -190px; }
+
+#viewProfile_current	{ background: url(http://www.cadwolf.com/Images/profile_sprite.png) no-repeat -23px -61px; }
+#viewFAF_current		{ background: url(http://www.cadwolf.com/Images/profile_sprite.png) no-repeat -68px -62px; }
+#viewPass_current		{ background: url(http://www.cadwolf.com/Images/profile_sprite.png) no-repeat -117px -63px; }
+#viewProfile			{ background: url(http://www.cadwolf.com/Images/profile_sprite.png) no-repeat -2px -62px; }
+#viewFAF				{ background: url(http://www.cadwolf.com/Images/profile_sprite.png) no-repeat -47px -62px; }
+#viewPass				{ background: url(http://www.cadwolf.com/Images/profile_sprite.png) no-repeat -94px -62px; }
+
+#folders_current 		{ background: url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -3px -118px; }
+#permissions_current	{ background: url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -26px -117px; }
+#folders				{ background: url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -3px -97px; }
+#permissions			{ background: url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -25px -96px; }
+
+.leftBlank {
+	float:left;
+	width:64px;
+	height:24px;
+}
+
+.userLine {
+	float:left;
+	width:150px;
+	height:24px;
+	font-size:10px;
+}
+
+.userItem {
+	text-decoration:none;
+	color:#DFE3E5;
+	width:150px;
+	margin:0px 0px 0px 20px;
+	cursor:pointer;
+}
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------- Block Sections on the Left -----------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+.insertLine {
+	float:left;
+	width:150px;
+	height:20px;
+	padding:0px 0px 1px 10px;
+}
+
+.insertLine:hover {
+	background-color:#B4C4D4;
+}
+
+.insertImage {
+	float:left;
+	width:16px;
+	height:16px;
+	margin:2px 4px 2px 4px; 	
+}
+
+.insertText {
+	float:left;
+	width:81px;
+	height:18px;
+	margin:2px 0px 0px 19px; 		
+}
+
+#addtext		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -1px -547px; }
+#addheader		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -28px -547px; }
+#addline		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -55px -547px; }
+#addequation	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -75px -547px; }
+#addplot		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -261px -543px; }
+#addtable		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -100px -546px; }
+#addforloop		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -170px -545px; }
+#addwhileloop	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -147px -546px; }
+#addifelse		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -191px -545px; }
+#addsymbolic	{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -123px -546px; }
+#addimage		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -214px -544px; }
+#addvideo		{	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -238px -543px; }
+
+
+.lc_description {
+	width:100%;
+	text-align:center;
+	letter-spacing:2px;
+	margin:10px 0px 0px 0px;
+	height:14px;
+	float:left;
+	cursor:pointer;
+	text-transform:uppercase;
+	font-size:0.9em;
+	color:#000000;
+}
+
+.lc_description_left {
+	float:left;
+	width:90px;
+	border-right:1px solid #000000;
+	height:10px;
+}	
+
+.lc_description_right {
+	float:right;
+	width:89px;
+	height:10px;
+}
+
+.lc_description_bottom {
+	float:left;
+	width:160px;
+	border-top:1px solid #000000;
+	border-left:1px solid #000000;
+	border-right:1px solid #000000;
+	margin:0px 10px 0px 10px;
+	height:10px;
+}	
+
+.newblock_block {
+	width:160px;
+	margin:-3px 10px 10px 10px;
+	float:left;
+	color:#456382;
+	cursor:pointer;
+}
+
+.newblock_block2 {
+	width:170px;
+	margin:-15px 50px 40px 97px;
+	float:left;
+}
+
+.tool_blockwrapper {
+	float:left;
+	width:24px;	
+	text-align:left;
+	padding:0px;	
+	margin:0px 8px 10px 8px;
+	border-radius:5px;
+	cursor:pointer;
+	letter-spacing:2px;
+	font-size:0.75em;
+}
+
+.tool_block {
+	float:right;
+	text-align:center;
+	padding:0px 0px 0px 0px;	
+	margin:0px 0px 0px 0px;
+	width:24px;
+	height:24px;
+}
+
+#view_text {
+	
+}
+
+.description_label {
+	width:100%;
+	text-align:center;
+	height:20px;
+	float:left;
+	margin:0px 0px 10px 0px;
+	font-size:0.85em;
+}
+
+.tool_movewrapper {
+	float:left;
+	width:auto;	
+	text-align:left;
+	padding:0px;	
+	margin:0px;
+	font-size:0.75em;
+}
+
+.tool_move {
+	float:left;
+	padding:0px 0px;	
+	margin:0px 5px;
+	width:24px;
+	height:24px;
+}
+
+
+#move_loc {
+	float:left;
+	width:60px;
+	margin:0px 10px;
+	padding:0px;
+}
+
+#thislocation {
+	text-align:center;
+}
+
+#upone {
+	float:left;
+	cursor:pointer;
+	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -282px -248px; height:24px; width:24px;
+}
+
+#downone {
+	float:left;
+	cursor:pointer;
+	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -252px -248px; height:24px; width:24px;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------ The left column -----------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+#forloopinfo, #whileloopinfo, #equationinfo, #ifelseinfo, #tableinfo {
+	display:none;
+}
+
+.left_section {
+	float:left;
+	width:160px;
+	margin:0px 0px 0px 10px;
+}
+
+.left_header {
+	float:left;
+	width:90%;
+	font-size:20px;
+	border-bottom:2px solid #8BA2BD;
+	padding:0 0 5px;
+	margin:0px 5% 10px 5%;
+	cursor:pointer;
+	color:#000000;
+	letter-spacing:2px;
+	text-transform:uppercase;
+}
+
+.left_suboptions {
+	width:150px;
+	margin:0px 10px;
+	float:left;
+}
+
+.left_line {
+	float:left;
+	width:140px;
+	font-size:1em;
+	font-weight:normal;
+	border-bottom:1px solid #ccc;
+	padding:5px 0px 5px 0px;
+	margin:0px 0px 0px 0px;
+	cursor:pointer;
+	letter-spacing:1px;
+	color:#000000;
+}
+
+.left_item {
+	float:left;
+	width:60px;
+	margin:5px 0px 0px 0px;
+	font-size:0.8em;
+}
+
+.right_item {
+	float:left;
+	width:60px;
+}
+
+input.left_format {
+	width:50px;
+	height:20px;
+	padding:0px;
+	margin:0px 0px 0px 5px;
+	font-size:1em;
+	border:1px solid #DDD;
+	background-color:#FFF;
+	color:#000;
+	letter-spacing:1px;
+	text-align:center;
+}
+
+.left_px {
+	float:left;
+	width:15px;
+	padding:0px;
+	margin:0px;
+	font-size:10px;
+	padding:5px 0px 0px 4px;
+	color:#000000;
+}
+
+#equationvalue {
+	overflow:hidden;
+}
+
+

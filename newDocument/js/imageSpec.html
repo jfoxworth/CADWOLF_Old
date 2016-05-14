@@ -1,0 +1,25 @@
+<div id="image_spec" class="top_spec">
+
+    <div id="close_imagespec"></div>
+    <div id="imagespecs_main">
+        <div ng-click="imageSpecsShowSelect=!imageSpecsShowSelect; imageSpecsShowProps=false; imageSpecsShowRefs=false;" class="imagespecs_block"><div class="imagespecs_option" id="imagespecs_showselect"></div><div class="imagespecs_label">Select</div></div>
+        <div ng-click="imageSpecsShowSelect=false; imageSpecsShowProps=!imageSpecsShowProps; imageSpecsShowRefs=false;" class="imagespecs_block"><div class="imagespecs_option" id="imagespecs_showprops"></div><div class="imagespecs_label">Props</div></div>
+        <div ng-click="imageSpecsShowSelect=false; imageSpecsShowProps=false; imageSpecsShowRefs=!imageSpecsShowRefs;" class="imagespecs_block"><div class="imagespecs_option" id="imagespecs_showrefs"></div><div class="imagespecs_label">Refs</div></div>
+    </div>
+
+
+    <div ng-show="imageSpecsShowSelect" id="imagespecs_select">	
+        <div id="imageselect_address"><input type="text" id="imgselect" placeholder="Enter Address Here"/></div>
+        <div id="imageselect_images"></div>
+    </div>
+
+    <div ng-show="imageSpecsShowProps" id="imagespecs_props">	
+<!--//		<div class="image_prop" id="imgname">Name :</div>
+//			<div class="image_prop" id="imgupload">Upload Date :</div>-->
+        <div class="image_prop">Height :</div>
+        <div class="image_prop">Width :</div>
+    </div>
+
+    <div ng-show="imageSpecsShowRefs" id="imagespecs_ref"><span reference-object="currentImage"></span></div>
+
+</div>

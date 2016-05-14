@@ -136,14 +136,15 @@ public function GetData($DirInfo, $Data, $itemid) 																													/
 				{	return 1; 																																			//	
 				}else																																					//
 				{	$flag=0;																																			//
-					Controller::loadModel('Groupuser');																													//
+/*					Controller::loadModel('Groupuser');																													//
 					$groupData=$this->Groupuser->find('all', array('conditions' => array('userid' => $userID )));														//
 					if (isset($groupData))																																//
 					{	foreach ($goupData as $index=>$thisFolder)																										//
 						{	if ($this->Permission->hasAny(array('workspace_id' => $DirInfo['ID'], 'userid'=>$thisFolder[$index]['Groupuser']['groupid'], $permType=>'1')));	//
 							{	$flag=1;	}																															//
 					}	}																																				//
-					if ($flag==1){ return 1; }else { return 0; }																										//
+*/
+                    if ($flag==1){ return 1; }else { return 0; }																										//
 				}																																						//
 			}else { return 0; }		 																																	//
 		}else { echo($fileURL); }																																		//

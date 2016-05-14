@@ -28,7 +28,8 @@
 		DOM_Object=Event.data['EqObj'];																																//	\
 		ImportedFunctions=Event.data['ImportedFunctions'];																											//	\
 		FileID=Event.data['FileID'];																																//	\
-		Units_Object=Event.data['Units_Object'];																													//	\
+		console.log('The file id sent was '+FileID);
+        Units_Object=Event.data['Units_Object'];																													//	\
 		ParseUnits=Event.data['ParseUnits'];																														//	\
 		Constants={};																																				//	\
 		Constants['pi']={};		Constants['pi']['value']=Math.PI;		Constants['pi']['units']='';																//	\
@@ -345,7 +346,8 @@ function solveTableFill(fileID, tableID, Location, fillType, tableRow, tableCol,
 /*------------------------------------------------------------------------ GET ID -------------------------------------------------------------------------------------*/
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 function Get_ID(type, file) 																																		//	\ 
-{	var flag=0, id='', testflag=0, PlotID='', DataID='', AxisID='', RID='', LineID='', BandID='', RefID='';															//	\
+{	if ((file===undefined)||(file=='')){ file=FileID; }                                                                                                             //  \
+    var flag=0, id='', testflag=0, PlotID='', DataID='', AxisID='', RID='', LineID='', BandID='', RefID='';															//	\
 	file="File"+file;  																																				//	\
 	if (type=="Equation") 				{ while (flag===0)	{ id=file+'var'+Math.floor((Math.random()*100000)+1); 		if (DOM_Object[id]===undefined){ flag=1; } }//	\
 	}else if (type=="ForLoop") 			{ while (flag===0)	{ id=file+'forloop'+Math.floor((Math.random()*10000)+1); 	if (DOM_Object[id]===undefined){ flag=1; } }//	\ 
@@ -1441,7 +1443,9 @@ function MatchClosestEquation(thisname, thislocation, thisid, index, insert)				
 		if ((insert=="1")&&(DOM_Object[answer]!==undefined))																												//	\
 		{	if ((DOM_Object[answer]['type']=="equation")&&(answer!=thisname))																								//	\
 			{	eqobj={Page_position:DOM_Object[thisid]['location'], equation:"MyEq=0", Format_showtype:"variable", Format_name:"MyEq"};									//	\
-				newid=CreateEq(DOM_Object[thisid]['fileid'], 0, eqobj);																										//	\	
+                if ((DOM_Object[thisid]['fileid']===undefined)||(DOM_Object[thisid]['fileid']=='')){ DOM_Object[thisid]['fileid']=FileID; }                                 //  \
+             console.log('Looking to create a new equation to match '+DOM_Object[thisid]['name']+' with the fileid '+DOM_Object[thisid]['fileid']);
+                newid=CreateEq(DOM_Object[thisid]['fileid'], 0, eqobj);																										//	\	
 				self[newid].Format_showequation=self[thisid].Solution_variable_array[index];																				//	\
 				self[thisid].Solution_variable_array[index]=newid; 																											//	\	
 				self[thisid].Solution_temps.push(newid);																													//	\
@@ -1568,7 +1572,8 @@ Equation.prototype.Replace_Numbers = function(callback)																		//	\
 		{	number=parseFloat(Big(this.Solution_variable_array[index]));													//	\
 			eqobj={Page_position:DOM_Object[this.Original_id]['location'], Format_showtype:"number",						//	\
 			Original_id:this.Format_id, equation:"TempEq="+this.Solution_variable_array[index]};							//	\
-			id=CreateEq(this.fileid, 0, eqobj);																				//	\
+console.log('Replacing numbers with a file ID of '+this.fileid);
+            id=CreateEq(this.fileid, 0, eqobj);																				//	\
 			this.Solution_temps.push(id);																					//	\
 			self[id].Solution_real['0-0']=number;																			//	\
 			self[id].Format_showequation=this.Solution_variable_array[index];												//	\
@@ -2318,7 +2323,8 @@ Equation.prototype.SolvePostFix = function(callback)																					//	\
 	numbers is an array, the proper function is performed.																					\
 /*-----------------------------------------------------------------------------------------------------------------------------------------*/
 function SolveMath (operator, pop1, pop2, id)																							//	\
-{	if (DOM_Object[pop1]['size']==='') {DOM_Object[pop1]['size']='1x1'; }																//	\
+{	console.log('Pop1 and Pop2 are '+pop1+' and '+pop2+' with an operator of '+operator);
+    if (DOM_Object[pop1]['size']==='') {DOM_Object[pop1]['size']='1x1'; }																//	\
 	if (DOM_Object[pop2]['size']==='') {DOM_Object[pop2]['size']='1x1'; }																//	\
 	var solution=''; var type1=1; var type2=1;																							//	\
 	if (self[pop1]) { if ((self[pop1].Format_size=="1x1")) { type1=1; }else { type1=3; } }												//	\
@@ -3351,13 +3357,18 @@ function MultMatrices (id1, id2, operator, thisid)																										//	\
 	size=index1+"x"+index2;																																//	\
 	var baseunits=new Array();																															//	\
 	for(var index in self[id1].Units_base_array) { baseunits[index]=self[id1].Units_base_array[index]+self[id2].Units_base_array[index]; 	}			//	\
-	var id=Get_ID("Equation");																															//	\
-	self[id]=new Equation(id);																															//	\
-	self[id].Solution_real=solution_realarray;																											//	\
-	self[id].Solution_imag=solution_imagarray;																											//	\
-	self[id].Format_size=size;																															//	\
-	self[id].Format_numinds=self[id1].Format_numinds;																									//	\
-	self[id].Units_base_array=baseunits;																												//	\
+	var eqobj={Page_position:DOM_Object[this.Format_id]['location'], Format_showtype:"InnerFunction", 													//	\
+	Original_id:this.Original_id, equation:"MyEq="+0, Solution_real:solution_realarray, Solution_imag:solution_imagarray, Format_size:size,           //  \
+    Format_numinds:self[id1].Format_numinds, Units_base_array:baseunits       };				                                        				//	\
+	var id=CreateEq(this.fileid, 0, eqobj);																											//	\
+console.log('The equation created at the end of multmatricces is '+id);
+//    var id=Get_ID("Equation");																															//	\
+//	self[id]=new Equation(id);																															//	\
+//	self[id].Solution_real=solution_realarray;																											//	\
+//	self[id].Solution_imag=solution_imagarray;																											//	\
+//	self[id].Format_size=size;																															//	\
+//	self[id].Format_numinds=self[id1].Format_numinds;																									//	\
+//	self[id].Units_base_array=baseunits;																												//	\
 	self[id].Get_BaseString();																															//	\
 	self[id].Recompose_Units(); 																														//	\
 	return id;																																			//	\
@@ -7512,7 +7523,8 @@ Equation.prototype.power = function(text, pid, pos, callback)															//	\
 	{ Set_Error(this.Original_id, "Power4"); }																			//	\
 	var eqobj={Page_position:DOM_Object[this.Format_id]['location'], Format_showtype:"InnerFunction", 					//	\
 			Original_id:this.Original_id, equation:"TempEq=0"};															//	\
-	var id=CreateEq(this.fileid, 0, eqobj);																				//	\
+console.log('In power, the fileid is '+this.fileid);
+    var id=CreateEq(this.fileid, 0, eqobj);																				//	\
 	if (self[id1].Format_size=="1x1")																					//	\
 	{	for (var i in self[id2].Solution_real) 																			//	\
 		{ 	if (self[id2].Solution_real[i]===undefined) { base_real=self[id2].Solution_realdefault; 					//	\
@@ -7615,6 +7627,7 @@ Equation.prototype.power = function(text, pid, pos, callback)															//	\
 	self[pid].Solution_variable_array.splice(parseInt(pos, 10)+1,1);													//	\
 	self[pid].Solution_key_array.splice(parseInt(pos, 10)+1,1);															//	\
 	self[pid].Remove_BuiltInEquations(parseInt(pos, 10)+1, callback);													//	\
+ console.log('Returned an equation from power with an id of '+id);
 }																														//	\
 //-------------------------------------------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------//
@@ -7851,16 +7864,18 @@ Equation.prototype.MatPow = function(text, pid, pos, callback)		 															
 //-------------------------------------------------------------------------------------------------------------------------//
 //---------------------------------- CREATE AND POSSIBLY SOLVE NEW EQUATION OBJECT ----------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------//
-function CreateEq(fileid, solve, eqobj)																					//	\--- This function is called to create and possibly solve new equation objects
-{	if (eqobj['id']!==undefined) { id=eqobj['id']; }else { var id=Get_ID("Equation", fileid);	}						//	\--- The need for the function arose out of repeated need to create temporary 
+function CreateEq(thisFile, solve, eqobj)																					//	\--- This function is called to create and possibly solve new equation objects
+{	if ((thisFile===undefined)||(thisFile=='')){ thisFile=FileID; }
+    if (eqobj['id']!==undefined) { id=eqobj['id']; }else { var id=Get_ID("Equation", thisFile);	}						//	\--- The need for the function arose out of repeated need to create temporary 
 	self[id]=new Equation(id);																							//	\--- equations and the absurd use of space that this created.
 	DOM_Object[id]={};	DOM_Object[id]['Dependents']={};	DOM_Object[id]['children']={};								//	\
 	DOM_Object[id]['active']=1;				DOM_Object[id]['Descendents']={};		DOM_Object[id]['name']="TempEq";	//	\
 	DOM_Object[id]['parent']="none";		DOM_Object[id]['topparent']="none";		DOM_Object[id]['type']="equation";	//	\
-	DOM_Object[id]['real']={};				DOM_Object[id]['imag']={};				DOM_Object[id]['fileid']=fileid;	//	\
+	DOM_Object[id]['real']={};				DOM_Object[id]['imag']={};				DOM_Object[id]['thisFile']=thisFile;	//	\
 	DOM_Object[id]['units']={};				DOM_Object[id]['numinds']=2;												//	\
-	var filename=fileid+'';																								//	\
-//	DOM_Object[id]['fileid']=filename.replace(/^File/,'').match(/^[0-9]+/);												//	\
+console.log('The file id sent to create the creation '+eqobj['equation']+' was '+thisFile);
+    var filename=thisFile+'';																								//	\
+//	DOM_Object[id]['thisFile']=filename.replace(/^File/,'').match(/^[0-9]+/);												//	\
 	DOM_Object[id]['ID']=id;																							//	\
 	if (eqobj['Page_position']!==undefined) {	DOM_Object[id]['location']=eqobj['Page_position']; 	}else{ DOM_Object[id]['location']=0; }//	\
 	if (eqobj['Page_position']!==undefined) {	self[id].Page_position=eqobj['Page_position'];			}				//	\
@@ -7875,7 +7890,7 @@ function CreateEq(fileid, solve, eqobj)																					//	\--- This functio
 	if (eqobj['Format_equation']!==undefined) 	{	DOM_Object[id]['equation']=eqobj['Format_equation'];}				//	\
 	if (eqobj['equation']!==undefined) 	{	DOM_Object[id]['equation']=eqobj['equation'];	}							//	\
 	if (eqobj['equation']!==undefined) 	{	self[id].Format_equation=eqobj['equation'];	}								//	\
-	self[id].fileid=fileid;																								//	\
+	self[id].fileid=thisFile;																								//	\
 	for (var prop in eqobj)	{	self[id][prop]=eqobj[prop];	}															//	\--- The function takes in the file id, a 1 or 0 on whether or not to solve the 
 	if (solve) { self[id].Solve_Equation(eqobj['equation']);	}														//	\--- equation, and an object holding the properties of the equation. The properties
 	return id;																											//	\--- are set and if the solve is set to 1, the equation is solved.
@@ -10702,10 +10717,8 @@ function Get_Table_Elements(text, option)																				//	\
 	function ScalarOperation(operation, id1, id2)																											//	\
 	{	if ((self[id1].Format_size=="1x1")||(self[id1].Format_size=="1 x 1")) { var numid=id1; var matrixid=id2; var order="1"; }							//	\
 		if ((self[id2].Format_size=="1x1")||(self[id2].Format_size=="1 x 1")) { var numid=id2; var matrixid=id1; var order="2"; }							//	\
-		var id=Get_ID("Equation");																															//	\
-		self[id]=new Equation(id);																															//	\
-		self[id].Format_name="TempEq";																														//	\
-		self[id].Format_size=self[matrixid].Format_size;																									//	\
+        var eqobj={Page_position:DOM_Object[id1]['location'], equation:"TempEq=0", Format_size:self[matrixid].Format_size};	                                //	\
+		var id=CreateEq("Equation", 0, eqobj);																												//	\
 		switch (operation)																																	//	\
 		{	case "*":																																		//	\
 				for (var i in self[matrixid].Solution_real) 																								//	\

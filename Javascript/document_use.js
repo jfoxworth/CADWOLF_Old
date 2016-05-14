@@ -17,6 +17,7 @@ $(document).ready(function(){ 																													//	\--- This function
 		BuildParseUnits(function(){ GetDependents(fileid, function(){ PlaceRefs (function(){ FormatItems(function(){ MakeBigChart( function(){ 	//	\
 		}); }); }); }); }); }); }); }); }); }); });	Big.DP=16;																					//	\
 });																																				//	\
+	$('#equation_spec, #image_spec, #loop_spec, #symeq_spec, #text_spec, #video_spec').hide();													//	\
 //-------------------------------------------------------------------------------------------------------------------------------------------------//
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------//
@@ -45,6 +46,7 @@ function FormatItems(callback)																													//	\--- This function
 			}else { $('#'+id).find('.eqshow').html('$$'+window[id].Format_left+"="+window[id].Format_showequation+"="+window[id].Format_showsolution+'$$');	}
 			$('#'+id).find('.eqparam').val(window[id].Format_name+"="+window[id].Format_right);													//	\
 			for (eqID in window[id].connected_ids){ $('#'+eqID).closest('.main_item').hide(); }		}											//	\
+			if (window[id]!==undefined) { if (window[id]['inputID']!=='') { $('#'+id).closest('.main_item').hide(); }	}						//	\
 	});																																			//	\
 	$(".symequationblock").each(function(index) {																								//	\
 		var id=$(this).attr('id');																												//	\

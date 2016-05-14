@@ -202,9 +202,11 @@ aside {
 
 #logo {
     background:url(http://www.cadwolf.com/Images/whitelogo.gif);
-    height:300px;
+    background:url(http://www.cadwolf.com/Images/cadwolf_Logo_White.png);
+    height:280px;
     width:550px;
-    margin:auto;
+    margin:0px auto 20px;
+    background-size:100%;
 }
 
 .header-fade {

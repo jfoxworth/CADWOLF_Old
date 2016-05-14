@@ -16,7 +16,14 @@ $(document).ready(function(){ 																													//	\--- This function
 		FormatIfElseStatements(function () { HandleTOC( function() { BuildScaleUnits(function() { 												//	\
 		BuildParseUnits(function(){ GetDOM(fileid, function(){ PlaceRefs (function(){ FormatItems(function(){ MakeBigChart( function(){ 		//	\
 		checkInputs( function(){ CheckDOM();	}); }); }); }); }); }); }); }); }); }); }); });	Big.DP=16;										//	\
-});																																				//	\
+        equationWorker = new Worker("http://www.cadwolf.com/js/EquationSolver.js");			     						             			//	\
+        plotWorker = new Worker("http://www.cadwolf.com/js/EquationSolver.js");																	//	\
+        solutionWorker = new Worker("http://www.cadwolf.com/js/EquationSolver.js");																//	\
+        loopWorker = new Worker("http://www.cadwolf.com/js/EquationSolver.js");																	//	\
+        structureWorker = new Worker("http://www.cadwolf.com/js/EquationSolver.js");						             						//	\
+        whileLoopWorker = new Worker("http://www.cadwolf.com/js/EquationSolver.js");															//	\
+        ifElseWorker = new Worker("http://www.cadwolf.com/js/EquationSolver.js");														     	//	\
+			});																																	//	\
 //-------------------------------------------------------------------------------------------------------------------------------------------------//
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------//
@@ -1087,7 +1094,8 @@ function Create_EqObj(id, callback)																									//	\
 		{	if (window[id].EqObj[ItemID]===undefined){ flag=1; 																		//	\
 			}else if (DOM_Object[ItemID]['location']>window[id].EqObj[ItemID]['location']){ flag=1; }								//	\
 			if ((flag==1)&&(DOM_Object[ItemID]['active']))																			//	\
-			{	window[id].EqObj[ItemID]={};																						//	\
+			{	
+                window[id].EqObj[ItemID]={};																						//	\
 				window[id].EqObj[ItemID]['name']=DOM_Object[ItemID]['name'];														//	\
 				window[id].EqObj[ItemID]['type']="equation";																		//	\
 				window[id].EqObj[ItemID]['size']=window[ItemID]['Format_size'];														//	\
@@ -1151,7 +1159,7 @@ function Create_EqObj(id, callback)																									//	\
 //-------------------------------------------------------------------------------------------------------------------------------------*/
 function Call_Solver (id, equation, fileid)																							//	\
 {	var objProp='', eqobj={}, tempid='', eqID='', eq='', tempid='', flag='', thisid='', tempname=[];								//	\
-	var equationWorker = new Worker("http://www.cadwolf.com/js/EquationSolver.js?");												//	\
+//	var equationWorker = new Worker("http://www.cadwolf.com/js/EquationSolver.js");			     									//	\
 	equationWorker.postMessage({																									//	\
 		"cadwolfType":"SolveEquation", 																								//	\
 		"Equation":equation,																										//	\
@@ -1208,8 +1216,8 @@ function Call_Solver (id, equation, fileid)																							//	\
 		if (returnObject.messageType=="WhileLoopParametersResult") 	{	UpdateWhileLoopParams(returnObject);	}					//	\
 		if (returnObject.messageType=="IfElseParametersResult") 	{	UpdateIfElseParams(returnObject);	}						//	\
 		if (returnObject.messageType=="StructureResult") 			{	UpdateStructure(returnObject);	}							//	\
-		equationWorker.terminate();																									//	\
-		equationWorker=undefined;																									//	\
+//		equationWorker.terminate();																									//	\
+//		equationWorker=undefined;																									//	\
 	}																																//	\	
 	if (typeof(callback)=="function") { callback();	}																				//	\
 };																																	//	\
@@ -1413,7 +1421,7 @@ function UpdateDep(callback)																											//	\
 		}																																//	\
 	}																																	//	\
 	for (var itemID in DOM_Object)				                        																//	\
-	{	if (DOM_Loc[a]!==undefined) 																									//	\
+	{	if (DOM_Loc[itemID]!==undefined) 																								//	\
 		{	if (DOM_Loc[itemID]['type']=="plot")                                                                                        //  \
             {   for (var textID in window[itemID]['Chart_textobj']){ FormatPlotText(PlotID, textID, DrawPlotText(PlotID, textID)); } }	//	\
         }                                                                                                                               //  \
@@ -1570,7 +1578,7 @@ Equation.prototype.Equation_Display = function()																						//	\
 /*	This is the function that sends the equation object to a worker. That worker then formats the solution according to the properties in the equation.					\
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 function callFormatSolver(eqID)																																		//	\
-{	var solutionWorker = new Worker("http://www.cadwolf.com/js/EquationSolver.js");																					//	\
+{	//var solutionWorker = new Worker("http://www.cadwolf.com/js/EquationSolver.js");																					//	\
 	solutionWorker.postMessage({																																	//	\
 		"cadwolfType":"FormatSolution", 																															//	\
 		"Units_Object":Units_Object,																																//	\
@@ -1586,8 +1594,8 @@ function callFormatSolver(eqID)																																		//	\
 			$('#'+id).find('.eqshow').html("$${"+window[id].Format_left+"="+window[id].Format_showequation+"="+window[id].Format_showsolution+"}$$");				//	\
 			MathJax.Hub.Queue(["Typeset",MathJax.Hub,id]);																											//	\
 		}																																							//	\
-		solutionWorker.terminate();																																	//	\
-		solutionWorker=undefined;																																	//	\
+//		solutionWorker.terminate();																																	//	\
+//		solutionWorker=undefined;																																	//	\
 		UpdateItem("equation", id);																																	//	\
 	}																																								//	\	
 	if (typeof(callback)=="function") { callback();	}																												//	\
@@ -2331,7 +2339,7 @@ function HandleTableData()																										//	\
 /*---------------------------------------------------------------------------------------------------------------------------------*/
 function Call_CellSolver (tableID, fileID, equation, rowIndex, columnIndex)														//	\
 {	var objProp='', eqobj={}, tempid='', eqID='', eq='', tempid='', flag='', thisid='', tempname=[];							//	\
-	var equationWorker = new Worker("http://www.cadwolf.com/js/EquationSolver.js");												//	\
+//	var equationWorker = new Worker("http://www.cadwolf.com/js/EquationSolver.js");												//	\
 	equationWorker.postMessage({																								//	\
 		"cadwolfType":"SolveTableCell", 																						//	\
 		"Equation":equation,																									//	\
@@ -2352,8 +2360,8 @@ function Call_CellSolver (tableID, fileID, equation, rowIndex, columnIndex)					
 		var solution1='<div class="toedit">'+returnObject.Equation.Solution_real['0-0']+' '+returnObject.Equation.Units_units+"</div>"; 
 		$('#'+returnObject.Equation.tableID+' tr:eq('+tableRow+') td:eq('+tableCol+')').html(solution1);						//	\
 		Find_Deps(returnObject.Equation.tableID, function () { UpdateDep();} );													//	\
-		equationWorker.terminate();																								//	\
-		equationWorker=undefined;																								//	\
+//		equationWorker.terminate();																								//	\
+//		equationWorker=undefined;																								//	\
 	}																															//	\	
 	if (typeof(callback)=="function") { callback();	}																			//	\
 };																																//	\
@@ -2777,7 +2785,7 @@ function Call_CellSolver (tableID, fileID, equation, rowIndex, columnIndex)					
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------*/
 function Call_TableSolver (tableID, fileID, equation, rowIndex, columnIndex, fillType)																//	\
 {	var objProp='', eqobj={}, tempid='', eqID='', eq='', tempid='', flag='', thisid='', tempname=[];												//	\
-	var equationWorker = new Worker("http://www.cadwolf.com/js/EquationSolver.js");																	//	\
+//	var equationWorker = new Worker("http://www.cadwolf.com/js/EquationSolver.js");																	//	\
 	equationWorker.postMessage({																													//	\
 		"cadwolfType":"SolveTableFill", 																											//	\
 		"Equation":equation,																														//	\
@@ -2807,8 +2815,8 @@ function Call_TableSolver (tableID, fileID, equation, rowIndex, columnIndex, fil
 			$('#'+returnObject.tableID+' tr:eq('+row+') td:eq('+col+')').attr('equation', returnObject.tableEquations[tableCells]);					//	\
 		}																																			//	\
 		Find_Deps(returnObject.tableID, function () { UpdateDep();} );																				//	\
-		equationWorker.terminate();																													//	\
-		equationWorker=undefined;																													//	\
+//		equationWorker.terminate();																													//	\
+//		equationWorker=undefined;																													//	\
 	}																																				//	\	
 	if (typeof(callback)=="function") { callback();	}																								//	\
 };																																					//	\
@@ -2953,7 +2961,7 @@ function ForLoop (loopid) 																							//	\
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------*/
 ForLoop.prototype.LoopValues = function () 																											//	\
 { 	var loopid=this.Format_id, eqArray=[];		DOM_Object[loopid]['Dependents']={};																//	\
-	var loopWorker = new Worker("http://www.cadwolf.com/js/EquationSolver.js");																		//	\
+//	var loopWorker = new Worker("http://www.cadwolf.com/js/EquationSolver.js");																		//	\
 	window[loopid]['Page_position']=DOM_Object[loopid]['location'];																					//	\
 console.log('The loop id is '+loopid+' - '+window[loopid]);
 	Create_EqObj(loopid, function () { 																												//	\
@@ -2969,7 +2977,8 @@ console.log('The loop id is '+loopid+' - '+window[loopid]);
 			"loopObject":window[loopid]																												//	\
 		});																																			//	\
 	});																																				//	\
-	loopWorker.onmessage = function(e) { returnObject=e.data; UpdateLoopParams(returnObject); 	loopWorker.terminate();		loopWorker=undefined;}	//	\
+	loopWorker.onmessage = function(e) { returnObject=e.data; UpdateLoopParams(returnObject); 	loopWorker.terminate();		loopWorker=undefined;
+                                       }	//	\
 };																																					//	\
 function UpdateLoopParams(loopObj)																													//	\
 {	var id=loopObj['ID'];																															//	\
@@ -3199,7 +3208,7 @@ function createStructureObj(thisid, callback)																						//	\
 /*	This is the function that actually calls the web worker to solve the for loop, while loop, or if else statement.					\
 //-------------------------------------------------------------------------------------------------------------------------------------*/
 function callStructureSolver(thisid, fileid, callback)																				//	\
-{	var structureWorker = new Worker("http://www.cadwolf.com/js/EquationSolver.js?");												//	\
+{	//var structureWorker = new Worker("http://www.cadwolf.com/js/EquationSolver.js?");												//	\
 	structureWorker.postMessage({																									//	\
 		"cadwolfType":"SolveStructure", 																							//	\
 		"ID":thisid,																												//	\
@@ -3785,7 +3794,7 @@ function WhileLoop (loopid) 																																//	\
 	Flag==Dependent, the text entered by the user is collected. The condition selected is also grabbed.															\
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 WhileLoop.prototype.LoopValues = function (loopid, firstrun, callback)																						//	\
-{ 	var whileLoopWorker = new Worker("http://www.cadwolf.com/js/EquationSolver.js");																		//	\
+{ 	//var whileLoopWorker = new Worker("http://www.cadwolf.com/js/EquationSolver.js");																		//	\
 	window[loopid].Errors_errors=new Array();	window[loopid].Errors_flag=0;	this.Loop_Values={};	var myobject={};									//	\
 	$('#'+loopid).find('.whilelooptext').first().find('.whileloopblock').each( function(blockindex)															//	\
 	{	myobject['blockindex'+blockindex]={};																												//	\
@@ -3818,7 +3827,8 @@ WhileLoop.prototype.LoopValues = function (loopid, firstrun, callback)										
 			"location":DOM_Object[loopid]['location']																										//	\
 		});																																					//	\
 	});																																						//	\
-	whileLoopWorker.onmessage=function(e){returnObject=e.data; UpdateWhileLoopParams(returnObject); whileLoopWorker.terminate(); whileLoopWorker=undefined;	}//	\
+	whileLoopWorker.onmessage=function(e){returnObject=e.data; UpdateWhileLoopParams(returnObject); //whileLoopWorker.terminate(); whileLoopWorker=undefined;	}//	\
+                                         }
 };																																							//	\
 function UpdateWhileLoopParams(loopObj)																														//	\
 {	var loopid=loopObj['ID'];																																//	\
@@ -4149,7 +4159,7 @@ IfElse.prototype.StatementValues = function (statementid, callback) 												
 		statementblock[statNum]['status']=window[statID]['Statement_truefalse'];																			//	\
 	}																																						//	\	
 */
-	var ifElseWorker = new Worker("http://www.cadwolf.com/js/EquationSolver.js");																			//	\
+//	var ifElseWorker = new Worker("http://www.cadwolf.com/js/EquationSolver.js");																			//	\
 	createStructureObj(statementid, function () { 																											//	\
 		ifElseWorker.postMessage({																															//	\
 			"cadwolfType":"SolveIfElseParameters", 																											//	\
@@ -4166,7 +4176,7 @@ IfElse.prototype.StatementValues = function (statementid, callback) 												
 			"FileID":$('#filenumber').attr('filenumber')																									//	\
 		});																																					//	\
 	});																																						//	\
-	ifElseWorker.onmessage = function(e) {	returnData=e.data; UpdateIfElseParams(e.data); 	ifElseWorker.terminate();  ifElseWorker=undefined;	}			//	\
+	ifElseWorker.onmessage = function(e) {	returnData=e.data; UpdateIfElseParams(e.data); }//	ifElseWorker.terminate();  ifElseWorker=undefined;	}		//	\
 };																																							//	\
 function UpdateIfElseParams(statementObj)																													//	\
 {	console.log('Updating if else parameters');
@@ -6234,40 +6244,6 @@ function ChangeLineData(PlotID, LineID)																																//	\
 }																																									//	\
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
-/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*---------------------------------------------------------------- MAKE A BIG NEW CHART -------------------------------------------------------------------------------*/
-/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-function MakeBigChart(callback)																																		//	\
-{	var mylocation=$(location).attr('href').split('/');																												//	\
-	if (mylocation[3]=="Charts")																																	//	\
-	{	var PlotID=mylocation[4];																																	//	\
-		var fileid=mylocation[4];																																	//	\
-		var temp='<div class="plot_block" id="'+PlotID+'"><div class="plot_holder"></div></div>';																	//	\
-		$('#chart_wrapper').append(temp);																															//	\
-		$('#chart_wrapper').height($(window).height()).width($(window).width());																					//	\
-		$('#chart_wrapper').find('.plot_block').height($(window).height()).width($(window).width());																//	\
-		$('#chart_wrapper').find('.plot_holder').height($(window).height()).width($(window).width());																//	\
-		$('#MainBody').css('margin-left','0px').css('margin-right','0px');																							//	\
-		$('#main_contents').css('margin-left','0px').css('margin-right','0px');																						//	\
-		$('#OpenLeft, #main_leftcolumn, #clicktotopenter').hide();																									//	\
-		$('#'+PlotID).css('width','');																																//	\
-		$('.titleblock, .subtitleblock').hide();																													//	\
-		CreatePlot(PlotID, function() { ResizeChart(PlotID)});																										//	\
-		$('#MainBody').show();																																		//	\
-		document.title=window[PlotID].Title_text;																													//	\
-	}else { callback(); }																																			//	\
-}																																									//	\
-function ResizeChart(PlotID)																																		//	\
-{	window[window[PlotID].Chart_Name].setSize(chartWidth = $(window).width(), chartHeight = $(window).height());													//	\
-	$('#'+PlotID).closest('.main_item').css('width',$(window).width());																								//	\
-	$('#'+PlotID).closest('.main_item').css('height',$(window).height());																							//	\
-	$('#'+PlotID).closest('.plot_block').css('width',$(window).width());																							//	\
-	$('#'+PlotID).closest('.plot_block').css('height',$(window).height());																							//	\
-	$('#'+PlotID).css('width',$(window).width());																													//	\
-	$('#'+PlotID).css('height',$(window).height());																													//	\	
-}																																									//	\
-/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -6496,7 +6472,6 @@ function solvePlotData(PlotID, DataID, plotObject, className)																			
 }																																									//	\
 function callPlotSolver(PlotID, DataID, plotObject, className)																										//	\
 {	$('#'+PlotID).addClass('active_plot');																															//	\
-	var plotWorker = new Worker("http://www.cadwolf.com/js/EquationSolver.js");																						//	\
 	plotWorker.postMessage({																																		//	\
 		"cadwolfType":"SolvePlotData", 																																//	\
 		"plotObject":plotObject,																																	//	\
@@ -6535,8 +6510,8 @@ function callPlotSolver(PlotID, DataID, plotObject, className)																		
 			}																																						//	\
 		}																																							//	\
 		$('#'+PlotID).removeClass('active_plot');																													//	\
-		plotWorker.terminate();																																		//	\
-		plotWorker=undefined;																																		//	\
+//		plotWorker.terminate();																																		//	\
+//		plotWorker=undefined;																																		//	\
 	}																																								//	\	
 	if (typeof(callback)=="function") { callback();	}																												//	\
 }																																									//	\

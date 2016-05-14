@@ -19,7 +19,7 @@ $(document).ready(function(){ 																													//	\
 //----------------------------------------------------------- SUBMIT A NEW FEATURE REQUEST --------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------//
 $(document).on('click', '#FeatureButton', function(e){																							//	\
-	$.ajax ({ type:"POST", url:"/Bugs/Feature", async: false,																					//	\
+	$.ajax ({ type:"POST", url:"/Bugs/Feature",			                 																		//	\
 		data: { thistype:1, thisbug:$('#featuretext').val() },																					//	\
 	    error: function () { alert('There was an error asking for that feature');},																//	\
     	success: function (data) { if (data=='0') { ShowMessage(1); 	$('#featuretext').val('');	}	}										//	\
@@ -44,7 +44,7 @@ $(document).on('mouseout', '#leftColumnIconsWrapper, #leftColumnTextWrapper, .le
 //--------------------------------------------------------------- REPORT A BUG TO US --------------------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------------------------------------------//
 $(document).on('click', '#BugButton', function(e){																								//	\
-	$.ajax ({ type:"POST", url:"/Bugs/Feature", async: false,																					//	\
+	$.ajax ({ type:"POST", url:"/Bugs/Feature",		                  																			//	\
 		data: { thistype:0, thisaddress:$('#bugaddress').val(), thisbug:$('#bugtext').val() },													//	\
 	    error: function () { alert('There was an error reporting that bug');},																	//	\
     	success: function (data) { if (data=='0') { ShowMessage(2); 	$('#bugtext, #bugaddress').val('');	}	}								//	\
@@ -58,6 +58,8 @@ $(document).on('click', '#BugButton', function(e){																								//	\
 function ShowMessage(num)																														//	\
 {	$('#Format_Wrapper').hide();																												//	\
 	var message='';		var type='';																											//	\
+	if (num==1)	{ message="Feature request submitted - thank you";     }	                                                          			//	\
+	if (num==2)	{ message="Bug submitted - thank you";     }	                                                              					//	\
 	if (num==1)	{ $('#goodmessage').html(message); $('#GoodMessageWrapper').slideDown('500').delay(5000).slideUp('500'); }						//	\
 	if (num==2) { $('#goodmessage').html(message); $('#GoodMessageWrapper').slideDown('500').delay(5000).slideUp('500'); }						//	\
 }																																				//	\

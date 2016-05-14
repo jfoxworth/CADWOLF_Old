@@ -381,8 +381,12 @@ function Check_Account() 																														//	\
 	var email=$("#create_email").val();																											//	\	
 //	var pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;																							//	\
 	var pattern = /^[a-zA-Z0-9\_\.\-\!]+@[0-9a-zA-Z_]+?\.[0-9a-zA-Z]{2,3}$/;																	//	\
+	var pattern2 = /^[a-zA-Z0-9\_\.\-\!]+@[0-9a-zA-Z_]+?\.[0-9a-zA-Z_]+?\.[0-9a-zA-Z]{2,3}$/;													//	\
+	var pattern3 = /^[a-zA-Z0-9\_\.\-\!]+@[0-9a-zA-Z_]+?\.[0-9a-zA-Z_]+?\.[0-9a-zA-Z_]+?\.[0-9a-zA-Z]{2,3}$/;      								//	\
 	var testname=email.match(pattern);																											//	\
-	if (testname==email) 																														//	\
+	var testname2=email.match(pattern2);																										//	\
+	var testname3=email.match(pattern3);																										//	\
+	if ((testname==email)||(testname2==email)||(testname3==email)) 																				//	\
 	{	$.ajax ({ type:"POST",	url:"/Users/TestEmail",async: false, data: { name:email	},   													//	\
 			success: function(data) {duplicate=data},error: function () 																		//	\
 			{ alert('There was an error checking the email.');}	});																				//	\
@@ -430,7 +434,6 @@ $(document).on('click', '#create_button', function(event)																						/
 		$.ajax ({																																//	\
 			type:"POST",																														//	\
 			url:"/Users/CreateUser",																											//	\
-			async: false,																														//	\
 			data: { name:name, pass:pass, email:email, fname:fname, lname:lname, fbid:fbid, fbname:fbname},										//	\
 			success: function(data) {																											//	\
 				data=JSON.parse(data);																											//	\

@@ -37,7 +37,21 @@ textarea:focus, input:focus{
 *:focus {
     outline: 0;
 }
-	
+
+input {
+    border:0px;
+    border-bottom:2px solid #456382;
+    width:100%;
+    background-color:#FFFFFF;
+	font-family:'Lato', sans-serif;
+	font-size:1em;
+	letter-spacing:1px;
+	font-weight:300;
+}
+
+.myInput:hover {
+    background-color:#DFE3E6;
+}
 
 #addfolder 			{ background: url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -47px -96px; }
 #addfile 			{ background: url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -70px -96px; }
@@ -63,7 +77,6 @@ textarea:focus, input:focus{
 
 
 .workspace_info, .workspace_imagewrapper {
-	display:none;
 	float:left;
 	width:90%;
 	margin:20px 5%;
@@ -100,40 +113,48 @@ textarea:focus, input:focus{
 	color:#730324;	
 }
 
-#workspace_description, #workspace_description_edit {
-	float:left;
-	width:100%;
+#workspaceDescriptionHolder {
+	width:750px;
+	margin:0px auto 0px auto;
+    padding:0px;
+}
+
+#workspaceDescription, #workspaceDescriptionEdit {
+	width:750px;
 	margin:0px auto 0px auto;
 }
 
 #workspace_description_save {
 	float:left;
 	width:15%;
-	margin:0px 84% 0px 0px;
+	margin:5px 42% 10px 42%;
 	color: #ccc;
 	font-size:0.85em;
-	margin:10px auto 10px auto;
 	cursor:pointer;
 	padding:5px;
-	display:none;
-	border:1px solid #FFF;
+	border:1px solid #ccc;
+    border-radius:5px;
 	text-align:center;
 }
 
 #workspace_description_save:hover {
-	border:1px solid #ccc;
+	color:#000;
+    border-color:#000;
 }
 
 #workspace_title_input {
-	float:left;
 	width:100%;
 	font-size:1.5em;
 	text-align:center;
 
 }
 
+#workspace_title_wrapper {
+    width:100%;
+    height:auto;
+}
+
 #workspace_title_edit, #workspace_title {
-	float:left;
 	width:100%;
 	font-size:1.5em;
 	text-align:center;
@@ -182,22 +203,21 @@ textarea:focus, input:focus{
 }
 
 #workspace_bodywide, #workspace_permissions {
-	margin:50px 0px 0px 250px;
+	margin:0px 0px 0px 250px;
 	padding:0px 20px;
 }
 
-#workspace_permissions { display:none; }
-
-#workspace_contents {
+.workspace_contents {
 	float:left;
 	height:100%;
 	width:950px;
+	margin:0px auto;
 }
 
-#workspace_contentswide {
+.workspace_contentswide {
 	height:100%;
-	width:1150px;
-	margin:40px auto;
+	width:1250px;
+	margin:0px auto;
 }
 
 .workspace_line {
@@ -219,8 +239,8 @@ textarea:focus, input:focus{
 
 #workspace_header1 { width:30px; }
 #workspace_header2 { width:300px; }
-#workspace_header3 { width:200px; }
-#workspace_header4 { width:200px; }
+#workspace_header3 { width:250px; }
+#workspace_header4 { width:250px; }
 #workspace_header5 { width:150px; }
 #workspace_header6 { width:150px; }
 #workspace_header7 { width:64px; }
@@ -286,7 +306,7 @@ textarea:focus, input:focus{
 
 .workspace_time {
 	float:left;
-	width:200px;
+	width:250px;
 	padding:2px 0px 0px 0px;
 	margin:0px 0px 0px 0px;
 	text-align:center;
@@ -656,7 +676,6 @@ input.moveaddress {
 
 #image_uploader {
 	float:left;
-	display:none;
 	border-top:1px solid #ccc;
 	border-bottom:1px solid #ccc;	
 	padding:1%;
@@ -725,7 +744,7 @@ input.moveaddress {
 }
 
 
-#workspace_permissionTree, #workspace_fulldata {
+#workspace_permissionTree, #workspace_fulldata, #workspace_thisdata {
 	display:none;
 }
 
@@ -744,6 +763,7 @@ input.moveaddress {
 .permWrapper {
 	float:left;
 	width:150px;
+    height:25px;
 }
 
 .permWrapperActive {
@@ -1196,6 +1216,35 @@ input.moveaddress {
 	background: url(http://www.cadwolf.com/Images/workspace_sprite.png) no-repeat -36px -63px; 
 	cursor:pointer;
 }
+
+#messageLine {
+    width:100%;
+    height:65px;
+    float:left;
+}
+
+.errorMessage {
+    color:#a94442;
+    background-color:#f2dede;
+    border-color:#ebccd1;
+    padding:15px;
+    border:1px solid transparent;
+    border-radius:4px;
+    width:800px;
+    margin:auto;
+}
+
+.successMessage{
+    color:#3c763d;
+    background-color:#dff0d8;
+    border-color:#d6e9c6;
+    padding:15px;
+    border:1px solid transparent;
+    border-radius:4px;
+    width:800px;
+    margin:auto;
+}
+
 
 
 /*----------------------------------------------------------------------------------------------------------------------------------*/

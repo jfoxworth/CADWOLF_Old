@@ -14,6 +14,7 @@ class SurfacesController extends AppController {
 		$this->set('Permissions',$Permissions);																												//	
 		$Surface_Data=$this->GetData($ID, $Permissions['use']);																								//	
 		$this->set("Surface_Data", $Surface_Data);																											//	
+        $this->set("UserName", $this->Auth->user('username'));																								//	    
     }																																						//
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -144,6 +145,120 @@ class SurfacesController extends AppController {
     	}
     }
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------- Get Initial Data -------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*  This is the function called upon page load that grabs all the data via an ajax call. We return the information for the file from the workspace entry    |
+    as well as all of the items within the document, the unit data, the constant data, and the permissions.                                                 |
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    public function getDataAngular() 																														//
+    {   $this->autorender = false;																															//
+ 		$this->layout = null;																																//
+  	    $this->render('ajax');																																//
+        $params = json_decode(file_get_contents('php://input'),true);                                                                                       //
+        $fileURL=$params['myURL'];			                    																			     			//
+		$dataID=preg_replace('/\/Surfaces\//','', $fileURL);								           				                  						//
+		$fileID=preg_replace('/^File/','',$dataID);					      			           																//
+		$fileID=preg_replace('/Plot[0-9]+/','',$fileID);			       		           																	//
+        $adminPerm=$this->getPermissionsFromID('admin', $this->Auth->user('id'), $fileID);			     		       					            		//
+		$editPerm=$this->getPermissionsFromID('edit', $this->Auth->user('id'), $fileID);								              						//
+		$usePerm=$this->getPermissionsFromID('use', $this->Auth->user('id'), $fileID);			     			               								//
+		$viewPerm=$this->getPermissionsFromID('view', $this->Auth->user('id'), $fileID);		            												//
+		$Permissions=array();																																//
+		$Permissions['admin']=$adminPerm;																													//
+		$Permissions['edit']=$editPerm;																														//
+		$Permissions['use']=$usePerm;																														//
+		$Permissions['view']=$viewPerm;																														//
+		if ($viewPerm=='1')	                                                                      															//
+        {   Controller::loadModel('Document');  																											//
+            if ($this->Document->hasAny(array('id' => $dataID)))	    										                                            //
+            {   $FileData=$this->Document->find('all', array('recursive' => 2, 'conditions' => array('id' => $dataID)));                                    //
+            }else																																			//
+            {   Controller::loadModel('DocumentTemp');  																									//
+                if ($this->DocumentTemp->hasAny(array('id' => $dataID)))	   		       		     			                                            //                                                                                                                                                //
+                {   $FileData=$this->Document->find('all', array('recursive' => 2, 'conditions' => array('id' => $dataID)));        }                       //
+            }                                                                                                                                               //
+        }                                                                                                                                                   //
+        echo(json_encode($FileData));                                                                                                                       //
+    }																																						//
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+    
+    
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------- GET THE PERMISSIONS FOR A GIVEN USER FOR A GIVEN FILE OR FOLDER --------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*	This is the new algorithm for determining permissions for a user on a specific file and folder. It takes in a permission type, a user ID, and a file    |
+    ID. It then looks to see if there are permissions set for that permission type or if it is inherited. If permissions are indeed set and are set for     |
+    everyone then a 1 is returned. If permissions are set with a list of users then the list is searched. If the user is on the list and given permission   |
+    then a 1 is returned as well. If the user is on the list and denied permission then a 0 is returned. If the permission inherits from above then the     |
+    final chunk of the address is removed and the function is called again.                          														|
+	permType 	- the type of permission being looked at - admin, edit, use, or view																		|
+	userID		- the ID of the user being looked at																										|
+	fileURL		- the URL of the file being looked at. It is in the form of PartTree/The_Wolf/My_Part_Tree													|
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
+public function getPermissionsFromID($permType, $userID, $fileID) 																							//
+{  	Controller::loadModel('Workspace');																														//
+	$FileData=$this->Workspace->find('first', array('conditions' => array('id' => $fileID)));		       													//
+	if ($FileData['Workspace'][$permType.'_status']==2)																										//
+	{	return $this->getPermissionsFromID($permType, $userID, $FileData['Workspace']['parent_id']);			               								//
+	}elseif	($FileData['Workspace'][$permType.'_status']==1)																								//
+	{	return 1;																																			//
+	}elseif	($FileData['Workspace'][$permType.'_status']==0)																								//
+	{	Controller::loadModel('Permission');																												//
+		if ($this->Permission->hasAny(array('workspace_id' => $fileID, 'userid'=>$userID, $permType=>'1')))		         									//  
+		{	return 1; 																																		//	
+		}else																																				//
+		{	return 0;																																		//
+		}																																					//
+	}else { return 0; }		 																																//
+}																																							//
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------- GET THE PERMISSIONS FOR A GIVEN USER FOR A GIVEN FILE OR FOLDER --------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*	This is the new algorithm for determining permissions for a user on a specific file and folder. It takes in a permission type, a user ID, and a URL for the file.	\
+	It then looks to see if there are permissions set for that permission type or if it is inherited. If permissions are indeed set and are set for everyone then a 1 	\
+	is returned. If permissions are set with a list of users then the list is searched. If the user is on the list and given permission then a 1 is returned as well.	\
+	If the user is on the list and denied permission then a 0 is returned. If the permission inherits from above then the final chunk of the address is removed and 	\
+	the function is called again.																																		\
+	permType 	- the type of permission being looked at - admin, edit, use, or view																					\
+	userID		- the ID of the user being looked at																													\
+	fileURL		- the URL of the file being looked at. It is in the form of PartTree/The_Wolf/My_Part_Tree																\
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+	public function getPermissionsAngular($permType, $userID, $fileURL) 							    															//	\
+	{  	$DirInfo=$this->Get_FolderID($fileURL);																														//	\
+		Controller::loadModel('Workspace');																															//	\
+		$FileData=$this->Workspace->find('first', array('conditions' => array('id' => $DirInfo['ID'])));															//	\
+		if ($DirInfo['exists']=='1')																																//	\
+		{	if ($FileData['Workspace'][$permType.'_status']==2)																										//	\
+			{	$newFile=preg_replace('/\/[0-9A-Za-z-_]+$/','',$fileURL);																							//	\
+				return $this->Get_Permissions($permType, $userID, $newFile);																						//	\
+			}elseif	($FileData['Workspace'][$permType.'_status']==1)																								//	\
+			{	return 1;																																			//	\
+			}elseif	($FileData['Workspace'][$permType.'_status']==0)																								//	\
+			{	Controller::loadModel('Permission');																												//	\
+				if ($this->Permission->hasAny(array('workspace_id' => $DirInfo['ID'], 'userid'=>$userID, $permType=>'1')))											//  \
+				{	return 1; 																																		//	\
+				}else																																				//	\
+				{	$flag=0;																																		//	\
+					return 0;
+				}																																					//	\
+			}else { return 0; }		 																																//	\
+		}else { echo($fileURL); }																																	//	\
+	}																																								//	\
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    
 
 }
 

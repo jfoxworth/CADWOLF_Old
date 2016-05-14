@@ -1,0 +1,101 @@
+<div class="icon_wrapper" ng-show="showIcons" ng-mouseover="showIcons=true;" ng-mouseout="showIcons=false">
+    <div class="icon_holder">
+        <div class="deletebutton"></div>
+        <div class="loopspecs"></div>
+        <div class="sublineshow" ng-click="obj.sublineEdit=!obj.sublineEdit; setCurrent(obj)">
+            <div class="subline" ng-show="obj.sublineEdit">
+                <div class="addequationsub" ng-click="addItem('Equation', {parentid:obj.itemid, topparentid:obj.itemid})"></div>
+                <div class="addforloopsub" ng-click="addItem('ForLoop', {parentid:obj.itemid, topparentid:obj.itemid})"></div>
+                <div class="addwhileloopsub" ng-click="addItem('WhileLoop', {parentid:obj.itemid, topparentid:obj.itemid})"></div>
+                <div class="addifelsesub" ng-click="addItem('IfElse', {parentid:obj.itemid, topparentid:obj.itemid})"></div>
+                <div class="upone" ng-if="obj.parentid!='none'" ng-click="moveSubItemUp(obj.itemid)"></div>
+                <div class="downone" ng-if="obj.parentid!='none'" ng-click="moveSubItemDown(obj.itemid)"></div>
+            </div>
+        </div>
+        <div class="updateforloop" ng-click="obj.needsUpdateFlag=1; $parent.runEquationDigest()"></div>
+    </div>
+</div>
+
+<div class="forloop">
+    <div class="forlooptext">
+        <div class="forloopstarttext">
+            <div class="forloopfor">for</div>
+            <div class="forlooplabel">{{obj.forloop.counter}}</div>
+            <div class="forloopequal">=</div>
+            <div class="forloopstart">
+                <div class="forloopvaluewrapper">
+                    <div class="forloopvalue" ng-show="!obj.startInputEdit" ng-dblclick="obj.startInputEdit=true">{{obj.forloop.startText}}</div>
+                    <div class="forloopvalue" ng-show="obj.startInputEdit"><input type="text" ng-model=obj.forloop.startText ng-enter="obj.startInputEdit=false; obj.needsBlockUpdate=1; obj.updateClass='itemneedsupdate'; $parent.runEquationDigest();" class="forloopinput"></div>
+                </div>
+            </div>
+        </div>
+        <div class="forloopwhiletext">
+            <div class="forloopwhile">While</div>
+            <div class="forlooplabel">{{obj.forloop.counter}}</div>
+            <div class="forloopequal">
+                <div class="forloopwhilevalue" ng-show="!obj.limitInputEdit" ng-dblclick="obj.limitInputEdit=true">{{obj.forloop.limitFactor}}</div>
+                <select class="forloopwhileselect" ng-show="obj.limitInputEdit" ng-change="obj.limitInputEdit=false; obj.updateClass='itemneedsupdate';" ng-blur="obj.limitInputEdit=false" ng-model="obj.forloop.limitFactor">
+                    <option value=">">></option>
+                    <option value="<"><</option>
+                    <option value=">=">>=</option>
+                    <option value="<="><=</option>
+                </select>
+            </div>
+            <div class="forloopend">
+                <div class="forloopvaluewrapper">
+                    <div class="forloopvalue" ng-show="!obj.endInputEdit" ng-dblclick="obj.endInputEdit=true">{{obj.forloop.stopText}}</div>
+                    <div class="forloopvalue" ng-show="obj.endInputEdit"><input type="text" ng-model=obj.forloop.stopText ng-enter="obj.endInputEdit=false; obj.needsBlockUpdate=1; obj.updateClass='itemneedsupdate'; $parent.runEquationDigest();" class="forloopinput"></div>
+                </div>
+            </div>
+        </div>
+        <div class="forloopinctext">
+            <div class="forloopinc">Increment by</div>
+            <div class="forloopincrease">
+                <div class="forloopvaluewrapper">
+                    <div class="forloopvalue" ng-show="!obj.incrementInputEdit" ng-dblclick="obj.incrementInputEdit=true">{{obj.forloop.incrementText}}</div>
+                    <div class="forloopvalue" ng-show="obj.incrementInputEdit"><input type="text" ng-model=obj.forloop.incrementText ng-enter="obj.incrementInputEdit=false; obj.needsBlockUpdate=1; obj.updateClass='itemneedsupdate'; $parent.runEquationDigest();" class="forloopinput"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="forloopcontent" ng-class="obj.updateClass">
+        <div class="main_item" ng-repeat="subObj in cadwolf_worksheet | orderBy:'location' track by subObj.itemid" ng-switch on="subObj.vartype" style="width:100%">
+            <div ng-click="$parent.setCurrent(subObj)" class="" style="margin-top:{{subObj.margintop}}px; margin-bottom:{{subObj.marginbottom}}px; margin-left:{{subObj.marginleft}}px; margin-right:{{subObj.marginright}}px;" >
+                <div ng-switch="subObj.vartype">
+                    
+                    <div class="switchWrapper" ng-if="(subObj.Equation.inputFile==0)&&(subObj.parentid==obj.itemid)" ng-switch-when="3" ng-click="$parent.$parent.formatDisplay=false" ng-mouseover="showIcons=true;" ng-mouseout="showIcons=false">
+                        <div ng-if="editPerm" ng-show="showIcons" class="icon_wrapper">
+                            <div class="icon_holder">
+                                <div class="deletebutton" ng-click="$parent.deleteItem(subObj)"></div>
+                                <div ng-click="showSpecs(subObj.itemid, 'equation')" class="equationspecs"></div>
+                                <div class="upone" ng-click="moveSubItemUp(subObj.itemid)"></div>
+                                <div class="downone" ng-click="moveSubItemDown(subObj.itemid)"></div>
+                            </div>
+                        </div>
+                        <div class="equationblock">
+                            <div class="eqshow" id="{{subObj.itemid}}" ng-show="!subObj.showEdit" ng-dblclick="subObj.showEdit=true">
+                                <span mathjax-bind="subObj.Equation.Format_left"></span>=
+                                <span mathjax-bind="subObj.Equation.Format_showequation"></span>=
+                                <span mathjax-bind="subObj.Equation.Format_showsolution"></span>
+                            </div>
+                            <input class="standardInput" ng-show="subObj.showEdit" ng-model="subObj.Equation.Format_equation" ng-enter="obj.updateClass='itemneedsupdate'" />
+                        </div>
+                    </div>
+                
+                    <div class="switchWrapper" ng-if="subObj.parentid==obj.itemid" ng-switch-when="6" id="{{subObj.itemid}}" ng-click="$parent.$parent.formatDisplay=false" ng-mouseover="showIcons=true;" ng-mouseout="showIcons=false">
+                        <span for-loop-object></span>
+                    </div>                                    
+                    
+                    <div class="switchWrapper" ng-if="subObj.parentid==obj.itemid" ng-switch-when="7" id="{{subObj.itemid}}" ng-click="$parent.$parent.formatDisplay=false" ng-mouseover="showIcons=true;" ng-mouseout="showIcons=false">
+                        <span while-loop-object></span>
+                    </div>                                    
+                    
+                    <div class="switchWrapper" ng-if="subObj.parentid==obj.itemid" ng-switch-when="8" id="{{subObj.itemid}}" ng-click="$parent.$parent.formatDisplay=false" ng-mouseover="showIcons=true;" ng-mouseout="showIcons=false">
+                        <span if-else-object></span>
+                    </div>                                    
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

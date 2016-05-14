@@ -26,8 +26,10 @@ class BugsController extends AppController {
 		$data_array['Bugs']['text']=$text;																													//
 		$data_array['Bugs']['bugorfeature']=$type;																											//
 		$data_array['Bugs']['fileid']=$DirInfo['ID'];																										//
-		$data_array['Bugs']['user']=$this->Auth->user('username');																							//
-		$data_array['Bugs']['userid']=$this->Auth->user('id');																								//
+		if ($this->Auth->user('username')==null){ $userName='No User'; }else{ $userName=$this->Auth->user('username'); }                                      //
+        if ($this->Auth->user('id')==null){ $userID='None'; }else{ $userID=$this->Auth->user('id'); }                                                         //
+        $data_array['Bugs']['user']=$userName;																							                    //
+		$data_array['Bugs']['userid']=$userID;	                   																							//
 		Controller::loadModel('Bugs');																														//
 		$this->Bugs->create();																																//
 		$this->Bugs->set($data_array); 																														//
