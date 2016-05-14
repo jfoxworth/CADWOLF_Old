@@ -45,44 +45,6 @@ body {
 	overflow-x:hidden;
 }
 
-.plot_subclass {
-	float:left;
-}
-
-.plot_appbox {
-	float:left;
-	text-align:center;	
-	width:220px;
-	height:32px;
-	margin:5px 0px 0px 10px;	
-}
-
-.plot_appeartext {
-	float:left;
-	text-align:center;	
-	font-size:1em;
-	width:100px;
-	padding:5px 0px 5px 0px;
-}
-
-.plot_datasetcamerasection, .plot_datasetappearancesection {
-	padding:0px;
-	height:100%;
-	width:250px;
-}
-
-
-.surface_camoption, .surface_datainput, .surface_legendinput {
-    COLOR: #000000; 
-    height:15px;
-    width:105px;
-    padding:2px 0px 2px 5px;
-    margin: 0px;
-    background-color:#FFFFFF;
-	font-size:1em;
-}
-
-
 #Legend_Wrapper {
 	width:100%;
 	min-height:75px;
@@ -111,24 +73,6 @@ body {
 	text-align:center;
 }
 
-#plane_box {
-	border-top:2px solid #000;
-}
-
-#dataselect, #planeselect {
-	float:left;
-	padding:8px 0px 8px 10px;
-	font-size:14px;
-	padding:10 0;
-}
-
-#surface_dataselect, #surface_planeselect {
-	width:200px;
-	margin:5px;
-	font-size:1.2em;
-	font-weight:bold;
-}
-
 .titles
 {
 	float:left;
@@ -139,5 +83,60 @@ body {
 	margin:10px 0px;
 	font-weight:bold;
 	letter-spacing:1.2px;
+    cursor:pointer;
 }
-/*-------------------------------------------------------------------------*/
+
+
+
+.plotOptionLine {
+    float:left;
+    width:230px;
+    margin:5px 10px;
+}
+
+.plotOptionLabel {
+    float:left;
+    width:115px;
+    text-align:center;
+}
+
+input.plotOption, select.plotOption, checkbox.plotOption {
+    float:left;
+    width:100px;
+    margin:0px 0px 0px 8px;
+    text-align:center;
+}
+
+.plotOptionText {
+    float:left;
+    width:100px;
+    margin:0px 8px 0px 7px;
+    text-align:center;
+}
+
+.plotTwoSelect {
+    float:left;
+    width:120px;
+    margin:0px 2px 0px 3px;
+    text-align:center;
+    padding:0px 0px 5px 0px;
+    border-bottom:1px solid;
+    cursor:pointer;
+}
+
+.plotThreeSelect {
+    float:left;
+    width:80px;
+    margin:0px 2px 0px 1px;
+    text-align:center;
+    padding:0px 0px 5px 0px;
+    border-bottom:1px solid;
+    cursor:pointer;
+}
+
+select.plotWideSelect {
+    float:left;
+    width:200px;
+    margin:15px 25px;
+    font-size:14px;
+}/*-------------------------------------------------------------------------*/

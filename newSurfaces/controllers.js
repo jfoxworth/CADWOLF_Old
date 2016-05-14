@@ -24,7 +24,7 @@ surfaceApp.controller('surfaceController', ['$scope', '$http', '$sce',
          
         // Function to initialize a surface map
         $scope.initializeItems = function()	
-        {	$scope.showEdit=false;
+        {	$scope.showEdit=true;
         };
         /*------------------------------------------------------------------------------------------------------------------------------------------
                                                                     SURFACE MAPS
@@ -682,8 +682,9 @@ surfaceApp.controller('surfaceController', ['$scope', '$http', '$sce',
             container.appendChild( $scope.cadwolf.Surface.Renderer.domElement );					
             $scope.cadwolf.Surface.Controls = new THREE.TrackballControls( $scope.cadwolf.Surface.Camera, $scope.cadwolf.Surface.Renderer.domElement );	
             $scope.cadwolf.Surface.Chart_dataobj=$.map($scope.cadwolf.Surface.Chart_dataobj, function(value, index) { return [value]; });
+            myScope=$scope;
             for (var dataIndex=0; dataIndex<$scope.cadwolf.Surface.Chart_dataobj.length; dataIndex++)				
-            {   var dataObj=new $scope.surfaceData(plotObj['Chart_dataobj'][dataIndex], $scope.cadwolf.Surface.Chart_dataobj[dataIndex]['Format_id'], $scope.cadwolf.Surface.Chart_dataobj[dataIndex]);				
+            {   var dataObj=new $scope.surfaceData($scope.cadwolf.Surface['Chart_dataobj'][dataIndex]['Format_id'], $scope.cadwolf.Surface['Format_id'], $scope.cadwolf.Surface.Chart_dataobj[dataIndex]);				
                 if ((dataObj['dataname']===undefined)||(dataObj['dataname']=='')){ dataObj['dataname']='dataset '+dataIndex; }
                 $scope.cadwolf.Surface.Chart_dataobj[dataIndex]=dataObj;
                 console.log('At index '+dataIndex+', the id is '+$scope.cadwolf.Surface.Chart_dataobj[dataIndex]['Format_id']);
