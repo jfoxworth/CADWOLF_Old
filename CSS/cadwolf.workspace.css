@@ -2,10 +2,6 @@
    This just controls the landing page and a few other greetings pages
 ---------------------------------------------------------------------- */
 
-[ng\:cloak], [ng-cloak], .ng-cloak {
-  display: none !important;
-}
-
 body {
 	margin: 0px 0px 0px 0px;
 	padding: 0px 0px;
