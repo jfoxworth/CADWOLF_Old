@@ -71,6 +71,7 @@
         }                                                                                                                                                           //  \
         if (Event.data['cadwolfType']=="SolveEquation")																												//	\
 		{	self[Event.data['EqID']]=new Equation(Event.data['EqID']);																								//	\
+			self[Event.data['EqID']]['Format_showvalue']=Event.data['showValue'];				            														//	\
 			self[Event.data['EqID']].fileid=Event.data['FileID'];																									//	\
 			self[Event.data['EqID']].Original_id=Event.data['EqID'];																								//	\
 			self[Event.data['EqID']].Page_position=Event.data['Location'];																							//	\
@@ -98,7 +99,8 @@
 							1  );																																	//	\
 		}																																							//	\
 		if (Event.data['cadwolfType']=="SolvePlotData")																												//	\
-		{	plotObject=Event.data['plotObject'];																													//	\
+		{	console.log('In solve plot data function with a className of '+Event.data['className']);
+            plotObject=Event.data['plotObject'];																													//	\
 			PlotID=Event.data['PlotID'];																															//	\
 			DataID=Event.data['DataID'];																															//	\
 			className=Event.data['className'];																														//	\
@@ -113,7 +115,8 @@
 				        thisEqz=plotObject['Chart_dataobj'][dataIndex]['zdata_name'];																				//	\
 				        thisEqc=plotObject['Chart_dataobj'][dataIndex]['cdata_name'];																				//	\
                 }   }                                                                                                                                               //  \
-                if ((thisEqx!='')||(thisEqx!==undefined)) 																											//	\
+                console.log('The plot and data IDs are '+PlotID+' and '+DataID+' while the x and y equations are '+thisEqx+' and '+thisEqy);
+                if (thisEqx!='') 																											//	\
 				{	eqobj={Page_position:DOM_Object[PlotID]['location'], Format_showtype:"InnerFunction", equation:"PlotEq="+thisEqx};								//	\
 					eqID=CreateEq(FileID, 0, eqobj);																												//	\
 					if ((((thisEqy=='')||(thisEqy===undefined)))&&(((thisEqz=='')||(thisEqz===undefined))))															//	\
@@ -121,7 +124,7 @@
 							PassPlotData(plotObject, PlotID, DataID, 'all'); }); }); 																				//	\
 					}else{self[eqID].Solve_Equation("PlotEq="+thisEqx, function() { PrepPlotData(eqID, plotObject, PlotID, DataID, 'plot_xdatainput'); }); 	}		//	\
 				}																																					//	\
-				if ((thisEqy!='')||(thisEqy!==undefined)) 																											//	\
+				if (thisEqy!='')																										//	\
 				{	eqobj={Page_position:DOM_Object[PlotID]['location'], Format_showtype:"InnerFunction", equation:"PlotEq="+thisEqy};								//	\
 					eqID=CreateEq(FileID, 0, eqobj);																												//	\
 					if (((thisEqz=='')||(thisEqz===undefined)))																										//	\
@@ -129,20 +132,20 @@
 							PassPlotData(plotObject, PlotID, DataID, 'all'); }); }); 																				//	\
 					}else{self[eqID].Solve_Equation("PlotEq="+thisEqy, function() { PrepPlotData(eqID, plotObject, PlotID, DataID, 'plot_ydatainput'); }); 	}		//	\
 				}																																					//	\
-				if ((thisEqz!='')||(thisEqz!==undefined)) 																											//	\
+				if ((thisEqz!='')&&(thisEqz!==undefined)) 			       																							//	\
 				{	eqobj={Page_position:DOM_Object[PlotID]['location'], Format_showtype:"InnerFunction", equation:"PlotEq="+thisEqz};								//	\
 					eqID=CreateEq(FileID, 0, eqobj);																												//	\
 					self[eqID].Solve_Equation("PlotEq="+thisEqz, function() { PrepPlotData(eqID, plotObject, PlotID, DataID, 'plot_zdatainput', function() { 		//	\
 						PassPlotData(plotObject, PlotID, DataID, 'all'); }); }); 																					//	\
 				}																																					//	\
-				if ((thisEqc!='')||(thisEqc!==undefined)) 																											//	\
+				if ((thisEqc!='')&&(thisEqc!=undefined)) 																											//	\
 				{	eqobj={Page_position:DOM_Object[PlotID]['location'], Format_showtype:"InnerFunction", equation:"PlotEq="+thisEqc};								//	\
 					eqID=CreateEq(FileID, 0, eqobj);																												//	\
 					self[eqID].Solve_Equation("PlotEq="+thisEqc, function() { PrepPlotData(eqID, plotObject, PlotID, DataID, 'plot_cdatainput', function() { 		//	\
 						PassPlotData(plotObject, PlotID, DataID, 'all'); }); }); 																					//	\
 				}																																					//	\
 			}else if (className=="Lathe")																															//	\
-			{	thisEq=plotObject['Chart_dataobj'][dataIndex]['curvetext']; 																							//	\
+			{	thisEq=plotObject['Chart_dataobj'][dataIndex]['curvetext']; 																						//	\
 				eqobj={Page_position:DOM_Object[PlotID]['location'], Format_showtype:"InnerFunction", equation:"PlotEq="+thisEq};									//	\
 				eqID=CreateEq(FileID, 0, eqobj);																													//	\
 				self[eqID].Solve_Equation("PlotEq="+thisEq, function() { 																							//	\
@@ -159,7 +162,6 @@
 				        if (className=="xLathe"){ thisEq=plotObject['Chart_dataobj'][thisData]['xdata_name']; }														//	\
 				        if (className=="yLathe"){ thisEq=plotObject['Chart_dataobj'][thisData]['ydata_name']; }														//	\
 				        if (thisEq=='')	{	thisEq="[0:1:"+Object.keys(plotObject['Chart_dataobj'][thisData]['PointData']).length-1+"]"; } 							//	\
-                    console.log('The name is '+thisEq);
                     }                                                                                                                                               //  \
                 }                                                                                                                                                   //  \
                 eqobj={Page_position:DOM_Object[PlotID]['location'], Format_showtype:"InnerFunction", equation:"PlotEq="+thisEq};									//	\
@@ -801,12 +803,10 @@ Equation.prototype.Remove_SubEquations = function(callback)																			//
     function call is replaced with the ID of the item created by solving the function.                                                  \
 //-------------------------------------------------------------------------------------------------------------------------------------*/
 Equation.prototype.Remove_FilesAsFunctions = function(callback)																		//	\
-{	console.log('In remove files as functions');
-    var thisid=this.Format_id, index=0, flag=0, thisEntry='', inputText='', sum=0, fafFlag=0;        								//	\
+{	var thisid=this.Format_id, index=0, flag=0, thisEntry='', inputText='', sum=0, fafFlag=0;        								//	\
     var saLength=this.Solution_variable_array.length;                                                                               //  \
     for (index=0; index<this.Solution_variable_array.length; index++)																//	\
-	{  	console.log(this.Solution_variable_array[index]);
-        if (this.Solution_variable_array[index]=="(") 																				//	\
+	{  	if (this.Solution_variable_array[index]=="(") 																				//	\
 		{ 	for (var a=0; a<ImportedFunctions.length; a++)																			//	\
 			{	if (ImportedFunctions[a]['functionName']==this.Solution_variable_array[parseInt(index, 10)-1]) 						//	\
 				{	fafFlag=1;    thisText='';  index2=index+1; flag=0; sum=1;	   												    //	\ 
@@ -1134,11 +1134,11 @@ Equation.prototype.Replace_Vectors = function(callback)																				//	\
 					tablename=tempdata[0].replace(/^#/,'');																			//	\
 					c1=(tempdata[1].replace("$",""));																				//	\
 					c1=parseInt(c1.charCodeAt(), 10)-62;																			//	\
-					r1=parseInt(tempdata[2].replace("$",""), 10)+2;																	//	\
+					r1=parseInt(tempdata[2].replace("$",""), 10)+3;																	//	\
 					tempdata=parameters[1].split(".");																				//	\
 					c2=(tempdata[1].replace("$",""));																				//	\
 					c2=parseInt(c2.charCodeAt(), 10)-62;																			//	\
-					r2=parseInt(tempdata[2].replace("$",""), 10)+2;																	//	\
+					r2=parseInt(tempdata[2].replace("$",""), 10)+3;																	//	\
 					c1=c1-3; r1=r1-3; c2=c2-3; r2=r2-3;																				//	\
 					flag=0;																											//	\
 					if ((c1!==c2)&&(r1!==r2)) {flag=1; Set_Error(this.Format_id, "Vector1");	}									//	\
@@ -1147,15 +1147,18 @@ Equation.prototype.Replace_Vectors = function(callback)																				//	\
 					if (c1==c2)																										//	\
 					{	for (a=r1; a<=r2; a=a+1)																					//	\
 						{	key='0-'+counter;																						//	\
-							self[id].Solution_real[key]=DOM_Object[tablename]['real'][a+'-'+c1];									//	\	
-							counter=counter+1;																						//	\
+							self[id].Solution_real[key]=DOM_Object[tablename]['data'][a][c1]['real'];					       		//	\	
+                            if (DOM_Object[PlotID]['Dependents'][DataID]===undefined){ DOM_Object[PlotID]['Dependents'][DataID]={}; }  //  \
+                            DOM_Object[this.Original_id]['Dependents'][tablename+'.'+tempdata[1]+'.'+a]='1';
+                            counter=counter+1;																						//	\
 						}																											//	\
 						DOM_Object[id]['real']=self[id].Solution_real;																//	\
 					}else																											//	\
 					{	for (a=c1; a<=c2; a=a+1)																					//	\
 						{	key='0-'+counter;																						//	\
-							self[id].Solution_real[key]=DOM_Object[tablename]['real'][r1+'-'+a];									//	\
+							self[id].Solution_real[key]=DOM_Object[tablename]['data'][r1][a]['real'];				    			//	\
 							counter=counter+1;																						//	\
+                            DOM_Object[this.Original_id]['Dependents'][tablename+'.'+String.fromCharCode(65+a)+'.'+r1]='1';         //  \
 						}																											//	\
 						DOM_Object[id]['real']=self[id].Solution_real;																//	\
 					}																												//	\
@@ -1540,7 +1543,8 @@ Equation.prototype.Replace_Tables = function(callback)																		//	\
 			colnumber=(tempdata[1].replace("$",""));																		//	\
 			colnumber=parseInt(colnumber.charCodeAt(), 10)-65;														        //	\
 			rownumber=parseInt(tempdata[2].replace("$",""), 10);															//	\
-            eqobj={Page_position:DOM_Object[thisid]['location'],Format_showtype:"InnerFunction",equation:"Temp=0"};			//	\
+console.log('The row and column numbers are '+rownumber+' and '+colnumber);            
+            eqobj={Page_position:DOM_Object[this.Format_id]['location'],Format_showtype:"InnerFunction",equation:"Temp=0"};			//	\
 			id=CreateEq(this.fileid, 0, eqobj);																				//	\
 			self[id].Solution_real['0-0']=DOM_Object[tablename]['data'][rownumber][colnumber]['real'];						//	\
 			self[id].Solution_imag['0-0']=DOM_Object[tablename]['data'][rownumber][colnumber]['imag'];						//	\
@@ -1581,22 +1585,22 @@ Equation.prototype.Replace_Tables = function(callback)																		//	\
 Equation.prototype.Replace_Constants = function(callback)																	//	\
 {	var var_array=this.Solution_variable_array, index=0, eqobj={}, id='';													//	\
 	var thisid=this.Format_id;																								//	\
-	for (index = 0; index < this.Solution_variable_array.length; ++index) 													//	\
+    for (index = 0; index < this.Solution_variable_array.length; ++index) 													//	\
 	{	for (var Constant in Constants)																						//	\
-		{	if (Constant==var_array[index])																					//	\
+		{	if (Constants[Constant]['Constant']['name']==var_array[index])													//	\
 			{	eqobj={Page_position:DOM_Object[thisid]['location'],Format_showtype:"InnerFunction",equation:"Temp=0"};		//	\
 				id=CreateEq(this.fileid, 0, eqobj);																			//	\
-				self[id].Format_showequation=Constants[Constant]['showvalue']; 												//	\
-				self[id].Solution_real['0-0']=Constants[Constant]['value'];													//	\
-				self[id].Units_units=Constants[Constant]['units']; 															//	\
+				self[id].Format_showequation=Constants[Constant]['Constant']['showvalue']; 									//	\
+				self[id].Solution_real['0-0']=Constants[Constant]['Constant']['value'];										//	\
+				self[id].Units_units=Constants[Constant]['Constant']['units']; 												//	\
 				self[id].Units_multiplier=1;							 													//	\
 				self[id].Format_showtype="constant";																		//	\
 				self[thisid].Solution_temps.push(id);																		//	\
 				self[thisid].Solution_variable_array[index]=id;																//	\
 				DOM_Object[id]['real']={};																					//	\
-				DOM_Object[id]['real']['0-0']=Constants[Constant]['value'];													//	\
+				DOM_Object[id]['real']['0-0']=Constants[Constant]['Constant']['value'];										//	\
 				DOM_Object[id]['size']="1x1";																				//	\
-				DOM_Object[id]['units']=Constants[Constant]['units']; 														//	\
+				DOM_Object[id]['units']=Constants[Constant]['Constant']['units']; 											//	\
 				DOM_Object[id]['imag']={};																					//	\
 	}	}	}																												//	\ 
 	if (typeof(callback)=="function") { callback();	}																		//	\
@@ -8137,14 +8141,14 @@ function SquashMatrix (thisid)																							//	|
 {	var eqobj={Original_id:self[thisid].Format_id, equation:"TempEq=0"};												//	|
 	var id=CreateEq(self[thisid].fileid, 0, eqobj);																		//	|	
 	var count=0, splitkey=new Array(), key='', newsize='';			                   									//	|
-	var splitsize=self[thisid].Format_size.split('x');		       														//	|
+	var splitsize=self[thisid]['Format_size'].split('x');		       													//	|
 	for (var a=0; a<splitsize.length; a++) { if (splitsize[a]>1) { newsize=newsize+'x'+splitsize[a]; } }				//	|
 	newsize=newsize.replace(/^x/,'');																					//	|
 	for (var a=0; a<splitsize.length; a++) { if (splitsize[a]>1) { count=parseInt(count, 10)+1; } }		              	//	|
-console.log('The count and size are '+count+' - '+newsize);
-    if (count===0)                                                                                                      //  |
+console.log('The count and size are '+count+' -'+self[thisid]['Format_size']+' - '+newsize);
+    if (count==0)                                                                                                       //  |
     {   for ( var a in self[thisid].Solution_real) 									                					//	|
-        {  self[id].Solution_real['0-0']=self[thisid].Solution_real[a];  } 		                   						//	|
+        {  self[id].Solution_real['0-0']=self[thisid].Solution_real[a]; newsize='1x1' } 		   						//	|
     }else																												//	|
 	{	if (count==1) {   newsize="1x"+newsize;      }                                  								//	|
         for (var a in self[thisid].Solution_real)																		//	|
@@ -11544,7 +11548,7 @@ function Populate_Item(loopid, callback)																															//	\
 	data to be passed back to the main function in the proper format.																									\
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 function PrepPlotData(eqID, plotObj, PlotID, DataID, className, callback)																							//	\
-{	console.log('In Prep Plot Data Function with className '+className);
+{	console.log('In Prep Plot Data Function with plot ID of '+PlotID+', a data ID of '+DataID+', andd a className '+className);
 	var Data='', oldlength=0, dataIndex=0;                                                                                                                          //  \
     for (var thisData=0; thisData<plotObject['Chart_dataobj'].length; thisData++)                                                                                   //  \
     {   if (plotObject['Chart_dataobj'][thisData]['Format_id']==DataID) {   Data=plotObj['Chart_dataobj'][thisData]; dataIndex=thisData;    }      }  				//	\

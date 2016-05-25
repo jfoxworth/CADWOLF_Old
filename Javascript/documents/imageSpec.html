@@ -9,17 +9,24 @@
 
 
     <div ng-show="imageSpecsShowSelect" id="imagespecs_select">	
-        <div id="imageselect_address"><input type="text" id="imgselect" placeholder="Enter Address Here"/></div>
-        <div id="imageselect_images"></div>
+        <div id="imageselect_address"><input type="text" id="imgselect" ng-enter="getFolderImages()" ng-model="imagePath"/></div>
+        <div id="imageselect_images">
+            <div ng-repeat="obj in imageObj">
+                <div ng-if="obj.fileType=='0'" ng-click="$parent.$parent.imagePath=$parent.$parent.imagePath+'/'+obj.name; getFolderImages();" class="imagepropsline"><div class="imageprops_folder">&nbsp</div><div class="imageprops_name">{{obj.name}}</div></div>
+                <div ng-if="obj.fileType=='2'" ng-click="setImage(obj);" class="imagepropsline"><div class="imageprops_image">&nbsp</div><div class="imageprops_name">{{obj.name}}</div></div>
+            </div>
+        </div>
     </div>
 
     <div ng-show="imageSpecsShowProps" id="imagespecs_props">	
-<!--//		<div class="image_prop" id="imgname">Name :</div>
-//			<div class="image_prop" id="imgupload">Upload Date :</div>-->
-        <div class="image_prop">Height :</div>
-        <div class="image_prop">Width :</div>
+		<div class="specsTitle">Image Properties</div>
+        <div class="specsLine"><div class="specsLabel">Name :</div><div class="specsInputDisplay">{{currentImage.data.name}}</div></div>
+        <div class="specsLine"><div class="specsLabel">Upload Date :</div><div class="specsInputDisplay">{{currentImage.data.mdate | date : 'EEE, MMM d, y - h:mm a'}}</div></div>
+        <div class="specsLine"><div class="specsLabel">Height :</div><input class="specsInput" ng-model="currentImage.data.height"></div>
+        <div class="specsLine"><div class="specsLabel">Width :</div><input class="specsInput" ng-model="currentImage.data.width"></div>
     </div>
 
     <div ng-show="imageSpecsShowRefs" id="imagespecs_ref"><span reference-object="currentImage"></span></div>
 
 </div>
+

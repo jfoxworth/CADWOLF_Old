@@ -1612,8 +1612,14 @@ public function getFileFolderData() 																									           			//
         $dataObject=$params['dataObject'];			                       																			   	    //
         $name=$params['name'];			                       																			       	            //
         $values=$params['values'];			                       																			        	    //
+        $vartype=$params['vartype'];		                    																			        	    //
         $inputID=$params['inputID'];	                     																			       	            //
         $inputFile=$params['inputFile'];			           																			       	            //
+        $width=$params['width'];	                          																			       	            //
+        $marginTop=$params['marginTop'];	                  																			       	            //
+        $marginBottom=$params['marginBottom'];	               																			       	            //
+        $marginLeft=$params['marginLeft'];	                  																			       	            //
+        $marginRight=$params['marginRight'];	                  																			       	        //
         $editPerm=$this->getPermissionsFromID('edit', $this->Auth->user('id'), $fileID);									           						//
         Controller::loadModel('Workspace');		       																										//
         $fileData=$this->Workspace->find('first', array('recursive' => 0, 'conditions' => array('id' => $fileID)));	            		                    //
@@ -1621,10 +1627,16 @@ public function getFileFolderData() 																									           			//
         {   Controller::loadModel('DocumentTemp');																											//
         	$this->DocumentTemp->id=$itemID;																												//
             $this->DocumentTemp->saveField('data', $dataObject);																							//
+            $this->DocumentTemp->saveField('vartype', $vartype);																							//
             $this->DocumentTemp->saveField('Name', $name);																									//
             $this->DocumentTemp->saveField('Values', $values);																								//
             $this->DocumentTemp->saveField('inputFile', $inputFile);																						//
             $this->DocumentTemp->saveField('inputID', $inputID);																							//
+            $this->DocumentTemp->saveField('width', $width);			     																				//
+            $this->DocumentTemp->saveField('margintop', $marginTop);	     																				//
+            $this->DocumentTemp->saveField('marginbottom', $marginBottom);	     																			//
+            $this->DocumentTemp->saveField('marginleft', $marginLeft);	     																				//
+            $this->DocumentTemp->saveField('marginright', $marginRight);	     																			//
         }																																					//
     }																																	      				//
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -1647,8 +1659,8 @@ public function getFileFolderData() 																									           			//
         if (($this->Auth->user('id')==$fileData['Workspace']['checkoutID'])&&($editPerm=='1'))																//
         {	Controller::loadModel('DocumentTemp');																											//
             $TempFileCount=$this->DocumentTemp->find('count', array('conditions' => array('fileid' => $fileID)));	          								//
-            $FileData=$this->DocumentTemp->find('all', array('conditions' => array('fileid' => $fileID)));	         										//
-            foreach ($FileData as &$value) { 																												//
+            $allData=$this->DocumentTemp->find('all', array('conditions' => array('fileid' => $fileID)));	         										//
+            foreach ($allData as &$value) { 																												//
                 $id=$value['DocumentTemp']['id'];						     																				//
                 Controller::loadModel('Document');																											//
                 $thisdata=array();																															//
@@ -1670,6 +1682,8 @@ public function getFileFolderData() 																									           			//
             {	$this->Workspace->id=$thisFolder['Document']['fileid'];																						//
                 $this->Workspace->saveField('needsUpdate', '1');																							//
             } 																																				//
+            $this->Workspace->id=$fileID;                                                                                                                   //
+            $this->Workspace->saveField('angUpdate', '1');			       																					//
             echo('1'); 		       																															//
         }else { echo('0'); }																																//
     }																																						//
@@ -1726,10 +1740,10 @@ public function getFileFolderData() 																									           			//
 //--------------------------------------------- VERIFY THAT THE ADDRESS THE USER HAS ENTERED IS VALID -------------------------------------------------//
 //-----------------------------------------------------------------------------------------------------------------------------------------------------//
     public function getFAFData() 																												    //	\
- 	{	$this->autorender = false;																														//	\
- 		$this->layout = null;																															//	\
-  	    $this->render('ajax');																															//	\
-        $params = json_decode(file_get_contents('php://input'),true);                                                                                   //
+ 	{	$this->autorender = false;																													//	\
+ 		$this->layout = null;																														//	\
+  	    $this->render('ajax');																														//	\
+        $params = json_decode(file_get_contents('php://input'),true);                                                                               //
         $fileURL=$params['fafUrl'];		                 																		                    //  \
 		$DirInfo=$this->Get_FolderID($fileURL);																										//	\
 		$usePerm=$this->Get_Permissions('use', $this->Auth->user('id'), $fileURL);																	//	\
@@ -1744,6 +1758,32 @@ public function getFileFolderData() 																									           			//
         }
     }																																				//	\
 //-----------------------------------------------------------------------------------------------------------------------------------------------------//
+    
+    
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------- This function grabs the images and folders in a given directory ------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------*/
+	public function getFolderImagesAngular() {																											//	\
+ 		$this->autorender = false;																														//	\
+ 		$this->layout = null;																															//	\
+  	    $this->render('ajax');																															//	\
+        $params = json_decode(file_get_contents('php://input'),true);                                                                                   //  \
+        $folder=$params['folder'];		                       																		                    //  \
+	    if ($folder=='') { $folder="/Workspaces/".str_replace(" ","_",$this->Auth->user('username')); }													//	\
+		$DirInfo=$this->Get_FolderID($folder);																											//	\
+		$usePerm=$this->Get_Permissions('use', $this->Auth->user('id'), $folder);																		//	\
+		if ($usePerm=='1')																																//	\
+		{	Controller::loadModel('Workspace');																											//	\
+    	    $ReturnData=$this->Workspace->find('all', array('conditions' => array('parent_id' => $DirInfo['ID'], 'File_or_Folder'=>array(0,2))));		//	\
+    		echo(json_encode($ReturnData));																												//	\
+		}else { echo('The id is '.$DirInfo['ID'].', the user name is '.$this->Auth->user('username').', and the permission is '.$usePerm);}				//	\
+	}																																					//	\
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
 
     
     

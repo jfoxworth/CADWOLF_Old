@@ -40,7 +40,7 @@ changePermEdits     - On click, the options to change the permissions for a file
 changePermUsers     - On click, the users with permissions on the current setting are shown along with an input box to add new users
 
 */
-workspaceApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
+cadwolfApp.controller('workspacesController', ['$scope', '$http', '$sce', 'ngDialog',
     function($scope, $http, $sce, ngDialog)
     {   
         
@@ -255,7 +255,7 @@ workspaceApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog'
 ]);
 
 
-workspaceApp.controller('filesController', ['$scope', '$http', '$sce', 'ngDialog',
+cadwolfApp.controller('filesController', ['$scope', '$http', '$sce', 'ngDialog',
     function($scope, $http, $sce, ngDialog)
     {   
 
@@ -496,7 +496,7 @@ workspaceApp.controller('filesController', ['$scope', '$http', '$sce', 'ngDialog
     }
 ]);
 
-workspaceApp.controller('permissionController', ['$scope', '$http', '$sce', 'ngDialog',
+cadwolfApp.controller('permissionController', ['$scope', '$http', '$sce', 'ngDialog',
     function($scope, $http, $sce)
     {   
         // Show the permissions available for a given item 

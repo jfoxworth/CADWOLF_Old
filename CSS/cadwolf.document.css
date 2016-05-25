@@ -14,6 +14,9 @@ Dark Blue	-	#456382
 */
 
 
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
 
 html {
 	height:100%;
@@ -55,16 +58,19 @@ blockquote {
 	padding:0px 10px;
 }
 
-h1, .h1edit {
-	border-bottom: 1px solid #ccc;
+h1, .h1edit, .header1 {
+	border:0px;
+    border-bottom: 1px solid #ccc;
 	margin:20px 0px 0px 0px;
 	padding:0px;
 	letter-spacing:2px;
 	font-weight:300;
 	font-size:1.85em;
+    font-family:'Arimo', sans-serif !important;
 }
 
-h2, .h2edit {
+h2, .h2edit, .header2 {
+	border:0px;
 	width:100%;
 	float:left;
 	padding:0px 0px 0px 0px;
@@ -73,9 +79,11 @@ h2, .h2edit {
 	font-weight:300;
 	border-bottom: 1px dashed #ccc;
 	font-size:1.75em;
+    font-family:'Arimo', sans-serif !important;
 }
 
-h3, .h3edit {
+h3, .h3edit, .header3 {
+	border:0px;
 	width:100%;
 	float:left;
 	padding:0px 0px 0px 0px;
@@ -83,9 +91,11 @@ h3, .h3edit {
 	letter-spacing:1px;
 	font-weight:300;
 	font-size:1.5em;
+	border:0px;
+    font-family:'Arimo', sans-serif !important;
 }
 
-h4, .h4edit {
+h4, .h4edit, .header4 {
 	width:100%;
 	float:left;
 	padding:0px 0px 0px 0px;
@@ -93,9 +103,12 @@ h4, .h4edit {
 	letter-spacing:1px;
 	font-weight:300;
 	font-size:1.25em;
+	border:0px;
+    font-family:'Arimo', sans-serif !important;
 }
 
-h5, .h5edit {
+h5, .h5edit, .header5 {
+	border:0px;
 	width:95%;
 	float:left;
 	padding:0px 0px 0px 0px;
@@ -103,6 +116,7 @@ h5, .h5edit {
 	letter-spacing:1px;
 	font-weight:300;
 	font-size:1.25em;
+    font-family:'Arimo', sans-serif !important;
 }
 
 h2.inputs { width:1000px; }
@@ -132,6 +146,17 @@ h2.inputs { width:1000px; }
 	margin:5px 0px 40px 0px;
 }
 
+.standardInput{
+    border:0px;
+    text-align:center;
+    background-color:#DFE3E5;
+    width:100%;
+}
+
+.switchWrapper{
+    float:left;
+    width:100%;
+}
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*-------------------------------------------------------------- The Option bar -----------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -213,10 +238,17 @@ h2.inputs { width:1000px; }
 
 #clicktotopenter {
 	width:100%;
-	height:15px;
-	background: url(/Images/Pages/Plus.png) no-repeat left top;
+	height:5px;
 	margin:0px 0px 15px 0px;
-	width:15px;
+    background-color:#ccc;
+    cursor:pointer;
+}
+#clicktotopenterCurrent {
+	width:100%;
+	height:5px;
+	margin:0px 0px 15px 0px;
+    background-color:#8BA2BD;
+    cursor:pointer;
 }
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -232,13 +264,18 @@ textarea:focus, input:focus{
 }
 
 input {
-	width:100%;
 	font-size:12px;
 }
 
 .header_block {
 	float:left;
 	width:100%;
+}
+
+.headerEdit {
+    border:0px;
+    border-bottom:2px solid #456382;
+    background-color:#FFF;
 }
 
 .hedit{    border:0px; }
@@ -296,10 +333,14 @@ input {
 	width:30%;
 	padding:5px 0px;
 	margin:10px 35%;
-	color: #456382;
-	border:1px solid #456382;
+	color: #FFF;
+	background-color:#456382;
 	border-radius:5px;
 	text-align:center;
+}
+
+#bugdone:hover 	{	
+	background-color:#730324;
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -328,7 +369,6 @@ input {
 .main_item {
 	float:left;			
 	padding:0px 0px 0px 0px;	
-	width:100%;	
 	height:auto;			
 }
 
@@ -363,7 +403,9 @@ input {
 .equationblock, .symequationblock, .tableblock {
 	cursor:pointer;
 	float:left;
-	width:99%;
+	width:100%;
+    text-align:center;
+    margin:10px 0px;
 }
 
 .equationblock, .symequationblock {
@@ -444,10 +486,19 @@ input {
 	background-image:url(/Images/713.GIF);
 }
 
-.eqshow {
+.eqshowold {
 	float:left;
 	width:100%;
 	text-align:center;
+    cursor:pointer;
+}
+
+.eqshow {
+	width:auto;
+	text-align:center;
+    cursor:pointer;
+    left:0;
+    right:0;
 }
 
 .eqparam {
@@ -657,7 +708,7 @@ table.contenttable tr {
 	min-height:20px;	
 }
 
-#tableinput {
+.tableinput {
 	float:left;
 	border:0px;
 	margin:0px;
@@ -665,7 +716,7 @@ table.contenttable tr {
 	text-align: center;
 	width:100%;
 	height:100%;
-	background-color:#B4C4D4;
+	background-color:#EEE;
 }
 
 .label {
@@ -680,7 +731,6 @@ table.contenttable tr {
 	height:15px;
 	border: 0px #FFF solid;
 	padding:0px;
-	display:none;
 }
 
 .trdelete {
@@ -690,7 +740,6 @@ table.contenttable tr {
 	height:15px;
 	border: 0px #FFF solid;
 	padding: 0px;
-	display:none;
 }
 
 .tcadd {
@@ -699,8 +748,8 @@ table.contenttable tr {
 	width:15px;
 	height:15px;
 	border: 0px #FFF solid;
+	border: 0px #FFF solid;
 	padding:0px;
-	display:none;
 }
 
 .tcdelete {
@@ -710,7 +759,7 @@ table.contenttable tr {
 	height:15px;
 	border: 0px #FFF solid;
 	padding: 0px;
-	display:none;
+	border: 0px #FFF solid;
 }
 
 .empty {
@@ -718,6 +767,7 @@ table.contenttable tr {
 	padding: 0px;
 	border: 0px #FFF solid;
 	height:15px;
+    text-align:center;
 }
 
 
@@ -752,7 +802,6 @@ input.thedit {
 
 .filler_void {
 	float:left;
-	background-color: #FFFFFF;
 	width:8px;
 	height:8px;
 }
@@ -806,6 +855,11 @@ input.thedit {
 	width:75px;
 }
 
+.tableShow, .tableEquation {
+    float:left;
+    width:100%;
+}
+
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -841,10 +895,10 @@ input.thedit {
 .forloopinput, .whileloopinput, .ifelseinput {
 	border:0px;
 	font-size:1em;
-	background-image:url(/Images/Pages/white_wall_hash.png);
 	position:relative;
 	top:-2px;
 	height:18px;	
+    width:auto;
 }
 
 .forlooptext {
@@ -872,7 +926,6 @@ input.thedit {
 }
 
 .forloopstartselect, .forloopincselect, .forloopendselect, .forloopwhileselect, .forloopstartinput, .forloopincinput, .forloopendinput, .updateforinput {
-	display:none;
 }	
 
 
@@ -883,6 +936,26 @@ input.thedit {
 
 .forloopequalselect {
 	width: 50px;
+}
+
+.downone {
+    float:left;
+    cursor:pointer;
+    background:url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -252px -248px;
+    height:24px;
+    width:24px;
+    padding:0px;
+    margin:0px 1px;
+}
+
+.upone {
+    float:left;
+    cursor:pointer;
+    background:url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -282px -248px;
+    height:24px;
+    width:24px;
+    padding:0px;
+    margin:0px 0px;
 }
 
 .separator {
@@ -924,7 +997,7 @@ input.plot_highlimit, input.plot_colorstops,
 input.surface_near, input.surface_far, input.surface_viewangle,
 input.surface_XYGridHeight, input.surface_XYGridSpace, input.surface_YZGridHeight, input.surface_YZGridSpace, input.surface_XZGridHeight, input.surface_XZGridSpace,
 input.surface_vyloc, input.surface_vzloc, input.surface_cypos, input.surface_czpos, input.plot_monoColor, input.plot_labelcolor, input.plot_labeldistance,
-input.plot_connectorWidth, input.surface_planecolor, input.surface_planewidth, 
+input.plot_connectorWidth, input.surface_planecolor, input.surface_planewidth, input.plot_colorpicker, input.plot_fillcolorpicker,
 input.surface_planeheight, input.surface_vplanespacing, input.surface_hplanespacing, input.surface_offset, input.plot_labelBorderWidth, input.plot_labelBorderColor,
 input.plot_labelBGColor, input.plot_labelBorderRadius, input.plot_labelBorderPadding, input.plot_labelRotation, input.plot_labelX, input.plot_labelY,
 input.point_colorpicker, input.point_index, input.point_labelcolor, input.point_labelBorderWidth, input.point_labelBorderColor,
@@ -1067,8 +1140,8 @@ input.plot_percentstack, input.plot_normalstack {
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
-.current {	border:1px dashed #FFFFFF; border-radius:15px;  }
-.notcurrent {	border: 1px solid rgb(255, 255, 255); border: 1px solid rgba(255, 255, 255, 0);  }
+.current {	    background-color:#DFE3E5;  }
+.notcurrent {     }
 .update {	border:1px dashed #FFFFFF; border-radius:15px;  }
 #tocloneaddline { display:none; }
 .sublineshow, .sublinehide {
@@ -1193,7 +1266,6 @@ input.plot_percentstack, input.plot_normalstack {
 	height:16px;
 	cursor:pointer;
 	margin:0px 2px;
-	display:none;
 }
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -1214,6 +1286,9 @@ input.plot_percentstack, input.plot_normalstack {
 .symeqshow {
 	float:left;
 	width:100%;
+    text-align:center;
+    margin:10px 0px;
+    cursor:pointer;
 }
 
 .symeqparam {
@@ -1361,7 +1436,6 @@ input.plot_percentstack, input.plot_normalstack {
 
 .andorsegment {
 	position:absolute;
-	display:none;
 }
 
 .andorline {
@@ -1503,7 +1577,6 @@ input.plot_percentstack, input.plot_normalstack {
 .whileloopconditionvalue, .forloopconditionvalue, .ifelseconditionvalue { cursor:pointer; }
 
 .whileloopflagselect, .whileloopconditionselect, .whileloopdependentselect, .whileloopflaginput, .whileloopconditioninput, .whileloopdependentinput, .whileloopandorselect, #toclonewhileloopadd {
-	display:none;	
 }
 
 
@@ -1652,7 +1725,7 @@ select.whileloopconditionselect {
 
 .ifelsetext {
 	float: left;
-	width:auto;
+	width:100%;
 	margin: 0px 0px 0px 0px;
 	padding: 0px 0px 0px 10px;
 }
@@ -1674,7 +1747,6 @@ select.whileloopconditionselect {
 }
 
 .ifelseflagselect, .ifelseconditionselect, .ifelsedependentselect, .ifelseflaginput, .ifelseconditioninput, .ifelsedependentinput, .ifelseandorselect, #tocloneifelseadd {
-	display:none;	
 }
 
 
@@ -1811,7 +1883,6 @@ select.ifelseconditionselect {
 	font-weight:bold;
 	padding:5px 5px 0px 5px;
 	margin:0px 10px 0px 10px;
-	display:none;
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -1828,12 +1899,11 @@ select.ifelseconditionselect {
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
-#tocloneeqadd, #eqnums, #equnits, #eqdims, .eqerrors, #eqequation, #eqdeps1, #eqdeps2, #symeqspecs_ref, #imagespecs_ref, #eqspecs_ref, #tablespecs_ref, 
-#textspecs_ref, #functioninputs { display:none; }
+#tocloneeqadd, #eqnums, #equnits, #eqdims, .eqerrors, #eqequation, #eqdeps1, #eqdeps2, #functioninputs { display:none; }
 
 
 
-#EquationBody, #UnitBody, #ConstantBody, #InputBody, #FileBody, #FunctionBody, #ImportedFunctionBody, #PropertyBody, #NumbersBody, #FunctionList, #FunctionsImported, #TOCBody, #BugBody, #DatasetBody {
+.mainSection, #EquationBody, #UnitBody, #ConstantBody, #InputBody, #FileBody, #FunctionBody, #ImportedFunctionBody, #PropertyBody, #NumbersBody, #FunctionList, #FunctionsImported, #TOCBody, #BugBody, #DatasetBody {
 	margin: 5px auto; 
 	height:100%;
 	width:825px;
@@ -1844,20 +1914,19 @@ select.ifelseconditionselect {
 	height:100%;
 	width:1000px;
 }
+
 #EquationBody, #ConstantBody, #InputBody,  #FunctionBody, #ImportedFunctionBody, #PropertyBody, #NumbersBody, #FunctionsImported, #TOCBody, #BugBody, #DatasetBody {
 	display:none;
 }
 
-#equation_spec, #loop_spec, #table_spec, #symeq_spec, #image_spec, #text_spec, #plot_spec, #video_spec {
+#equation_spec, #loop_spec, #table_spec, #symeq_spec, #image_spec, #text_spec, #plot_spec, #video_spec, #surface_spec {
 	position:fixed;
 	top:0px;
 	right:0px;
 	width:48px;
 	height:100%;
-/*	background-image:url(/Images/moulin.png); */
 	background-color:#0e1a21;
 	z-index:999;
-	display:none;
 	overflow:hidden;
 }
 
@@ -1883,6 +1952,9 @@ select.ifelseconditionselect {
 	z-index:9999;
 	cursor:pointer;
 }
+
+#tocProp { cursor:pointer; }
+
 
 #specs_equation {
 	text-align:center;
@@ -1940,7 +2012,19 @@ select.ifelseconditionselect {
 	pointer-events: none;
 }
 
-#eqspecs_table:after, #eqspecs_table:before, #eqspecs_display:after, #eqspecs_display:before, #eqspecs_models:after, #eqspecs_models:before,
+#eqspecs_table:after, #eqspecs_table:before
+{
+	left: 100%;
+	top: 20%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+#eqspecs_display:after, #eqspecs_display:before, #eqspecs_models:after, #eqspecs_models:before,
  #eqspecs_deps:after, #eqspecs_deps:before, #eqspecs_errors:after, #eqspecs_errors:before, #tablespecs_table:after, #tablespecs_table:before,
  #tablespecs_row:after, #tablespecs_row:before, #tablespecs_column:after, #tablespecs_column:before, #tablespecs_cell:after, #tablespecs_cell:before,
  #imagespecs_ref:before, #imagespecs_ref:after, #imagespecs_props:before, #imagespecs_props:after, #eqspecs_ref:before, #eqspecs_ref:after,
@@ -2074,9 +2158,8 @@ select.ifelseconditionselect {
 	top:51px;
 	right:63px;
 	background-color:#FFF;
-	width:700px;
-	height:130px;
-	display:none;
+	height:320px;
+    width:400px;
 	border:1px solid #000;
 	border-radius:15px;
 }
@@ -2088,7 +2171,6 @@ select.ifelseconditionselect {
 	background-color:#FFF;
 	width:650px;
 	height:150px;
-	display:none;
 	border:1px solid #000;
 	border-radius:15px;
 }
@@ -2098,35 +2180,32 @@ select.ifelseconditionselect {
 	top:120px;
 	right:63px;
 	background-color:#FFF;
-	min-width:650px;
-	width:auto;
+	width:400px;
 	height:300px;
-	display:none;
 	border:1px solid #000;
 	border-radius:15px;
+    overflow:scroll;
+    padding:0px 20px;
 }
 
 #eqspecs_deps {
 	position:fixed;
-	top:200px;
+	top:130px;
 	right:63px;
 	background-color:#FFF;
-	min-width:650px;
-	width:auto;
+	width:400px;
 	height:300px;
-	display:none;
 	border:1px solid #000;
 	border-radius:15px;
 }
 
 #eqspecs_errors {
 	position:fixed;
-	top:323px;
+	top:255px;
 	height:200px;
 	width:650px;
 	right:63px;
 	background-color:#FFF;
-	display:none;
 	border:1px solid #000;
 	border-radius:15px;
 }
@@ -2219,6 +2298,21 @@ select.ifelseconditionselect {
 	margin:0px 0px 20px 0px;
 }
 
+.eqspecs_lineItem {
+    margin:10px;
+    padding:25px 0px;
+}
+
+.eqspecs_leftItem {
+	float:left;
+    width:250px;
+    font-size:1.2em;
+}
+
+.eqspecs_rightItem {
+	float:left;
+}
+
 .eqspecs_errorline {
 	width:550px;
 	margin:5px 25px;	
@@ -2228,11 +2322,8 @@ select.ifelseconditionselect {
 {
 	width:90%;
 	margin:10px 5%;
-	height:254px;
 	overflow:scroll;
 }
-
-#dim_model, #unit_model, #quantity_model, #dep2{	display:none; }
 
 .loopspecs_subline {
 	float:left;
@@ -2334,7 +2425,6 @@ select.ifelseconditionselect {
 	background-color:#FFF;
 	width:650px;
 	height:300px;
-	display:none;
 	border:1px solid #000;
 	border-radius:15px;	
 }
@@ -2346,7 +2436,6 @@ select.ifelseconditionselect {
 	background-color:#FFF;
 	width:650px;
 	height:220px;
-	display:none;
 	border:1px solid #000;
 	border-radius:15px;	
 }
@@ -2358,7 +2447,6 @@ select.ifelseconditionselect {
 	background-color:#FFF;
 	width:350px;
 	height:200px;
-	display:none;
 	border:1px solid #000;
 	border-radius:15px;	
 }
@@ -2370,7 +2458,6 @@ select.ifelseconditionselect {
 	background-color:#FFF;
 	width:350px;
 	height:200px;
-	display:none;
 	border:1px solid #000;
 	border-radius:15px;	
 }
@@ -2382,7 +2469,6 @@ select.ifelseconditionselect {
 	background-color:#FFF;
 	width:350px;
 	height:225px;
-	display:none;
 	border:1px solid #000;
 	border-radius:15px;	
 }
@@ -2432,7 +2518,7 @@ select.ifelseconditionselect {
 
 #eqspecs_ref {
 	position:fixed;
-	top:405px;
+	top:318px;
 	right:63px;
 }
 
@@ -2451,7 +2537,6 @@ select.ifelseconditionselect {
 
 .ref_web, .ref_book, .ref_mag, .ref_enc { 
 	margin:10px 0px 0px 0px;
-	display:none; 
 }
 
 .addref {
@@ -2494,41 +2579,23 @@ select.ifelseconditionselect {
 }
 
 .ref_typeline {
-	width:425px;
-	border-bottom:1px solid #ccc;
+	width:90%;
 	font-size:0.8em;
-	margin:5px 0px 0px 5px;
-	height:17px;
+	margin:5px 5% 0px 5%;
+	height:25px;
 }
 
 .ref_type {
 	float:left;
 	padding:2px 4px;
-	margin:0px 5px;
-	border-top:1px solid #898989;
-	border-left:1px solid #898989;
-	border-right:1px solid #898989;
-	background-color:#ccc;
+	margin:0px 40px;
 	cursor:pointer;
-}
-
-.ref_type_active {
-	float:left;
-	padding:2px;
-	margin:0px 3px;
-	border-top:1px solid #898989;
-	border-left:1px solid #898989;
-	border-right:1px solid #898989;
-	background-color:#FFFFFF;
-	cursor:pointer;
-	position:relative;
-	top:1px;
 }
 
 .ref_line {
-	width:400px;
-	padding:5px 25px;
-	height:20px;
+	width:100%;
+	margin:10px 0px;
+	float:left;
 }
 
 .ref_text {
@@ -2566,10 +2633,11 @@ select.ifelseconditionselect {
 
 
 input.ref_input {
-	width:215px;
+	width:65%;
 	border:1px solid #ccc;
 	color:#000;
 	padding:0px 5px;
+    margin:0px 5% 0px 5%;
 }
 
 input.ref_inputactive {
@@ -2579,6 +2647,15 @@ input.ref_inputactive {
 	color:#730324;
 }
 
+.refEditLine {
+    width:100%;
+    float:left;
+    height:20px;
+    font-size:0.8em;
+    color:#898989;
+    cursor:pointer;
+}
+
 #imagespecs_select {
 	position:fixed;
 	top:65px;
@@ -2586,19 +2663,17 @@ input.ref_inputactive {
 	background-color:#FFF;
 	width:440px;
 	height:250px;
-	display:none;
 	border:1px solid #000;
 	border-radius:15px;	
 }
 
 #imagespecs_props {
 	position:fixed;
-	top:140px;
+	top:100px;
 	right:63px;
 	background-color:#FFF;
 	width:330px;
-	height:100px;
-	display:none;
+	height:190px;
 	border:1px solid #000;
 	border-radius:15px;	
 }
@@ -2621,7 +2696,6 @@ input.ref_inputactive {
 	background-color:#FFF;
 	width:250px;
 	height:250px;
-	display:none;
 	border:1px solid #000;
 	border-radius:15px;	
 }
@@ -2637,8 +2711,12 @@ input.ref_inputactive {
 	width:100%;
 }
 
-.reficon_wrapper {
+.refSection {
 	float:right;
+}
+
+.reficon_wrapper {
+	float:left;
 	border:1px solid #898989;
 	color:#898989;
 	border-radius:10px;
@@ -2662,11 +2740,33 @@ input.ref_inputactive {
 /*-------------------------------------------------------- Bibliography ------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+.setRefLine {
+	float:left;
+	width:100%;
+	border-top:1px solid #ccc;
+	padding:10px 0px;
+    margin:10px 0px;
+    font-size:0.8em;
+    cursor:pointer;
+}
+
+.setRefLine:hover {
+	float:left;
+	width:100%;
+	border-top:1px solid #ccc;
+	padding:10px 0px;
+    margin:10px 0px;
+    font-size:0.8em;
+    cursor:pointer;
+    background-color:#ccc;
+}
+
 .bib_line {
 	float:left;
-	width:1000px;
+	width:100%;
 	border-top:1px solid #ccc;
-	padding:4px 0px;
+	padding:10px 0px;
+    margin:10px 0px;
 }
 
 .bib_num {
@@ -2712,13 +2812,18 @@ input.ref_inputactive {
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
+.icon_wrapper {
+	margin:0px 0px 0px 0px;
+	position:relative;	
+}
+
 .icon_holder {
-	display:none;
 	margin:0px 0px 0px 0px;
 	position:absolute;	
-	width:825px;
-	height:0px;
+	height:20px;
 	z-index:1;
+    top:0px;
+    right:0px;
 }
 
 .videoicon_holder {
@@ -2737,17 +2842,17 @@ input.ref_inputactive {
 }
 
 .updateforloop, .updatewhileloop, .updateifelse, .equationspecs, .loopspecs, .deletebutton, .subdeletebutton, .headerbutton, 
-.imagespecs, .expandbutton, .expandsurface, .tablespecs, .symeq_specs, .text_specs, .videospecs
+.imagespecs, .expandbutton, .expandsurface, .tablespecs, .symeq_specs, .text_specs, .videospecs, .plot_specs, a.expandbutton, a.expandsurface
 {
 	float:right;
 	height:16px;
 	width:16px;
-	z-index:0;
+	z-index:9999;
 	cursor:pointer;
 }
 
 .updateforloop, .updatewhileloop, .updateifelse {			background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -193px -60px; }
-.loopspecs, .equationspecs, .videospecs, .imagespecs, .headerbutton, .tablespecs, .symeq_specs, .text_specs {	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -156px -33px; }
+.loopspecs, .equationspecs, .videospecs, .imagespecs, .headerbutton, .tablespecs, .symeq_specs, .text_specs, .plot_specs {	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -156px -33px; }
 .deletebutton {	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -193px -34px; }
 .subdeletebutton {	background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -193px -34px; }
 .expandbutton {	background: url(http://www.cadwolf.com/Images/icons/fit-to-width-16.png) no-repeat left top; }
@@ -2918,7 +3023,7 @@ table.units th {
 	padding:5px 0px 0px 0px;
 }
 
-#plotselect { background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -1px -166px;	 }
+#plotselect, #surfselect { background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -1px -166px;	 }
 #dataselect { background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -36px -165px;	 }
 #cameraselect { background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -246px 9px;	 }
 #yaxisselect { background: url(http://www.cadwolf.com/Images/worksheet_sprite.png) no-repeat -105px -165px;	 }
@@ -3030,7 +3135,6 @@ table.units th {
 #plot_datablock1, #plot_datablock2, #plot_datablock3, #plot_datablock4, #plot_datablock5, #plot_datablock6, #plot_datablock6
 { 
 	float:left;
-	display:none; 
 }
 
 #plot_typedisplay {
@@ -3042,7 +3146,7 @@ table.units th {
 
 .top_third {
 	float:left;
-	width:300px;
+	width:350px;
 	padding:0px 0px 0px 0px;
 }
 
@@ -3050,7 +3154,7 @@ table.units th {
 	display:none;
 }
 
-#plot_adddatawrapper, #plot_addbandwrapper, #plot_addlinewrapper, #plot_addtextwrapper, #surface_addplanewrapper {
+#plot_adddatawrapper, #plot_addbandwrapper, #plot_addlinewrapper, #plot_addtextwrapper, #surface_addplanewrapper, #addRefWrapper {
 	width:100%;
 	height:50px;
 	float:left;
@@ -3068,7 +3172,7 @@ table.units th {
 }
 
 
-.plot_adddata, #plot_addxaxis, #plot_addyaxis, #plot_addplottext, #plot_addplotband, #plot_addplotline, .surface_adddata, .surface_addplane {
+.plot_adddata, #plot_addxaxis, #plot_addyaxis, #plot_addplottext, #plot_addplotband, #plot_addplotline, .surface_adddata, .surface_addplane, .addRefText {
 	font-size:12px;
 	width:105px;
 	padding:10px 10px 8px 10px;
@@ -3079,14 +3183,11 @@ table.units th {
 	cursor:pointer;
 }
 
-#plot_adddata:hover, #plot_addxaxis:hover, #plot_addyaxis:hover, #plot_addplottext:hover, #plot_addplotband:hover, #plot_addplotline:hover, .surface_adddata:hover, .surface_addplane:hover {
+#plot_adddata:hover, #plot_addxaxis:hover, #plot_addyaxis:hover, #plot_addplottext:hover, #plot_addplotband:hover, #plot_addplotline:hover, .surface_adddata:hover, .surface_addplane:hover, .addRefText:hover {
 	background-color:#898989;
 	color:#ECECEC;
 }
 
-#plot_dataseriestemplate {
-	display:none;
-}
 
 .plot_holder {
 	width:825px;
@@ -3198,7 +3299,6 @@ table.units th {
 	padding:10px;
 	position:fixed;
 	right:63px;
-	display:none;
 	z-index:9999;
 	border:1px solid #000;
 	border-radius:15px;
@@ -3282,13 +3382,13 @@ table.units th {
 
 #plot_xaxesblock {
 	position:fixed;
-	top:290px;
+	top:235px;
 	background-color:#FFF;
 }
 
 #plot_yaxesblock {
 	position:fixed;
-	top:355px;
+	top:310px;
 	background-color:#FFF;
 }
 
@@ -3300,7 +3400,7 @@ table.units th {
 
 #plot_formatblock {
 	position:fixed;
-	top:213px;
+	top:180px;
 	background-color:#FFF;
 }
 
@@ -3476,6 +3576,7 @@ table.units th {
 
 .plot_axistypeselect, .plot_xaxistypeselect, .plot_yaxisreverse, .plot_xaxisreverse, .plot_xaxisshowhide {
 	float:right;
+    margin:0px 17px 0px 0px;
 }
 
 .plot_label75 {
@@ -3517,7 +3618,8 @@ table.units th {
 #plot_yaxislabel, #plot_yaxismin, #plot_yaxismax, #plot_yaxisoffset, #plot_axisoffset, #plot_yaxiswidth, #plot_xaxislabel, 
 #plot_xaxismin, #plot_xaxismax, #plot_xaxisoffset, #plot_yaxistickinterval, #plot_yaxisticklength, #plot_yaxistickwidth,
 #plot_xaxistickinterval, #plot_xaxisticklength, #plot_xaxistickwidth, #plot_xaxiswidth, #plot_yaxisminortickinterval, #plot_xaxisminortickinterval,
-#plot_ygridlinewidth, #plot_yminorgridlinewidth, #plot_xgridlinewidth, #plot_xminorgridlinewidth  {
+#plot_ygridlinewidth, #plot_yminorgridlinewidth, #plot_xgridlinewidth, #plot_xminorgridlinewidth, #plot_yminortickpicker, #plot_ymajortickpicker, 
+#plot_yaxiscolorpicker, #plot_xmajortickpicker, #plot_xminortickpicker, #plot_xaxiscolorpicker, #plot_yaxiscolorpicker  {
 	float:left;
 	border:1px solid #000000;
 	padding:0px;
@@ -3604,7 +3706,7 @@ select.plot_ydataselect, select.plot_xdataselect, select.plot_labelselect, selec
 #plot_optionsright {
 	float:right;
 	width:300px;
-	height:230px;
+	height:300px;
 }
 
 .plot_optionlist {
@@ -3623,7 +3725,11 @@ select.plot_ydataselect, select.plot_xdataselect, select.plot_labelselect, selec
 
 .plot_axiscolorbox {
 	float:left;
-	padding:0px 0px 0px 50px;
+	padding:0px 0px 0px 22px;
+}
+
+.plot_colorbox {
+	float:left;
 }
 
 .plot_piebox {
@@ -3737,7 +3843,7 @@ select.plot_symbolselect, select.plot_surfaceselect {
 	float:left;
 	border-bottom:1px solid #898989;
 	width:85%;
-	margin:10px 5% 0px 5%;
+	margin:10px 5% 10px 5%;
 	padding:0px 0px 0px 5%;
 	height:23px;
 }
@@ -3762,7 +3868,7 @@ select.plot_symbolselect, select.plot_surfaceselect {
 .plot_datasetappearancesection, .plot_datasettrendlinesection, #plot_yaxisappearancesection, #plot_yaxistickmarkssection, 
 #plot_xaxisappearancesection, #plot_xaxistickmarkssection, #plot_bandtemplate, #plot_linetemplate, #plot_texttemplate,
 .plot_pointappearancesection, #plot_formatSection, #plot_legendSection {
-	display:none;
+	
 }
 
 #plot_bandnames, #plot_linenames, #plot_textnames {
@@ -3824,8 +3930,7 @@ select.plot_symbolselect, select.plot_surfaceselect {
 #plot_xgridsonoff, #plot_ygridsonoff, #plot_xminorgridsonoff, #plot_yminorgridsonoff, .surface_XYonoff, .surface_XZonoff, .surface_YZonoff
 {
 	float:left;
-	width:25px;
-	margin:8px 0px 0px 20px;
+	margin:3px 11px 0px 0px;
 	padding:0px;
 }
 
@@ -3954,7 +4059,6 @@ select.plot_symbolselect, select.plot_surfaceselect {
 	margin:10px 0px 10px 0px;
 	padding:10px 0px 10px 0px;
 	border-radius:15px;
-	display:none;
 }
 
 
@@ -4483,7 +4587,6 @@ table.inputs th {
 }
 
 #tocsections {
-	display:none;
 	border-left:1px solid #ccc; 
 	border-right:1px solid #ccc; 
 	border-top:1px solid #ccc; 
@@ -4659,7 +4762,6 @@ table.inputs th {
 #Format_Wrapper {
 	height: 50px;
 	z-index:999;
-	display:none;
 	width:auto;
 	position:fixed;
 	top:0px;
@@ -4694,7 +4796,6 @@ table.inputs th {
 	top:0px;
 	left:0px;
 	width:100%;
-	display:none;
 	text-align:center;
 	padding:5px 0px 5px 115px;
 	font-size:1.5em;
@@ -4783,7 +4884,7 @@ table.inputs th {
 	cursor:pointer;
 }
 
-#AddFAFLine, #AddDataset {
+#AddFAFLine, #AddDataset, #addReference {
 	width:30%;
 	background-color:#8BA2BD;
 	cursor:pointer;
@@ -4806,20 +4907,35 @@ table.inputs th {
 
 .datasetname_holder {
 	float:left;
-	width:20%;
-	margin:10px 5%;
+	margin:10px 10px;
+	margin:10px 10px;
 	height:24px;
 }
 
 .dataseturl_holder {
 	float:left;
 	width:55%;
-	margin:10px 5%;
+	margin:10px 10px;
 	height:24px;
+    overflow-x:scroll;
+}
+
+.dataset_url{
+    float:left;
+    width:450px;
+    text-align:center;
 }
 
 .dataset_name {
 	float:left;
+    width:125px;
+    text-align:center;
+}
+
+.dataset_size {
+	float:left;
+    width:75px;
+    text-align:center;
 }
 
 .dataset_delete {
@@ -4869,13 +4985,6 @@ table.inputs th {
 }
 
 
-/* Things relating to surface data options */
-
-#line_datablock, #cube_datablock, #icosahedron_datablock, #tetrahedron_datablock, #octahedron_datablock, #sphere_datablock, #cylinder_datablock,
-#torus_datablock, #lathe_datablock, #plane_datablock, #grid_datablock {
-	display:none;
-}
-
 /*--------------------------------------------------------- VIDEO STUFF -----------------------------------------------------*/
 .youtube-container { display: block; margin: 20px auto; width: 100%; max-width: 600px; }
 .youtube-player { display: block; width: 100%; /* assuming that the video has a 16:9 ratio */ padding-bottom: 56.25%; overflow: hidden; position: relative; width: 100%; height: 100%; cursor: hand; cursor: pointer; display: block; }
@@ -4902,4 +5011,83 @@ div.play-button { height: 72px; width: 72px; left: 50%; top: 50%; margin-left: -
 	color:#DFE3E5;
 	background-color:#456382;
 	cursor:pointer;
+}
+
+.activeTD {
+    background-color:#B4C4D4;
+}
+
+
+/*--------------------------------------------------------- GENERIC SPECS STUFF -----------------------------------------------------*/
+
+.specsTitle {
+    width:90%;
+	font-size:1.2em;
+    font-weight:bold;
+    text-align:center;
+    padding:0px 0px 5px 0px;
+    margin:5px 5% 10px 5%;
+    border-bottom:1px solid #456382;
+}
+
+.specsLine{
+    float:left;
+    width:100%;
+    height:25px;
+    margin:5px 0px;
+}
+
+.specsLabel {
+    float:left;
+    width:50%;
+    height:25px;
+	font-size:1em;
+	text-align:center;
+    padding:5px 0px 0px 0px;
+}
+
+.specsLabelShort {
+    float:left;
+    width:43%;
+    height:25px;
+	font-size:1em;
+	text-align:center;
+    padding:5px 0px 0px 0px;
+}
+
+.specsInputDisplay {
+    float:left;
+    width:50%;
+    height:25px;
+	font-size:1em;
+	text-align:center;
+}
+        
+input.specsInput, select.specsInput {
+    float:left;
+    width:45%;
+    height:25px;
+    COLOR: #000000; 
+    padding:2px 0px 2px 0px;
+    background-color:#FFFFFF;
+	font-size:1em;
+	border:1px solid #ccc;
+	text-align:center;
+}
+       
+input.specsInputShort {
+    float:left;
+    width:5%;
+    height:25px;
+    COLOR: #000000; 
+    padding:2px 0px 2px 0px;
+    background-color:#FFFFFF;
+	font-size:1em;
+	border:1px solid #ccc;
+	text-align:center;
+}
+
+.specsText {
+    width:90%;
+    margin:10px 5% 0px 5%;    
 }

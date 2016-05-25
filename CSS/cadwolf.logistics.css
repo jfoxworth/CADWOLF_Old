@@ -1,0 +1,192 @@
+/* ---------------------------------------------------------------------
+   This controls the logistics page
+---------------------------------------------------------------------- */
+
+/*
+For the colors, the "Cherries on the Lake" pattern was used for colors. The "Theme 3" was also looked at.
+Red			-	#730324
+White		-	#DFE3E5
+Light Blue	-	#B4C4D4
+Middle Blue	-	#8BA2BD
+Dark Blue	-	#456382
+
+*/
+
+body {
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px;
+	background-color:#FFFFFF;
+	font-family:'Lato', sans-serif;
+	font-size:0.85em;
+	letter-spacing:1px;
+	font-weight:300;
+}
+
+p {
+	line-height:1.75em;	
+}
+
+#main_wrapper {
+	
+}
+
+#content_wrapper {
+	height:100%;
+}
+
+#left_wrapper {
+	float:left;
+	width:250px;
+}
+
+textarea:focus, input:focus{
+    outline: 0;
+}
+
+*:focus {
+    outline: 0;
+}
+
+input {
+    border:0px;
+    border-bottom:2px solid #456382;
+    width:100%;
+    background-color:#FFFFFF;
+	font-family:'Lato', sans-serif;
+	font-size:1em;
+	letter-spacing:1px;
+	font-weight:300;
+}
+
+#logisticsWrapper {
+    width:100%;
+}
+
+#logisticsInner {
+    width:1000px;
+    margin:0px auto;
+}
+
+#buttonRow {
+    width:100%;
+    height:50px;
+    float:left;
+}
+
+.selectButton{
+    width:33%;
+    text-align:center;
+    border:1px solid #456382;
+    color:#456382;
+}
+
+.selectButton:hover {
+    border:1px solid #730324;
+    color:#730324;
+}
+
+
+.leftIcon {
+    float:left;
+    width:25px;
+    height:30px;
+    margin:0px 18px 0px 22px;
+}
+
+.bs-callout {
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 3px;
+}
+.bs-callout h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+.bs-callout p:last-child {
+    margin-bottom: 0;
+}
+.bs-callout code {
+    border-radius: 3px;
+}
+.bs-callout+.bs-callout {
+    margin-top: -5px;
+}
+.bs-callout-default {
+    border-left-color: #777;
+}
+.bs-callout-default h4 {
+    color: #777;
+}
+.bs-callout-primary {
+    border-left-color: #428bca;
+}
+.bs-callout-primary h4 {
+    color: #428bca;
+}
+.bs-callout-success {
+    border-left-color: #5cb85c;
+}
+.bs-callout-success h4 {
+    color: #5cb85c;
+}
+.bs-callout-danger {
+    border-left-color: #d9534f;
+}
+.bs-callout-danger h4 {
+    color: #d9534f;
+}
+.bs-callout-warning {
+    border-left-color: #f0ad4e;
+}
+.bs-callout-warning h4 {
+    color: #f0ad4e;
+}
+.bs-callout-info {
+    border-left-color: #5bc0de;
+}
+.bs-callout-info h4 {
+    color: #5bc0de;
+}
+
+.spacer5 { height: 5px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+.spacer10 { height: 10px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+.spacer15 { height: 15px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+.spacer20 { height: 20px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+.spacer25 { height: 25px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+.spacer30 { height: 30px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+.spacer35 { height: 35px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+.spacer40 { height: 40px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+.spacer45 { height: 45px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+.spacer50 { height: 50px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+.spacer100 { height: 100px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+.spacer200 { height: 200px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+
+#Format_Wrapper {
+	height: 50px;
+	z-index:999;
+	width:auto;
+	position:fixed;
+	top:0px;
+	left:250px;
+	width:100%;
+}
+
+#Format_Bar {
+	float:left;
+	width:90%;
+	margin:0 5%;
+}
+
+#NicEdit_Wrapper {	margin:auto; background-color:#FFF; }
+#myNicPanel { float:left; }
+
+
+#cktoolbar {
+	margin:auto;
+	padding:0px 0px 0px 0px;
+}
+
+.cke_chrome {	border:0px !important; }
+

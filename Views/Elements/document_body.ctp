@@ -7,7 +7,7 @@ The code then outputs every item for the main page randing from text to equation
 the DOM. This info is read into memory on page load and deleted.
 --->
 
-<body ng-controller="mainController" ng-cloak>
+<body ng-controller="documentController" ng-cloak>
 
 <div id="messageLine" ng-cloak>
     <div id="GoodMessageWrapper" ng-show="displayGoodMessage"><div id="goodmessage">{{goodMessageText}}</div></div>
@@ -133,7 +133,7 @@ the DOM. This info is read into memory on page load and deleted.
 				<div class="lc_description_bottom">&nbsp</div>	
 				<div class="left_section formatborder" id="formatsection">	
 					<div class="left_suboptions">	
-					<div class="left_line"><div class="left_item">Width :</div><div class="right_item"><input id="width" class="left_format" ng-model="currentItem.mainwidth" ng-enter="updateFormats()"></div><div class="left_px">px</div></div>
+					<div class="left_line"><div class="left_item">Width :</div><div class="right_item"><input id="width" class="left_format" ng-model="currentItem.width" ng-enter="updateFormats()"></div><div class="left_px">px</div></div>
 					<div class="left_line"><div class="left_item">Top :</div><div class="right_item"><input id="topmargin" class="left_format" ng-model="currentItem.margintop" ng-enter="updateFormats()"></div><div class="left_px">px</div></div>
 					<div class="left_line"><div class="left_item">Bottom :</div><div class="right_item"><input id="bottommargin" class="left_format" ng-model="currentItem.marginbottom" ng-enter="updateFormats()"></div><div class="left_px">px</div></div>
 					<div class="left_line"><div class="left_item">Left :</div><div class="right_item"><input id="leftmargin" class="left_format" ng-model="currentItem.marginleft" ng-enter="updateFormats()"></div><div class="left_px">px</div></div>
@@ -153,17 +153,18 @@ the DOM. This info is read into memory on page load and deleted.
                     <!-- This is the worksheet  -->
                     <div class="mainSection" ng-show="worksheetShow" style="width: 845px;">              <!-- This width should be adaptable in the future -->
 
-                        <div id="clicktotopenter" ng-click="setCurrent('top')">&nbsp</div>
+                        <div ng-if="currentItem=='top'" id="clicktotopenterCurrent" ng-click="setCurrent('top')">&nbsp</div>
+                        <div ng-if="currentItem!='top'" id="clicktotopenter" ng-click="setCurrent('top')">&nbsp</div>
 
                         <div class="titleblock">{{cadwolf_fileInfo.title}}</div>
-                        <div class="subtitleblock">{{cadwolf_fileInfo.subtitle}}</div>
+                        <div ng-if="{{cadwolf_fileInfo.subtitle}}!='Enter Subtitle'" class="subtitleblock">{{cadwolf_fileInfo.subtitle}}</div>
 
                         <!-- The main repeat to iterate over all of the document components -->
                         <div class="main_item" ng-repeat="obj in cadwolf_worksheet | orderBy:'location' track by obj.itemid" ng-switch on="obj.vartype" ng-click="$parent.setCurrent(obj)">
                             <div class="" style="width: {{obj.width}}px; margin-top:{{obj.margintop}}px; margin-bottom:{{obj.marginbottom}}px; margin-left:{{obj.marginleft}}px; margin-right:{{obj.marginright}}px;" >
                                 <div ng-switch="obj.vartype">
                                     
-                                    <div class="switchWrapper"  ng-switch-when="1" ng-click="$parent.$parent.formatDisplay=true; $parent.formatDisplay=true; formatDisplay=true;" ng-mouseover="showIcons=true;" ng-mouseout="showIcons=false" ng-if="obj.location>=showStartLoc&&obj.location<showEndLoc">
+                                    <div class="switchWrapper"  ng-switch-when="1" ng-mouseover="showIcons=true;" ng-mouseout="showIcons=false" ng-if="obj.location>=showStartLoc&&obj.location<=showEndLoc">
                                         <div class="icon_wrapper" ng-if="editPerm" ng-show="showIcons">
                                             <div class="icon_holder">
                                                 <div class="deletebutton" ng-click="$parent.deleteItem(obj)"></div>
@@ -174,7 +175,7 @@ the DOM. This info is read into memory on page load and deleted.
                                         <span ref-num="obj.Values.References"></span>
                                     </div>
                                     
-                                    <div class="switchWrapper" ng-switch-when="2" ng-click="$parent.$parent.formatDisplay=false;" ng-mouseover="showIcons=true;" ng-mouseout="showIcons=false" ng-if="obj.location>=showStartLoc&&obj.location<showEndLoc">
+                                    <div class="switchWrapper" ng-switch-when="2" ng-mouseover="showIcons=true;" ng-mouseout="showIcons=false" ng-if="obj.location>=showStartLoc&&obj.location<showEndLoc">
                                         <div ng-if="editPerm" ng-show="showIcons" class="icon_wrapper">
                                             <div class="icon_holder"><div class="deletebutton" ng-click="$parent.deleteItem(obj)"></div>
                                                 <div class="headerbutton" ng-click="obj.showOption=!obj.showOption">
@@ -193,7 +194,7 @@ the DOM. This info is read into memory on page load and deleted.
                                         </div>
                                     </div>
                                     
-                                    <div class="switchWrapper" ng-switch-when="3" ng-if="((obj.Equation.inputType!='Dataset')&&(obj.Equation.inputType!='File'))&&obj.location>=showStartLoc&&obj.location<showEndLoc" ng-click="$parent.$parent.formatDisplay=false;" ng-mouseover="showIcons=true;" ng-mouseout="showIcons=false" ng-dblclick="obj.showEdit=true">
+                                    <div class="switchWrapper" ng-switch-when="3" ng-if="((obj.Equation.inputType!='Dataset')&&(obj.Equation.inputType!='File')&&(obj.Equation.isConnectedID!=1))&&obj.location>=showStartLoc&&obj.location<showEndLoc" ng-mouseover="showIcons=true;" ng-mouseout="showIcons=false" ng-dblclick="obj.showEdit=true">
                                         <div ng-if="editPerm" ng-show="showIcons" class="icon_wrapper">
                                             <div class="icon_holder">
                                                 <div class="deletebutton" ng-click="$parent.deleteItem(obj)"></div>
@@ -201,52 +202,50 @@ the DOM. This info is read into memory on page load and deleted.
                                             </div>
                                         </div>
                                         <div class="equationblock">
-                                            <div class="eqshow" id="{{obj.itemid}}" ng-show="!obj.showEdit">
-                                                <span mathjax-bind="obj.Equation.Format_left"></span>=
-                                                <span mathjax-bind="obj.Equation.Format_showequation"></span>=
-                                                <span mathjax-bind="obj.Equation.Format_showsolution"></span>
-                                            </div>
-                                            <input class="standardInput" ng-show="obj.showEdit" ng-enter="obj.showEdit=false; obj.needsUpdateFlag=1; runEquationDigest()" ng-model="obj.Equation.newEquation" />
+                                            <div ng-if="editPerm||(usePerm&&(obj.Equation.Format_editinuse==1))" class="eqshow" id="{{obj.itemid}}" ng-show="!obj.showEdit"><span mathjax-bind="obj.Equation.Format_left"></span>=<span mathjax-bind="obj.Equation.Format_showequation"></span>=<span mathjax-bind="obj.Equation.Format_showsolution"></span></div>
+                                            <input ng-if="editPerm||(usePerm&&(obj.Equation.Format_editinuse==1))" class="standardInput" ng-show="obj.showEdit" ng-enter="obj.showEdit=false; obj.needsUpdateFlag=1; runEquationDigest()" ng-model="obj.Equation.newEquation" />
+                                            <div ng-if="!editPerm&&(!usePerm||(obj.Equation.Format_editinuse!=1))" class="eqshow" id="{{obj.itemid}}"><span mathjax-bind="obj.Equation.Format_left"></span>=<span mathjax-bind="obj.Equation.Format_showequation"></span>=<span mathjax-bind="obj.Equation.Format_showsolution"></span></div>
                                         </div>
                                         <span ref-num="obj.Values.References"></span>
                                     </div>
                                     
-                                    <div class="switchWrapper" ng-switch-when="4" ng-click="$parent.$parent.formatDisplay=false;" ng-mouseover="showIcons=true;" ng-mouseout="showIcons=false" ng-if="obj.location>=showStartLoc&&obj.location<showEndLoc">
+                                    <div class="switchWrapper" ng-switch-when="4" ng-mouseover="showIcons=true;" ng-mouseout="showIcons=false" ng-if="obj.location>=showStartLoc&&obj.location<showEndLoc">
                                         <div ng-if="editPerm" ng-show="showIcons" class="icon_wrapper"><div class="icon_holder"><div class="deletebutton" ng-click="$parent.deleteItem(obj)"></div><div ng-click="showSpecs(obj.itemid, 'symbolic');" class="symeq_specs"></div></div></div>
                                         <div class="symequationblock">
-                                            <div class="symeqshow" id="{{obj.itemid}}" ng-show="!obj.showEdit" ng-dblclick="obj.showEdit=!obj.showEdit"><span mathjax-bind="obj.data.text"></span></div>
-                                            <input class="standardInput" ng-show="obj.showEdit" ng-enter="obj.showEdit=!obj.showEdit" ng-model="obj.data.text" />
+                                            <div ng-if="editPerm" class="symeqshow" id="{{obj.itemid}}" ng-show="!obj.showEdit" ng-dblclick="obj.showEdit=!obj.showEdit"><span mathjax-bind="obj.data.text"></span></div>
+                                            <input ng-if="editPerm" class="standardInput" ng-show="obj.showEdit" ng-enter="obj.showEdit=!obj.showEdit" ng-model="obj.data.text" />
+                                            <div ng-if="!editPerm" class="symeqshow" id="{{obj.itemid}}"><span mathjax-bind="obj.data.text"></span></div>
                                         </div>
                                         <span ref-num="obj.Values.References"></span>
                                     </div>
-                                    <div class="switchWrapper" ng-switch-when="5" id="{{obj.itemid}}" ng-click="$parent.$parent.formatDisplay=false;" ng-mouseover="showIcons=true;" ng-mouseout="showIcons=false" ng-if="obj.location>=showStartLoc&&obj.location<showEndLoc">
+                                    <div class="switchWrapper" ng-switch-when="5" id="{{obj.itemid}}" ng-mouseover="showIcons=true;" ng-mouseout="showIcons=false" ng-if="obj.location>=showStartLoc&&obj.location<showEndLoc">
                                         <span table-object="obj"></span>
                                         <span ref-num="obj.Values.References"></span>
                                     </div>                                    
-                                    <div class="switchWrapper" ng-if="obj.parentid=='none'" ng-switch-when="6" id="{{obj.itemid}}" ng-click="$parent.$parent.formatDisplay=false;" ng-mouseover="showIcons=true;" ng-mouseout="showIcons=false" ng-if="obj.location>=showStartLoc&&obj.location<showEndLoc">
+                                    <div class="switchWrapper" ng-if="obj.parentid=='none'" ng-switch-when="6" id="{{obj.itemid}}" ng-mouseover="showIcons=true;" ng-mouseout="showIcons=false" ng-if="obj.location>=showStartLoc&&obj.location<showEndLoc">
                                         <span for-loop-object></span>
                                     </div>                                    
-                                    <div class="switchWrapper" ng-if="obj.parentid=='none'" ng-switch-when="7" id="{{obj.itemid}}" ng-click="$parent.$parent.formatDisplay=false;" ng-mouseover="showIcons=true;" ng-mouseout="showIcons=false" ng-if="obj.location>=showStartLoc&&obj.location<showEndLoc">
+                                    <div class="switchWrapper" ng-if="obj.parentid=='none'" ng-switch-when="7" id="{{obj.itemid}}" ng-mouseover="showIcons=true;" ng-mouseout="showIcons=false" ng-if="obj.location>=showStartLoc&&obj.location<showEndLoc">
                                         <span while-loop-object="obj"></span>
                                     </div>                                    
-                                    <div class="switchWrapper" ng-if="obj.parentid=='none'" ng-switch-when="8" id="{{obj.itemid}}" ng-click="$parent.$parent.formatDisplay=false;" ng-mouseover="showIcons=true;" ng-mouseout="showIcons=false" ng-if="obj.location>=showStartLoc&&obj.location<showEndLoc">
+                                    <div class="switchWrapper" ng-if="obj.parentid=='none'" ng-switch-when="8" id="{{obj.itemid}}" ng-mouseover="showIcons=true;" ng-mouseout="showIcons=false" ng-if="obj.location>=showStartLoc&&obj.location<showEndLoc">
                                         <span if-else-object="obj"></span>
                                     </div>                                    
-                                    <div class="switchWrapper" ng-switch-when="9" ng-click="$parent.$parent.formatDisplay=false;" ng-mouseover="showIcons=true;" ng-mouseout="showIcons=false" ng-if="obj.location>=showStartLoc&&obj.location<showEndLoc">
+                                    <div class="switchWrapper" ng-switch-when="9" ng-mouseover="showIcons=true;" ng-mouseout="showIcons=false" ng-if="obj.location>=showStartLoc&&obj.location<showEndLoc">
                                         <div ng-if="editPerm" ng-show="showIcons" class="icon_wrapper"><div class="icon_holder"><div class="deletebutton" ng-click="$parent.deleteItem(obj)"></div><div ng-click="showSpecs(obj.itemid, 'plot')" class="plot_specs"></div><a class="expandbutton" ng-href="http://www.cadwolf.com/Plots/{{obj.itemid}}" target="_blank"></a></div></div>
-                                        <div class="plot_block"><div id="{{obj.itemid}}" class="plot_holder" ng-style="{height:obj.Chart_height, width:obj.Chart_width}"><span plot-bind="obj.Plot"></span></div></div>
+                                        <div class="plot_block"><div id="{{obj.itemid}}" class="plot_holder" ng-style="{height:obj.Chart_height, width:obj.Chart_width}"><span plot-bind="obj"></span></div></div>
                                         <span ref-num="obj.Values.References"></span>
                                     </div>                                    
-                                    <div class="switchWrapper" ng-switch-when="10" ng-click="$parent.$parent.formatDisplay=false;" ng-mouseover="showIcons=true;" ng-mouseout="showIcons=false" ng-if="obj.location>=showStartLoc&&obj.location<showEndLoc">
+                                    <div class="switchWrapper" ng-switch-when="10" ng-mouseover="showIcons=true;" ng-mouseout="showIcons=false" ng-if="obj.location>=showStartLoc&&obj.location<showEndLoc">
                                         <div ng-if="editPerm" ng-show="showIcons" class="icon_wrapper"><div class="icon_holder"><div class="deletebutton" ng-click="$parent.deleteItem(obj)"></div><div ng-click="showSpecs(obj.itemid, 'image')" class="imagespecs"></div></div></div>
                                         <div class="image"><img ng-src="/UserImages/{{obj.data.src}}.{{obj.data.thisType}}" width="obj.data.width" height="{{obj.data.height}}"/></div>
                                         <span ref-num="obj.Values.References"></span>
                                     </div>                                    
-                                    <div class="switchWrapper" ng-switch-when="11" ng-click="$parent.$parent.formatDisplay=false;" ng-mouseover="showIcons=true;" ng-mouseout="showIcons=false" ng-if="obj.location>=showStartLoc&&obj.location<showEndLoc">
+                                    <div class="switchWrapper" ng-switch-when="11" ng-mouseover="showIcons=true;" ng-mouseout="showIcons=false" ng-if="obj.location>=showStartLoc&&obj.location<showEndLoc">
                                         <div ng-if="editPerm" ng-show="showIcons" class="icon_wrapper"><div class="icon_holder"><div class="deletebutton" ng-click="$parent.deleteItem(obj)"></div></div></div>
                                         <div class="linebreak_block"></div>
                                     </div>       
-                                    <div class="switchWrapper" ng-switch-when="12" ng-click="$parent.$parent.formatDisplay=false;" ng-mouseover="showIcons=true;" ng-mouseout="showIcons=false" ng-if="obj.location>=showStartLoc&&obj.location<showEndLoc">
+                                    <div class="switchWrapper" ng-switch-when="12" ng-mouseover="showIcons=true;" ng-mouseout="showIcons=false" ng-if="obj.location>=showStartLoc&&obj.location<showEndLoc">
                                         <div ng-if="editPerm" ng-show="showIcons" class="icon_wrapper"><div class="icon_holder"><div class="deletebutton" ng-click="$parent.deleteItem(obj)"></div><div ng-click="showSpecs(obj.itemid, 'video')" class="videospecs"></div></div></div>
                                         <div class="video_block" id="{{obj.data.Format_id}}">
                                             <div width="{{obj.data.videoWidth}}" height="{{obj.data.videoHeight}}">
@@ -255,10 +254,10 @@ the DOM. This info is read into memory on page load and deleted.
                                         </div>
                                         <span ref-num="obj.Values.References"></span>
                                    </div>                                    
-                                    <div class="switchWrapper" ng-switch-when="13" ng-click="$parent.$parent.formatDisplay=false;" outside-click="cancel_animate()" ng-mouseover="showIcons=true;" ng-mouseout="showIcons=false" ng-if="obj.location>=showStartLoc&&obj.location<showEndLoc">
+                                    <div class="switchWrapper" ng-switch-when="13" ng-mouseover="showIcons=true;" ng-mouseout="showIcons=false" ng-if="obj.location>=showStartLoc&&obj.location<showEndLoc" >
                                         <div ng-if="editPerm" ng-show="showIcons" class="icon_wrapper"><div class="icon_holder"><div class="deletebutton" ng-click="$parent.deleteItem(obj)"></div><div ng-click="showSpecs(obj.itemid, 'surface')" class="plot_specs"></div><a class="expandbutton"  ng-href="http://www.cadwolf.com/Surfaces/{{obj.itemid}}" target="_blank"></a></div></div>
                                         <div class="surface_block">
-                                            <div class="plot_holder" ng-dblclick="animate()" ng-style="{height:obj.Surface.Chart_height, width:obj.Surface.Chart_width}">
+                                            <div class="plot_holder" ng-style="{height:obj.Surface.Chart_height, width:obj.Surface.Chart_width}" ng-click="$parent.$parent.$parent.currentPlot=obj;  animate()">
                                                 <div id="{{obj.itemid}}" style="float:left; overflow:auto;}"></div>
                                                 <div class="Legend_Wrapper" ng-show="obj.Surface.Props.Legend.onOff=='1'">
                                                     <div class="Legend" ng-show="obj.Surface.Props.Legend.onOff=='1'&&obj.Surface.Props.divideColormap=='0'" id="{{obj.itemid}}Legend"></div><div ng-show="obj.Surface.Props.Legend.onOff=='1'&&obj.Surface.Props.divideColormap=='0'" id="{{obj.itemid}}LegendTicks" class="LegendTicks"></div>
@@ -347,7 +346,7 @@ the DOM. This info is read into memory on page load and deleted.
                     <div class="mainSection" ng-show="bibShow" ng-cloak>
                         <div class="fileheader">Bibliography</div>
                         <div class="file_description">This view lets the user add, delete, and edit references for the document. These references can then be assigned to individual items in the worksheet view. You must have edit permissions to set a reference.</div>
-                        <div id="addReference" ng-click="addReference()">Add a Reference</div>
+                        <div id="addReference" ng-if="editPerm" ng-click="addReference()">Add a Reference</div>
                         <!-- Loop over the references and display the appropriate information -->
                         <div ng-repeat="obj in cadwolf_references | orderBy:obj.refNum track by obj.refID">
                             <div ng-if="obj['type']=='web'" class="bib_line"><div class="bib_num">{{obj['refNum']+1}}</div>{{obj['author']}}. <a href="{{address}}">{{obj['webtitle']}}</a>.<u>{{obj['pagetitle']}}</u> - {{obj['sitetitle']}}. Date accessed : {{obj['dateaccessed']}}</div>
@@ -397,8 +396,12 @@ the DOM. This info is read into memory on page load and deleted.
                             <div class="Inputs_smalldesc">Check the equations to use as inputs</div>
                             <div id="Inputs_folderwindow">
                                 <div ng-repeat="obj in $parent.inputData" ng-switch on="obj.Workspace.File_or_Folder">
-                                    <div ng-switch-when="0" class="folderline"><div class="filefoldername" ng-dblclick="$parent.$parent.$parent.inputLocation=$parent.$parent.$parent.inputLocation+'/'+obj.Workspace.name; $parent.$parent.$parent.getFileFolderData();">{{obj.Workspace.name}}</div></div>
-                                    <div ng-switch-when="1" class="fileline"><div class="filefoldername" ng-dblclick="$parent.$parent.$parent.inputLocation=$parent.$parent.$parent.inputLocation+'/'+obj.Workspace.name; $parent.$parent.$parent.getFileFolderData();">{{obj.Workspace.name}}</div></div>
+                                    <div ng-switch-when="0" class="folderline" ng-dblclick="$parent.$parent.$parent.inputLocation=$parent.$parent.$parent.inputLocation+'/'+obj.Workspace.name; $parent.$parent.$parent.getFileFolderData();">
+                                        <div class="filefoldername" ng-dblclick="$parent.$parent.$parent.inputLocation=$parent.$parent.$parent.inputLocation+'/'+obj.Workspace.name; $parent.$parent.$parent.getFileFolderData();">{{obj.Workspace.name}}</div>
+                                    </div>
+                                    <div ng-switch-when="1" class="fileline" ng-dblclick="$parent.$parent.$parent.inputLocation=$parent.$parent.$parent.inputLocation+'/'+obj.Workspace.name; $parent.$parent.$parent.getFileFolderData();">
+                                        <div class="filefoldername" ng-dblclick="$parent.$parent.$parent.inputLocation=$parent.$parent.$parent.inputLocation+'/'+obj.Workspace.name; $parent.$parent.$parent.getFileFolderData();">{{obj.Workspace.name}}</div>
+                                    </div>
                                 </div>
                             </div>
                             
@@ -603,16 +606,16 @@ the DOM. This info is read into memory on page load and deleted.
         </div>
     </div>
     
-    <span ng-show="textShow" text-spec-bind="currentText"></span>
-    <span ng-show="equationShow" eq-spec-bind="currentEquation"></span>
-    <span ng-show="symbolicShow" sym-spec-bind="currentSymbolic"></span>
-    <span ng-show="tableShow" table-spec-bind="currentTable"></span>
-    <span ng-show="loopShow" loop-spec-bind="currentLoop"></span>
-    <span ng-show="statementShow" statement-spec-bind="currentStatement"></span>
-    <span ng-show="plotShow" plot-spec-bind="currentPlot"></span>
-    <span ng-show="surfaceShow" surf-spec-bind="currentPlot"></span>
-    <span ng-show="imageShow" image-spec-bind="currentImage"></span>
-    <span ng-show="videoShow" video-spec-bind="currentVideo"></span>
+    <span ng-if="editPerm" ng-show="textShow" text-spec-bind="currentText"></span>
+    <span ng-if="editPerm" ng-show="equationShow" eq-spec-bind="currentEquation"></span>
+    <span ng-if="editPerm" ng-show="symbolicShow" sym-spec-bind="currentSymbolic"></span>
+    <span ng-if="editPerm" ng-show="tableShow" table-spec-bind="currentTable"></span>
+    <span ng-if="editPerm" ng-show="loopShow" loop-spec-bind="currentLoop"></span>
+    <span ng-if="editPerm" ng-show="statementShow" statement-spec-bind="currentStatement"></span>
+    <span ng-if="editPerm" ng-show="plotShow" plot-spec-bind="currentPlot"></span>
+    <span ng-if="editPerm" ng-show="surfaceShow" surf-spec-bind="currentPlot"></span>
+    <span ng-if="editPerm" ng-show="imageShow" image-spec-bind="currentImage"></span>
+    <span ng-if="editPerm" ng-show="videoShow" video-spec-bind="currentVideo"></span>
 
                     
     <script type="text/x-mathjax-config">MathJax.Hub.Config({ extensions: ["tex2jax.js"], jax: ["input/TeX","output/HTML-CSS"], });</script>
@@ -620,7 +623,7 @@ the DOM. This info is read into memory on page load and deleted.
     <script src="http://www.cadwolf.com/js/angular/angular-sanitize.min.js"></script>
     <script src="http://www.cadwolf.com/js/angular/httpBackend.js"></script>
     <script src="http://www.cadwolf.com/js/angular/ngDialog.min.js"></script>
-    <script src="http://www.cadwolf.com/js/documents/app.js"></script>
+    <script src="http://www.cadwolf.com/js/app.js"></script>
     <script src="http://www.cadwolf.com/js/documents/controllers.js"></script>
     <script src="http://www.cadwolf.com/js/documents/directives.js"></script>
     <script src="http://www.cadwolf.com/js/jquery.js"></script>
@@ -645,5 +648,5 @@ the DOM. This info is read into memory on page load and deleted.
 
 
 
-    <script>angular.bootstrap(document, ['documentApp']);</script>
+    <script>angular.bootstrap(document, ['cadwolfApp']);</script>
 </body>

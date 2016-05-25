@@ -1,9 +1,9 @@
 // DIRECTIVES
-cadwolfApp.directive("workspaceMain", function() {
+logisticsApp.directive("logisticsMain", function() {
     }
 );
 
-cadwolfApp.directive('ngEnter', function() {
+logisticsApp.directive('ngEnter', function() {
         return function(scope, element, attrs) {
             element.bind("keydown keypress", function(event) {
                 if(event.which === 13) {

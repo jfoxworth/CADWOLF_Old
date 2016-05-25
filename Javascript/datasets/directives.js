@@ -1,9 +1,9 @@
 // DIRECTIVES
-datasetApp.directive("datasetMain", function() {
+cadwolfApp.directive("datasetMain", function() {
     }
 );
 
-datasetApp.directive('customOnChange', function() {
+cadwolfApp.directive('customOnChange', function() {
   return {
     restrict: 'A',
     link: function (scope, element, attrs) {
@@ -13,7 +13,7 @@ datasetApp.directive('customOnChange', function() {
   };
 });
 
-datasetApp.directive('customOnChangeExcel', function() {
+cadwolfApp.directive('customOnChangeExcel', function() {
   return {
     restrict: 'A',
     link: function (scope, element, attrs) {

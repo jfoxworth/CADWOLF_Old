@@ -53,8 +53,9 @@ parseText           - The function that actually looks at the input string and p
 showText            - Handles the display of the results, letting the user see a 2D matrix by selecting the indexes desired
 
 */
-datasetApp.controller('mainController', ['$scope', '$http', '$sce',
-    function($scope, $http, $sce)
+
+cadwolfApp.controller('datasetController', ['$scope', '$http', '$sce', 'ngDialog',
+    function($scope, $http, $sce, ngDialog)
     {   $scope.displaySettings=false;
         $scope.displayInfo=true;
         $scope.displayPaste=false;
@@ -386,9 +387,8 @@ datasetApp.controller('mainController', ['$scope', '$http', '$sce',
     }
 ]);
 
-
-datasetApp.controller('dataController', ['$scope', '$http', '$sce',
-    function($scope, $http, $sce)
+cadwolfApp.controller('dataController', ['$scope', '$http', '$sce', 'ngDialog',
+    function($scope, $http, $sce, ngDialog)
     {   $scope.pasteClass="dataOptionCurrent";
         $scope.fileClass="dataOption";
         $scope.htmlClass="dataOption";

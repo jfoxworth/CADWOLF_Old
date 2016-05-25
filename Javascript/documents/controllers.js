@@ -1,6 +1,6 @@
 // CONTROLLERS
 
-documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
+cadwolfApp.controller('documentController', ['$scope', '$http', '$sce', 'ngDialog',
     function($scope, $http, $sce, ngDialog)
     {  
         /*------------------------------------------------------------------------------------------------------------------------------------------
@@ -54,7 +54,7 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
         
         // Shows and hides the specific window and set the current item
         $scope.saveFile = function() 
-        {   $scope.setCurrent($scope.currentItem);
+        {   $scope.updateItem($scope.currentItem);
             $http.post('http://www.cadwolf.com/Documents/saveFileAngular', {fileID:$scope.cadwolf_fileInfo.id, checkin:'0' }, {}).
             then(function(response)
              {  myResponse=response;
@@ -117,14 +117,27 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
         // The 3D charts need to have a filter to prevent circular JSON wrapper. See the "censor" item in the old code
         $scope.setCurrent = function(thisObj) 
         {   if (($scope.editPerm)||($scope.usePerm))
-            {   console.log('The item id is '+thisObj['itemid']);
+            {   console.log('The item id is '+thisObj['itemid']+' and the type is '+parseInt(thisObj['vartype']));
                 if (document.getElementById($scope.currentItem['itemid'])!==null)
                 {   $('#'+$scope.currentItem['itemid']).closest('.main_item').removeClass('current');
                     $('#'+thisObj['itemid']).closest('.main_item').addClass('current');
-                    $scope.updateItem(thisObj); 
+                    $scope.updateItem($scope.currentItem);
+                    if (parseInt(thisObj['vartype'])!=1){ $scope.textShow=false;        }else{ $scope.currentText=thisObj; }
+                    if (parseInt(thisObj['vartype'])!=3){ $scope.equationShow=false;    }else{ $scope.currentEquation=thisObj; }
+                    if (parseInt(thisObj['vartype'])!=4){ $scope.symbolicShow=false;    }else{ $scope.currentSymbolic=thisObj; }
+                    if (parseInt(thisObj['vartype'])!=5){ $scope.tableShow=false;       }else{ $scope.currentTable=thisObj; }
+                    if (parseInt(thisObj['vartype'])!=6){ $scope.loopShow=false; }
+                    if (parseInt(thisObj['vartype'])!=8){ $scope.statementShow=false; }
+                    if (parseInt(thisObj['vartype'])!=9){ $scope.plotShow=false;        }else{ $scope.currentPlot=thisObj; }
+                    if (parseInt(thisObj['vartype'])!=10){ $scope.imageShow=false;      }else{ $scope.currentImage=thisObj; }
+                    if (parseInt(thisObj['vartype'])!=12){ $scope.videoShow=false;      }else{ $scope.currentTable=thisObj; }
+                    if (parseInt(thisObj['vartype'])!=13){ $scope.surfaceShow=false;    }else{ $scope.currentPlot=thisObj; }
+                    if (parseInt(thisObj['vartype'])==1){ $scope.formatDisplay=true;    }else{ $scope.formatDisplay=false; } 
+                    if (parseInt(thisObj['vartype'])!=13){ $scope.cancel_animate(); }
                 }
             }
             $scope.currentItem=thisObj;
+            myScope=$scope;
         };
         
         // This function calls the AJAX to update an item
@@ -132,31 +145,37 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
         {   var hasChanged=true;
             if ($scope.editPerm)
             {   var dataObject={}, hasChanged=true, values={}, name='', values={};
-                if ($scope.currentItem['vartype']=='1'){ if ($scope.currentItem['data']==CKEDITOR.instances[$scope.currentItem['itemid']].getData()){ hasChanged=false; } }
-                if ($scope.currentItem['vartype']=='1'){            $scope.currentItem['data']=CKEDITOR.instances[$scope.currentItem['itemid']].getData();}
-                if ($scope.currentItem['vartype']=='3'){            dataObject=JSON.stringify($scope.currentItem['Equation']); 
-                }else if ($scope.currentItem['vartype']=='5'){      dataObject=JSON.stringify($scope.currentItem['props']);
-                }else if ($scope.currentItem['vartype']=='9'){      dataObject=JSON.stringify($scope.currentItem['Plot']);
-                }else if ($scope.currentItem['vartype']=='13'){     dataObject=JSON.stringify($scope.currentItem['Surface']);
-                }else if ($scope.currentItem['vartype']=='1'){      dataObject=$scope.currentItem['data'];
-                }else {                                             dataObject=JSON.stringify($scope.currentItem['data']); }
-                if ($scope.currentItem['vartype']=='3')
-                {   values['size']=$scope.currentItem['Equation']['Format_size'];
-                    values['real']=$scope.currentItem['Equation']['Solution_real'];
-                    values['imag']=$scope.currentItem['Equation']['Solution_imag'];
-                    values['units']=$scope.currentItem['Equation']['Units_units'];
-                    values['quantity']=$scope.currentItem['Equation']['Units_quantity'];
-                    name=$scope.currentItem['Equation']['Format_name'];
+                if (thisObj['vartype']==1){ if (thisObj['data']==CKEDITOR.instances[thisObj['itemid']].getData()){ hasChanged=false; console.log('Text has not changed'); } }
+                if (thisObj['vartype']==1){            thisObj['data']=CKEDITOR.instances[thisObj['itemid']].getData();}
+                if (thisObj['vartype']==3){            dataObject=JSON.stringify(thisObj['Equation']); 
+                }else if (thisObj['vartype']==5){      dataObject=JSON.stringify(thisObj['props']);
+                }else if (thisObj['vartype']==9){      dataObject=JSON.stringify(thisObj['Plot']);
+                }else if (thisObj['vartype']==13){     dataObject=JSON.stringify(thisObj['Surface']);
+                }else if (thisObj['vartype']==1){      dataObject=thisObj['data'];
+                }else {                                dataObject=JSON.stringify(thisObj['data']); }
+                if (thisObj['vartype']=='3')
+                {   values['size']=thisObj['Equation']['Format_size'];
+                    values['real']=thisObj['Equation']['Solution_real'];
+                    values['imag']=thisObj['Equation']['Solution_imag'];
+                    values['units']=thisObj['Equation']['Units_units'];
+                    values['quantity']=thisObj['Equation']['Units_quantity'];
+                    name=thisObj['Equation']['Format_name'];
                 }
                 if (hasChanged)
                 {   $http.post('http://www.cadwolf.com/Documents/saveTempDataAngular', 
                     {   fileID:$scope.cadwolf_fileInfo.id, 
-                        itemID:$scope.currentItem['itemid'], 
+                        itemID:thisObj['itemid'], 
+                        vartype:thisObj['vartype'], 
                         dataObject:dataObject,
+                        width:thisObj['width'],
+                        marginTop:thisObj['margintop'],
+                        marginBottom:thisObj['marginbottom'],
+                        marginLeft:thisObj['marginleft'],
+                        marginRight:thisObj['marginright'],
                         values:JSON.stringify(values),
                         name:name,
-                        inputID:$scope.currentItem['inputID'],
-                        inputFile:$scope.currentItem['inputFile']
+                        inputID:thisObj['inputID'],
+                        inputFile:thisObj['inputFile']
                     }, {}).then(function(response)
                     {  }, function(){ $scope.showMessage({type:"bad", messageText:"There was an error updating that item"}, true); }); 
                 }
@@ -166,7 +185,8 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
 
         // Shows and hides the specific window and set the current item
         $scope.showSpecs = function(thisID, type) 
-        {   if (type=="text"){          $scope.textShow=!$scope.textShow;           $scope.cadwolf_worksheet.forEach(function(item, index){   if (item.itemid==thisID){ $scope.currentText=$scope.cadwolf_worksheet[index]; }    });  }
+        {   console.log('In the show specs, the type is '+type+' with ID '+thisID);
+            if (type=="text"){          $scope.textShow=!$scope.textShow;           $scope.cadwolf_worksheet.forEach(function(item, index){   if (item.itemid==thisID){ $scope.currentText=$scope.cadwolf_worksheet[index]; }    });  }
             if (type=="equation"){      $scope.equationShow=!$scope.equationShow;   $scope.cadwolf_worksheet.forEach(function(item, index){   if (item.itemid==thisID){ $scope.currentEquation=$scope.cadwolf_worksheet[index]; }    });  }
             if (type=="symbolic"){      $scope.symbolicShow=!$scope.symbolicShow;   $scope.cadwolf_worksheet.forEach(function(item, index){   if (item.itemid==thisID){ $scope.currentSymbolic=$scope.cadwolf_worksheet[index]; }    });  }
             if (type=="table"){         $scope.tableShow=!$scope.tableShow;         $scope.cadwolf_worksheet.forEach(function(item, index){   if (item.itemid==thisID){ $scope.currentTable=$scope.cadwolf_worksheet[index]; }    });  }
@@ -222,7 +242,7 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
         };        
 
         // Delete an item
-        $scope.deleteItem = function(obj) 
+        $scope.deleteItem = function(obj, connFlag) 
         {   console.log('Deleting '+obj['itemid']);
             $http.post('http://www.cadwolf.com/Documents/deleteItemAngular', 
             {   fileID:$scope.cadwolf_fileInfo.id, 
@@ -230,17 +250,19 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
                 location:obj['location'] 
             }, {}).then(function(response)
              {  }, function(){ $scope.showMessage({type:"bad", messageText:"There was an error deleting that item"}, true); }); 
-            for (var a=0; a<$scope.cadwolf_worksheet.length; a++)
-            {   if ($scope.cadwolf_worksheet[a]['location']>obj['location'])
-                {   $scope.cadwolf_worksheet[a]['location']=$scope.cadwolf_worksheet[a]['location']-1; }
+            if (connFlag!=1)
+            {   for (var a=0; a<$scope.cadwolf_worksheet.length; a++)
+                {   if ($scope.cadwolf_worksheet[a]['location']>obj['location'])
+                    {   $scope.cadwolf_worksheet[a]['location']=$scope.cadwolf_worksheet[a]['location']-1; }
+                }
             }
             if (obj.parentid!="none") { $scope.getLastPositions();  }
-            if (obj['vartype']=='3'){ $scope.findDependents(obj['itemID'], function(){ $scope.runEquationDigest(); } );	 }
+            if (obj['vartype']=='3'){ $scope.findDependents(obj['itemID'], function(){ if (connFlag!=1) { $scope.runEquationDigest(); } } );	 }
             $scope.cadwolf_worksheet.forEach(function(item1, index1)
             {   if (item1['itemid']==obj['itemid'])
                 {   if (obj['vartype']=='3')
                     {   for (var delID in item1['Equation']['connected_ids'])
-                        {   $scope.cadwolf_worksheet.forEach(function(item2, index2){ if (item2['itemid']==delID){ $scope.deleteItem(item2);  } }); }
+                        {   $scope.cadwolf_worksheet.forEach(function(item2, index2){ if (item2['itemid']==delID){ $scope.deleteItem(item2, 1);  } }); }
                     }
                     $scope.cadwolf_worksheet.splice(index1,1); 
                 }
@@ -543,8 +565,8 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
         {   myScope=$scope;
             var newLoc=0;
             var oldLoc=parseInt($scope.currentItem['location']);
-            if (type=='up'){    newLoc=oldLoc+1; }
-            if (type=='down'){  newLoc=oldLoc-1; }
+            if (type=='up'){    newLoc=oldLoc-1; }
+            if (type=='down'){  newLoc=oldLoc+1; }
             if (type=="move"){  newLoc=parseInt(document.getElementById('thislocation').value); }    
             console.log('Changing '+oldLoc+' to '+newLoc);
             if (newLoc>oldLoc)
@@ -591,16 +613,19 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
             if (objProps['parentid']===undefined){  objProps['parentid']="none";   }
             if (objProps['topparentid']===undefined){  objProps['topparentid']="none";   }
             var thisLoc=0, templateObj={}, itemData={};
-            if (connFlag==0)
-            {   for (var a=0; a<$scope.cadwolf_worksheet.length; a++)
-                {   if ($scope.cadwolf_worksheet[a]['itemid']==$scope.currentItem['itemid'])
-                    {   if ((($scope.currentItem['vartype']==6)||($scope.currentItem['vartype']==7)||($scope.currentItem['vartype']==8))&&(objProps['parentid']=="none"))
-                        {                                           thisLoc=parseInt($scope.cadwolf_worksheet[a]['Page_lastposition']); 
-                        }else if (objProps['parentid']!="none"){    thisLoc=$scope.retrieveLastPosition($scope.cadwolf_worksheet[a]['itemid']); 
-                        }else  {                                    thisLoc=parseInt($scope.cadwolf_worksheet[a]['location']); }
-                }   }
+            if ((connFlag==0)||(connFlag===undefined))
+            {   if ($scope.currentItem=="top"){ thisLoc=0;
+                }else
+                {   for (var a=0; a<$scope.cadwolf_worksheet.length; a++)
+                    {   if ($scope.cadwolf_worksheet[a]['itemid']==$scope.currentItem['itemid'])
+                        {   if ((($scope.currentItem['vartype']==6)||($scope.currentItem['vartype']==7)||($scope.currentItem['vartype']==8))&&(objProps['parentid']=="none"))
+                            {                                           thisLoc=parseInt($scope.cadwolf_worksheet[a]['Page_lastposition']); 
+                            }else if (objProps['parentid']!="none"){    thisLoc=$scope.retrieveLastPosition($scope.cadwolf_worksheet[a]['itemid']); 
+                            }else  {                                    thisLoc=parseInt($scope.cadwolf_worksheet[a]['location']); }
+                }   }   }
                 for (var a=0; a<$scope.cadwolf_worksheet.length; a++)
-                {   if ($scope.cadwolf_worksheet[a]['location']>thisLoc)
+                {   if (($scope.cadwolf_worksheet[a]['Page_lastposition']=='')||($scope.cadwolf_worksheet[a]['Page_lastposition']===undefined)){ $scope.cadwolf_worksheet[a]['Page_lastposition']=parseInt($scope.cadwolf_worksheet[a]['location']); }
+                    if ($scope.cadwolf_worksheet[a]['location']>thisLoc)
                     {   $scope.cadwolf_worksheet[a]['location']=parseInt($scope.cadwolf_worksheet[a]['location'])+1; 
                         $scope.cadwolf_worksheet[a]['Page_lastposition']=parseInt($scope.cadwolf_worksheet[a]['Page_lastposition'])+1; 
                 }   }
@@ -630,7 +655,7 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
             templateObj['Values']={};
             templateObj['active']=1;
             if (objProps['fileid']===undefined){    templateObj['fileid']=$scope['cadwolf_fileInfo']['id'];   
-            }else{                                  templateObj['fileid']=objPops['fileid'];  }
+            }else{                                  templateObj['fileid']=objProps['fileid'];  }
             for (var prop in objProps){ if (templateObj[prop]!==undefined) { templateObj[prop]=objProps[prop]; } }
             if (type=="Text")
             {   templateObj['data']='<p>Enter text here.</p>';
@@ -714,11 +739,16 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
             if (type=="Image")
             {   templateObj['data']={};
                 templateObj['data']['height']=250;
-                templateObj['data']['src']='';
+                templateObj['data']['src']='sample';
                 templateObj['data']['thisType']='jpg';
                 templateObj['data']['type']='image/jpg';
-                templateObj['data']['width']=700;
+                templateObj['data']['width']=250;
                 templateObj['vartype']=10;
+                itemData=templateObj['data'];
+            }
+            if (type=="LineBreak")
+            {   templateObj['data']={};
+                templateObj['vartype']=11;
                 itemData=templateObj['data'];
             }
             if (type=="Video")
@@ -753,7 +783,8 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
              {  }, function(){ $scope.showMessage({type:"bad", messageText:"There was an error retrieving the data from the server"}, true); }); 
 
             $scope.cadwolf_worksheet=$scope.cadwolf_worksheet.sort($scope.dynamicSort("location"));
-
+            $scope.showEndLoc=$scope.cadwolf_worksheet.length;
+            
             myScope=$scope;
          
             return newID
@@ -935,6 +966,7 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
             this.active=1;	
             this.fileid=$scope.cadwolf_fileInfo.id;
             this.datasetURL='Enter URL Here';
+            this.isConnectedID=0;
             this.FaF={};	this.connected_ids={};	
             for (var unitindex = 0; unitindex < $scope.unitList.length; ++unitindex) {		this.Units_base_array[$scope.unitList[unitindex]]=0;	}	
             for (var item in eqObj){ this[item]=JSON.parse(JSON.stringify(eqObj[item])); }
@@ -957,7 +989,6 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
                     if (item['Page_lastposition']===undefined){  item['Page_lastposition']=item['location'];  }
                     if (item['Page_lastposition']<item['location']){  item['Page_lastposition']=item['location'];  }
                 }
-            myEq=thisEq;
                 if ((item['vartype']=="3")&&(item['location']<=parseInt(thisEq['Page_lastposition'])))	
                 {   sendObj[item['itemid']]={};
                     sendObj[item['itemid']]['name']=item['Equation']['Format_name'];
@@ -1010,7 +1041,7 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
                         if (item['vartype']=="8")	{   sendObj[item['itemid']]['ifelse']=item['ifelse'];   }   
                     }
                 }
-                if (((item['vartype']=="9")||(item['vartype']=="13"))&&(item['location']==parseInt(thisEq['Page_lastposition'])))
+                if (((item['vartype']=="9")||(item['vartype']=="13"))&&(item['location']==parseInt(thisEq['location'])))
                 {	sendObj[item['itemid']]={};	
                     sendObj[item['itemid']]['name']=item['Format_id'];
                     sendObj[item['itemid']]['type']="plot";		
@@ -1038,20 +1069,20 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
         // Populate the equations properties with the dependent values shown in the specs view
         $scope.populateDeps=function (eqID)	
         {   $scope.cadwolf_worksheet.forEach(function(item, index)
-            {   if (eqID==item['itemid'])
+            {   if ((eqID==item['itemid'])&&(item['vartype']!=5))
                 {   $scope.cadwolf_worksheet[index]['Equation']['DepItem1']=[];
                     $scope.cadwolf_worksheet[index]['Equation']['DepItem2']=[];
                     for (var depID in item['Equation']['Dependents']) 
                     {   $scope.cadwolf_worksheet.forEach(function(thisItem, thisIndex)
                         {   if (depID==$scope.cadwolf_worksheet[thisIndex]['itemid'])
-                            {    $scope.cadwolf_worksheet[index]['Equation']['DepItem1'].push($scope.cadwolf_worksheet[thisIndex]['Equation']['Format_name']);   }
+                            {    $scope.cadwolf_worksheet[index]['Equation']['DepItem1'].push({name:$scope.cadwolf_worksheet[thisIndex]['Equation']['Format_name'], id:depID});   }
                         });
                     }
                     $scope.cadwolf_worksheet.forEach(function(thisItem, thisIndex)
                     {   if (thisItem['vartype']=='3')
                         {   for (var depID in thisItem['Equation']['Dependents']) 
                             {   if (depID==$scope.cadwolf_worksheet[index]['itemid'])
-                                {    $scope.cadwolf_worksheet[index]['Equation']['DepItem2'].push($scope.cadwolf_worksheet[thisIndex]['Equation']['Format_name']);   }
+                                {    $scope.cadwolf_worksheet[index]['Equation']['DepItem2'].push({name:$scope.cadwolf_worksheet[thisIndex]['Equation']['Format_name'], id:depID});   }
                             }
                         }
                     });
@@ -1074,12 +1105,13 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
                 "ImportedFunctions":$scope.cadwolf_fileFunData.impFunctions,
                 "FileID":thisItem['fileid'],
                 "Location":thisItem['location'],
+                "Constants":$scope.cadwolf_constants,
                 "EqObj":thisItem['sendObj']
             }    
             if (eqType=="SolveEquation")
-            {   solveObj['Equation']=thisItem['Equation']['newEquation'];
-                console.log('Calling the equation solver for '+eqType);
-    
+            {   solveObj["showValue"]=thisItem['Equation']['Format_showvalue'] 
+                solveObj['Equation']=thisItem['Equation']['newEquation'];
+             
             }else if (eqType=="SolveTableCell")
             {   solveObj['Equation']=thisItem['props']['data'][thisItem['solveRow']][thisItem['solveCol']]['equation'].replace(/\#\./g,'#'+thisItem['itemid']);
                 solveObj['tableID']=thisItem['itemid'];
@@ -1131,20 +1163,31 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
                 {	$scope.cadwolf_worksheet.forEach(function(item, index)
                     {   if (returnObject.id==item['id'])
                         {   if (Object.keys(returnObject.connected).length>0)
-                            {   for (var connID in item['Equation']['connected_ids']){ $scope.findDependents(connID); }
+                            {   for (var connID in item['Equation']['connected_ids']){ $scope.cadwolf_worksheet.forEach(function(tempItem, tempIndex){ if (tempItem['itemid']==connID) { $scope.deleteItem(tempItem, 1); } }); }
                                 item['Equation']['connected_ids']={};
                                 for (var connItem in returnObject.connected)
-                                {   delete connItem['Format_id'];
-                                    connItem['Original_id']=returnObject.id;
-                                    var connectedID=$scope.addItem('Equation', connItem, 1, item['location']);
+                                {   delete returnObject.connected[connItem]['Format_id'];
+                                    returnObject.connected[connItem]['Original_id']=returnObject.id;
+                                    returnObject.connected[connItem]['isConnectedID']=1;
+                        tempItem=returnObject.connected[connItem];
+                                    var connectedID=$scope.addItem('Equation', returnObject.connected[connItem], 1, item['location']);
                                     item['Equation']['connected_ids'][connectedID]=1;
                                 }   
                             }
                             for (objProp in returnObject.equation) { $scope.cadwolf_worksheet[index]['Equation'][objProp]=returnObject.equation[objProp]; }
                             $scope.cadwolf_worksheet[index]['needsUpdateFlag']=0;
+                            console.log('Turning off the flag for '+$scope.cadwolf_worksheet[index]['itemid']);
+                            $scope.cadwolf_worksheet[index]['Name']=returnObject.equation['Format_name'];
+                            $scope.cadwolf_worksheet[index]['Values']={};
+                            $scope.cadwolf_worksheet[index]['Values']['real']=returnObject.equation['Solution_real'];
+                            $scope.cadwolf_worksheet[index]['Values']['imag']=returnObject.equation['Solution_imag'];
+                            $scope.cadwolf_worksheet[index]['Values']['size']=returnObject.equation['Format_size'];
+                            $scope.cadwolf_worksheet[index]['Values']['units']=returnObject.equation['Units_units'];
+                            $scope.cadwolf_worksheet[index]['Values']['quantity']=returnObject.equation['Units_quantity'];
                             $scope.cadwolf_worksheet[index]['Equation']['Dependents']=returnObject.Deps;
                             $scope.digestStatus=1;
                             $scope.populateDeps(item['id']);
+                            $scope.updateItem(item);
                             $scope.findDependents(returnObject.id, function(){ $scope.runEquationDigest(); });
                         }
                     });
@@ -1326,8 +1369,7 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
 
         // Find start the process to update dependents
         $scope.findDependents = function (itemID, callback, tableFlag)	
-        {	//console.log('Updating the dependents of '+itemID);
-            thisLoc=0, thisName='';
+        {	thisLoc=0, thisName='';
             $scope.cadwolf_worksheet=$scope.cadwolf_worksheet.sort($scope.dynamicSort("location"));
             for (var a=0; a<$scope.cadwolf_worksheet.length; a++)
             {   if (itemID==$scope.cadwolf_worksheet[a]['itemid'])
@@ -1347,10 +1389,10 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
         // Set the dependents of an equation to on
         $scope.setDependentsOn = function (itemID, startLoc)	
         {	//console.log('Turning on the dependents of '+itemID);
-            for (var a=startLoc; a<$scope.cadwolf_worksheet.length; a++)
+            for (var a=parseInt(startLoc)+1; a<$scope.cadwolf_worksheet.length; a++)
             {   if ($scope.cadwolf_worksheet[a]['vartype']=='3')
                 {   for (var depID in $scope.cadwolf_worksheet[a]['Equation']['Dependents'])
-                    {   if (depID==itemID) {  $scope.cadwolf_worksheet[a]['needsUpdateFlag']=1;   }
+                    {   if (depID==itemID) {  $scope.cadwolf_worksheet[a]['needsUpdateFlag']=1;  }
                     }
                 }
                 if ($scope.cadwolf_worksheet[a]['vartype']=='5')
@@ -1368,7 +1410,8 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
                         {   console.log('Comparing '+thisDep+' to '+itemID);
                             if (thisDep==itemID) 
                             {   for (var b=0; b<$scope.cadwolf_worksheet[a]['Plot']['Chart_dataobj'].length; b++)
-                                {   if ($scope.cadwolf_worksheet[a]['Plot']['Chart_dataobj'][b]['Format_id']==thisDataset['Format_id'])
+                                {   console.log('Match - now comparing '+$scope.cadwolf_worksheet[a]['Plot']['Chart_dataobj'][b]['Format_id']+' to '+thisDataset);
+                                    if ($scope.cadwolf_worksheet[a]['Plot']['Chart_dataobj'][b]['Format_id']==thisDataset)
                                     { $scope.cadwolf_worksheet[a]['Plot']['Chart_dataobj'][b]['needsUpdateFlag']=1; } 
                                 }
                             }
@@ -1399,41 +1442,55 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
             if ($scope.digestStatus==1)
             {   $scope.cadwolf_worksheet=$scope.cadwolf_worksheet.sort($scope.dynamicSort("location"));
                 for (var a=0; a<$scope.cadwolf_worksheet.length; a++)
-                {   if (($scope.cadwolf_worksheet[a]['needsUpdateFlag']==1)&&($scope.cadwolf_worksheet[a]['vartype']==3))
-                    {   $scope.digestStatus=0;
-                        $scope.setCurrent($scope.cadwolf_worksheet[a]);
+                {   if (($scope.cadwolf_worksheet[a]['needsUpdateFlag']==1)&&($scope.cadwolf_worksheet[a]['vartype']==3)){   if ($scope.cadwolf_worksheet[a]['Equation']['isConnectedID']==1){ $scope.cadwolf_worksheet[a]['needsUpdateFlag']=0; } }
+                    if (($scope.cadwolf_worksheet[a]['needsUpdateFlag']==1)&&($scope.cadwolf_worksheet[a]['vartype']==3))
+                    {   console.log('Calling the solver for '+$scope.cadwolf_worksheet[a]['itemid']);
+                        $scope.digestStatus=0;
                         $scope.solveEquation($scope.cadwolf_worksheet[a]['itemid'], 'SolveEquation');   
                         break
                     }
                     if ($scope.cadwolf_worksheet[a]['vartype']==5)
-                    {   for (b=0; b<$scope.cadwolf_worksheet[a]['props']['data'].length; b++)
+                    {   var flag=0;
+                        for (b=0; b<$scope.cadwolf_worksheet[a]['props']['data'].length; b++)
                         {   for (c=0; c<$scope.cadwolf_worksheet[a]['props']['data'][0].length; c++)
-                            {   console.log('The flag for table '+$scope.cadwolf_worksheet[a]['itemid']+' at '+b+'-'+c+' is '+$scope.cadwolf_worksheet[a]['props']['data'][b][c]['needsUpdateFlag']);
+                            {   console.log();
                                 if ($scope.cadwolf_worksheet[a]['props']['data'][b][c]['needsUpdateFlag']==1)
-                                {   console.log('Solving for index '+b+'-'+c+' with an equation of '+$scope.cadwolf_worksheet[a]['props']['data'][b][c]['equation']);
-                                    $scope.setCurrent($scope.cadwolf_worksheet[a]);
-                                    $scope.cadwolf_worksheet[a]['solveRow']=b
+                                {   $scope.cadwolf_worksheet[a]['solveRow']=b
                                     $scope.cadwolf_worksheet[a]['solveCol']=c
                                     if ($scope.cadwolf_worksheet[a]['props']['data'][b][c]['equation'].match(/^=/)==null)
-                                    {   $scope.cadwolf_worksheet[a]['props']['data'][b][c]['real']=$scope.cadwolf_worksheet[a]['props']['data'][b][c]['equation'];
+                                    {   console.log('Setting index '+b+'-'+c+' to '+$scope.cadwolf_worksheet[a]['props']['data'][b][c]['equation']);
+                                        $scope.cadwolf_worksheet[a]['props']['data'][b][c]['real']=$scope.cadwolf_worksheet[a]['props']['data'][b][c]['equation'];
                                         $scope.digestStatus=1;
                                     }else
-                                    {   $scope.digestStatus=0;
-                                        $scope.solveEquation($scope.cadwolf_worksheet[a]['itemid'], 'SolveTableCell');   }
-                                    break
-                                    break
+                                    {   if ($scope.isNumber($scope.cadwolf_worksheet[a]['props']['data'][b][c]['equation'].replace(/^=/,'')))
+                                        {   $scope.cadwolf_worksheet[a]['props']['data'][b][c]['real']=parseFloat($scope.cadwolf_worksheet[a]['props']['data'][b][c]['equation'].replace(/^=/,''));
+                                            $scope.cadwolf_worksheet[a]['props']['data'][b][c]['needsUpdateFlag']=0;
+                                            console.log('I am updating the dependents on '+String.fromCharCode(65+c)+' - '+b);
+                                            $scope.findDependents($scope.cadwolf_worksheet[a]['itemid']+'.'+String.fromCharCode(65+c)+'.'+b, function(){ $scope.runEquationDigest(); });
+                                            flag=1;
+                                            break
+                                        }else
+                                        {   console.log('Solving for index '+b+'-'+c+' with an equation of '+$scope.cadwolf_worksheet[a]['props']['data'][b][c]['equation']);
+                                            $scope.digestStatus=0;
+                                            $scope.solveEquation($scope.cadwolf_worksheet[a]['itemid'], 'SolveTableCell'); 
+                                            flag=1;
+                                            break
+                                        }
+                                    }
                                 }
                             } 
+                            if (flag==1) { break }
                         }
+                        if (flag==1) { break }
                     }
-                    if (($scope.cadwolf_worksheet[a]['vartype']==6)&&($scope.cadwolf_worksheet[a]['needsBlockUpdate']==1))
+                    if (($scope.cadwolf_worksheet[a]['vartype']==6)&&($scope.cadwolf_worksheet[a]['needsBlockUpdate']==1)&&($scope.digestStatus==1))
                     {   $scope.digestStatus=0;
                         $scope.cadwolf_worksheet[a]['forloop']['firstRun']=1;
                         $scope.setCurrent($scope.cadwolf_worksheet[a]);
                         $scope.solveEquation($scope.cadwolf_worksheet[a]['itemid'], 'SolveLoopParameters');   
                         break
                     }
-                    if (($scope.cadwolf_worksheet[a]['vartype']==7)&&($scope.cadwolf_worksheet[a]['needsBlockUpdate']==1))
+                    if (($scope.cadwolf_worksheet[a]['vartype']==7)&&($scope.cadwolf_worksheet[a]['needsBlockUpdate']==1)&&($scope.digestStatus==1))
                     {   $scope.digestStatus=0;
                         $scope.cadwolf_worksheet[a]['whileloop']['firstRun']=1;
                         $scope.setCurrent($scope.cadwolf_worksheet[a]);
@@ -1441,14 +1498,14 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
                         {   $scope.solveEquation($scope.cadwolf_worksheet[a]['itemid'], 'SolveWhileLoopParameters');   });   
                         break
                     }
-                    if (($scope.cadwolf_worksheet[a]['vartype']==8)&&($scope.cadwolf_worksheet[a]['needsBlockUpdate']==1))
+                    if (($scope.cadwolf_worksheet[a]['vartype']==8)&&($scope.cadwolf_worksheet[a]['needsBlockUpdate']==1)&&($scope.digestStatus==1))
                     {   $scope.digestStatus=0;
                         $scope.setCurrent($scope.cadwolf_worksheet[a]);
                         $scope.createEqObj($scope.cadwolf_worksheet[a]['itemid'], function() 
                         {   $scope.solveEquation($scope.cadwolf_worksheet[a]['itemid'], 'SolveIfElseParameters');   });   
                         break
                     }
-                    if ((($scope.cadwolf_worksheet[a]['vartype']==6)||($scope.cadwolf_worksheet[a]['vartype']==7)||($scope.cadwolf_worksheet[a]['vartype']==8))&&($scope.cadwolf_worksheet[a]['needsUpdateFlag']==1))
+                    if ((($scope.cadwolf_worksheet[a]['vartype']==6)||($scope.cadwolf_worksheet[a]['vartype']==7)||($scope.cadwolf_worksheet[a]['vartype']==8))&&($scope.cadwolf_worksheet[a]['needsUpdateFlag']==1)&&($scope.digestStatus==1))
                     {   $scope.digestStatus=0;
                         if ($scope.cadwolf_worksheet[a]['vartype']==6) { $scope.cadwolf_worksheet[a]['forloop']['firstRun']=1; }
                         if ($scope.cadwolf_worksheet[a]['vartype']==7) { $scope.cadwolf_worksheet[a]['whileloop']['firstRun']=1; }
@@ -1457,20 +1514,22 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
                         $scope.solveEquation($scope.cadwolf_worksheet[a]['itemid'], 'SolveStructure');   
                         break
                     }
-                    if ($scope.cadwolf_worksheet[a]['vartype']==9)
-                    {   $scope.setCurrent($scope.cadwolf_worksheet[a]);
+                    if (($scope.cadwolf_worksheet[a]['vartype']==9)&&($scope.digestStatus==1))
+                    {   var flag=0;
                         for (var thisDataset in $scope.cadwolf_worksheet[a]['Plot']['Chart_dataobj'])
                         {   if ($scope.cadwolf_worksheet[a]['Plot']['Chart_dataobj'][thisDataset]['needsUpdateFlag']==1)
-                            {   $scope.digestStatus=0;
+                            {   console.log('I am updating dataset '+thisDataset+'-'+$scope.cadwolf_worksheet[a]['Plot']['Chart_dataobj'][thisDataset]['Format_id']+' on plot '+$scope.cadwolf_worksheet[a]['itemid']);
+                                $scope.digestStatus=0;
                                 $scope.cadwolf_worksheet[a]['Plot']['Chart_dataobj'][thisDataset]['needsUpdateFlag']=0; 
-                                $scope.solvePlotData($scope.cadwolf_worksheet[a]['itemid'], thisDataset, $scope.cadwolf_worksheet[a]['Plot'], 'all');
+                                $scope.solvePlotData($scope.cadwolf_worksheet[a]['itemid'], $scope.cadwolf_worksheet[a]['Plot']['Chart_dataobj'][thisDataset]['Format_id'], $scope.cadwolf_worksheet[a]['Plot'], 'all');
+                                flag=1;
                                 break
                             }
-                        }  
+                        } 
+                        if (flag==1){ break }
                     }
                     if ($scope.cadwolf_worksheet[a]['vartype']==13)
-                    {   $scope.setCurrent($scope.cadwolf_worksheet[a]);
-                        for (var dataIndex in $scope.cadwolf_worksheet[a]['Surface']['Chart_dataobj'])
+                    {   for (var dataIndex in $scope.cadwolf_worksheet[a]['Surface']['Chart_dataobj'])
                         {   if ($scope.cadwolf_worksheet[a]['Surface']['Chart_dataobj'][dataIndex]['needsUpdateFlag']==1)
                             {   $scope.digestStatus=0;
                                 $scope.cadwolf_worksheet[a]['Surface']['Chart_dataobj'][dataIndex]['needsUpdateFlag']=0; 
@@ -1484,6 +1543,7 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
                         }  
                     }
                 }
+                myScope=$scope;
                 console.log('The digest loop is clean');
             }
         }
@@ -1546,14 +1606,11 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
         
         $scope.Plot=function (id, plotObj) 															
         { 	this.Format_id=id;														
-            this.Format_haschanged=1;												
+            this.needsUpdateFlag=1;												
             this.Page_parentid="none";												
             this.Page_topparentid="none";											
 
             this.Chart_type="bar";													
-            this.Chart_dataobj=[];													
-            this.Chart_yaxesobj=[];													
-            this.Chart_xaxesobj=[];													
             this.Chart_width="825px";												
             this.Chart_height="500px";												
             this.Chart_marginright=10;												
@@ -1588,10 +1645,16 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
             this.Legend_marginBottom=0;												
             this.Legend_marginTop=0;												
 
+            this.Chart_dataobj=[];													
+            this.Chart_yaxesobj=[];													
+            this.Chart_xaxesobj=[];													
             this.Chart_bandsobj={};													
             this.Chart_linesobj={};													
             this.Chart_textobj={};
-
+            this.Chart_xaxesobj.push(new $scope.PlotAxis($scope.getID('Axis', 'thisFile'), id, {}, 'Primary X Axis'));
+            this.Chart_yaxesobj.push(new $scope.PlotAxis($scope.getID('Axis', 'thisFile'), id, {}, 'Primary Y Axis'));
+         
+        
             for (var item in plotObj){ this[item]=JSON.parse(JSON.stringify(plotObj[item])); }
         }																			
 
@@ -1614,6 +1677,10 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
             this.zdata_name='';														
             this.zdata_id='';														
             this.zdata_rawtable='';													
+            this.cdata_plottext='';													
+            this.cdata_name='';														
+            this.cdata_id='';														
+            this.cdata_rawtable='';													
             this.dataname='New Dataset';														
             this.data_type=1;														
             this.pielabels=new Array();												
@@ -1651,11 +1718,11 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
             for (var item in dataObj){ this[item]=JSON.parse(JSON.stringify(dataObj[item])); }
         }																			
 
-        $scope.PlotAxis=function (id, plotid, axisObj)												
+        $scope.PlotAxis=function (id, plotid, axisObj, axisName)												
         {																			
             this.Format_id=id;							
             this.Format_plotid=plotid;					
-            this.Axis_name="";							
+            if (axisName!==undefined) { this.Axis_name=axisName; }else{ this.Axis_name="New Axis"; }			
             this.Axis_num=0;							
             this.Axis_label="";							
             this.Axis_lineWidth=0;						
@@ -1673,7 +1740,8 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
             this.Axis_minorgridcolor='#C0C0C0';			
             this.Axis_gridlinewidth=1;					
             this.Axis_minorgridlinewidth=0;				
-            this.Axis_reversed="false";					
+            this.Axis_reversed="false";	
+            this.Chart_Labeltext='';
             for (var item in axisObj){ this[item]=JSON.parse(JSON.stringify(axisObj[item])); }
         }																			
 
@@ -1744,13 +1812,13 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
         {	var tempDataset=new $scope.PlotData($scope.getID('DataSeries', 'thisFile'), plotObj['Plot']['Format_id'], {Format_type:plotObj['Plot']['Chart_type']});
             tempDataset['series']=plotObj['Plot']['Chart_dataobj'].length;
             $scope.currentPlot['Plot']['Chart_dataobj'].push(tempDataset);
-            $scope.makeChart(plotObj['Plot']['Format_id']);
             var thisIndex=parseInt(plotObj['Plot']['Chart_dataobj'].length);
             var colorArray=['#7cb5ec', '#434348', '#90ed7d', '#f7a35c', '#8085e9', '#f15c80', '#e4d354', '#2b908f', '#f45b5b', '#91e8e1'];
             var thisColor=colorArray[thisIndex%10-1];
             $scope.currentPlot['Plot']['Chart_dataobj'][thisIndex-1]['color']=thisColor;
             $scope.currentPlot['Plot']['Chart_dataobj'][thisIndex-1]['symbol']="circle";
             $scope.currentPlot['Plot']['Chart_dataobj'][thisIndex-1]['fillcolor']=thisColor;
+            plotObj['Plot']['needsUpdateFlag']=1;
             myScope=$scope;  
         };
 
@@ -1769,13 +1837,13 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
                         {   $scope.cadwolf_worksheet[index]['Plot']['Chart_dataobj'][a]['series']=$scope.cadwolf_worksheet[index]['Plot']['Chart_dataobj'][a]['series']-1;  }   }
                 }   
             });
-            $scope.makeChart(plotObj['Plot']['Format_id']);
+            plotObj['Plot']['needsUpdateFlag']=1;
             myScope=$scope;  
         }
         
         $scope.addPlotItem=function (plotID, itemType)		        								
         {	var axisNum=0, axisID='';
-            $scope.cadwolf_worksheet.forEach(function(item, index){   if (plotID==item['itemid']){   axisID=item['Plot']['Chart_xaxesobj'][0]['Format_id'];  }    });
+            $scope.cadwolf_worksheet.forEach(function(item, index){   if (plotID==item['itemid']){   axisID=item['Plot']['Chart_xaxesobj'][0]['Format_id']; thisItem=item;  }    });
             if (itemType=="yaxis") { $scope.cadwolf_worksheet.forEach(function(item, index){   if (plotID==item['itemid']){   axisNum=item['Plot']['Chart_yaxesobj'].length;  } }); }
             if (itemType=="xaxis") { $scope.cadwolf_worksheet.forEach(function(item, index){   if (plotID==item['itemid']){   axisNum=item['Plot']['Chart_xaxesobj'].length;  } }); }
             if (itemType=="text")
@@ -1800,7 +1868,7 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
                 {   if (plotID==item['itemid']) {   for (var a=0; a<item['Plot']['Chart_xaxesobj'].length; a++) {   item['Plot']['Chart_xaxesobj'][a]['Axis_name']="Axis "+a;  item['Plot']['Chart_xaxesobj'][a]['Axis_label']="Axis "+a; }  }    });
             }
             myScope=$scope;  
-            $scope.makeChart(plotID);
+            thisItem['Plot']['needsUpdateFlag']=1;
         }
 
         $scope.deletePlotItem=function (plotID, itemID, itemType)		        								
@@ -1813,58 +1881,60 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
             {   if (plotID==item['itemid'])
                 {   for (var thisData=0; thisData<$scope.cadwolf_worksheet[index]['Plot'][thisObj].length; thisData++)
                     {   if ($scope.cadwolf_worksheet[index]['Plot'][thisObj][thisData]['Format_id']==itemID)
-                        {   $scope.cadwolf_worksheet[index]['Plot'][thisObj].splice(thisData, 1);  axisNum=thisData; }
+                        {   $scope.cadwolf_worksheet[index]['Plot'][thisObj].splice(thisData, 1);  axisNum=thisData; thisItem=item; }
                     }
                 }   
             });
             if (itemType=="yaxis")
             {   $scope.cadwolf_worksheet.forEach(function(item, index)
                 {   if (plotID==item['itemid']) 
-                    {   for (var a=0; a<item['Plot']['Chart_dataobj'].length; a++) {   if (item['Plot']['Chart_dataobj'][a]['yaxis']>axisNum) { item['Plot']['Chart_dataobj'][a]['yaxis']=item['Plot']['Chart_dataobj'][a]['yaxis']-1; }  } 
+                    {   thisItem=item
+                        for (var a=0; a<item['Plot']['Chart_dataobj'].length; a++) {   if (item['Plot']['Chart_dataobj'][a]['yaxis']>axisNum) { item['Plot']['Chart_dataobj'][a]['yaxis']=item['Plot']['Chart_dataobj'][a]['yaxis']-1; }  } 
                         for (var a=0; a<item['Plot']['Chart_yaxesobj'].length; a++) {   item['Plot']['Chart_yaxesobj'][a]['Axis_name']="Axis "+a;  }  }    });    
             }
             if (itemType=="xaxis")
             {   $scope.cadwolf_worksheet.forEach(function(item, index)
                 {   if (plotID==item['itemid']) 
-                    {   for (var a=0; a<item['Plot']['Chart_dataobj'].length; a++) {   if (item['Plot']['Chart_dataobj'][a]['xaxis']>axisNum) { item['Plot']['Chart_dataobj'][a]['xaxis']=item['Plot']['Chart_dataobj'][a]['xaxis']-1; }  } 
+                    {   thisItem=item;
+                        for (var a=0; a<item['Plot']['Chart_dataobj'].length; a++) {   if (item['Plot']['Chart_dataobj'][a]['xaxis']>axisNum) { item['Plot']['Chart_dataobj'][a]['xaxis']=item['Plot']['Chart_dataobj'][a]['xaxis']-1; }  } 
                         for (var a=0; a<item['Plot']['Chart_xaxesobj'].length; a++) {   item['Plot']['Chart_xaxesobj'][a]['Axis_name']="Axis "+a;  }  }    });    
             }
-            $scope.makeChart(plotID);
+            thisItem['Plot']['needsUpdateFlag']=1;
             myScope=$scope;  
         };
 
         // Create the mono color
         $scope.setMonoColor = function ()
         {   var flag=0;		var base='';
-            if (($scope.currentPlot.Chart_monoColor=="Blue")||($scope.currentPlot.Chart_monoColor=="blue")) { base = "#7cb5ec"; }	
-            if (($scope.currentPlot.Chart_monoColor=="Green")||($scope.currentPlot.Chart_monoColor=="green")) { base = "#AADDAA"; }
-            if (($scope.currentPlot.Chart_monoColor=="Red")||($scope.currentPlot.Chart_monoColor=="red")) { base = "#FF0000"; }
-            if (($scope.currentPlot.Chart_monoColor=="Yellow")||($scope.currentPlot.Chart_monoColor=="yellow")) { base = "#e4d354"; }	
-            if ($scope.currentPlot.Chart_monoColor=="") { flag=1; }	
+            if (($scope.currentPlot['Plot'].Chart_monoColor=="Blue")||($scope.currentPlot['Plot'].Chart_monoColor=="blue")) { base = "#7cb5ec"; }	
+            if (($scope.currentPlot['Plot'].Chart_monoColor=="Green")||($scope.currentPlot['Plot'].Chart_monoColor=="green")) { base = "#AADDAA"; }
+            if (($scope.currentPlot['Plot'].Chart_monoColor=="Red")||($scope.currentPlot['Plot'].Chart_monoColor=="red")) { base = "#FF0000"; }
+            if (($scope.currentPlot['Plot'].Chart_monoColor=="Yellow")||($scope.currentPlot['Plot'].Chart_monoColor=="yellow")) { base = "#e4d354"; }	
+            if ($scope.currentPlot['Plot'].Chart_monoColor=="") { flag=1; }	
             if ($scope.currentDataset['Format_type']=="pie")
-            {	if (flag===0){	for (var i in $scope.currentPlot.Chart_dataobj[dataIndex]['PointData']){   $scope.currentPlot.Chart_dataobj[dataIndex]['PointData'][i]['color']=Highcharts.Color(base).brighten((i - 3) / 7).get(); }
-                }else	     {	for (var i in $scope.currentPlot.Chart_dataobj[dataIndex]['PointData']){   $scope.currentPlot.Chart_dataobj[dataIndex]['PointData'][i]['color']=Highcharts.getOptions().colors[i]; }	}
+            {	if (flag===0){	for (var i in $scope.currentPlot['Plot']['Chart_dataobj'][dataIndex]['PointData']){   $scope.currentPlot['Plot']['Chart_dataobj'][dataIndex]['PointData'][i]['color']=Highcharts.Color(base).brighten((i - 3) / 7).get(); }
+                }else	     {	for (var i in $scope.currentPlot['Plot']['Chart_dataobj'][dataIndex]['PointData']){   $scope.currentPlot['Plot']['Chart_dataobj'][dataIndex]['PointData'][i]['color']=Highcharts.getOptions().colors[i]; }	}
                 currentDataset.Chart_monoColor=monoColor; 
             }else 
-            {	
-                if (flag==0)
+            {	if (flag==0)
                 {	var i=0;
-                    for (var dataIndex=0; dataIndex<$scope.currentPlot.Chart_dataobj.length; dataIndex++) 
-                    {   $scope.currentPlot.Chart_dataobj[dataIndex]['color']=Highcharts.Color(base).brighten((i - 3) / 7).get(); 
-                        $scope.currentPlot.Chart_dataobj[dataIndex]['fillFolor']=Highcharts.Color(base).brighten((i - 3) / 7).get();
+                    for (var dataIndex=0; dataIndex<$scope.currentPlot['Plot']['Chart_dataobj'].length; dataIndex++) 
+                    {   $scope.currentPlot['Plot']['Chart_dataobj'][dataIndex]['color']=Highcharts.Color(base).brighten((i - 3) / 7).get(); 
+                        $scope.currentPlot['Plot']['Chart_dataobj'][dataIndex]['fillFolor']=Highcharts.Color(base).brighten((i - 3) / 7).get();
                         i++;
                     }
                 }else	
                 {	var i=0;
-                    for (var dataIndex=0; dataIndex<$scope.currentPlot.Chart_dataobj.length; dataIndex++) 
+                    for (var dataIndex=0; dataIndex<$scope.currentPlot['Plot']['Chart_dataobj'].length; dataIndex++) 
                     {   console.log('Setting color for index '+dataIndex+' to '+Highcharts.getOptions().colors[i]);
-                        $scope.currentPlot.Chart_dataobj[dataIndex]['color']=Highcharts.getOptions().colors[i];
-                        $scope.currentPlot.Chart_dataobj[dataIndex]['fillColor']=Highcharts.getOptions().colors[i]; 
+                        $scope.currentPlot['Plot']['Chart_dataobj'][dataIndex]['color']=Highcharts.getOptions().colors[i];
+                        $scope.currentPlot['Plot']['Chart_dataobj'][dataIndex]['fillColor']=Highcharts.getOptions().colors[i]; 
                         i++;
                     }
                 }
             }
-            $scope.makeChart($scope.currentPlot['Format_id']);
+            myScope=$scope;
+            currentPlot['Plot']['needsUpdateFlag']=1;
         };	
 
         $scope.formatPlotText = function(plotID, textID, callback) 
@@ -1930,7 +2000,7 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
                                                     is when the labels or data are being changed. In those cases, the algorithm takes in an array and sets
                                                     the point data to the value at each index
 
-            makeChart           :   Prompts     :   A plot item is found in the data on load
+            solvePlotData       :   Prompts     :   Needs to be updated
                                                     A new chart is created
                                                     Any number of changes are made to the data or properties that require the chart to be remade
                                     Inputs      :   plotID      - the id of the plot containing the text
@@ -1948,336 +2018,7 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
             myScope=$scope;
         };
 
-        // Function that creates the chart from the data
-        $scope.makeChart=function (plotID, newType)	
-        {   var chartData={};
-            console.log('Make Charts was called with '+plotID);
-            $scope.cadwolf_worksheet.forEach(function(item, index){ if (plotID==item['itemid']){ chartData=item.Plot; }   });
-            chartData['vartype']="9";
-            if (newType==1){ chartData.Chart_dataobj=[]; }
-            var datafinal=new Array();
-            thischart={}; thischart.chart={}; thischart.series=new Array();	thischart.title={};	thischart.subtitle={};	thischart.xAxis=new Array();
-            thischart.yAxis=new Array();	thischart.legend={};	thischart.yAxis[0]={};	thischart.xAxis[0]={};		thischart.plotOptions={};	
-            thischart.chart.renderTo=plotID;
-            if (thischart.Chart_type!="combo") { thischart.chart.type=chartData.Chart_type;	}
-            thischart.chart.margin='['+chartData.Chart_margintop+', '+chartData.Chart_marginright+', '+chartData.Chart_marginbottom+', '+chartData.Chart_marginleft+']';
-            thischart.chart.backgroundColor='transparent';
-            thischart.chart.height=chartData.Chart_height.replace(/[a-z]+$/,'');				
-            thischart.chart.width=chartData.Chart_width.replace(/[a-z]+$/,'');
-            if (chartData.Title_onoff===true) 		
-            {	thischart.title.margin=15; thischart.title.text=chartData.Title_text; 	thischart.title.floating=true;
-            }else { thischart.title.margin=0; thischart.title.text=''; }		
-            if (chartData.Subtitle_onoff===true) { thischart.subtitle.text=chartData.Subtitle_text; }else { thischart.subtitle.text=''; }	
-            thischart.title.x=chartData.Title_xoffset;			thischart.title.y=chartData.Title_yoffset;		
-            thischart.subtitle.x=chartData.Subtitle_xoffset;	thischart.subtitle.y=chartData.Subtitle_yoffset;
-            thischart.chart.marginBottom=chartData.Chart_marginbottom;		thischart.chart.marginTop=chartData.Chart_margintop;			
-            thischart.chart.marginLeft=chartData.Chart_marginleft;			thischart.chart.marginRight=chartData.Chart_marginright;		
-            thischart.tooltip={};	thischart.tooltip.shared=true;	thischart.tooltip.crosshairs=true;
-            thischart.tooltip.formatter= "";
-            if(thischart.chart.type=="heatmap") {		thischart.tooltip.pointFormat='{series.name}: X is {point.x} : Y is {point.y} : the value is {point.value}<br/>';
-            }else if(thischart.chart.type=="pie") {	thischart.tooltip.pointFormat='{point.name} - {point.y}<br/>';
-            }else if(thischart.chart.type!="bubble"){	thischart.tooltip.pointFormat='{series.name}: X is {point.x} : Y is {point.y}<br/>';	}
-            thischart.tooltip.headerFormat='';
-
-            if (thischart.chart.type=="heatmap")		
-            {	thischart.colorAxis={};
-                if (chartData.colorAxis===undefined) { thischart.colorAxis={};  window[plotID].colorAxis={}; }			
-                if (chartData.colorAxis.min!==undefined) { thischart.colorAxis.min=window[PlotID].colorAxis.min; }else{ chartData.colorAxis.min=0; }	
-                if (chartData.colorAxis.max!==undefined) { thischart.colorAxis.max=window[PlotID].colorAxis.max; }	
-                if (chartData.colorAxis.type===undefined) { thischart.colorAxis.type="linear"; chartData.colorAxis.type="linear"; }else { thischart.colorAxis.type=chartData.colorAxis.type; }
-                if (chartData.colorAxis.stops!==undefined) 
-                {	thischart.colorAxis.stops=new Array();
-                    for (var a=0; a<window[PlotID].colorAxis.stops.length; a++)	
-                    {	thischart.colorAxis.stops[a]=new Array();
-                        thischart.colorAxis.stops[a]['0']=window[PlotID].colorAxis.stops[a]['0'];
-                        thischart.colorAxis.stops[a]['1']=window[PlotID].colorAxis.stops[a]['1']; }
-                }else 				
-                {	thischart.colorAxis.stops=new Array();
-                    thischart.colorAxis.stops['0']=new Array();		thischart.colorAxis.stops['1']=new Array();		thischart.colorAxis.stops['2']=new Array();	
-                    thischart.colorAxis.stops['0']['0']=0;		    thischart.colorAxis.stops['0']['1']='#3060cf'; 
-                    thischart.colorAxis.stops['1']['0']=0.5;	    thischart.colorAxis.stops['1']['1']='#fffbbc'; 
-                    thischart.colorAxis.stops['2']['0']=1;		    thischart.colorAxis.stops['2']['1']='#c4463a'; 
-                    chartData.colorAxis.stops=new Array();
-                    chartData.colorAxis.stops['0']=new Array();		chartData.colorAxis.stops['1']=new Array();		chartData.colorAxis.stops['2']=new Array();	
-                    chartData.colorAxis.stops['0']['0']=0;		    chartData.colorAxis.stops['0']['1']='#3060cf'; 
-                    chartData.colorAxis.stops['1']['0']=0.5;	    chartData.colorAxis.stops['1']['1']='#fffbbc'; 
-                    chartData.colorAxis.stops['2']['0']=1;		    chartData.colorAxis.stops['2']['1']='#c4463a';                 
-                }					
-            }						
-            if (thischart.chart.type=="heatmap")		
-            {	thischart.legend.align='center';		
-                thischart.legend.layout='horizontal';	
-                thischart.legend.verticalAlign='bottom';
-                thischart.legend.y=25;
-                thischart.legend.margin=0;	
-            }else{					
-                thischart.legend.align=chartData['Legend_align'];			
-                if (chartData.Legend_floating==1) { thischart.legend.floating=true; }else { thischart.legend.floating=false; }					
-                thischart.legend.layout=chartData['Legend_layout'];		
-                if (chartData['Legend_onoff']===false) { thischart.legend.enabled=false;	}else { thischart.legend.enabled=true; }			
-                thischart.legend.rtl=chartData['Legend_rtl'];
-                thischart.legend.verticalAlign=chartData['Legend_verticalalign'];				
-                thischart.legend.x=$scope.toNum(chartData['Legend_xoffset']);		
-                thischart.legend.y=$scope.toNum(chartData['Legend_yoffset']);		
-                thischart.legend.itemMarginTop=15;		
-            }						
-            for (var AxisID in chartData.Chart_yaxesobj)	
-            {	var axisnum=chartData.Chart_yaxesobj[AxisID]['Axis_num'];	
-                thischart.yAxis[axisnum]={};
-                thischart.yAxis[axisnum].id=chartData.Chart_yaxesobj[AxisID]['Format_id'];		
-                thischart.yAxis[axisnum].title={};		
-                thischart.yAxis[axisnum].title.text=chartData['Chart_yaxesobj'][AxisID].Axis_label;	
-                thischart.yAxis[axisnum].type=chartData['Chart_yaxesobj'][AxisID].Axis_type;	
-                var opposite=chartData['Chart_yaxesobj'][AxisID].Axis_opposite; var reversed=chartData['Chart_yaxesobj'][AxisID].Axis_reversed;		
-                if ((opposite=="true")||(opposite===true)){ thischart.yAxis[axisnum].opposite=true;}else{thischart.yAxis[axisnum].opposite=false;}	
-                if ((reversed=="true")||(reversed===true)){ thischart.yAxis[axisnum].reversed=true;}else{thischart.yAxis[axisnum].reversed=false;}	
-                if (chartData['Chart_yaxesobj'][AxisID].Axis_min!="null") { thischart.yAxis[axisnum].min=chartData['Chart_yaxesobj'][AxisID].Axis_min;  }
-                if (chartData['Chart_yaxesobj'][AxisID].Axis_max!="null") { thischart.yAxis[axisnum].max=chartData['Chart_yaxesobj'][AxisID].Axis_max;  }
-                if ((chartData['Chart_yaxesobj'][AxisID].Axis_gridlinesonoff=="true")||(chartData['Chart_yaxesobj'][AxisID].Axis_gridlinesonoff===true))		
-                {	thischart.yAxis[axisnum].gridLineWidth=chartData['Chart_yaxesobj'][AxisID].Axis_gridlinewidth;	
-                    thischart.yAxis[axisnum].gridLineColor=chartData['Chart_yaxesobj'][AxisID].Axis_gridcolor;		
-                    if ((chartData['Chart_yaxesobj'][AxisID].Axis_tickinterval!==0)&&(chartData['Chart_yaxesobj'][AxisID].Axis_tickinterval!="null"))	
-                    {	thischart.yAxis[axisnum].tickInterval=parseFloat(chartData['Chart_yaxesobj'][AxisID].Axis_tickinterval); } 			
-                }					
-                if ((chartData['Chart_yaxesobj'][AxisID].Axis_minorgridlinesonoff=="true")||(chartData['Chart_yaxesobj'][AxisID].Axis_minorgridlinesonoff===true))		
-                {	thischart.yAxis[axisnum].minorGridLineWidth=chartData['Chart_yaxesobj'][AxisID].Axis_minorgridlinewidth;					
-                    thischart.yAxis[axisnum].minorGridLineColor=chartData['Chart_yaxesobj'][AxisID].Axis_minorgridcolor;						
-                    if (chartData['Chart_yaxesobj'][AxisID].Axis_minortickinterval!==0) 		
-                    {	thischart.yAxis[axisnum].minorTickInterval=parseFloat(chartData['Chart_yaxesobj'][AxisID].Axis_minortickinterval); } 	
-                }					
-                thischart.yAxis[axisnum].plotBands=new Array();	
-                for (var BandID in chartData['Chart_bandsobj'])			
-                {	if (chartData['Chart_bandsobj'][BandID]['Axis_id']==chartData.Chart_yaxesobj[AxisID]['Format_id'])				
-                    {	var temp={};
-                        temp.color=chartData['Chart_bandsobj'][BandID]['color'];				
-                        temp.from=chartData['Chart_bandsobj'][BandID]['Band_start'];			
-                        temp.to=chartData['Chart_bandsobj'][BandID]['Band_end'];				
-                        thischart.yAxis[axisnum].plotBands.push(temp);			
-                    }				
-                }					
-                thischart.yAxis[axisnum].plotLines=new Array();	
-                for (var LineID in chartData['Chart_linesobj'])			
-                {	if (chartData['Chart_linesobj'][LineID]['Axis_id']==chartData.Chart_yaxesobj[AxisID]['Format_id'])				
-                    {	var temp={};
-                        temp.color=chartData['Chart_linesobj'][LineID]['color'];				
-                        temp.value=chartData['Chart_linesobj'][LineID]['Line_value'];			
-                        temp.width=chartData['Chart_linesobj'][LineID]['Line_width'];			
-                        thischart.yAxis[axisnum].plotLines.push(temp);			
-                    }				
-                }					
-            }						
-            for (var AxisID in chartData.Chart_xaxesobj)	
-            {	var axisnum=chartData.Chart_xaxesobj[AxisID]['Axis_num'];	
-                thischart.xAxis[axisnum]={};
-                thischart.xAxis[axisnum].id=chartData.Chart_xaxesobj[AxisID]['Format_id'];		
-                thischart.xAxis[axisnum].title={};		
-                if ((chartData.Chart_type=="column")||(chartData.Chart_type=="bar")||(chartData.Chart_type=="heatmap")) { var temptext=chartData.Chart_Labeltext.split(',');		
-                thischart.xAxis[axisnum].categories=temptext;	}
-                thischart.xAxis[axisnum].title.text=chartData['Chart_xaxesobj'][AxisID].Axis_label;	
-                thischart.xAxis[axisnum].type=chartData['Chart_xaxesobj'][AxisID].Axis_type;	
-                if (chartData['Chart_xaxesobj'][AxisID].Axis_opposite=="true"){ thischart.xAxis[axisnum].opposite=true;}else{thischart.xAxis[axisnum].opposite=false;}	
-                if (chartData['Chart_xaxesobj'][AxisID].Axis_reversed=="true"){ thischart.xAxis[axisnum].reversed=true;}else{thischart.xAxis[axisnum].reversed=false;}	
-                if (chartData['Chart_xaxesobj'][AxisID].Axis_min!="null") { thischart.xAxis[axisnum].min=chartData['Chart_xaxesobj'][AxisID].Axis_min;  }
-                if (chartData['Chart_xaxesobj'][AxisID].Axis_max!="null") { thischart.xAxis[axisnum].max=chartData['Chart_xaxesobj'][AxisID].Axis_max;  }
-                if ((chartData['Chart_xaxesobj'][AxisID].Axis_gridlinesonoff=="true")||(chartData['Chart_xaxesobj'][AxisID].Axis_gridlinesonoff===true))		
-                {	thischart.xAxis[axisnum].gridLineWidth=parseInt(chartData['Chart_xaxesobj'][AxisID]['Axis_gridlinewidth'], 10);				
-                    thischart.xAxis[axisnum].gridLineColor=chartData['Chart_xaxesobj'][AxisID].Axis_linecolor;		
-                    if ((chartData['Chart_xaxesobj'][AxisID].Axis_tickinterval!==0)&&(chartData['Chart_xaxesobj'][AxisID].Axis_tickinterval!="null"))	
-                    {	thischart.xAxis[axisnum]['tickInterval']=parseFloat(chartData['Chart_xaxesobj'][AxisID]['Axis_tickinterval']); } 						
-                }					
-                if ((chartData['Chart_xaxesobj'][AxisID].Axis_minorgridlinesonoff=="true")||(chartData['Chart_xaxesobj'][AxisID].Axis_minorgridlinesonoff===true)) 		
-                {	thischart.xAxis[axisnum].minorGridLineWidth=parseInt(chartData['Chart_xaxesobj'][AxisID].Axis_minorgridlinewidth);					
-                    thischart.xAxis[axisnum].minorGridLineColor=chartData['Chart_xaxesobj'][AxisID].Axis_minorgridcolor;						
-                    if (chartData['Chart_xaxesobj'][AxisID].Axis_minortickinterval!==0) 		
-                    {	thischart.xAxis[axisnum].minorTickInterval=parseFloat(chartData['Chart_xaxesobj'][AxisID].Axis_minortickinterval); } 				
-                }					
-                thischart.xAxis[axisnum].plotBands=new Array();	
-                for (var BandID in chartData['Chart_bandsobj'])			
-                {	if (chartData['Chart_bandsobj'][BandID]['Axis_id']==chartData.Chart_xaxesobj[AxisID]['Format_id'])				
-                    {	var temp={};
-                        temp.color=chartData['Chart_bandsobj'][BandID]['color'];				
-                        temp.from=chartData['Chart_bandsobj'][BandID]['Band_start'];			
-                        temp.to=chartData['Chart_bandsobj'][BandID]['Band_end'];				
-                        thischart.xAxis[axisnum].plotBands.push(temp);			
-                    }				
-                }					
-                thischart.xAxis[axisnum].plotLines=new Array();	
-                for (var LineID in chartData['Chart_linesobj'])			
-                {	if (chartData['Chart_linesobj'][LineID]['Axis_id']==chartData.Chart_xaxesobj[AxisID]['Format_id'])				
-                    {	var temp={};
-                        temp.color=chartData['Chart_linesobj'][LineID]['color'];				
-                        temp.value=chartData['Chart_linesobj'][LineID]['Line_value'];			
-                        temp.width=chartData['Chart_linesobj'][LineID]['Line_width'];			
-                        thischart.xAxis[axisnum].plotLines.push(temp);			
-                    }				
-                }					
-            }						
-            for (var dataid in chartData.Chart_dataobj)	
-            {	if (chartData.Chart_dataobj[dataid]['data_plottext']!==undefined)				
-                {	if (chartData.Chart_dataobj[dataid]['Format_type']=="pie")
-                    {	if (chartData.Chart_dataobj[dataid]['dataname']=='') {   chartData.Chart_dataobj[dataid]['dataname']=chartData.Chart_dataobj[dataid]['ydata_name'];    }
-                        datafinal=new Array();
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']]={};		
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].type="pie";
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].startAngle=chartData.Chart_dataobj[dataid]['Chart_startangle'];	
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].startAngle=chartData.Chart_dataobj[dataid]['Chart_endangle'];		
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].center=chartData.Chart_dataobj[dataid]['Chart_location'].split(',');
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].size=parseInt(chartData.Chart_dataobj[dataid]['Chart_size'], 10)+'%';
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].innerSize=parseInt(chartData.Chart_dataobj[dataid]['Chart_innersize'], 10)+'%';
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].fillcolor=chartData.Chart_dataobj[dataid]['fillcolor'];
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels={};
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].startAngle=chartData.Chart_dataobj[dataid]['Chart_startangle'];	
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].endAngle=chartData.Chart_dataobj[dataid]['Chart_stopangle'];		
-                        dataobj=new Array();
-                        for (var a=0; a<chartData.Chart_dataobj[dataid]['piedata'].length; a++)
-                        {	dataobj[a]={};	
-                            if (chartData.Chart_dataobj[dataid]['pielabels'][a]!==undefined){dataobj[a]['name']=chartData.Chart_dataobj[dataid]['pielabels'][a]; }
-                            dataobj[a]['y']=chartData.Chart_dataobj[dataid]['piedata'][a];		
-                        }			
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].data=dataobj;
-                        thischart.plotOptions['pie']={};
-                        if (chartData.Chart_dataobj[dataid]['showInLegend']===true) { 			
-                                thischart.series[chartData.Chart_dataobj[dataid]['series']].showInLegend = true;	
-                        }else {	thischart.series[chartData.Chart_dataobj[dataid]['series']].showInLegend = false;	}
-                        if ((chartData.Chart_dataobj[dataid]['data_datalabels']=="true")||((chartData.Chart_dataobj[dataid]['data_datalabels']===true)))
-                        {	thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels={};	
-                            thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels['connectorWidth']=chartData.Chart_dataobj[dataid].Chart_connectorWidth;	
-                            thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels['enabled']=true;
-                            thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels['softConnector']=false;						
-                            thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels['distance']=chartData.Chart_dataobj[dataid].data_labelDistance;
-                            thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels['color']=chartData.Chart_dataobj[dataid].data_labelColor;
-                            thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels['style']={ fontFamily: 'Arimo' };			
-                            if (chartData.Chart_dataobj[dataid].data_labelFormat=="Percentage")
-                            {	thischart.series[chartData.Chart_dataobj[dataid]['series']]['dataLabels']['formatter']=function() { return Math.round(this.percentage*100)/100 + ' %';}
-                            }else if (chartData.Chart_dataobj[dataid].data_labelFormat=="Value")
-                            {	thischart.series[chartData.Chart_dataobj[dataid]['series']]['dataLabels']['formatter']=function() { return this.y;} }			
-                            thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels['borderWidth']=chartData.Chart_dataobj[dataid]['data_labelBorderWidth'];	
-                            thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels['borderColor']=chartData.Chart_dataobj[dataid]['data_labelBorderColor'];	
-                            thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels['borderRadius']=chartData.Chart_dataobj[dataid]['data_labelBorderRadius'];	
-                            thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels['padding']=chartData.Chart_dataobj[dataid]['data_labelBorderPadding'];
-                            thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels['backgroundColor']=chartData.Chart_dataobj[dataid]['data_labelBackgroundColor'];
-                            thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels['rotation']=chartData.Chart_dataobj[dataid]['data_labelRotation'];
-                            thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels['x']=chartData.Chart_dataobj[dataid]['data_labelX'];
-                            thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels['y']=chartData.Chart_dataobj[dataid]['data_labelY'];
-                            thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels['style']={ fontFamily: 'Arimo' };			
-                            thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels['style']['fontSize']=chartData.Chart_dataobj[dataid]['data_labelSize']; 	
-                        }else {	thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels={};
-                                thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels['enabled']=false;	}					
-                        for (var point in chartData.Chart_dataobj[dataid].PointData)			
-                        {	
-                            thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]={};
-                            thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['y']=chartData.Chart_dataobj[dataid].PointData[point]['y'];	
-                            if (chartData.Chart_dataobj[dataid]['PointData'][point]['name']!==undefined) { thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['name']=chartData.Chart_dataobj[dataid].PointData[point]['name']; }//\
-                            if ((chartData.Chart_dataobj[dataid].PointData[point].color!==undefined)&&(chartData.Chart_dataobj[dataid].PointData[point].color!==''))
-                            {	thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['color']=chartData.Chart_dataobj[dataid].PointData[point].color;}//\
-                            if (chartData.Chart_dataobj[dataid]['PointData'][point]['sliced']!==undefined) { thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['sliced']=eval(chartData.Chart_dataobj[dataid].PointData[point]['sliced']);	}
-                            thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['dataLabels']={};
-                            if (chartData.Chart_dataobj[dataid]['PointData'][point]['labels']!==undefined) { thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['dataLabels'].enabled=eval(chartData.Chart_dataobj[dataid]['PointData'][point]['labels']); }
-                            if (chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelColor']!==undefined) { thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['dataLabels'].color=chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelColor']; }	
-                            if (chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelBorderRadius']!==undefined) { thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['dataLabels'].borderRadius=chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelBorderRadius']; }
-                            if (chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelBackgroundColor']!==undefined) { thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['dataLabels'].backgroundColor=chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelBackgroundColor']; }
-                            if (chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelBorderWidth']!==undefined) { thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['dataLabels'].borderWidth=chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelBorderWidth']; }	
-                            if (chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelBorderPadding']!==undefined) { thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['dataLabels'].padding=chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelBorderPadding']; }	
-                            if (chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelBorderColor']!==undefined) { thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['dataLabels'].borderColor=chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelBorderColor']; }	
-                            thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['dataLabels']['style']={ fontFamily: 'Arimo' }; 		
-                            if (chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelSize']!==undefined) { thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['dataLabels']['style']['fontSize']=chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelSize']; }
-                            if (chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelRotation']!==undefined) { thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['dataLabels'].rotation=chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelRotation']; }
-                            if (chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelX']!==undefined) { thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['dataLabels'].x=chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelX']; }
-                            if (chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelY']!==undefined) { thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['dataLabels'].y=chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelY']; }		
-                        }			
-                    }else			
-                    {	thischart.series[chartData.Chart_dataobj[dataid]['series']]={};		
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].type=chartData.Chart_dataobj[dataid]['Format_type'];	
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].turboThreshold=0;	
-            //				thischart.series[chartData.Chart_dataobj[dataid]['series']].data=JSON.parse("["+chartData.Chart_dataobj[dataid]['data_plottext']+"]");	
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].name=chartData.Chart_dataobj[dataid]['dataname'];		
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].yAxis=parseInt(chartData.Chart_dataobj[dataid]['yaxis']);		
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].xAxis=parseInt(chartData.Chart_dataobj[dataid]['xaxis']);		
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].color=chartData.Chart_dataobj[dataid]['color'];		
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].fillcolor=chartData.Chart_dataobj[dataid]['fillcolor'];
-                        if (chartData.Chart_dataobj[dataid]['showInLegend']===true) { 			
-                                thischart.series[chartData.Chart_dataobj[dataid]['series']].showInLegend = true;	
-                        }else {	thischart.series[chartData.Chart_dataobj[dataid]['series']].showInLegend = false;	}
-                        if (thischart.chart.type!="heatmap")	
-                        {	thischart.series[chartData.Chart_dataobj[dataid]['series']].lineWidth=parseInt(chartData.Chart_dataobj[dataid]['lineWidth'], 10);	}	
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].marker={};	
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].marker['enabled']=eval(chartData.Chart_dataobj[dataid]['data_pointmarkers']);	
- //                       thischart.series[chartData.Chart_dataobj[dataid]['series']].marker['radius']=parseInt(chartData.Chart_dataobj[dataid]['data_markersize']);	
-                        if ((chartData.Chart_dataobj[dataid]['Format_type']=="bubble")||(chartData.Chart_dataobj[dataid]['Format_type']=="scatter"))
-                        {	chartData.Chart_dataobj[dataid]['lineWidth']=0;  }
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].marker.fillColor=chartData.Chart_dataobj[dataid]['fillcolor'];	
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].marker.symbol=chartData.Chart_dataobj[dataid]['symbol'];
-                        if ((chartData.Chart_dataobj[dataid]['Format_type']=="column")||(chartData.Chart_dataobj[dataid]['Format_type']=="bar"))
-                        {   if (chartData.Chart_dataobj[dataid]['Chart_Labeltext']===undefined){    chartData.Chart_dataobj[dataid]['Chart_Labeltext']='';  }
-                            if (chartData.Chart_dataobj[dataid]['Chart_Labeltext'].length>0)
-                            {   thischart.xAxis[0].categories=chartData.Chart_dataobj[dataid]['Chart_Labeltext'].split(',');   }
-                        }
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels={};
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels.enabled=eval(chartData.Chart_dataobj[dataid]['data_datalabels']);	
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels.color=chartData.Chart_dataobj[dataid]['data_labelColor'];
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels.borderRadius=chartData.Chart_dataobj[dataid].data_labelBorderRadius;
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels.backgroundColor=chartData.Chart_dataobj[dataid].data_labelBackgroundColor;
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels.borderWidth=chartData.Chart_dataobj[dataid].data_labelBorderWidth;	
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels.padding=chartData.Chart_dataobj[dataid].data_labelBorderPadding;	
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels['style']={ fontFamily: 'Arimo' };				
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels['style']['fontSize']=chartData.Chart_dataobj[dataid]['data_labelSize'];
-                        if (chartData.Chart_dataobj[dataid].data_labelBorderColor==='')		
-                        {	thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels.borderColor=chartData.Chart_dataobj[dataid]['color'];
-                        }else { thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels.borderColor=chartData.Chart_dataobj[dataid].data_labelBorderColor; }
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels.rotation=chartData.Chart_dataobj[dataid].data_labelRotation;
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels.x=chartData.Chart_dataobj[dataid].data_labelX;
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].dataLabels.y=chartData.Chart_dataobj[dataid].data_labelY;
-                        thischart.series[chartData.Chart_dataobj[dataid]['series']].data=new Array();	
-                        for (var point in chartData.Chart_dataobj[dataid].PointData)			
-                            {	var temp=JSON.parse(JSON.stringify(chartData.Chart_dataobj[dataid].PointData[point]['y']));						
-                                thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]={y: temp};		
-                                if (chartData.Chart_dataobj[dataid].PointData[point]['x']!==undefined) { thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['x']=chartData.Chart_dataobj[dataid].PointData[point]['x']; }	
-                                if (chartData.Chart_dataobj[dataid].PointData[point]['z']!==undefined) { thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['z']=chartData.Chart_dataobj[dataid].PointData[point]['z']; }	
-                                if (chartData.Chart_dataobj[dataid].PointData[point]['value']!==undefined) { thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['value']=chartData.Chart_dataobj[dataid].PointData[point]['value']; }	
-                                if (chartData.Chart_dataobj[dataid].PointData[point].data_fillcolor!==undefined) { thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['color']=chartData.Chart_dataobj[dataid].PointData[point].data_fillcolor; }	
-                                if (chartData.Chart_dataobj[dataid].PointData[point].data_markersize!==undefined) { thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['radius']=chartData.Chart_dataobj[dataid].PointData[point].data_markersize; }	
-                                thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['marker']={};	
-                                if (chartData.Chart_dataobj[dataid].PointData[point]['data_pointmarkers']!==undefined) { thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['marker']['enabled']=chartData.Chart_dataobj[dataid].PointData[point]['data_pointmarkers']; }	
-                                if (chartData.Chart_dataobj[dataid].PointData[point]['symbol']!==undefined) { thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['marker']['symbol']=chartData.Chart_dataobj[dataid].PointData[point]['symbol']; }	
-                                thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['dataLabels']={};
-                                if (chartData.Chart_dataobj[dataid]['PointData'][point]['labels']!==undefined) { thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['dataLabels'].enabled=eval(chartData.Chart_dataobj[dataid]['PointData'][point]['labels']); }
-                                if (chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelColor']!==undefined) { thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['dataLabels'].color=chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelColor']; }
-                                if (chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelBorderRadius']!==undefined) { thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['dataLabels'].borderRadius=chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelBorderRadius']; }
-                                if (chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelBackgroundColor']!==undefined) { thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['dataLabels'].backgroundColor=chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelBackgroundColor']; }
-                                if (chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelBorderWidth']!==undefined) { thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['dataLabels'].borderWidth=chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelBorderWidth']; }	
-                                if (chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelBorderPadding']!==undefined) { thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['dataLabels'].padding=chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelBorderPadding']; }	
-                                if (chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelBorderColor']!==undefined) { thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['dataLabels'].borderColor=chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelBorderColor']; }	
-                                thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['dataLabels']['style']={ fontFamily: 'Arimo' };				
-                                if (chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelSize']!==undefined) { thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['dataLabels']['style']['fontSize']=chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelSize']; }
-                                if (chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelRotation']!==undefined) { thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['dataLabels'].rotation=chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelRotation']; }
-                                if (chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelX']!==undefined) { thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['dataLabels'].x=chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelX']; }
-                                if (chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelY']!==undefined) { thischart.series[chartData.Chart_dataobj[dataid]['series']].data[point]['dataLabels'].y=chartData.Chart_dataobj[dataid]['PointData'][point]['data_labelY']; }		
-                            }
-                        
-                        thischart.plotOptions.series={};		thischart.plotOptions.series.states={};		thischart.plotOptions.series.states.hover={};		
-                        thischart.plotOptions.series.states.hover.enabled=false;
-                        if (chartData['Chart_stack']=="none") { thischart.plotOptions.series.stacking=null;
-                        }else {		thischart.plotOptions.series.stacking=chartData['Chart_stack'];	}	
-                    }				
-                }
-            }        
-            window[chartData.Chart_Name]=new Highcharts.Chart( thischart );
-            window[chartData.Chart_Name].container.onclick = null;			
-            window[chartData.Chart_Name].credits.hide();	
-
-            for (var textID in chartData.Chart_textobj)	
-            {   var thisText=chartData.Chart_textobj[textID]['textFormattedText'];
-                var thisX=chartData.Chart_textobj[textID]['textXLoc'];
-                var thisY=chartData.Chart_textobj[textID]['textYLoc'];
-                var thisColor=chartData.Chart_textobj[textID]['textColor'];
-                var thisSize=chartData.Chart_textobj[textID]['textSize'];
-                var thisRot=chartData.Chart_textobj[textID]['textRotAng'];
-                window[chartData['Chart_Name']].renderer.text(thisText, thisX, thisY).css({color: '#'+thisColor, fontSize: thisSize }).attr({rotation:thisRot, zIndex:9999}).add();
-            }
-        
-
-        };
-                    
+                     
         $scope.solvePlotData = function(PlotID, DataID, plotObject, className)
         {	$scope.createEqObj(PlotID, function() { $scope.callPlotSolver(PlotID, DataID, plotObject, className) });	}
 
@@ -2297,7 +2038,8 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
                 "Units_Object":$scope.cadwolf_scaleUnits,						
                 "ParseUnits":$scope.cadwolf_parseUnits,							
                 "ImportedFunctions":$scope.cadwolf_fileFunData.impFunctions,				
-                "FileID":$scope.cadwolf_fileInfo.id,		
+                "FileID":$scope.cadwolf_fileInfo.id,
+                "Constants":$scope.cadwolf_constants,
                 "EqObj":sendObj						
             });														
             equationWorker.onmessage = function(e) {					
@@ -2309,11 +2051,12 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
                     {	for (var a=0; a<$scope.cadwolf_worksheet.length; a++)
                         {   if ($scope.cadwolf_worksheet[a]['itemid']==returnObject.PlotID)
                             {   for (var objProp in returnObject.plotObj) { $scope.cadwolf_worksheet[a]['Plot'][objProp]=returnObject.plotObj[objProp]; }	
-                                $scope.makeChart(returnObject.PlotID);	
-                                for (var datasetID in $scope.cadwolf_worksheet[a]['Plot']['Chart_dataobj'])
-                                {   if ($scope.cadwolf_worksheet[a]['Plot']['Chart_dataobj'][datasetID]['Format_id']==$scope.datasetID)
-                                    {   $scope.currentDataset=$scope.cadwolf_worksheet[a]['Plot']['Chart_dataobj'][datasetID]; } }
-                                $scope.currentPlot=$scope.cadwolf_worksheet[a];
+                                $scope.cadwolf_worksheet[a]['Plot']['Dependents']=returnObject.Dependents;
+                                $scope.cadwolf_worksheet[a]['Plot']['needsUpdateFlag']=1;
+                                for (var datasetIndex in $scope.cadwolf_worksheet[a]['Plot']['Chart_dataobj'])
+                                {   if ($scope.cadwolf_worksheet[a]['Plot']['Chart_dataobj'][datasetIndex]['Format_id']==$scope.datasetID)
+                                    {   $scope.currentDataset=$scope.cadwolf_worksheet[a]['Plot']['Chart_dataobj'][datasetIndex]; } }
+                                $scope.updateItem($scope.cadwolf_worksheet[a]);
                             }
                         }
                     }else												
@@ -2333,14 +2076,11 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
                                                 $scope.cadwolf_worksheet[a]['Plot']['Dependents'][DataID][eqID]['active']=1; 			
                                                 $scope.cadwolf_worksheet[a]['Plot']['Dependents'][DataID][eqID]['axis']=returnObject.Dependents[DepDataID][eqID]['axis']; 
                                 }	}	}	}								
-                                $scope.makeChart(returnObject.PlotID);	
-//                                for (var b=0; b<$scope.cadwolf_worksheet[a]['Plot']['Chart_dataobj'].length; b++)
-//                                {   if ($scope.cadwolf_worksheet[a]['Plot']['Chart_dataobj'][b]['Format_id']==DataID) 
-//                                    {   $scope.currentDataset=$scope.cadwolf_worksheet[a]['Plot']['Chart_dataobj'][b];  } }
-                                for (var datasetID in $scope.cadwolf_worksheet[a]['Plot']['Chart_dataobj'])
-                                {   if ($scope.cadwolf_worksheet[a]['Plot']['Chart_dataobj'][datasetID]['Format_id']==$scope.datasetID)
-                                    {   $scope.currentDataset=$scope.cadwolf_worksheet[a]['Plot']['Chart_dataobj'][datasetID]; } }
-                                $scope.currentPlot=$scope.cadwolf_worksheet[a];
+                                $scope.cadwolf_worksheet[a]['Plot']['needsUpdateFlag']=1
+                                for (var datasetIndex in $scope.cadwolf_worksheet[a]['Plot']['Chart_dataobj'])
+                                {   if ($scope.cadwolf_worksheet[a]['Plot']['Chart_dataobj'][datasetIndex]['Format_id']==$scope.datasetID)
+                                    {   $scope.currentDataset=$scope.cadwolf_worksheet[a]['Plot']['Chart_dataobj'][datasetIndex]; } }
+                                $scope.updateItem($scope.cadwolf_worksheet[a]);
                             }
                         }
                     }												
@@ -2353,9 +2093,57 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
 
  
         
+        /*------------------------------------------------------------------------------------------------------------------------------------------
+                                                            ITEMS RELATED TO IMAGES
+
+            These items are functions handle everything needed for the images. Basically, that just means grabbing the folders and images from the
+            server when requested. These functions include:
+            
+            getFolderImages     :   Prompts     :   When the user hits enter when editing the URL to pull images from
+                                                    When the user clicks on a folder in the image menu
+                                    Inputs      :   None - it uses the model linked variable
+                                    Description :   This function calls the server and asks for all images and folders in the given directory
+
+            setFolderImages     :   Prompts     :   When the user clicks on an image in the image menu
+                                    Inputs      :   None - it uses the model linked variable
+                                    Description :   This function calls the server and asks for all images and folders in the given directory
+                                                    
+                                    
+        ------------------------------------------------------------------------------------------------------------------------------------------*/
         
-        
-        
+        // Function called upon load images and folders
+        $scope.getFolderImages = function() 
+        {   $scope.imagePath=$scope.imagePath.replace(/\/$/,'');
+            $http.post('http://www.cadwolf.com/Documents/getFolderImagesAngular', { folder:$scope.imagePath }, {}).
+            then(function(response)
+             {  myResponse=response;
+                $scope.imageObj=[];
+                var thisObj={};
+                for (var a=0; a<response.data.length; a++)
+                {   thisObj={};
+                    thisObj['id']=response.data[a]['Workspace']['id'];
+                    thisObj['fileType']=response.data[a]['Workspace']['File_or_Folder'];
+                    thisObj['type']=response.data[a]['Workspace']['type'];
+                    thisObj['thisType']=response.data[a]['Workspace']['type'].replace(/image\//,'');
+                    thisObj['name']=response.data[a]['Workspace']['name'];
+                    var thisDate=$scope.cadwolf_fileInfo.modified.split(' ');
+                    thisObj['mdate']=new Date(thisDate[0]+'T'+thisDate[1]);
+                    $scope.imageObj.push(thisObj);
+                }
+                myScope=$scope;
+             }, function(){ $scope.showMessage({type:"bad", messageText:"There was an error retrieving the data from the server"}, true); }); 
+        };
+
+        // Set the image properties
+        $scope.setImage = function(selectedObj) 
+        {   $scope.currentImage.data.src=selectedObj.id;
+            $scope.currentImage.data.thisType=selectedObj.thisType;
+            $scope.currentImage.data.type=selectedObj.type;
+            $scope.currentImage.data.name=selectedObj.name;
+            $scope.currentImage.data.mdate=selectedObj.mdate;
+            myScope=$scope;
+        };
+
         /*------------------------------------------------------------------------------------------------------------------------------------------
                                                             ITEMS DONE ON PAGE LOAD
 
@@ -2393,6 +2181,7 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
             $scope.plotShow=false;
             $scope.videoShow=false;
             $scope.editInputs=false;
+            $scope.imagePath='/Workspaces/';
             $scope.currentEquation='';
             $scope.currentTable='';
             $scope.currentImage='';
@@ -2445,12 +2234,16 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
 //    <!-- End of delete -->
             $scope.showStartLoc=0;
             $scope.showEndLoc=$scope.cadwolf_worksheet.length;
+myScope=$scope; 
             $scope.cadwolf_worksheet.forEach(function(item, index)
             {   $scope.cadwolf_worksheet[index]['Values']=$scope.cadwolf_worksheet[index]['Values'];
                 if (($scope.cadwolf_worksheet[index]['Values']=='')||($scope.cadwolf_worksheet[index]['Values']===undefined)){   $scope.cadwolf_worksheet[index]['Values']={};   }
                 if (($scope.cadwolf_worksheet[index]['Values']['References']=='')||($scope.cadwolf_worksheet[index]['Values']['References']===undefined)){   $scope.cadwolf_worksheet[index]['Values']['References']=[];   }
                 $scope.cadwolf_worksheet[index]['Values']['References']=[];
+                $scope.cadwolf_worksheet[index]['vartype']=parseInt($scope.cadwolf_worksheet[index]['vartype']);
                 $scope.cadwolf_worksheet[index]['location']=parseInt($scope.cadwolf_worksheet[index]['location']);
+                $scope.cadwolf_worksheet[index]['Page_lastposition']=parseInt($scope.cadwolf_worksheet[index]['Page_lastposition']);
+                if (($scope.cadwolf_worksheet[index]['Page_lastposition']=='')||($scope.cadwolf_worksheet[index]['Page_lastposition']===undefined)||(isNaN($scope.cadwolf_worksheet[index]['Page_lastposition']))){ $scope.cadwolf_worksheet[index]['Page_lastposition']=$scope.cadwolf_worksheet[index]['location']; }
                 if (item.vartype=="2")
                 {   if ($scope.cadwolf_worksheet[index]['data'].match(/^{/)!=null)
                     {   $scope.cadwolf_worksheet[index]['data']=JSON.parse($scope.cadwolf_worksheet[index]['data']);
@@ -2466,29 +2259,18 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
                         $scope.cadwolf_worksheet[index]['data']['hClass']=hClass;
                     }
                 }
+                if (item.vartype=="3")
+                {   $scope.cadwolf_worksheet[index]['data']=JSON.parse($scope.cadwolf_worksheet[index]['data']); 
+                    $scope.cadwolf_worksheet[index]['Equation']=new $scope.Equation($scope.cadwolf_worksheet[index]['data']);
+                    if ($scope.cadwolf_worksheet[index]['Equation']['inputFile']==''){ $scope.cadwolf_worksheet[index]['Equation']['inputFile']=0; }
+                    $scope.cadwolf_worksheet[index]['Equation']['newEquation']=$scope.cadwolf_worksheet[index]['Equation']['Format_left']+'='+$scope.cadwolf_worksheet[index]['Equation']['Format_right'];
+                    delete $scope.cadwolf_worksheet[index]['data'];
+                    
+                }
                 if ((item.vartype=="4")||(item.vartype=="9")||(item.vartype=="10")||(item.vartype=="12"))
                 {   $scope.cadwolf_worksheet[index]['data']=JSON.parse($scope.cadwolf_worksheet[index]['data']);      }
                 if (item.vartype=="5")
                 {   $scope.cadwolf_worksheet[index]['props']=JSON.parse($scope.cadwolf_worksheet[index]['data']);      }
-                if (item.vartype=="3")
-                {   //myValues=$scope.cadwolf_worksheet[index]['Values'];
-                    //$scope.cadwolf_worksheet[index]['Values']=JSON.parse($scope.cadwolf_worksheet[index]['Values']);
-                    $scope.cadwolf_worksheet[index]['Values']={};
-                    if ($scope.cadwolf_worksheet[index]['Values']['References']===undefined){ $scope.cadwolf_worksheet[index]['Values']['References']=[]; }
-                    $scope.cadwolf_worksheet[index]['data']=JSON.parse($scope.cadwolf_worksheet[index]['data']); 
-                    $scope.cadwolf_worksheet[index]['Equation']=new $scope.Equation($scope.cadwolf_worksheet[index]['data']);
-                    if ($scope.cadwolf_worksheet[index]['Equation']['inputFile']==''){ $scope.cadwolf_worksheet[index]['Equation']['inputFile']=0; }
-                    $scope.cadwolf_worksheet[index]['needsUpdateFlag']=0;
-                    delete $scope.cadwolf_worksheet[index]['data'];
-                    
-                }
-                if (item.vartype=="10")
-                {   if ($scope.cadwolf_worksheet[index]['data']['type']=="image/jpg")  { $scope.cadwolf_worksheet[index]['data']['thisType']="jpg"; }
-				    if ($scope.cadwolf_worksheet[index]['data']['type']=="image/jpeg") { $scope.cadwolf_worksheet[index]['data']['thisType']="jpeg"; }
-				    if ($scope.cadwolf_worksheet[index]['data']['type']=="image/bmp")  { $scope.cadwolf_worksheet[index]['data']['thisType']="bmp"; }
-				    if ($scope.cadwolf_worksheet[index]['data']['type']=="image/png")  { $scope.cadwolf_worksheet[index]['data']['thisType']="png"; }
-				    if ($scope.cadwolf_worksheet[index]['data']['type']=="image/gif")  { $scope.cadwolf_worksheet[index]['data']['thisType']="gif"; } 
-                }
                 if (item.vartype=="9")
                 {   if(item['data']['Chart_textobj']===undefined){ item['data']['Chart_textobj']={}; }
                     if(item['data']['Chart_bandsobj']===undefined){ item['data']['Chart_bandsobj']={}; }
@@ -2503,8 +2285,28 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
                     $scope.cadwolf_worksheet[index]['Plot']['Chart_xaxesobj']=$.map(item['data']['Chart_xaxesobj'], function(value, index) { return [value]; })
                     $scope.cadwolf_worksheet[index]['Plot']['Chart_yaxesobj']=$.map(item['data']['Chart_yaxesobj'], function(value, index) { return [value]; })
                     delete $scope.cadwolf_worksheet[index]['data'];
+                    $scope.cadwolf_worksheet[index]['Plot']['needsUpdateFlag']=1;
+                }
+                if (item.vartype=="10")
+                {   if ($scope.cadwolf_worksheet[index]['data']['type']=="image/jpg")  { $scope.cadwolf_worksheet[index]['data']['thisType']="jpg"; }
+				    if ($scope.cadwolf_worksheet[index]['data']['type']=="image/jpeg") { $scope.cadwolf_worksheet[index]['data']['thisType']="jpeg"; }
+				    if ($scope.cadwolf_worksheet[index]['data']['type']=="image/bmp")  { $scope.cadwolf_worksheet[index]['data']['thisType']="bmp"; }
+				    if ($scope.cadwolf_worksheet[index]['data']['type']=="image/png")  { $scope.cadwolf_worksheet[index]['data']['thisType']="png"; }
+				    if ($scope.cadwolf_worksheet[index]['data']['type']=="image/gif")  { $scope.cadwolf_worksheet[index]['data']['thisType']="gif"; } 
+                }
+                if (item.vartype=="13")
+                {   $scope.cadwolf_worksheet[index]['data']=JSON.parse($scope.cadwolf_worksheet[index]['data']); 
+                    $scope.cadwolf_worksheet[index]['Surface']=new $scope.surface($scope.cadwolf_worksheet[index]['itemid'], $scope.cadwolf_worksheet[index]['data']);
+                    $scope.cadwolf_worksheet[index]['Surface']['Chart_dataobj']=$.map(item['data']['Chart_dataobj'], function(value, index) { return [value]; })
+                    delete $scope.cadwolf_worksheet[index]['data'];
+                    var loader = new THREE.JSONLoader();
+                    angular.element(document).ready(function() {
+                        $scope.initializeSurface($scope.cadwolf_worksheet[index]['itemid'], 1);
+                        $scope.cadwolf_worksheet[index]['Surface'].reDrawItem($scope.cadwolf_worksheet[index], 'all', 1) 	
+                    });                    
                 }
             });
+        
         };
 
         // Immediately invoked function that sets the initial parameters and calls the function to get the data
@@ -2530,14 +2332,33 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
                 $scope.cadwolf_scaleUnits=response.data.scaleUnits;
                 $scope.cadwolf_userName=response.data.userName;
                 $scope.cadwolf_userID=response.data.userID;
-                if (($scope.cadwolf_permissions['edit']=='1')&&($scope.cadwolf_fileInfo.checkoutID==$scope.cadwolf_userID))
-                { $scope.editPerm=true; }else{ $scope.editPerm=false; }
+                if (($scope.cadwolf_permissions['edit']=='1')&&($scope.cadwolf_fileInfo.checkoutID==$scope.cadwolf_userID)){ $scope.editPerm=true; }else{ $scope.editPerm=false; }              
                 if ($scope.cadwolf_permissions['use']=='1'){ $scope.usePerm=true; }
                 $scope.setDataParameters();
+                if (parseInt($scope.cadwolf_fileInfo.angUpdate)==0) { $scope.solveFullDocument(); }
                 myScope=$scope
              }, function(){ $scope.showMessage({type:"bad", messageText:"There was an error retrieving the data from the server"}, true); }); 
         }();
 
+
+        // Function to resolve entire document upon page load
+        $scope.solveFullDocument = function() 
+        {   for (var a=0; a<$scope.cadwolf_worksheet.length; a++)
+            {   if ($scope.cadwolf_worksheet[a]['vartype']==3)
+                {   $scope.cadwolf_worksheet[a]['needsUpdateFlag']=1; 
+                    for (var connID in $scope.cadwolf_worksheet[a]['Equation']['connected_ids'])
+                    {   for (var b=0; b<$scope.cadwolf_worksheet.length; b++)
+                        {   if ($scope.cadwolf_worksheet[b]['vartype']==3) { if ($scope.cadwolf_worksheet[b]['Equation']['Format_id']==connID){ $scope.cadwolf_worksheet[b]['Equation']['isConnectedID']=1; } } }  
+                    }
+                }
+                if ($scope.cadwolf_worksheet[a]['vartype']==9)
+                {   for (var dataIndex=0; dataIndex<$scope.cadwolf_worksheet[a]['Plot']['Chart_dataobj'].length; dataIndex++) 
+                    {   $scope.cadwolf_worksheet[a]['Plot']['Chart_dataobj'][dataIndex]['needsUpdateFlag']=1; } 
+                }
+            }
+            $scope.runEquationDigest();
+        };
+        
         /*------------------------------------------------------------------------------------------------------------------------------------------
                                                                     TABLE ITEMS
 
@@ -3009,6 +2830,7 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
                 }
             }
             thisItem['Values']['References']=tempArray;
+            myScope=$scope;
         };
         
 
@@ -3369,7 +3191,7 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
             this['Chart_dataobj'][dataIndex]['surfaceGeometry']['groupsNeedUpdate']=true;	
             this['Chart_dataobj'][dataIndex]['surfaceGeometry']['verticesNeedUpdate']=true;	
             if (typeof(callback)=="function") { callback();	}					
-        }	
+        };	
         
         // Set the max and min extremes for the plot
         $scope.surface.prototype.setPlotExtremes=function (callback)			
@@ -3412,8 +3234,7 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
                 colorData=this['Chart_dataobj'][dataIndex].zData;		
             }							
             if (this.Props.divideColormap=='0')
-            {	console.log('Setting the colormap of '+this.Props.Legend.colorMap+' for '+this['Chart_dataobj'][dataIndex].surfaceGeometry.vertices.length+' vertices');
-                for ( var i = 0; i < this['Chart_dataobj'][dataIndex].surfaceGeometry.vertices.length; i++ ) 	
+            {	for ( var i = 0; i < this['Chart_dataobj'][dataIndex].surfaceGeometry.vertices.length; i++ ) 	
                 {	var x=Math.floor(i/this['Chart_dataobj'][dataIndex].xLength);	
                     var y=i%this['Chart_dataobj'][dataIndex].yLength;	
                     var key=x+'-'+y;	
@@ -3483,8 +3304,7 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
             if (this['Chart_dataobj'][dataIndex]['type']=="Surface")		
             {	if (this['Chart_dataobj'][dataIndex]['sWireFrame']=="Solid")
                 {	if (this['Chart_dataobj'][dataIndex]['showLines']==1)
-                    {	//var wireTexture = new THREE.ImageUtils.loadTexture( 'http://www.cadwolf.com/Images/square.png' );
-                        wireTexture.wrapS = wireTexture.wrapT = THREE.RepeatWrapping; 		
+                    {	wireTexture.wrapS = wireTexture.wrapT = THREE.RepeatWrapping; 		
                         wireTexture.repeat.set( parseInt(this['Chart_dataobj'][dataIndex].xLength), parseInt(this['Chart_dataobj'][dataIndex].yLength) );
                         wireMaterial = new THREE.MeshBasicMaterial( { map: wireTexture, vertexColors: THREE.VertexColors, side:THREE.DoubleSide } );
                     }else {	wireMaterial = new THREE.MeshBasicMaterial( {vertexColors: THREE.VertexColors, side:THREE.DoubleSide} );  	}
@@ -3494,11 +3314,11 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
                 graphMesh.id = dataID;	
                 graphMesh.name = dataID;
                 this.Scene.add(graphMesh);	
-            }else if (this['Chart_dataobj'][dataIndex]['type']=="PointCloud")		
+            }else if (this['Chart_dataobj'][dataIndex]['type']=="PointCloud")	
             {	wireMaterial = new THREE.MeshBasicMaterial( {vertexColors: THREE.VertexColors, side:THREE.DoubleSide } );
                 graphMesh = new THREE.PointCloud( this['Chart_dataobj'][dataIndex].surfaceGeometry, wireMaterial );
-                graphMesh.id = dataIndex;	
-                graphMesh.name = dataIndex;
+                graphMesh.id = dataID;	
+                graphMesh.name = dataID;
                 this.Scene.add(graphMesh);	
             }							
             if (typeof(callback)=="function") { callback();	}					
@@ -3734,10 +3554,16 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
         {	console.log('Initializing the surface for '+plotID);
             $scope.cadwolf_worksheet.forEach(function(thisItem, index)
             {   if (thisItem.itemid==plotID)
-                {   console.log('Here with an itemid of '+thisItem.itemid);
-                    if (thisItem['vartype']=="9") { thisItem['vartype']="13"; this['Chart_dataobj']=[] }
+                {   if (thisItem['vartype']==9) { thisItem['vartype']=13; this['Chart_dataobj']=[] }
                     delete thisItem.Plot;
-                    thisItem.Surface=new $scope.surface(plotID);
+                    if (reset==1)				
+                    {	for (var dataIndex in thisItem['Surface']['Chart_dataobj'])				
+                        {	var dataObj=new $scope.surfaceData(thisItem['Surface']['Chart_dataobj'][dataIndex]['Format_id'], plotID, thisItem['Surface']['Chart_dataobj'][dataIndex]);				
+                            thisItem.Surface.Chart_dataobj[dataIndex]=dataObj;
+                        }						
+                    }else
+                    {   thisItem.Surface=new $scope.surface(plotID);
+                    }
                     thisItem.Surface.Scene=new THREE.Scene();
                     thisItem.Surface.Camera = new THREE.PerspectiveCamera( thisItem.Surface.Props.view_angle, thisItem.Surface.Props.aspect, thisItem.Surface.Props.near, thisItem.Surface.Props.far);	
                     thisItem.Surface.Camera.up = new THREE.Vector3( 0, 0, 1 );
@@ -3748,16 +3574,10 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
                     if ( Detector.webgl ) { thisItem.Surface.Renderer = new THREE.WebGLRenderer( {antialias:true} ); } else { thisItem.Surface.Renderer = new THREE.CanvasRenderer(); }	
                     thisItem.Surface.Renderer.setSize(thisItem.Surface.Props.screen_width, thisItem.Surface.Props.screen_height);	
                     thisItem.Surface.Renderer.setClearColor( 0xffffff, 1);	
-                    var container = document.getElementById( thisItem.itemid );			
+                    console.log('The item id is '+thisItem.itemid);
+                    container = document.getElementById( thisItem.itemid );			
                     container.appendChild( thisItem.Surface.Renderer.domElement );					
                     thisItem.Surface.Controls = new THREE.TrackballControls( thisItem.Surface.Camera, thisItem.Surface.Renderer.domElement );	
-                    if (reset=="2")				
-                    {	for (var dataID in this['Chart_dataobj'])				
-                        {	var dataObj=new $scope.surfaceData(dataID, plotID);				
-                            for (var objProp in thisItem.Surface.Chart_dataobj[dataID]) { dataObj[objProp]=thisItem.Surface.Chart_dataobj[dataID][objProp]; }
-                            thisItem.Surface.Chart_dataobj[dataID]=dataObj;
-                        }						
-                    }	
                 }
             });
             myScope=$scope;
@@ -3782,16 +3602,22 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
 
         // Redraw a surface
         $scope.surface.prototype.reDrawItem = function (plotObj, dataID, toRender, callback) 	
-        {	if (dataID=='all')
-            {   for (var dataIndex=0; dataIndex<plotObj['Surface']['Chart_dataobj'].length; dataIndex++)				
-                {	if (dataIndex==plotObj['Surface']['Chart_dataobj'].length-1){ toRender=1; }else{ toRender=0; }
+        {	var thisID='';
+            if (dataID=='all')
+            {   
+                for (var dataIndex=0; dataIndex<plotObj['Surface']['Chart_dataobj'].length; dataIndex++)				
+                {	thisID=plotObj['Surface']['Chart_dataobj'][dataIndex]['Format_id'];
+                    if (dataIndex==plotObj['Surface']['Chart_dataobj'].length-1){ toRender=1; }else{ toRender=0; }
+                    console.log('I should be drawing a '+plotObj['Surface']['Chart_dataobj'][dataIndex]['type']+' for '+thisID+' with a render of '+toRender);
                     if ((plotObj['Surface']['Chart_dataobj'][dataIndex]['type']=="Surface")||(plotObj['Surface']['Chart_dataobj'][dataIndex]['type']=="PointCloud"))
-                    {	if (toRender=="1") { plotObj['Surface'].removeItem(dataID, function() { plotObj['Surface'].setSurfaceVertices(dataID, function() { plotObj['Surface'].setPlotExtremes(function() {plotObj['Surface'].setSurfaceColors( dataID, function(){plotObj['Surface'].setMeshes( dataID, function(){plotObj['Surface'].setPositions(  function(){ plotObj['Surface'].Render( plotObj['Surface'].Format_plotid )} )} )} )} )} )} ); 
-                        }else              { plotObj['Surface'].removeItem(dataID, function() { plotObj['Surface'].setSurfaceVertices(dataID, function() { plotObj['Surface'].setPlotExtremes(function() {plotObj['Surface'].setSurfaceColors( dataID, function(){plotObj['Surface'].setMeshes( dataID, function(){plotObj['Surface'].setPositions( )} )} )} )} )} );  }
+                    {	if (toRender=="1") { plotObj['Surface'].removeItem(thisID, function() { plotObj['Surface'].setSurfaceVertices(thisID, function() { plotObj['Surface'].setPlotExtremes(function() {plotObj['Surface'].setSurfaceColors( thisID, function(){plotObj['Surface'].setMeshes( thisID, function(){plotObj['Surface'].setPositions(  function(){ plotObj['Surface'].Render( plotObj['Surface'].Format_plotid )} )} )} )} )} )} ); 
+                        }else              { plotObj['Surface'].removeItem(thisID, function() { plotObj['Surface'].setSurfaceVertices(thisID, function() { plotObj['Surface'].setPlotExtremes(function() {plotObj['Surface'].setSurfaceColors( thisID, function(){plotObj['Surface'].setMeshes( thisID, function(){plotObj['Surface'].setPositions( )} )} )} )} )} );  }
                     }else if (plotObj['Surface']['Chart_dataobj'][dataIndex]['type']=="Line")		
-                    {	if (toRender=="1") { plotObj['Surface'].removeItem(DataID,  function() {plotObj['Surface'].setLineColors( DataID, function(){plotObj['Surface'].setMeshes( DataID,  function(){plotObj['Surface'].setPositions( function(){plotObj['Surface'].Render( plotObj['Surface'].Format_plotid )} )} )} )} ); 
-                        }else              { plotObj['Surface'].removeItem(DataID,  function() {plotObj['Surface'].setLineColors( DataID, function(){plotObj['Surface'].setMeshes( DataID,  function(){plotObj['Surface'].setPositions( )} )} )} );  }
-                    }
+                    {	if (toRender=="1") { plotObj['Surface'].removeItem(thisID,  function() {plotObj['Surface'].setLineColors( thisID, function(){plotObj['Surface'].setMeshes( thisID,  function(){plotObj['Surface'].setPositions( function(){plotObj['Surface'].Render( plotObj['Surface'].Format_plotid )} )} )} )} ); 
+                        }else              { plotObj['Surface'].removeItem(thisID,  function() {plotObj['Surface'].setLineColors( thisID, function(){plotObj['Surface'].setMeshes( thisID,  function(){plotObj['Surface'].setPositions( )} )} )} );  }
+                    }else if (plotObj['Surface']['Chart_dataobj'][dataIndex]['type']=="Lathe")
+                    {       plotObj['Surface'].formatLatheData(plotObj['Surface']['itemid'], thisID);	
+                    }else { plotObj['Surface'].createShape(plotObj['Surface']['Chart_dataobj'][dataIndex]['type'], plotObj['itemid'], thisID, toRender);		}
                 }
             }else
             {   for (var dataIndex=0; dataIndex<plotObj['Surface']['Chart_dataobj'].length; dataIndex++)				
@@ -3802,10 +3628,13 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
                         }else if (plotObj['Surface']['Chart_dataobj'][dataIndex]['type']=="Line")		
                         {	if (toRender=="1") { plotObj['Surface'].removeItem(DataID,  function() {plotObj['Surface'].setLineColors( DataID, function(){plotObj['Surface'].setMeshes( DataID,  function(){plotObj['Surface'].setPositions( function(){plotObj['Surface'].Render( plotObj['Surface'].Format_plotid )} )} )} )} ); 
                             }else              { plotObj['Surface'].removeItem(DataID,  function() {plotObj['Surface'].setLineColors( DataID, function(){plotObj['Surface'].setMeshes( DataID,  function(){plotObj['Surface'].setPositions( )} )} )} );  }
-                        }
+                        }else if (plotObj['Surface']['Chart_dataobj'][dataIndex]['type']=="Lathe")
+                        {       plotObj['Surface'].formatLatheData(plotObj['Surface']['itemid'], dataID);	
+                        }else { plotObj['Surface'].createShape(plotObj['Surface']['Chart_dataobj'][dataIndex]['type'], plotObj['itemid'], dataID, toRender);		}
                     }
                 }
             }
+
         };	
         
         // Remove a dataset from the scene
@@ -3929,17 +3758,17 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
             myScope=$scope;  
         };
 
-        $scope.deleteSurfaceDataset=function (plotObj)		        								
+        $scope.deleteSurfaceDataset=function (plotObj, dataID)		        								
         {	var seriesNum="NA";
             for (var a=0; a<plotObj['Surface']['Chart_dataobj'].length; a++)
-            {   if (plotObj['Surface']['Chart_dataobj'][a]['Format_id']==$scope.currentDataset['Format_id'])
-                {   seriesNum=$scope.cadwolf_worksheet[index]['Plot']['Chart_dataobj']['series'];
-                    $scope.cadwolf_worksheet[index]['Plot']['Chart_dataobj'].splice(a, 1);
+            {   if (plotObj['Surface']['Chart_dataobj'][a]['Format_id']==dataID)
+                {   seriesNum=plotObj['Surface']['Chart_dataobj'][a]['series'];
+                    plotObj['Surface']['Chart_dataobj'].splice(a, 1);
                 }
             }
-            for (var a=0; a<$scope.cadwolf_worksheet[index]['Plot']['Chart_dataobj'].length; a++)
-            {   if (($scope.cadwolf_worksheet[index]['Plot']['Chart_dataobj'][a]['series']>=seriesNum)&&(seriesNum!="NA"))
-                {   $scope.cadwolf_worksheet[index]['Plot']['Chart_dataobj'][a]['series']=$scope.cadwolf_worksheet[index]['Plot']['Chart_dataobj'][a]['series']-1;  }   }
+            for (var a=0; a<plotObj['Surface']['Chart_dataobj'].length; a++)
+            {   if ((plotObj['Surface']['Chart_dataobj'][a]['series']>=seriesNum)&&(seriesNum!="NA"))
+                {   plotObj['Surface']['Chart_dataobj'][a]['series']=plotObj['Surface']['Chart_dataobj'][a]['series']-1;  }   }
             myScope=$scope;  
         }
 
@@ -3980,7 +3809,6 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
                 if (this['Chart_dataobj'][dataIndex]['flat']==1)			
                 {		zVal=a+parseFloat(this['Chart_dataobj'][dataIndex]['zOffset']); 
                 }else {	zVal=parseFloat(this['Chart_dataobj'][dataIndex]['lineGeometry']['points'][a]['z'])+parseFloat(this['Chart_dataobj'][dataIndex]['zOffset']); 	}
-                console.log('The x, y, and z values are '+xVal+' '+yVal+' '+zVal);
                 this['Chart_dataobj'][dataIndex].lineData.push(new THREE.Vector3(xVal, yVal, zVal));				
             }
             if (this['Chart_dataobj'][dataIndex]['type']=="Line")		
@@ -4087,7 +3915,7 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
 
         // Create a predefined shape
         $scope.surface.prototype.createShape = function(thisShape, plotID, dataID, toRender, callback)		
-        {	console.log('Creating a '+thisShape+' for dataset '+dataID);
+        {	console.log('Creating a '+thisShape+' for dataset '+dataID+' with a render of '+toRender);
             var dataIndex=0, thisData={}, ps=0, pl=0, ts=0, pl=0, arc=0;					
             this['Chart_dataobj'].forEach(function(thisItem, thisIndex){   if (thisItem['Format_id']==dataID){ dataIndex=thisIndex; thisData=thisItem; } });
             this.removeItem(dataID);	
@@ -4104,7 +3932,7 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
             arc=parseFloat(Big(0.0174532925).times(Big(thisData.arc)));			
             if (thisShape=="Cube"){	        var shape = THREE.SceneUtils.createMultiMaterialObject( new THREE.BoxGeometry(thisData.width, thisData.height, thisData.depth, thisData.widthSegs, thisData.heightSegs, thisData.depthSegs), multiMaterial );}	
             if (thisShape=="Sphere"){       var shape = THREE.SceneUtils.createMultiMaterialObject( new THREE.SphereGeometry(thisData.radius, thisData.widthSegs, thisData.heightSegs, ps, pl, ts, tl), multiMaterial );}	
-            if (thisShape=="Cylinder"){	    var shape = THREE.SceneUtils.createMultiMaterialObject( new THREE.CylinderGeometry(thisData.topRadius, thisData.botRadius, thisData.height, thisData.radSegs, thisData.heightSegs, thisData.openEnded, ts, tl), multiMaterial );}	
+            if (thisShape=="Cylinder"){	    var shape = THREE.SceneUtils.createMultiMaterialObject( new THREE.CylinderGeometry(parseFloat(thisData.topRadius), parseFloat(thisData.botRadius), thisData.height, thisData.radSegs, thisData.heightSegs, thisData.openEnded, ts, tl), multiMaterial );}	
             if (thisShape=="Dodecahedron"){	var shape = THREE.SceneUtils.createMultiMaterialObject( new THREE.DodecahedronGeometry(thisData.radius, thisData.detail), multiMaterial );}	
             if (thisShape=="Tetrahedron"){	var shape = THREE.SceneUtils.createMultiMaterialObject( new THREE.TetrahedronGeometry(thisData.radius, thisData.detail), multiMaterial );}	
             if (thisShape=="Octahedron"){	var shape = THREE.SceneUtils.createMultiMaterialObject( new THREE.OctahedronGeometry(thisData.radius, thisData.detail), multiMaterial );}
@@ -4178,6 +4006,7 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
                 "FileID":thisItem['fileid'],
                 "Location":thisItem['location'],
                 "type":type,	
+                "Constants":$scope.cadwolf_constants,
                 "EqObj":sendObj
             };							
             equationWorker.postMessage(surfaceObject);			
@@ -4230,6 +4059,7 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
                                 }
                             }
                         }
+                        $scope.updateItem(item);
                     }
                 });
                 myScope=$scope;
@@ -4271,37 +4101,6 @@ documentApp.controller('mainController', ['$scope', '$http', '$sce', 'ngDialog',
             {  plotObject.Surface.makeAxes(datasetObject['Format_id'], 1); }
         };
         
-        $scope.makeBigChart = function (callback)
-        {	var mylocation=$(location).attr('href').split('/');
-            if (mylocation[3]=="Charts")
-            {	var plotID=mylocation[4];
-                var fileID=mylocation[4];
-                var temp='<div class="plot_block" id="'+plotID+'"><div class="plot_holder"></div></div>';	
-                $('#chart_wrapper').append(temp);
-                $('#chart_wrapper').height($(window).height()).width($(window).width());
-                $('#chart_wrapper').find('.plot_block').height($(window).height()).width($(window).width());
-                $('#chart_wrapper').find('.plot_holder').height($(window).height()).width($(window).width());
-                $('#MainBody').css('margin-left','0px').css('margin-right','0px');
-                $('#main_contents').css('margin-left','0px').css('margin-right','0px');	
-                $('#OpenLeft, #main_leftcolumn, #clicktotopenter').hide();	
-                $('#'+PlotID).css('width','');	
-                $('.titleblock, .subtitleblock').hide();
-                $scope.makeChart(plotID, function () { $scope.resizeChart(plotID)} );
-                $('#MainBody').show();
-                document.title=window[PlotID].Title_text;
-            }else { callback(); }
-        }	
-
-        $scope.resizeChart = function(plotID)
-        {	window[window[PlotID].Chart_Name].setSize(chartWidth = $(window).width(), chartHeight = $(window).height());
-            $('#'+PlotID).closest('.main_item').css('width',$(window).width());
-            $('#'+PlotID).closest('.main_item').css('height',$(window).height());
-            $('#'+PlotID).closest('.plot_block').css('width',$(window).width());
-            $('#'+PlotID).closest('.plot_block').css('height',$(window).height());	
-            $('#'+PlotID).css('width',$(window).width());
-            $('#'+PlotID).css('height',$(window).height());	
-        }	
-
                             
     }
 ]);

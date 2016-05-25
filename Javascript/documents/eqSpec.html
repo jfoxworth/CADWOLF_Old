@@ -3,69 +3,43 @@
     window and lets the user choose the type, set the data, the title, and several other things. The inputs are linked back to the model and set a "isDirty"
     when an item is changed. There is a watcher on the digest to check this variable so that any changed item is updated.
 -->
+<div ng-init="eqSpecsShowModels=false; eqSpecsShowDeps=false; eqSpecsShowErrors=false; eqSpecsShowRefs=false"></div>
+
 <div id="equation_spec" class="top_spec">
     <div ng-click="equationShow=false" id="close_eqspec"></div>
     <div id="eqspecs_main">
         <div ng-click="eqSpecsShowInfo=!eqSpecsShowInfo; eqSpecsShowDisplay=false; eqSpecsShowModels=false; eqSpecsShowDeps=false; eqSpecsShowErrors=false; eqSpecsShowRefs=false" class="eqspecs_block"><div class="eqspecs_option" id="eqspecs_showtable"></div><div class="eqspecs_label">Info</div></div>
-        <div ng-click="eqSpecsShowInfo=false; eqSpecsShowDisplay=!eqSpecsShowDisplay; eqSpecsShowModels=false; eqSpecsShowDeps=false; eqSpecsShowErrors=false; eqSpecsShowRefs=false" class="eqspecs_block"><div class="eqspecs_option" id="eqspecs_showdisplay"></div><div class="eqspecs_label">Display</div></div>
+<!--    <div ng-click="eqSpecsShowInfo=false; eqSpecsShowDisplay=!eqSpecsShowDisplay; eqSpecsShowModels=false; eqSpecsShowDeps=false; eqSpecsShowErrors=false; eqSpecsShowRefs=false" class="eqspecs_block"><div class="eqspecs_option" id="eqspecs_showdisplay"></div><div class="eqspecs_label">Display</div></div>-->
         <div ng-click="eqSpecsShowInfo=false; eqSpecsShowDisplay=false; eqSpecsShowModels=!eqSpecsShowModels; eqSpecsShowDeps=false; eqSpecsShowErrors=false; eqSpecsShowRefs=false" class="eqspecs_block"><div class="eqspecs_option" id="eqspecs_showmodels"></div><div class="eqspecs_label">Models</div></div>
         <div ng-click="eqSpecsShowInfo=false; eqSpecsShowDisplay=false; eqSpecsShowModels=false; eqSpecsShowDeps=!eqSpecsShowDeps; eqSpecsShowErrors=false; eqSpecsShowRefs=false" class="eqspecs_block"><div class="eqspecs_option" id="eqspecs_showdeps"></div><div class="eqspecs_label">Deps</div></div>
         <div ng-click="eqSpecsShowInfo=false; eqSpecsShowDisplay=false; eqSpecsShowModels=false; eqSpecsShowDeps=false; eqSpecsShowErrors=!eqSpecsShowErrors; eqSpecsShowRefs=false" class="eqspecs_block"><div class="eqspecs_option" id="eqspecs_showerrors"></div><div class="eqspecs_label">Errors</div></div>
         <div ng-click="eqSpecsShowInfo=false; eqSpecsShowDisplay=false; eqSpecsShowModels=false; eqSpecsShowDeps=false; eqSpecsShowErrors=false; eqSpecsShowRefs=!eqSpecsShowRefs" class="eqspecs_block"><div class="eqspecs_option" id="eqspecs_showrefs"></div><div class="eqspecs_label">Refs</div></div>
     </div>
 
+
     <div ng-show="eqSpecsShowInfo" id="eqspecs_table">
-        <div class="equationbar"><input id="specs_equation" ng-model="currentEquation['Equation']['newEquation']" ng-enter="currentEquation.showEdit=false; currentEquation.needsUpdateFlag=1; runEquationDigest()"></div>
-        <table id="eq_info" class="eq_info">
-            <tr height="35px">
-                <th width="150px">Name</th>
-                <th width="100px">Value</th>
-                <th width="100px">Units</th>
-                <th width="100px">Quantity</th>
-                <th width="50px">Size</th>
-                <th width="50px">Errors</th>
-                <th width="150px">Edit in Use</th>
-            </tr>
-            <tr height="35px">
-                <td>{{currentEquation['Equation']['Format_name']}}</td>
-                <td ng-if="currentEquation['Format_size']=='1x1'">{{currentEquation['Equation']['Solution_real']['0-0']}}</td>
-                <td ng-if="currentEquation['Format_size']!='1x1'">{{currentEquation['Equation']['Format_size']}}</td>
-                <td>{{currentEquation['Equation']['Units_units']}}</td>
-                <td>{{currentEquation['Equation']['Units_quantity']}}</td>
-                <td>{{currentEquation['Equation']['Format_size']}}</td>
-                <td>{{currentEquation['Equation']['Errors_errors'].length}}</td>
-                <td ng-if="currentEquation['Equation']['Format_editinuse']==0" ng-show="!currentEquation['showEIU']" ng-init="currentEquation['showEIU']=false" ng-click="currentEquation['showEIU']=true">No</td>  
-                <td ng-if="currentEquation['Equation']['Format_editinuse']==1" ng-show="!currentEquation['showEIU']" ng-init="currentEquation['showEIU']=false" ng-click="currentEquation['showEIU']=true">Yes</td>  
-                <td ng-show="currentEquation['showEIU']"><select id="editinuse" ng-model="currentEquation['Equation']['Format_editinuse']" ng-change="updateItem(currentEquation); currentEquation['showEIU']=false"><option value="1">Yes</option><option value="0">No</option></select></td>  
-            </tr>
-        </table>					
-    </div>
+        <div class="specsTitle">Equation Information</div>
+        <div class="specsLine"><div class="specsLabel">Name</div><div class="specsInputDisplay">{{currentEquation['Equation']['Format_name']}}</div></div>
+        <div class="specsLine" ng-if="currentEquation['Equation']['Format_size']=='1x1'"><div class="specsLabel">Value</div><div class="specsInputDisplay">{{currentEquation['Equation']['Solution_real']['0-0']}}</div></div>
+        <div class="specsLine" ng-if="currentEquation['Equation']['Format_size']!='1x1'"><div class="specsLabel">Value</div><div class="specsInputDisplay">{{currentEquation['Equation']['Format_size']}}</div></div>
+        <div class="specsLine" ng-if="currentEquation['Equation']['Units_units']==''"><div class="specsLabel">Units</div><div class="specsInputDisplay">No Units</div></div>
+        <div class="specsLine" ng-if="currentEquation['Equation']['Units_units']!=''"><div class="specsLabel">Units</div><div class="specsInputDisplay">{{currentEquation['Equation']['Units_units']}}</div></div>
+        <div class="specsLine" ng-if="currentEquation['Equation']['Units_quantity']==''"><div class="specsLabel">Quantity</div><div class="specsInputDisplay">No Quantity</div></div>
+        <div class="specsLine" ng-if="currentEquation['Equation']['Units_quantity']!=''"><div class="specsLabel">Quantity</div><div class="specsInputDisplay">{{currentEquation['Equation']['Units_quantity']}}</div></div>
+        <div class="specsLine"><div class="specsLabel">Size</div><div class="specsInputDisplay">{{currentEquation['Equation']['Format_size']}}</div></div>
+        <div class="specsLine" ng-if="(currentEquation['Equation']['Format_showvalue']=='value')||(currentEquation['Equation']['Format_showvalue']=='default')" ng-show="!currentEquation['showEditFormat']" ng-init="currentEquation['showEditFormat']=false" ng-click="currentEquation['showEditFormat']=true"><div class="specsLabel">Display</div><div class="specsInputDisplay">Solution</div></div>
+        <div class="specsLine" ng-if="currentEquation['Equation']['Format_showvalue']=='size'" ng-show="!currentEquation['showEditFormat']" ng-init="currentEquation['showEditFormat']=false" ng-click="currentEquation['showEditFormat']=true"><div class="specsLabel">Display</div><div class="specsInputDisplay">Size</div></div>
+        <div class="specsLine" ng-show="currentEquation['showEditFormat']" ng-if="currentEquation['Equation']['Format_size']=='1x1'"><div class="specsLabel">Display</div><select ng-change="updateItem(currentEquation); currentEquation['showEditFormat']=false; currentEquation['needsUpdateFlag']=1; runEquationDigest();" ng-model="currentEquation['Equation']['Format_showvalue']" class="specsInput"><option value="value">Solution</option></select></div>
+        <div class="specsLine" ng-show="currentEquation['showEditFormat']" ng-if="currentEquation['Equation']['Format_size']!='1x1'"><div class="specsLabel">Display</div><select ng-change="updateItem(currentEquation); currentEquation['showEditFormat']=false; currentEquation['needsUpdateFlag']=1; runEquationDigest();" ng-model="currentEquation['Equation']['Format_showvalue']" class="specsInput"><option value="value">Solution</option><option value="size">Size</option></select></div>
+        <div class="specsLine"><div class="specsLabel">Errors</div><div class="specsInputDisplay">{{currentEquation['Equation']['Errors_errors'].length}}</div></div>
+        <div class="specsLine" ng-if="currentEquation['Equation']['Format_editinuse']==0" ng-show="!currentEquation['showEIU']" ng-init="currentEquation['showEIU']=false" ng-click="currentEquation['showEIU']=true"><div class="specsLabel">Edit in Use</div><div class="specsInputDisplay">No</div></div>  
+        <div class="specsLine" ng-if="currentEquation['Equation']['Format_editinuse']==1" ng-show="!currentEquation['showEIU']" ng-init="currentEquation['showEIU']=false" ng-click="currentEquation['showEIU']=true"><div class="specsLabel">Edit in Use</div><div class="specsInputDisplay">Yes</div></div>  
+        <div class="specsLine" ng-show="currentEquation['showEIU']"><div class="specsLabel">Edit in Use</div><select class="specsInput" ng-model="currentEquation['Equation']['Format_editinuse']" ng-change="updateItem(currentEquation); currentEquation['showEIU']=false"><option value="1">Yes</option><option value="0">No</option></select></div>  
+    </div>        
+
     
-    <div ng-show="eqSpecsShowDisplay" id="eqspecs_display">
-        <div id="eqspecs_disp">
-            <div id="eqspecs_left">
-                <div class="eqspecs_subtitle">Select Format</div>
-                <div>
-                    <div ng-if="(currentEquation['Equation']['Format_showvalue']=='value')||(currentEquation['Equation']['Format_showvalue']=='default')" ng-show="!currentEquation['showEditFormat']" ng-init="currentEquation['showEditFormat']=false" ng-click="currentEquation['showEditFormat']=true">Solution</div>
-                    <div ng-if="currentEquation['Equation']['Format_showvalue']==size" ng-show="!currentEquation['showEditFormat']" ng-init="currentEquation['showEditFormat']=false">Size</div>
-                    <select ng-show="currentEquation['showEditFormat']" ng-change="updateItem(currentEquation); currentEquation['showEditFormat']=false" ng-if="currentEquation['Equation']['Format_size']=='1x1'" ng-model="currentEquation['Equation']['Format_showvalue']" id="equationshowtype"><option value="value">Solution</option></select>
-                    <select ng-show="currentEquation['showEditFormat']" ng-change="updateItem(currentEquation); currentEquation['showEditFormat']=false" ng-if="currentEquation['Equation']['Format_size']!='1x1'" ng-model="currentEquation['Equation']['Format_showvalue']" id="equationshowtype"><option value="value">Solution</option><option value="size">Size</option></select>
-                </div>
-            </div>
-            
-            <div id="eqspecs_right">
-                <div class="eqspecs_subtitle">Select Units</div>
-                <div> 
-                    <div ng-if="currentEquation['Equation']['Units_showunits']==''" ng-show="!currentEquation['Equation']['showUnitEdit']" ng-init="currentEquation['Equation']['showUnitEdit']=false" ng-click="currentEquation['Equation']['showUnitEdit']=true">No Units</div>
-                    <div ng-if="currentEquation['Equation']['Units_showunits']!=''" ng-show="!currentEquation['Equation']['showUnitEdit']" ng-init="currentEquation['Equation']['showUnitEdit']=false" ng-click="currentEquation['Equation']['showUnitEdit']=true">{{currentEquation['Equation']['Units_showunits']}}</div>
-                    <select ng-show="currentEquation['Equation']['showUnitEdit']" id="showunits" ng-model="currentEquation['Equation']['Units_showunits']" ng-change="updateItem(currentEquation); currentEquation['Equation']['showUnitEdit']=false" ng-options="item.ScaledUnit.unit disable when item.ScaledUnit.quanity!=currentEquation['Equation']['Units_quantity'] for item in cadwolf_scaleUnits"></select>   
-                </div>
-            </div>
-        </div>
-    </div>
-
-
     <div ng-show="eqSpecsShowModels" id="eqspecs_models">
+        <div class="specsTitle">Equation Models</div>
         <div class="eqspecs_lineItem">
             <div class="eqspecs_leftItem">Number Model</div>
             <div class="eqspecs_rightItem"><span mathjax-bind="currentEquation['Equation']['Models_numerical']"></span></div>
@@ -85,21 +59,21 @@
     </div>
 
     
-    <!-- This needs a repeat when I decide where to locate the dependencies -->
     <div ng-show="eqSpecsShowDeps" id="eqspecs_deps">
+        <div class="specsTitle">Equation Dependencies</div>
         <div class="eqspecs_lineItem">
             <div class="eqspecs_subtitle">I depend on these items</div>
-            <div ng-repeat="obj in currentEquation['Equation']['DepItem1']">{{obj}}</div>
+            <div ng-repeat="obj in currentEquation['Equation']['DepItem1'] track by obj.id">{{obj.name}}</div>
         </div>
         <div class="eqspecs_lineItem">
             <div class="eqspecs_subtitle">These items depend on me</div>
-            <div ng-repeat="obj in currentEquation['Equation']['DepItem2']">{{obj}}</div>
+            <div ng-repeat="obj in currentEquation['Equation']['DepItem2'] track by obj.id">{{obj.name}}</div>
         </div>
     </div>
     
     <div ng-show="eqSpecsShowErrors" id="eqspecs_errors">
+        <div class="specsTitle">Equation Errors</div>
         <div class="eqspecs_lineItem">
-            <div class="eqspecs_subtitle">Errors in the equation</div>
             <div ng-if="currentEquation['Equation']['Errors_errors'].length==0">There are no errors</div>
             <div ng-repeat="obj in currentEquation['Equation']['Errors_errors']" ><div>{{obj}}</div></div>
         </div>

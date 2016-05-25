@@ -16,23 +16,23 @@
 </div>
 
 <div ng-show="plotSpecsType" class="plot_optionblock" id="plot_typeblock">
-    <div class="plot_chartoptionstitle">{{chartType}}</div>
-    <div ng-click="currentPlot['Plot']['Chart_type']='line';  makeChart(currentPlot['itemid'], 1)" class="plot_selectplottype" ng-mouseenter="chartType='Line Plot'" ng-mouseout="chartType='Chart Type'" id="select_lineplot"></div>
-    <div ng-click="currentPlot['Plot']['Chart_type']='column';  makeChart(currentPlot['itemid'], 1)" class="plot_selectplottype" ng-mouseenter="chartType='Column Chart'" ng-mouseout="chartType='Chart Type'" id="select_columnchart"></div>
-    <div ng-click="currentPlot['Plot']['Chart_type']='bar';  makeChart(currentPlot['itemid'], 1)" class="plot_selectplottype" ng-mouseenter="chartType='Bar Chart'" ng-mouseout="chartType='Chart Type'" id="select_barchart"></div>
-    <div ng-click="currentPlot['Plot']['Chart_type']='area';  makeChart(currentPlot['itemid'], 1)" class="plot_selectplottype" ng-mouseenter="chartType='Area Chart'" ng-mouseout="chartType='Chart Type'" id="select_areachart"></div>
-    <div ng-click="currentPlot['Plot']['Chart_type']='scatter';  makeChart(currentPlot['itemid'], 1)" class="plot_selectplottype" ng-mouseenter="chartType='Scatter Chart'" ng-mouseout="chartType='Chart Type'" id="select_scatterchart"></div>
-    <div ng-click="currentPlot['Plot']['Chart_type']='spline';  makeChart(currentPlot['itemid'], 1)" class="plot_selectplottype" ng-mouseenter="chartType='Spline Plot'" ng-mouseout="chartType='Chart Type'" id="select_splineplot"></div>
-    <div ng-click="currentPlot['Plot']['Chart_type']='pie';  makeChart(currentPlot['itemid'], 1)" class="plot_selectplottype" ng-mouseenter="chartType='Pie Chart'" ng-mouseout="chartType='Chart Type'" id="select_piechart"></div>
-    <div ng-click="currentPlot['Plot']['Chart_type']='combo';  makeChart(currentPlot['itemid'], 1)" class="plot_selectplottype" ng-mouseenter="chartType='Combo Chart'" ng-mouseout="chartType='Chart Type'" id="select_combochart"></div>
-    <div ng-click="currentPlot['Plot']['Chart_type']='bubble';  makeChart(currentPlot['itemid'], 1)" class="plot_selectplottype" ng-mouseenter="chartType='Bubble Chart'" ng-mouseout="chartType='Chart Type'" id="select_bubblechart"></div>
-    <div ng-click="currentPlot['Plot']['Chart_type']='heatmap';  makeChart(currentPlot['itemid'], 1)" class="plot_selectplottype" ng-mouseenter="chartType='Heat Map'" ng-mouseout="chartType='Chart Type'" id="select_heatmap"></div>
+    <div class="specsTitle">{{chartType}}</div>
+    <div ng-click="currentPlot['Plot']['Chart_type']='line';  currentPlot['Plot']['newType']=1; currentPlot['Plot']['needsUpdateFlag']=1;" class="plot_selectplottype" ng-mouseenter="chartType='Line Plot'" ng-mouseout="chartType='Chart Type'" id="select_lineplot"></div>
+    <div ng-click="currentPlot['Plot']['Chart_type']='column';  currentPlot['Plot']['newType']=1; currentPlot['Plot']['needsUpdateFlag']=1;" class="plot_selectplottype" ng-mouseenter="chartType='Column Chart'" ng-mouseout="chartType='Chart Type'" id="select_columnchart"></div>
+    <div ng-click="currentPlot['Plot']['Chart_type']='bar';  currentPlot['Plot']['newType']=1; currentPlot['Plot']['needsUpdateFlag']=1;" class="plot_selectplottype" ng-mouseenter="chartType='Bar Chart'" ng-mouseout="chartType='Chart Type'" id="select_barchart"></div>
+    <div ng-click="currentPlot['Plot']['Chart_type']='area';  currentPlot['Plot']['newType']=1; currentPlot['Plot']['needsUpdateFlag']=1;" class="plot_selectplottype" ng-mouseenter="chartType='Area Chart'" ng-mouseout="chartType='Chart Type'" id="select_areachart"></div>
+    <div ng-click="currentPlot['Plot']['Chart_type']='scatter';  currentPlot['Plot']['newType']=1; currentPlot['Plot']['needsUpdateFlag']=1;" class="plot_selectplottype" ng-mouseenter="chartType='Scatter Chart'" ng-mouseout="chartType='Chart Type'" id="select_scatterchart"></div>
+    <div ng-click="currentPlot['Plot']['Chart_type']='spline';  currentPlot['Plot']['newType']=1; currentPlot['Plot']['needsUpdateFlag']=1;" class="plot_selectplottype" ng-mouseenter="chartType='Spline Plot'" ng-mouseout="chartType='Chart Type'" id="select_splineplot"></div>
+    <div ng-click="currentPlot['Plot']['Chart_type']='pie';  currentPlot['Plot']['newType']=1; currentPlot['Plot']['needsUpdateFlag']=1;" class="plot_selectplottype" ng-mouseenter="chartType='Pie Chart'" ng-mouseout="chartType='Chart Type'" id="select_piechart"></div>
+    <div ng-click="currentPlot['Plot']['Chart_type']='combo';  currentPlot['Plot']['newType']=1; currentPlot['Plot']['needsUpdateFlag']=1;" class="plot_selectplottype" ng-mouseenter="chartType='Combo Chart'" ng-mouseout="chartType='Chart Type'" id="select_combochart"></div>
+    <div ng-click="currentPlot['Plot']['Chart_type']='bubble';  currentPlot['Plot']['newType']=1; currentPlot['Plot']['needsUpdateFlag']=1;" class="plot_selectplottype" ng-mouseenter="chartType='Bubble Chart'" ng-mouseout="chartType='Chart Type'" id="select_bubblechart"></div>
+    <div ng-click="currentPlot['Plot']['Chart_type']='heatmap';  currentPlot['Plot']['newType']=1; currentPlot['Plot']['needsUpdateFlag']=1;" class="plot_selectplottype" ng-mouseenter="chartType='Heat Map'" ng-mouseout="chartType='Chart Type'" id="select_heatmap"></div>
     <div ng-click="currentPlot['Plot']['Chart_type']='surface';  plotShow=false; surfaceShow=true; initializeSurface(currentPlot['itemid'])" class="plot_selectplottype" ng-mouseenter="chartType='3D Surface Map'" ng-mouseout="chartType='Chart Type'" id="select_surface"></div>
 </div>
 
 
 <div ng-show="plotSpecsData" class="plot_optionblock" id="plot_datablock">
-    <div class="plot_chartoptionstitle">Chart Data Sets</div>
+    <div class="specsTitle">Chart Data Sets</div>
     <div class="plot_datanames">
         <div id="plot_adddatawrapper"><div class="plot_adddata" ng-click="addDataset(currentPlot)">Add Data Series</div></div>
         <div id="plot_dataseriestemplate">
@@ -54,22 +54,22 @@
                 </div>
                 <div class="plot_errorblock"></div>
                 <div ng-show="data_datatab" class="plot_datasetdatasection" class="plot_subclass">
-                    <div class="plot_appbox"><div class="plot_appeartext">Name</div><input class="plot_seriesname" placeholder="New Series" ng-model="currentDataset.dataname" ng-enter="makeChart(currentPlot['itemid'])"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">X Data</div><input type="text" class="plot_xdatainput" ng-model="currentDataset['xdata_name']" ng-enter="solvePlotData(currentPlot['itemid'], currentDataset['Format_id'], currentPlot['Plot'], 'plot_xdatainput')"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Y Data</div><input type="text" class="plot_ydatainput" ng-model="currentDataset['ydata_name']" ng-enter="solvePlotData(currentPlot['itemid'], currentDataset['Format_id'], currentPlot['Plot'], 'plot_ydatainput')"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">X Axis</div><select  class="plot_yaxisselect" ng-change="makeChart(currentPlot['itemid'])" ng-model="currentDataset['xaxis']" name="plot_axis1" id="plot_xaxis1"><option ng-repeat="option in $parent.currentPlot['Plot']['Chart_xaxesobj']" value="{{option.Axis_num}}">{{option.Axis_name}}</option></select></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Y Axis</div><select  class="plot_yaxisselect" ng-change="makeChart(currentPlot['itemid'])" ng-model="currentDataset['yaxis']" name="plot_axis1" id="plot_yaxis1"><option ng-repeat="option in $parent.currentPlot['Plot']['Chart_yaxesobj']" value="{{option.Axis_num}}">{{option.Axis_name}}</option></select></div>
+                    <div class="specsLine"><div class="specsLabel">Name</div><input class="specsInput" placeholder="New Series" ng-model="currentDataset.dataname" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1"></div>
+                    <div class="specsLine"><div class="specsLabel">X Data</div><input type="text" class="specsInput" ng-model="currentDataset['xdata_name']" ng-enter="solvePlotData(currentPlot['itemid'], currentDataset['Format_id'], currentPlot['Plot'], 'plot_xdatainput')"></div>
+                    <div class="specsLine"><div class="specsLabel">Y Data</div><input type="text" class="specsInput" ng-model="currentDataset['ydata_name']" ng-enter="solvePlotData(currentPlot['itemid'], currentDataset['Format_id'], currentPlot['Plot'], 'plot_ydatainput')"></div>
+                    <div class="specsLine"><div class="specsLabel">X Axis</div><select  class="specsInput" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset['xaxis']" name="plot_axis1"><option ng-repeat="option in $parent.currentPlot['Plot']['Chart_xaxesobj']" value="{{option.Axis_num}}">{{option.Axis_name}}</option></select></div>
+                    <div class="specsLine"><div class="specsLabel">Y Axis</div><select  class="specsInput" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset['yaxis']" name="plot_axis2"><option ng-repeat="option in $parent.currentPlot['Plot']['Chart_yaxesobj']" value="{{option.Axis_num}}">{{option.Axis_name}}</option></select></div>
                 </div>
                 <div ng-show="data_apptab" class="plot_datasetappearancesection" class="plot_subclass">
-                    <div class="plot_appbox"><div class="plot_appeartext">Data Labels</div><div class="plot_optionbox"><input type="checkbox" class="plot_optionlabelsonoff" ng-change="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_datalabels"></div></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Label Color</div><div class="plot_optionbox"><input type="text" class="plot_labelcolor" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_labelColor"></div></div>
-                    <div ng-if="currentDataset.data_pointmarkers==true" class="plot_appbox"><div class="plot_appeartext">Point Markers</div><div class="plot_optionbox"><input type="checkbox" class="plot_optionmarkersonoff" checked="checked" ng-change="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_pointmarkers"></div></div>
-                    <div ng-if="currentDataset.data_pointmarkers==false" class="plot_appbox"><div class="plot_appeartext">Point Markers</div><div class="plot_optionbox"><input type="checkbox" class="plot_optionmarkersonoff" ng-change="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_pointmarkers"></div></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Line Color</div><input type="text" class="plot_colorpicker" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.color"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Fill Color</div><input type="text" class="plot_fillcolorpicker" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.fillcolor"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Data Symbol</div><select ng-change="makeChart(currentPlot['itemid'])" ng-model="currentDataset.symbol" class="plot_symbolselect"><option value="circle">Circle</option><option value="square">Square</option><option value="triangle">Triangle</option><option value="triangle-down">Triangle-Down</option><option value="diamond">Diamond</option></select></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Symbol Size</div><input class="plot_markersize" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_markersize"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Line Width</div><input class="plot_plotlinewidth" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.lineWidth"></div>
+                    <div class="specsLine"><div class="specsLabel">Data Labels</div><input type="checkbox" class="specsInput" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_datalabels"></div>
+                    <div class="specsLine"><div class="specsLabel">Label Color</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_labelColor"></div>
+                    <div ng-if="currentDataset.data_pointmarkers==true" class="specsLine"><div class="specsLabel">Point Markers</div><input type="checkbox" class="specsInput" checked="checked" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_pointmarkers"></div>
+                    <div ng-if="currentDataset.data_pointmarkers==false" class="specsLine"><div class="specsLabel">Point Markers</div><input type="checkbox" class="specsInput" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_pointmarkers"></div>
+                    <div class="specsLine"><div class="specsLabel">Line Color</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.color"></div>
+                    <div class="specsLine"><div class="specsLabel">Fill Color</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.fillcolor"></div>
+                    <div class="specsLine"><div class="specsLabel">Data Symbol</div><select ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.symbol" class="specsInput"><option value="circle">Circle</option><option value="square">Square</option><option value="triangle">Triangle</option><option value="triangle-down">Triangle-Down</option><option value="diamond">Diamond</option></select></div>
+                    <div class="specsLine"><div class="specsLabel">Symbol Size</div><input class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_markersize"></div>
+                    <div class="specsLine"><div class="specsLabel">Line Width</div><input class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.lineWidth"></div>
                 </div>
             </div>
         </div>
@@ -84,53 +84,54 @@
                     <div toggle-active='' ng-click="data_datatab=false; data_appsettab=false; data_apppointtab=true;" class="plot_pointappearancetab dataplot_subtab">Point</div>
                 </div>
                 <div ng-show="data_datatab" class="plot_datasetdatasection" class="plot_subclass">
-                    <div class="plot_appbox"><div class="plot_appeartext">Labels</div><input type="text" class="plot_pielabels" ng-model="currentDataset['Chart_Labeltext']" ng-enter="setPointData(0, 'name', inputArray(currentDataset['Chart_Labeltext'])); makeChart(currentPlot['itemid'])"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Data</div><input type="text" class="plot_piedatainput" ng-model="currentDataset['ydata_name']" ng-enter="currentDataset['dataname']=currentDataset['ydata_name']; solvePlotData(currentPlot['itemid'], currentDataset['Format_id'], currentPlot['Plot'], 'all')"></div>
+                    <div class="specsLine"><div class="specsLabel">Name</div><input class="specsInput" placeholder="New Series" ng-model="currentDataset.dataname" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1"></div>
+                    <div class="specsLine"><div class="specsLabel">Labels</div><input type="text" class="specsInput" ng-model="currentDataset['Chart_Labeltext']" ng-enter="setPointData(0, 'name', inputArray(currentDataset['Chart_Labeltext'])); currentPlot['Plot']['needsUpdateFlag']=1"></div>
+                    <div class="specsLine"><div class="specsLabel">Data</div><input type="text" class="specsInput" ng-model="currentDataset['ydata_name']" ng-enter="solvePlotData(currentPlot['itemid'], currentDataset['Format_id'], currentPlot['Plot'], 'all')"></div>
                     <div class="plot_errorblock"></div>
                 </div>
                 <div ng-show="data_appsettab" class="plot_datasetappearancesection" class="plot_subclass">
-                    <div class="plot_appbox"><div class="plot_appeartext">Line Width</div><input type="text" class="plot_connectorWidth" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.Chart_connectorWidth"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Mono Color</div><input type="text" class="plot_monoColor" ng-enter="setMonoColor()" ng-model="currentPlot.Chart_monoColor"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Start Angle</div><input type="text" class="plot_startangle" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.Chart_startangle"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Stop Angle</div><input type="text" class="plot_stopangle" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.Chart_stopangle"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Location (x,y)</div><input type="text" class="plot_location" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.Chart_location"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Inner Radius</div><input type="text" class="plot_innersize" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.Chart_innersize"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Size (%)</div><input type="text" class="plot_size" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.Chart_size"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Data Labels</div><div class="plot_optionbox"><input type="checkbox" class="plot_optionlabelsonoff" ng-change="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_datalabels"></div></div>
-                    <div class="plot_appbox" ng-if="currentDataset.data_labelFormat=='Normal'"><div class="plot_appeartext">Label Format</div><select class="plot_labelformat" ng-change="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_labelFormat"><option value="Normal">Normal</option><option value="Percentage">Percentage</option><option value="Value">Value</option></select></div>
-                    <div class="plot_appbox" ng-if="currentDataset.data_labelFormat=='Percentage'"><div class="plot_appeartext">Label Format</div><select class="plot_labelformat" ng-change="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_labelFormat"><option value="Percentage">Percentage</option><option value="Value">Value</option><option value="Normal">Normal</option></select></div>
-                    <div class="plot_appbox" ng-if="currentDataset.data_labelFormat=='Value'"><div class="plot_appeartext">Label Format</div><select class="plot_labelformat" ng-change="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_labelFormat"><option value="Value">Value</option><option value="Normal">Normal</option><option value="Percentage">Percentage</option></select></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Label Size</div><div class="plot_optionbox"><input type="text" class="plot_labelSize" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_labelSize"></div></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Label Color</div><div class="plot_optionbox"><input type="text" class="plot_labelcolor" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_labelColor"></div></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Label Dist</div><div class="plot_optionbox"><input type="text" class="plot_labeldistance" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_labelDistance"></div></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Label Border</div><div class="plot_optionbox"><input type="text" class="plot_labelBorderWidth" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_labelBorderWidth"></div></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Border Color</div><div class="plot_optionbox"><input type="text" class="plot_labelBorderColor" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_labelBorderColor"></div></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">BG Color</div><div class="plot_optionbox"><input type="text" class="plot_labelBGColor" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_labelBackgroundColor"></div></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Border Rad</div><div class="plot_optionbox"><input type="text" class="plot_labelBorderRadius" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_labelBorderRadius"></div></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Border Pad</div><div class="plot_optionbox"><input type="text" class="plot_labelBorderPadding" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_labelBorderPadding"></div></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Label Rot</div><div class="plot_optionbox"><input type="text" class="plot_labelRotation" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_labelRotation"></div></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Label X</div><div class="plot_optionbox"><input type="text" class="plot_labelX" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_labelX"></div></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Label Y</div><div class="plot_optionbox"><input type="text" class="plot_labelY" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_labelY"></div></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Legend</div><div class="plot_optionbox"><input type="checkbox" class="plot_serieslegendonoff" ng-click="makeChart(currentPlot['itemid'])" ng-model="currentDataset.showInLegend"></div></div>
+                    <div class="specsLine"><div class="specsLabel">Line Width</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.Chart_connectorWidth"></div>
+                    <div class="specsLine"><div class="specsLabel">Mono Color</div><input type="text" class="specsInput" ng-enter="setMonoColor()" ng-model="currentPlot.Chart_monoColor"></div>
+                    <div class="specsLine"><div class="specsLabel">Start Angle</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.Chart_startangle"></div>
+                    <div class="specsLine"><div class="specsLabel">Stop Angle</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.Chart_stopangle"></div>
+                    <div class="specsLine"><div class="specsLabel">Location (x,y)</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.Chart_location"></div>
+                    <div class="specsLine"><div class="specsLabel">Inner Radius</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.Chart_innersize"></div>
+                    <div class="specsLine"><div class="specsLabel">Size (%)</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.Chart_size"></div>
+                    <div class="specsLine"><div class="specsLabel">Data Labels</div><input type="checkbox" class="specsInput" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_datalabels"></div>
+                    <div class="specsLine" ng-if="currentDataset.data_labelFormat=='Normal'"><div class="specsLabel">Label Format</div><select class="specsInput" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_labelFormat"><option value="Normal">Normal</option><option value="Percentage">Percentage</option><option value="Value">Value</option></select></div>
+                    <div class="specsLine" ng-if="currentDataset.data_labelFormat=='Percentage'"><div class="specsLabel">Label Format</div><select class="specsInput" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_labelFormat"><option value="Percentage">Percentage</option><option value="Value">Value</option><option value="Normal">Normal</option></select></div>
+                    <div class="specsLine" ng-if="currentDataset.data_labelFormat=='Value'"><div class="specsLabel">Label Format</div><select class="specsInput" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_labelFormat"><option value="Value">Value</option><option value="Normal">Normal</option><option value="Percentage">Percentage</option></select></div>
+                    <div class="specsLine"><div class="specsLabel">Label Size</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_labelSize"></div>
+                    <div class="specsLine"><div class="specsLabel">Label Color</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_labelColor"></div>
+                    <div class="specsLine"><div class="specsLabel">Label Dist</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_labelDistance"></div>
+                    <div class="specsLine"><div class="specsLabel">Label Border</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_labelBorderWidth"></div>
+                    <div class="specsLine"><div class="specsLabel">Border Color</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_labelBorderColor"></div>
+                    <div class="specsLine"><div class="specsLabel">BG Color</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_labelBackgroundColor"></div>
+                    <div class="specsLine"><div class="specsLabel">Border Rad</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_labelBorderRadius"></div>
+                    <div class="specsLine"><div class="specsLabel">Border Pad</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_labelBorderPadding"></div>
+                    <div class="specsLine"><div class="specsLabel">Label Rot</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_labelRotation"></div>
+                    <div class="specsLine"><div class="specsLabel">Label X</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_labelX"></div>
+                    <div class="specsLine"><div class="specsLabel">Label Y</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_labelY"></div>
+                    <div class="specsLine"><div class="specsLabel">Legend</div><input type="checkbox" class="specsInput" ng-click="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.showInLegend"></div>
                 </div>
                 
                 <div ng-show="data_apppointtab" class="plot_pointappearancesection" class="plot_subclass">
-                    <div class="plot_appbox"><div class="plot_appeartext">Point Index</div><input type="text" class="point_index" ng-enter="currentPoint=currentDataset['PointData'][currentPointIndex]" ng-model="currentPointIndex"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Slice Color</div><input type="text" class="point_colorpicker" ng-model="currentPoint['color']"></div>
-                    <div class="plot_appbox" ng-if="currentPoint['sliced']=='false'"><div class="plot_appeartext">Sliced</div><select class="point_slicedselect" ng-model="currentPoint['sliced']" ng-change="makeChart(currentPlot['itemid'])"><option value="false">False</option><option value="true">True</option></select></div>
-                    <div class="plot_appbox" ng-if="currentPoint['sliced']=='true'"><div class="plot_appeartext">Sliced</div><select class="point_slicedselect" ng-model="currentPoint['sliced']" ng-change="makeChart(currentPlot['itemid'])"><option value="true">True</option><option value="false">False</option></select></div>
-                    <div class="plot_appbox" ng-if="currentPoint['sliced']===undefined"><div class="plot_appeartext">Sliced</div><select class="point_slicedselect" ng-model="currentPoint['sliced']" ng-change="makeChart(currentPlot['itemid'])"><option value="false">False</option><option value="true">True</option></select></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Data Labels</div><div class="plot_optionbox"><input type="checkbox" class="point_optionlabelsonoff" ng-click="makeChart(currentPlot['itemid'])" ng-model="currentPoint['labels']"></div></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Label Size</div><div class="plot_optionbox"><input type="text" class="point_labelSize" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentPoint['data_labelSize']"></div></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Label Color</div><div class="plot_optionbox"><input type="text" class="point_labelcolor" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentPoint['data_labelColor']"></div></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Label Border</div><div class="plot_optionbox"><input type="text" class="point_labelBorderWidth" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentPoint['data_labelBorderWidth']"></div></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Border Color</div><div class="plot_optionbox"><input type="text" class="point_labelBorderColor" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentPoint['data_labelBorderColor']"></div></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">BG Color</div><div class="plot_optionbox"><input type="text" class="point_labelBGColor" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentPoint['data_labelBackgroundColor']"></div></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Border Rad</div><div class="plot_optionbox"><input type="text" class="point_labelBorderRadius" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentPoint['data_labelBorderRadius']"></div></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Border Pad</div><div class="plot_optionbox"><input type="text" class="point_labelBorderPadding" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentPoint['data_labelBorderPadding']"></div></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Label Rot</div><div class="plot_optionbox"><input type="text" class="point_labelRotation" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentPoint['data_labelRotation']"></div></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Label X</div><div class="plot_optionbox"><input type="text" class="point_labelX" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentPoint['data_labelX']"></div></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Label Y</div><div class="plot_optionbox"><input type="text" class="point_labelY" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentPoint['data_labelY']"></div></div>
+                    <div class="specsLine"><div class="specsLabel">Point Index</div><input type="text" class="specsInput" ng-enter="currentPoint=currentDataset['PointData'][currentPointIndex]" ng-model="currentPointIndex"></div>
+                    <div class="specsLine"><div class="specsLabel">Slice Color</div><input type="text" class="specsInput" ng-model="currentPoint['color']"></div>
+                    <div class="specsLine" ng-if="currentPoint['sliced']=='false'"><div class="specsLabel">Sliced</div><select class="specsInput" ng-model="currentPoint['sliced']" ng-change="currentPlot['Plot']['needsUpdateFlag']=1"><option value="false">False</option><option value="true">True</option></select></div>
+                    <div class="specsLine" ng-if="currentPoint['sliced']=='true'"><div class="specsLabel">Sliced</div><select class="specsInput" ng-model="currentPoint['sliced']" ng-change="currentPlot['Plot']['needsUpdateFlag']=1"><option value="true">True</option><option value="false">False</option></select></div>
+                    <div class="specsLine" ng-if="currentPoint['sliced']===undefined"><div class="specsLabel">Sliced</div><select class="specsInput" ng-model="currentPoint['sliced']" ng-change="currentPlot['Plot']['needsUpdateFlag']=1"><option value="false">False</option><option value="true">True</option></select></div>
+                    <div class="specsLine"><div class="specsLabel">Data Labels</div><input type="checkbox" class="specsInput" ng-click="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentPoint['labels']"></div>
+                    <div class="specsLine"><div class="specsLabel">Label Size</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentPoint['data_labelSize']"></div>
+                    <div class="specsLine"><div class="specsLabel">Label Color</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentPoint['data_labelColor']"></div>
+                    <div class="specsLine"><div class="specsLabel">Label Border</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentPoint['data_labelBorderWidth']"></div>
+                    <div class="specsLine"><div class="specsLabel">Border Color</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentPoint['data_labelBorderColor']"></div>
+                    <div class="specsLine"><div class="specsLabel">BG Color</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentPoint['data_labelBackgroundColor']"></div>
+                    <div class="specsLine"><div class="specsLabel">Border Rad</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentPoint['data_labelBorderRadius']"></div>
+                    <div class="specsLine"><div class="specsLabel">Border Pad</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentPoint['data_labelBorderPadding']"></div>
+                    <div class="specsLine"><div class="specsLabel">Label Rot</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentPoint['data_labelRotation']"></div>
+                    <div class="specsLine"><div class="specsLabel">Label X</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentPoint['data_labelX']"></div>
+                    <div class="specsLine"><div class="specsLabel">Label Y</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentPoint['data_labelY']"></div>
                 </div>
             </div>
         </div>
@@ -145,8 +146,8 @@
                 </div>
                 <div class="plot_errorblock"></div>
                 <div ng-show="data_datatab" class="plot_datasetdatasection" class="plot_subclass">
-                    <div class="plot_appbox"><div class="plot_appeartext">Type</div>
-                        <select id="plot_seriestype" class="plot_dataplotselect" ng-model="currentDataset['Format_type']" ng-change="makeChart(currentPlot['itemid'])">
+                    <div class="specsLine"><div class="specsLabel">Type</div>
+                        <select id="plot_seriestype" class="plot_dataplotselect" ng-model="currentDataset['Format_type']" ng-change="currentPlot['Plot']['needsUpdateFlag']=1">
                             <option value="line">Line Plot</option>
                             <option value="column">Column Chart</option>
                             <option value="pie">Pie Chart</option>
@@ -155,29 +156,30 @@
                             <option value="spline">Spline Plot</option>
                         </select>
                     </div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Name</div><input class="plot_seriesname" value="New Series" ng-model="currentDataset.dataname" ng-enter="makeChart(currentPlot['itemid'])"></div>
-                    <div class="plot_appbox" ng-if="currentDataset['Format_type']=='pie'"><div class="plot_appeartext">Labels</div><input type="text" class="plot_pielabels" ng-model="currentDataset['Chart_Labeltext']" ng-enter="setPointData(0, 'name', inputArray(currentDataset['Chart_Labeltext'])); makeChart(currentPlot['itemid'])"></div>
-                    <div class="plot_appbox" ng-if="currentDataset['Format_type']=='column'"><div class="plot_appeartext">Labels</div><input type="text" class="plot_labels" ng-model="currentDataset.Chart_Labeltext" ng-enter="makeChart(currentPlot['itemid'])"></div>
-                    <div class="plot_appbox" ng-if="(currentDataset['Format_type']!='column')&&(currentDataset['Format_type']!='pie')"><div class="plot_appeartext">X Data</div><input type="text" class="plot_xdatainput" ng-model="currentDataset['xdata_name']" ng-enter="solvePlotData(currentPlot['itemid'], currentDataset['Format_id'], currentPlot['Plot'], 'plot_xdatainput')"></div>
-                    <div class="plot_appbox" ng-if="currentDataset['Format_type']=='pie'"><div class="plot_appeartext">Y Data</div><input type="text" class="plot_ydatainput" ng-model="currentDataset['ydata_name']" ng-enter="solvePlotData(currentPlot['itemid'], currentDataset['Format_id'], currentPlot['Plot'], 'all')"></div>
-                    <div class="plot_appbox" ng-if="currentDataset['Format_type']!='pie'"><div class="plot_appeartext">Y Data</div><input type="text" class="plot_ydatainput" ng-model="currentDataset['ydata_name']" ng-enter="solvePlotData(currentPlot['itemid'], currentDataset['Format_id'], currentPlot['Plot'], 'plot_ydatainput')"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Y Axis</div><select class="plot_yaxisselect" id="plot_yaxis1"><option>Y Axis 1</option></select></div>
+                    <div class="specsLine"><div class="specsLabel">Name</div><input class="specsInput" value="New Series" ng-model="currentDataset.dataname" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1"></div>
+                    <div class="specsLine" ng-if="currentDataset['Format_type']=='pie'"><div class="specsLabel">Labels</div><input type="text" class="specsInput" ng-model="currentDataset['Chart_Labeltext']" ng-enter="setPointData(0, 'name', inputArray(currentDataset['Chart_Labeltext'])); currentPlot['Plot']['needsUpdateFlag']=1"></div>
+                    <div class="specsLine" ng-if="currentDataset['Format_type']=='column'"><div class="specsLabel">Labels</div><input type="text" class="specsInput" ng-model="currentDataset.Chart_Labeltext" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1"></div>
+                    <div class="specsLine" ng-if="(currentDataset['Format_type']!='column')&&(currentDataset['Format_type']!='pie')"><div class="specsLabel">X Data</div><input type="text" class="specsInput" ng-model="currentDataset['xdata_name']" ng-enter="solvePlotData(currentPlot['itemid'], currentDataset['Format_id'], currentPlot['Plot'], 'plot_xdatainput')"></div>
+                    <div class="specsLine" ng-if="currentDataset['Format_type']=='pie'"><div class="specsLabel">Y Data</div><input type="text" class="specsInput" ng-model="currentDataset['ydata_name']" ng-enter="solvePlotData(currentPlot['itemid'], currentDataset['Format_id'], currentPlot['Plot'], 'all')"></div>
+                    <div class="specsLine" ng-if="currentDataset['Format_type']!='pie'"><div class="specsLabel">Y Data</div><input type="text" class="specsInput" ng-model="currentDataset['ydata_name']" ng-enter="solvePlotData(currentPlot['itemid'], currentDataset['Format_id'], currentPlot['Plot'], 'plot_ydatainput')"></div>      
+                    <div class="specsLine"><div class="specsLabel">X Axis</div><select  class="specsInput" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset['xaxis']" name="plot_axis1"><option ng-repeat="option in $parent.currentPlot['Plot']['Chart_xaxesobj']" value="{{option.Axis_num}}">{{option.Axis_name}}</option></select></div>
+                    <div class="specsLine"><div class="specsLabel">Y Axis</div><select  class="specsInput" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset['yaxis']" name="plot_axis2"><option ng-repeat="option in $parent.currentPlot['Plot']['Chart_yaxesobj']" value="{{option.Axis_num}}">{{option.Axis_name}}</option></select></div>
                 </div>
                 <div ng-show="data_apptab" class="plot_datasetappearancesection" class="plot_subclass">
-                    <div class="plot_appbox"><div class="plot_appeartext">Data Labels</div><div class="plot_optionbox"><input type="checkbox" class="plot_optionlabelsonoff" ng-click="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_datalabels"></div></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Label Color</div><div class="plot_optionbox"><input type="text" class="plot_labelcolor" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_labelColor"></div></div>
-                    <div ng-if="(currentDataset.data_pointmarkers==true)&&((currentDataset['Format_type']!='pie')||(currentDataset['Format_type']!='column'))" class="plot_appbox"><div class="plot_appeartext">Point Markers</div><div class="plot_optionbox"><input type="checkbox" class="plot_optionmarkersonoff" checked="checked" ng-change="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_pointmarkers"></div></div>
-                    <div ng-if="(currentDataset.data_pointmarkers==false)&&((currentDataset['Format_type']!='pie')||(currentDataset['Format_type']!='column'))" class="plot_appbox"><div class="plot_appeartext">Point Markers</div><div class="plot_optionbox"><input type="checkbox" class="plot_optionmarkersonoff" ng-change="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_pointmarkers"></div></div>
-                    <div class="plot_appbox" ng-if="(currentDataset['Format_type']=='line')||(currentDataset['Format_type']=='scatter')||(currentDataset['Format_type']=='spline')||(currentDataset['Format_type']=='area')"><div class="plot_appeartext">Line Color</div><input type="text" class="plot_colorpicker" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.color"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Fill Color</div><input type="text" class="plot_fillcolorpicker" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.fillcolor"></div>
-                    <div class="plot_appbox" ng-if="(currentDataset['Format_type']=='line')||(currentDataset['Format_type']=='scatter')||(currentDataset['Format_type']=='spline')"><div class="plot_appeartext">Data Symbol</div><select ng-change="makeChart(currentPlot['itemid'])" ng-model="currentDataset.symbol" class="plot_symbolselect"><option value="circle">Circle</option><option value="square">Square</option><option value="triangle">Triangle</option><option value="triangle-down">Triangle-Down</option><option value="diamond">Diamond</option></select></div>
-                    <div class="plot_appbox" ng-if="(currentDataset['Format_type']=='line')||(currentDataset['Format_type']=='scatter')||(currentDataset['Format_type']=='spline')"><div class="plot_appeartext">Symbol Size</div><input class="plot_markersize" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_markersize"></div>
-                    <div class="plot_appbox" ng-if="(currentDataset['Format_type']=='line')||(currentDataset['Format_type']=='scatter')||(currentDataset['Format_type']=='spline')"><div class="plot_appeartext">Line Width</div><input class="plot_plotlinewidth" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.lineWidth"></div>
-                    <div class="plot_appbox" ng-if="currentDataset['Format_type']=='pie'"><div class="plot_appeartext">Start Angle</div><input type="text" class="plot_startangle" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.Chart_startangle"></div>
-                    <div class="plot_appbox" ng-if="currentDataset['Format_type']=='pie'"><div class="plot_appeartext">Stop Angle</div><input type="text" class="plot_stopangle" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.Chart_stopangle"></div>
-                    <div class="plot_appbox" ng-if="currentDataset['Format_type']=='pie'"><div class="plot_appeartext">Location (x,y)</div><input type="text" class="plot_location" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.Chart_location"></div>
-                    <div class="plot_appbox" ng-if="currentDataset['Format_type']=='pie'"><div class="plot_appeartext">Inner Radius</div><input type="text" class="plot_innersize" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.Chart_innersize"></div>
-                    <div class="plot_appbox" ng-if="currentDataset['Format_type']=='pie'"><div class="plot_appeartext">Size (%)</div><input type="text" class="plot_size" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.Chart_size"></div>
+                    <div class="specsLine"><div class="specsLabel">Data Labels</div><input type="checkbox" class="specsInput" ng-click="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_datalabels"></div>
+                    <div class="specsLine"><div class="specsLabel">Label Color</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_labelColor"></div>
+                    <div ng-if="(currentDataset.data_pointmarkers==true)&&((currentDataset['Format_type']!='pie')||(currentDataset['Format_type']!='column'))" class="specsLine"><div class="specsLabel">Point Markers</div><input type="checkbox" class="specsInput" checked="checked" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_pointmarkers"></div>
+                    <div ng-if="(currentDataset.data_pointmarkers==false)&&((currentDataset['Format_type']!='pie')||(currentDataset['Format_type']!='column'))" class="specsLine"><div class="specsLabel">Point Markers</div><input type="checkbox" class="specsInput" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_pointmarkers"></div>
+                    <div class="specsLine" ng-if="(currentDataset['Format_type']=='line')||(currentDataset['Format_type']=='scatter')||(currentDataset['Format_type']=='spline')||(currentDataset['Format_type']=='area')"><div class="specsLabel">Line Color</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.color"></div>
+                    <div class="specsLine"><div class="specsLabel">Fill Color</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.fillcolor"></div>
+                    <div class="specsLine" ng-if="(currentDataset['Format_type']=='line')||(currentDataset['Format_type']=='scatter')||(currentDataset['Format_type']=='spline')"><div class="specsLabel">Data Symbol</div><select ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.symbol" class="specsInput"><option value="circle">Circle</option><option value="square">Square</option><option value="triangle">Triangle</option><option value="triangle-down">Triangle-Down</option><option value="diamond">Diamond</option></select></div>
+                    <div class="specsLine" ng-if="(currentDataset['Format_type']=='line')||(currentDataset['Format_type']=='scatter')||(currentDataset['Format_type']=='spline')"><div class="specsLabel">Symbol Size</div><input class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_markersize"></div>
+                    <div class="specsLine" ng-if="(currentDataset['Format_type']=='line')||(currentDataset['Format_type']=='scatter')||(currentDataset['Format_type']=='spline')"><div class="specsLabel">Line Width</div><input class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.lineWidth"></div>
+                    <div class="specsLine" ng-if="currentDataset['Format_type']=='pie'"><div class="specsLabel">Start Angle</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.Chart_startangle"></div>
+                    <div class="specsLine" ng-if="currentDataset['Format_type']=='pie'"><div class="specsLabel">Stop Angle</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.Chart_stopangle"></div>
+                    <div class="specsLine" ng-if="currentDataset['Format_type']=='pie'"><div class="specsLabel">Location (x,y)</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.Chart_location"></div>
+                    <div class="specsLine" ng-if="currentDataset['Format_type']=='pie'"><div class="specsLabel">Inner Radius</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.Chart_innersize"></div>
+                    <div class="specsLine" ng-if="currentDataset['Format_type']=='pie'"><div class="specsLabel">Size (%)</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.Chart_size"></div>
                 </div>
             </div>
         </div>
@@ -192,13 +194,13 @@
                 </div>
                 <div class="plot_errorblock"></div>
                 <div ng-show="data_datatab" class="plot_datasetdatasection" class="plot_subclass">
-                    <div class="plot_appbox"><div class="plot_appeartext">Name</div><input class="plot_seriesname" placeholder="New Series" ng-model="currentDataset.dataname" ng-enter="makeChart(currentPlot['itemid'])"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Data</div><input type="text" placeholder="Enter Matrix Here" ng-model="currentDataset.zdata_name" ng-enter="makeChart(currentPlot['itemid'])" class="plot_zdatainput"></div>
+                    <div class="specsLine"><div class="specsLabel">Name</div><input class="specsInput" placeholder="New Series" ng-model="currentDataset.dataname" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1"></div>
+                    <div class="specsLine"><div class="specsLabel">Data</div><input type="text" placeholder="Enter Matrix Here" ng-model="currentDataset.zdata_name" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" class="specsInput"></div>
                     <div class="plot_errorblock"></div>
                 </div>
                 <div ng-show="data_apptab" class="plot_datasetappearancesection" class="plot_subclass">
-                    <div class="plot_appbox"><div class="plot_appeartext">Data Labels</div><input type="checkbox" class="plot_optionlabelsonoff" ng-change="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_datalabels"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Label Color</div><div class="plot_optionbox"><input type="text" class="plot_labelcolor" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_labelColor"></div></div>
+                    <div class="specsLine"><div class="specsLabel">Data Labels</div><input type="checkbox" class="specsInput" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_datalabels"></div>
+                    <div class="specsLine"><div class="specsLabel">Label Color</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_labelColor"></div>
                 </div>
             </div>
         </div>
@@ -213,24 +215,24 @@
                 </div>
                 <div class="plot_errorblock"></div>
                 <div ng-show="data_datatab" class="plot_datasetdatasection" class="plot_subclass">
-                    <div class="plot_appbox"><div class="plot_appeartext">Name</div><input class="plot_seriesname" value="New Series" ng-model="currentDataset.dataname" ng-enter="makeChart(currentPlot['itemid'])"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Labels</div><input type="text" class="plot_labels" ng-model="currentDataset.Chart_Labeltext" ng-enter="makeChart(currentPlot['itemid'])"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Y Data</div><input type="text" class="plot_ydatainput" ng-model="currentDataset.ydata_name" ng-enter="solvePlotData(currentPlot['itemid'], currentDataset['Format_id'], currentPlot['Plot'], 'plot_ydatainput')"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Y Axis</div><select class="plot_yaxisselect" id="plot_yaxis1"><option>Y Axis 1</option></select></div>
-                    <div ng-if="currentPlot['Plot']['Chart_stack']=='none'" class="plot_appbox"><div class="plot_appeartext">Stack</div><div class="plot_optionbox"><select ng-change="makeChart(currentPlot['itemid'])" ng-model="currentPlot['Plot']['Chart_stack']"><option value="none">none</option><option value="normal">Normal</option><option value="percent">Percent</option></select></div></div>
-                    <div ng-if="currentPlot['Plot']['Chart_stack']=='normal'" class="plot_appbox"><div class="plot_appeartext">Stack</div><div class="plot_optionbox"><select ng-change="makeChart(currentPlot['itemid'])" ng-model="currentPlot['Plot']['Chart_stack']"><option value="normal">Normal</option><option value="percent">Percent</option><option value="none">None</option></select></div></div>
-                    <div ng-if="currentPlot['Plot']['Chart_stack']=='percent'" class="plot_appbox"><div class="plot_appeartext">Stack</div><div class="plot_optionbox"><select ng-change="makeChart(currentPlot['itemid'])" ng-model="currentPlot['Plot']['Chart_stack']"><option value="percent">Percent</option><option value="normal">Normal</option><option value="none">None</option></select></div></div>
+                    <div class="specsLine"><div class="specsLabel">Name</div><input class="specsInput" value="New Series" ng-model="currentDataset.dataname" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1"></div>
+                    <div class="specsLine"><div class="specsLabel">Labels</div><input type="text" class="specsInput" ng-model="currentDataset.Chart_Labeltext" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1"></div>
+                    <div class="specsLine"><div class="specsLabel">Y Data</div><input type="text" class="specsInput" ng-model="currentDataset.ydata_name" ng-enter="solvePlotData(currentPlot['itemid'], currentDataset['Format_id'], currentPlot['Plot'], 'plot_ydatainput')"></div>
+                    <div class="specsLine"><div class="specsLabel">Y Axis</div><select  class="specsInput" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset['yaxis']" name="plot_axis2"><option ng-repeat="option in $parent.currentPlot['Plot']['Chart_yaxesobj']" value="{{option.Axis_num}}">{{option.Axis_name}}</option></select></div>
+                    <div ng-if="currentPlot['Plot']['Chart_stack']=='none'" class="specsLine"><div class="specsLabel">Stack</div><select class="specsInput" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentPlot['Plot']['Chart_stack']"><option value="none">none</option><option value="normal">Normal</option><option value="percent">Percent</option></select></div>
+                    <div ng-if="currentPlot['Plot']['Chart_stack']=='normal'" class="specsLine"><div class="specsLabel">Stack</div><select class="specsInput" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentPlot['Plot']['Chart_stack']"><option value="normal">Normal</option><option value="percent">Percent</option><option value="none">None</option></select></div>
+                    <div ng-if="currentPlot['Plot']['Chart_stack']=='percent'" class="specsLine"><div class="specsLabel">Stack</div><select class="specsInput" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentPlot['Plot']['Chart_stack']"><option value="percent">Percent</option><option value="normal">Normal</option><option value="none">None</option></select></div>
                 </div>
                 <div ng-show="data_apptab" class="plot_datasetappearancesection" class="plot_subclass">
-                    <div class="plot_appbox"><div class="plot_appeartext">Data Labels</div><div class="plot_optionbox"><input type="checkbox" ng-change="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_datalabels" class="plot_optionlabelsonoff" ></div></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Label Color</div><div class="plot_optionbox"><input type="text" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_labelColor" class="plot_labelcolor" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_labelColor"></div></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Column Color</div><input type="text" ng-model="currentDataset.color" class="plot_colorpicker" ng-enter="makeChart(currentPlot['itemid'])"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Mono Color</div><input type="text" ng-model="currentPlot.Chart_monoColor" class="plot_monoColor" ng-enter="setMonoColor()"></div>
+                    <div class="specsLine"><div class="specsLabel">Data Labels</div><input type="checkbox" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_datalabels" class="specsInput" ></div>
+                    <div class="specsLine"><div class="specsLabel">Label Color</div><input type="text" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_labelColor" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_labelColor"></div>
+                    <div class="specsLine"><div class="specsLabel">Column Color</div><input type="text" ng-model="currentDataset.color" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1"></div>
+                    <div class="specsLine"><div class="specsLabel">Mono Color</div><input type="text" ng-model="currentPlot['Plot'].Chart_monoColor" class="specsInput" ng-enter="setMonoColor()"></div>
                 </div>
             </div>
         </div>
     </div>
-
+        
     <div ng-if="currentPlot['Plot']['Chart_type']=='area'" id="plot_datablock7" class="plot_plotdatablock">	   <!--  Area charts  -->
         <div class="plot_datasets">
             <div class="plot_dataseries">
@@ -240,24 +242,25 @@
                 </div>
                 <div class="plot_errorblock"></div>
                 <div ng-show="data_datatab" class="plot_datasetdatasection" class="plot_subclass">
-                    <div class="plot_appbox"><div class="plot_appeartext">Name</div><input class="plot_seriesname" placeholder="New Series" ng-model="currentDataset.dataname" ng-enter="makeChart(currentPlot['itemid'])"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">X Data</div><input type="text" class="plot_xdatainput" ng-model="currentDataset.xdata_name" ng-enter="solvePlotData(currentPlot['itemid'], currentDataset['Format_id'], currentPlot['Plot'], 'plot_xdatainput')"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Y Data</div><input type="text" class="plot_ydatainput" ng-model="currentDataset.ydata_name" ng-enter="solvePlotData(currentPlot['itemid'], currentDataset['Format_id'], currentPlot['Plot'], 'plot_ydatainput')"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Y Axis</div><select class="plot_yaxisselect" id="plot_yaxis1"><option>Y Axis 1</option></select></div>
-                    <div ng-if="currentPlot.data.Chart_stack=='none'" class="plot_appbox"><div class="plot_appeartext">Stack</div><div class="plot_optionbox"><select ng-change="makeChart(currentPlot['itemid'])" ng-model="currentPlot.Chart_stack"><option value="none">none</option><option value="normal">Normal</option><option value="percent">Percent</option></select></div></div>
-                    <div ng-if="currentPlot.data.Chart_stack=='normal'" class="plot_appbox"><div class="plot_appeartext">Stack</div><div class="plot_optionbox"><select ng-change="makeChart(currentPlot['itemid'])" ng-model="currentPlot.Chart_stack"><option value="normal">Normal</option><option value="percent">Percent</option><option value="none">None</option></select></div></div>
-                    <div ng-if="currentPlot.data.Chart_stack=='percent'" class="plot_appbox"><div class="plot_appeartext">Stack</div><div class="plot_optionbox"><select ng-change="makeChart(currentPlot['itemid'])" ng-model="currentPlot.Chart_stack"><option value="percent">Percent</option><option value="normal">Normal</option><option value="none">None</option></select></div></div>
+                    <div class="specsLine"><div class="specsLabel">Name</div><input class="specsInput" placeholder="New Series" ng-model="currentDataset.dataname" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1"></div>
+                    <div class="specsLine"><div class="specsLabel">X Data</div><input type="text" class="specsInput" ng-model="currentDataset.xdata_name" ng-enter="solvePlotData(currentPlot['itemid'], currentDataset['Format_id'], currentPlot['Plot'], 'plot_xdatainput')"></div>
+                    <div class="specsLine"><div class="specsLabel">Y Data</div><input type="text" class="specsInput" ng-model="currentDataset.ydata_name" ng-enter="solvePlotData(currentPlot['itemid'], currentDataset['Format_id'], currentPlot['Plot'], 'plot_ydatainput')"></div>
+                    <div class="specsLine"><div class="specsLabel">X Axis</div><select class="specsInput" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset['xaxis']" name="plot_axis1"><option ng-repeat="option in $parent.currentPlot['Plot']['Chart_xaxesobj']" value="{{option.Axis_num}}">{{option.Axis_name}}</option></select></div>
+                    <div class="specsLine"><div class="specsLabel">Y Axis</div><select class="specsInput" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset['yaxis']" name="plot_axis2"><option ng-repeat="option in $parent.currentPlot['Plot']['Chart_yaxesobj']" value="{{option.Axis_num}}">{{option.Axis_name}}</option></select></div>
+                    <div ng-if="currentPlot.data.Chart_stack=='none'" class="specsLine"><div class="specsLabel">Stack</div><select class="specsInput" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentPlot.Chart_stack"><option value="none">none</option><option value="normal">Normal</option><option value="percent">Percent</option></select></div>
+                    <div ng-if="currentPlot.data.Chart_stack=='normal'" class="specsLine"><div class="specsLabel">Stack</div><select class="specsInput" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentPlot.Chart_stack"><option value="normal">Normal</option><option value="percent">Percent</option><option value="none">None</option></select></div>
+                    <div ng-if="currentPlot.data.Chart_stack=='percent'" class="specsLine"><div class="specsLabel">Stack</div><select class="specsInput" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentPlot.Chart_stack"><option value="percent">Percent</option><option value="normal">Normal</option><option value="none">None</option></select></div>
                 </div>
                 <div ng-show="data_apptab" class="plot_datasetappearancesection" class="plot_subclass">
-                    <div class="plot_appbox"><div class="plot_appeartext">Data Labels</div><input type="checkbox" class="plot_optionlabelsonoff" ng-click="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_datalabels"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Label Color</div><div class="plot_optionbox"><input type="text" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_labelColor" class="plot_labelcolor" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_labelColor"></div></div>
-                    <div ng-if="currentDataset.data_pointmarkers==true" class="plot_appbox"><div class="plot_appeartext">Point Markers</div><div class="plot_optionbox"><input type="checkbox" class="plot_optionmarkersonoff" checked="checked" ng-change="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_pointmarkers"></div></div>
-                    <div ng-if="currentDataset.data_pointmarkers==false" class="plot_appbox"><div class="plot_appeartext">Point Markers</div><div class="plot_optionbox"><input type="checkbox" class="plot_optionmarkersonoff" ng-change="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_pointmarkers"></div></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Line Color</div><input type="text" class="plot_colorpicker" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.color"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Fill Color</div><input type="text" class="plot_fillcolorpicker" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.fillcolor"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Data Symbol</div><select ng-change="makeChart(currentPlot['itemid'])" ng-model="currentDataset.symbol" class="plot_symbolselect"><option value="circle">Circle</option><option value="square">Square</option><option value="triangle">Triangle</option><option value="triangle-down">Triangle-Down</option><option value="diamond">Diamond</option></select></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Symbol Size</div><input class="plot_markersize" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_markersize"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Line Width</div><input class="plot_plotlinewidth" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.lineWidth"></div>
+                    <div class="specsLine"><div class="specsLabel">Data Labels</div><input type="checkbox" class="specsInput" ng-click="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_datalabels"></div>
+                    <div class="specsLine"><div class="specsLabel">Label Color</div><input type="text" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_labelColor" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_labelColor"></div>
+                    <div ng-if="currentDataset.data_pointmarkers==true" class="specsLine"><div class="specsLabel">Point Markers</div><input type="checkbox" class="specsInput" checked="checked" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_pointmarkers"></div>
+                    <div ng-if="currentDataset.data_pointmarkers==false" class="specsLine"><div class="specsLabel">Point Markers</div><input type="checkbox" class="specsInput" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_pointmarkers"></div>
+                    <div class="specsLine"><div class="specsLabel">Line Color</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.color"></div>
+                    <div class="specsLine"><div class="specsLabel">Fill Color</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.fillcolor"></div>
+                    <div class="specsLine"><div class="specsLabel">Data Symbol</div><select ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.symbol" class="specsInput"><option value="circle">Circle</option><option value="square">Square</option><option value="triangle">Triangle</option><option value="triangle-down">Triangle-Down</option><option value="diamond">Diamond</option></select></div>
+                    <div class="specsLine"><div class="specsLabel">Symbol Size</div><input class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_markersize"></div>
+                    <div class="specsLine"><div class="specsLabel">Line Width</div><input class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.lineWidth"></div>
                 </div>
             </div>
         </div>
@@ -272,16 +275,15 @@
                 </div>
                 <div class="plot_errorblock"></div>
                 <div ng-show="data_datatab" class="plot_datasetdatasection" class="plot_subclass">
-                    <div class="plot_appbox"><div class="plot_appeartext">Name</div><input class="plot_seriesname" placeholder="New Series" ng-model="currentDataset.dataname" ng-enter="makeChart(currentPlot['itemid'])"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">X Data</div><input type="text" class="plot_xdatainput" ng-model="currentDataset.xdata_name" ng-enter="solvePlotData(currentPlot['itemid'], currentDataset['Format_id'], currentPlot['Plot'], 'plot_xdatainput')"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Y Data</div><input type="text" class="plot_ydatainput" ng-model="currentDataset.ydata_name" ng-enter="solvePlotData(currentPlot['itemid'], currentDataset['Format_id'], currentPlot['Plot'], 'plot_ydatainput')"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Z Data</div><input type="text" class="plot_zdatainput" ng-model="currentDataset.zdata_name" ng-enter="solvePlotData(currentPlot['itemid'], currentDataset['Format_id'], currentPlot['Plot'], 'plot_zdatainput')"></div>
-                    <div class="plot_errorblock"></div>
+                    <div class="specsLine"><div class="specsLabel">Name</div><input class="specsInput" placeholder="New Series" ng-model="currentDataset.dataname" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1"></div>
+                    <div class="specsLine"><div class="specsLabel">X Data</div><input type="text" class="specsInput" ng-model="currentDataset.xdata_name" ng-enter="solvePlotData(currentPlot['itemid'], currentDataset['Format_id'], currentPlot['Plot'], 'plot_xdatainput')"></div>
+                    <div class="specsLine"><div class="specsLabel">Y Data</div><input type="text" class="specsInput" ng-model="currentDataset.ydata_name" ng-enter="solvePlotData(currentPlot['itemid'], currentDataset['Format_id'], currentPlot['Plot'], 'plot_ydatainput')"></div>
+                    <div class="specsLine"><div class="specsLabel">Z Data</div><input type="text" class="specsInput" ng-model="currentDataset.zdata_name" ng-enter="solvePlotData(currentPlot['itemid'], currentDataset['Format_id'], currentPlot['Plot'], 'plot_zdatainput')"></div>
                 </div>
                 <div ng-show="data_apptab" class="plot_datasetappearancesection" class="plot_subclass">
-                    <div class="plot_appbox"><div class="plot_appeartext">Data Labels</div><input type="checkbox" class="plot_optionlabelsonoff" ng-click="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_datalabels"></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Label Color</div><div class="plot_optionbox"><input ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_labelColor" type="text" class="plot_labelcolor" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.data_labelColor"></div></div>
-                    <div class="plot_appbox"><div class="plot_appeartext">Fill Color</div><input type="text" class="plot_fillcolorpicker" ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentDataset.fillcolor"></div>
+                    <div class="specsLine"><div class="specsLabel">Data Labels</div><input type="checkbox" class="specsInput" ng-click="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_datalabels"></div>
+                    <div class="specsLine"><div class="specsLabel">Label Color</div><input ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_labelColor" type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.data_labelColor"></div>
+                    <div class="specsLine"><div class="specsLabel">Fill Color</div><input type="text" class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentDataset.fillcolor"></div>
                 </div>
             </div>
         </div>
@@ -291,6 +293,7 @@
 
 
 <div ng-show="plotSpecsXAxis" class="plot_optionblock" id="plot_xaxesblock">
+    <div class="specsTitle">Chart X Axes</div>
      <div id="plot_xaxisnames">
         <div id="plot_adddatawrapper"><div id="plot_addxaxis" ng-click="addPlotItem(currentPlot['itemid'], 'xaxis')">Add X Axis</div></div>
         <div ng-repeat="obj in currentPlot['Plot']['Chart_xaxesobj'] track by obj.Format_id">
@@ -308,33 +311,33 @@
                 <div toggle-active='' ng-click="xAxisSetup=false; xAxisApp=false; xAxisMarks=true" id="plot_xaxistickmarkstab" class="xplot_subtab">Ticks</div>
             </div>
             <div ng-show="xAxisSetup" id="plot_xaxissetupsection" class="plot_subclass">
-                <div class="plot_chartline"><div class="plot_chartlabel">Axis Label</div><div class="plot_charttextbox"><input ng-model="currentXAxis['Axis_label']" ng-enter="makeChart(currentPlot['itemid'])" id="plot_xaxislabel" value="Values"></div></div>
-                <div class="plot_chartline"><div class="plot_chartlabel">Minimum</div><div class="plot_charttextbox"><input ng-model="currentXAxis['Axis_min']" ng-enter="makeChart(currentPlot['itemid'])" id="plot_xaxismin" placeholder="Automatic"></div></div>
-                <div class="plot_chartline"><div class="plot_chartlabel">Maximum</div><div class="plot_charttextbox"><input ng-model="currentXAxis['Axis_max']" ng-enter="makeChart(currentPlot['itemid'])" id="plot_xaxismax" placeholder="Automatic"></div></div>
-                <div class="plot_chartline" ng-if="currentXAxis['Axis_type']=='linear'"><div class="plot_chartlabel">Axis Type</div><select ng-model="currentXAxis['Axis_type']" ng-change="makeChart(currentPlot['itemid'])" class="plot_xaxistypeselect"><option value="linear">Linear</option><option value="datetime">Date-Time</option><option value="logarithmic">Logarithmic</option></select></div>
-                <div class="plot_chartline" ng-if="currentXAxis['Axis_type']=='datetime'"><div class="plot_chartlabel">Axis Type</div><select ng-model="currentXAxis['Axis_type']" ng-change="makeChart(currentPlot['itemid'])" class="plot_xaxistypeselect"><option value="datetime">Date-Time</option><option value="logarithmic">Logarithmic</option><option value="linear">Linear</option></select></div>
-                <div class="plot_chartline" ng-if="currentXAxis['Axis_type']=='logarithmic'"><div class="plot_chartlabel">Axis Type</div><select ng-model="currentXAxis['Axis_type']" ng-change="makeChart(currentPlot['itemid'])" class="plot_xaxistypeselect"><option value="logarithmic">Logarithmic</option><option value="linear">Linear</option><option value="datetime">Date-Time</option></select></div>
-                <div class="plot_chartline"><div class="plot_chartlabel">Reverse Axis</div><select ng-model="currentXAxis['Axis_reversed']" ng-change="makeChart(currentPlot['itemid'])" class="plot_xaxisreverse" id="plot_xaxisreverse"><option value="false">False</option><option value="true">True</option></select></div>
+                <div class="specsLine"><div class="specsLabel">Axis Label</div><input ng-model="currentXAxis['Axis_label']" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" class="specsInput" value="Values"></div>
+                <div class="specsLine"><div class="specsLabel">Minimum</div><input ng-model="currentXAxis['Axis_min']" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" class="specsInput" placeholder="Automatic"></div>
+                <div class="specsLine"><div class="specsLabel">Maximum</div><input ng-model="currentXAxis['Axis_max']" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" class="specsInput" placeholder="Automatic"></div>
+                <div class="specsLine" ng-if="currentXAxis['Axis_type']=='linear'"><div class="specsLabel">Axis Type</div><select ng-model="currentXAxis['Axis_type']" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" class="specsInput"><option value="linear">Linear</option><option value="datetime">Date-Time</option><option value="logarithmic">Logarithmic</option></select></div>
+                <div class="specsLine" ng-if="currentXAxis['Axis_type']=='datetime'"><div class="specsLabel">Axis Type</div><select ng-model="currentXAxis['Axis_type']" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" class="specsInput"><option value="datetime">Date-Time</option><option value="logarithmic">Logarithmic</option><option value="linear">Linear</option></select></div>
+                <div class="specsLine" ng-if="currentXAxis['Axis_type']=='logarithmic'"><div class="specsLabel">Axis Type</div><select ng-model="currentXAxis['Axis_type']" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" class="specsInput"><option value="logarithmic">Logarithmic</option><option value="linear">Linear</option><option value="datetime">Date-Time</option></select></div>
+                <div class="specsLine"><div class="specsLabel">Reverse Axis</div><select ng-model="currentXAxis['Axis_reversed']" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" class="specsInput" ><option value="false">False</option><option value="true">True</option></select></div>
             </div>
             <div ng-show="xAxisApp" id="plot_xaxisappearancesection" class="plot_subclass">
-                <div class="plot_chartline"><div class="plot_chartlabel">Axis Line Width</div><div class="plot_charttextbox"><input ng-model="currentXAxis['Axis_lineWidth']" ng-enter="makeChart(currentPlot['itemid'])" id="plot_xaxiswidth" value="0px"></div></div>
-                <div class="plot_chartline"><div class="plot_chartlabel">Axis Line Color</div><div class="plot_axiscolorbox"><input ng-model="currentXAxis['Axis_linecolor']" ng-enter="makeChart(currentPlot['itemid'])" type="text" id="plot_xaxiscolorpicker"></div></div>
+                <div class="specsLine"><div class="specsLabel">Axis Line Width</div><input class="specsInput" ng-model="currentXAxis['Axis_lineWidth']" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" value="0px"></div>
+                <div class="specsLine"><div class="specsLabel">Axis Line Color</div><input class="specsInput" ng-model="currentXAxis['Axis_linecolor']" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" type="text"></div>
             </div>
             <div ng-show="xAxisMarks" id="plot_xaxistickmarkssection" class="plot_subclass">
-                <div class="plot_chartline"><div class="plot_chartlabel">Major Tick Interval</div><div class="plot_charttextbox"><input ng-model="currentXAxis['Axis_tickinterval']" ng-enter="makeChart(currentPlot['itemid'])" id="plot_xaxistickinterval" placeholder="Automatic"></div></div>
-                <div class="plot_chartline"><div class="plot_chartlabel">Grid Line Width</div><div class="plot_charttextbox"><input ng-model="currentXAxis['Axis_gridlinewidth']" ng-enter="makeChart(currentPlot['itemid'])" id="plot_xgridlinewidth" value=""></div></div>
-                <div class="plot_chartline"><div class="plot_chartlabel">Grid Line Color</div>
-                    <div class="plot_optionbox" ng-if="currentXAxis['Axis_gridlinesonoff']===true||currentXAxis['Axis_gridlinesonoff']=='true'"><input ng-model="currentXAxis['Axis_gridlinesonoff']" ng-change="makeChart(currentPlot['itemid'])" type="checkbox" id="plot_xgridsonoff"></div>
-                    <div class="plot_optionbox" ng-if="currentXAxis['Axis_gridlinesonoff']===false||currentXAxis['Axis_gridlinesonoff']=='false'"><input ng-model="currentXAxis['Axis_gridlinesonoff']" ng-change="makeChart(currentPlot['itemid'])" id="plot_xgridsonoff"></div>
-                    <div class="plot_colorbox"><input ng-model="currentXAxis['Axis_linecolor']" ng-enter="makeChart(currentPlot['itemid'])" type="text" id="plot_xmajortickpicker"></div>
+                <div class="specsLine"><div class="specsLabel">Major Tick Interval</div><input class="specsInput" ng-model="currentXAxis['Axis_tickinterval']" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" placeholder="Automatic"></div>
+                <div class="specsLine"><div class="specsLabel">Grid Line Width</div><input class="specsInput" ng-model="currentXAxis['Axis_gridlinewidth']" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" value=""></div>
+                <div class="specsLine"><div class="specsLabelShort">Grid Line Color</div>
+                    <input class="specsInputShort" ng-if="currentXAxis['Axis_gridlinesonoff']==='true'||currentXAxis['Axis_gridlinesonoff']=='true'" ng-model="currentXAxis['Axis_gridlinesonoff']" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" type="checkbox" checked="checked">
+                    <input class="specsInputShort" ng-if="currentXAxis['Axis_gridlinesonoff']!=='true'||currentXAxis['Axis_gridlinesonoff']=='false'" ng-model="currentXAxis['Axis_gridlinesonoff']" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" type="checkbox">
+                    <input class="specsInput" ng-model="currentXAxis['Axis_linecolor']" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" type="text">
                 </div>
-                <div class="plot_chartline"><div class="plot_chartlabel">Minor Tick Interval</div><div class="plot_charttextbox"><input ng-model="currentXAxis['Axis_minortickinterval']" ng-enter="makeChart(currentPlot['itemid'])" id="plot_xaxisminortickinterval" placeholder="Automatic"></div></div>
-                <div class="plot_chartline"><div class="plot_chartlabel">Minor Line Width</div><div class="plot_charttextbox"><input ng-model="currentXAxis['Axis_minorgridlinewidth']" ng-enter="makeChart(currentPlot['itemid'])" id="plot_xminorgridlinewidth" ></div></div>
-                <div class="plot_chartline">
-                    <div class="plot_chartlabel">Minor Grid Line</div>
-                    <div class="plot_optionbox" ng-if="currentXAxis['Axis_minorgridlinesonoff']=='true'||currentXAxis['Axis_minorgridlinesonoff']===true"><input ng-model="currentXAxis['Axis_minorgridlinesonoff']" ng-change="makeChart(currentPlot['itemid'])" type="checkbox" checked="checked" id="plot_xminorgridsonoff"></div>
-                    <div class="plot_optionbox" ng-if="currentXAxis['Axis_minorgridlinesonoff']=='false'||currentXAxis['Axis_minorgridlinesonoff']===false"><input ng-model="currentXAxis['Axis_minorgridlinesonoff']" ng-change="makeChart(currentPlot['itemid'])" type="checkbox" id="plot_xminorgridsonoff"></div>
-                    <div class="plot_colorbox"><input ng-model="currentXAxis['Axis_minorgridcolor']" ng-enter="makeChart(currentPlot['itemid'])" type="text" id="plot_xminortickpicker"></div>
+                <div class="specsLine"><div class="specsLabel">Minor Tick Interval</div><input class="specsInput" ng-model="currentXAxis['Axis_minortickinterval']" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" placeholder="Automatic"></div>
+                <div class="specsLine"><div class="specsLabel">Minor Line Width</div><input class="specsInput" ng-model="currentXAxis['Axis_minorgridlinewidth']" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1"></div>
+                <div class="specsLine">
+                    <div class="specsLabelShort">Minor Grid Line</div>
+                    <input class="specsInputShort" ng-if="currentXAxis['Axis_minorgridlinesonoff']=='true'||currentXAxis['Axis_minorgridlinesonoff']===true" ng-model="currentXAxis['Axis_minorgridlinesonoff']" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" type="checkbox" checked="checked">
+                    <input class="specsInputShort" ng-if="currentXAxis['Axis_minorgridlinesonoff']!=='true'||currentXAxis['Axis_minorgridlinesonoff']!==true" ng-model="currentXAxis['Axis_minorgridlinesonoff']" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" type="checkbox">
+                    <input class="specsInput" ng-model="currentXAxis['Axis_minorgridcolor']" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" type="text">
                 </div>
             </div>
         </div>
@@ -342,6 +345,7 @@
 </div>
 
 <div ng-show="plotSpecsYAxis" class="plot_optionblock" id="plot_yaxesblock">
+    <div class="specsTitle">Chart X Axes</div>
     <div id="plot_yaxisnames">
         <div id="plot_adddatawrapper"><div id="plot_addyaxis" ng-click="addPlotItem(currentPlot['itemid'], 'yaxis')">Add Y Axis</div></div>
         <div ng-repeat="obj in currentPlot['Plot']['Chart_yaxesobj'] track by obj.Format_id">
@@ -359,35 +363,35 @@
                 <div toggle-active='' ng-click="yAxisSetup=false; yAxisApp=false; yAxisMarks=true" id="plot_yaxistickmarkstab" class="yplot_subtab">Ticks</div>
             </div>
             <div ng-show="yAxisSetup" id="plot_yaxissetupsection" class="plot_subclass">
-                <div class="plot_chartline"><div class="plot_chartlabel">Axis Label</div><div class="plot_charttextbox"><input ng-model="currentAxis['Axis_label']" id="plot_yaxislabel" value="Values" ng-enter="makeChart(currentPlot['itemid'], 0)"></div></div>
-                <div class="plot_chartline"><div class="plot_chartlabel">Minimum</div><div class="plot_charttextbox"><input ng-model="currentAxis['Axis_min']" id="plot_yaxismin" placeholder="Automatic" ng-enter="makeChart(currentPlot['itemid'], 0)"></div></div>
-                <div class="plot_chartline"><div class="plot_chartlabel">Maximum</div><div class="plot_charttextbox"><input ng-model="currentAxis['Axis_max']" id="plot_yaxismax" placeholder="Automatic" ng-enter="makeChart(currentPlot['itemid'], 0)"></div></div>
-                <div class="plot_chartline" ng-if="currentAxis['Axis_type']=='linear'"><div class="plot_chartlabel">Axis Type</div><select ng-change="makeChart(currentPlot['itemid'])" ng-model="currentAxis['Axis_type']" class="plot_axistypeselect"><option value="linear">Linear</option><option value="datetime">Date-Time</option><option value="logarithmic">Logarithmic</option></select></div>
-                <div class="plot_chartline" ng-if="currentAxis['Axis_type']=='datetime'"><div class="plot_chartlabel">Axis Type</div><select ng-change="makeChart(currentPlot['itemid'])" ng-model="currentAxis['Axis_type']" class="plot_axistypeselect"><option value="datetime">Date-Time</option><option value="logarithmic">Logarithmic</option><option value="linear">Linear</option></select></div>
-                <div class="plot_chartline" ng-if="currentAxis['Axis_type']=='logarithmic'"><div class="plot_chartlabel">Axis Type</div><select ng-change="makeChart(currentPlot['itemid'])" ng-model="currentAxis['Axis_type']" class="plot_axistypeselect"><option value="logarithmic">Logarithmic</option><option value="linear">Linear</option><option value="datetime">Date-Time</option></select></div>
-                <div class="plot_chartline" ng-if="currentAxis['Axis_reversed']=='false'"><div class="plot_chartlabel">Reverse Axis</div><select ng-change="makeChart(currentPlot['itemid'])" ng-model="currentAxis['Axis_reversed']" class="plot_yaxisreverse" id="plot_yaxisreverse"><option value="false">False</option><option value="true">True</option></select></div>
-                <div class="plot_chartline" ng-if="currentAxis['Axis_reversed']=='true'"><div class="plot_chartlabel">Reverse Axis</div><select ng-change="makeChart(currentPlot['itemid'])" ng-model="currentAxis['Axis_reversed']" class="plot_yaxisreverse" id="plot_yaxisreverse"><option value="true">True</option><option value="false">False</option></select></div>
+                <div class="specsLine"><div class="specsLabel">Axis Label</div><input class="specsInput" ng-model="currentAxis['Axis_label']" value="Values" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1"></div>
+                <div class="specsLine"><div class="specsLabel">Minimum</div><input class="specsInput" ng-model="currentAxis['Axis_min']" placeholder="Automatic" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1"></div>
+                <div class="specsLine"><div class="specsLabel">Maximum</div><input class="specsInput" ng-model="currentAxis['Axis_max']" placeholder="Automatic" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1"></div>
+                <div class="specsLine" ng-if="currentAxis['Axis_type']=='linear'"><div class="specsLabel">Axis Type</div><select class="specsInput" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentAxis['Axis_type']"><option value="linear">Linear</option><option value="datetime">Date-Time</option><option value="logarithmic">Logarithmic</option></select></div>
+                <div class="specsLine" ng-if="currentAxis['Axis_type']=='datetime'"><div class="specsLabel">Axis Type</div><select class="specsInput" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentAxis['Axis_type']"><option value="datetime">Date-Time</option><option value="logarithmic">Logarithmic</option><option value="linear">Linear</option></select></div>
+                <div class="specsLine" ng-if="currentAxis['Axis_type']=='logarithmic'"><div class="specsLabel">Axis Type</div><select class="specsInput" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentAxis['Axis_type']"><option value="logarithmic">Logarithmic</option><option value="linear">Linear</option><option value="datetime">Date-Time</option></select></div>
+                <div class="specsLine" ng-if="currentAxis['Axis_reversed']=='false'"><div class="specsLabel">Reverse Axis</div><select class="specsInput" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentAxis['Axis_reversed']"><option value="false">False</option><option value="true">True</option></select></div>
+                <div class="specsLine" ng-if="currentAxis['Axis_reversed']=='true'"><div class="specsLabel">Reverse Axis</div><select class="specsInput" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentAxis['Axis_reversed']"><option value="true">True</option><option value="false">False</option></select></div>
             </div>
             <div ng-show="yAxisApp" id="plot_yaxisappearancesection" class="plot_subclass">
-                <div class="plot_chartline"><div class="plot_chartlabel">Axis Opposite</div><select ng-change="makeChart(currentPlot['itemid'])" ng-model="currentAxis['Axis_opposite']" class="plot_yaxisreverse" id="plot_yaxisopposite"><option value="false">False</option><option value="true">True</option></select></div>
-                <div class="plot_chartline"><div class="plot_chartlabel">Axis Offset</div><div class="plot_charttextbox"><input ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentAxis['Axis_offset']" id="plot_axisoffset" value="0px"></div></div>
-                <div class="plot_chartline"><div class="plot_chartlabel">Axis Line Width</div><div class="plot_charttextbox"><input ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentAxis['Axis_lineWidth']" id="plot_yaxiswidth" value="0px"></div></div>
-                <div class="plot_chartline"><div class="plot_chartlabel">Axis Line Color</div><div class="plot_axiscolorbox plot_charttextbox"><input ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentAxis['Axis_linecolor']" type="text" id="plot_yaxiscolorpicker"></div></div>
+                <div class="specsLine"><div class="specsLabel">Axis Opposite</div><select class="specsInput" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentAxis['Axis_opposite']"><option value="false">False</option><option value="true">True</option></select></div>
+                <div class="specsLine"><div class="specsLabel">Axis Offset</div><input class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentAxis['Axis_offset']" value="0px"></div>
+                <div class="specsLine"><div class="specsLabel">Axis Line Width</div><input class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentAxis['Axis_lineWidth']" value="0px"></div>
+                <div class="specsLine"><div class="specsLabel">Axis Line Color</div><input class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentAxis['Axis_linecolor']" type="text" ></div>
             </div>
             <div ng-show="yAxisMarks" id="plot_yaxistickmarkssection" class="plot_subclass">
-                <div class="plot_chartline"><div class="plot_chartlabel">Major Tick Interval</div><div class="plot_charttextbox"><input ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentAxis['Axis_tickinterval']" id="plot_yaxistickinterval" placeholder="Automatic"></div></div>
-                <div class="plot_chartline"><div class="plot_chartlabel">Grid Line Width</div><div class="plot_charttextbox"><input ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentAxis['Axis_gridlinewidth']" id="plot_ygridlinewidth" value=""></div></div>
-                <div class="plot_chartline"><div class="plot_chartlabel">Grid Line Color</div>
-                    <div class="plot_optionbox" ng-if="currentAxis['Axis_gridlinesonoff']=='true'||currentAxis['Axis_gridlinesonoff']===true"><input ng-change="makeChart(currentPlot['itemid'])" ng-model="currentAxis['Axis_gridlinesonoff']" type="checkbox" id="plot_ygridsonoff" checked="checked"></div>
-                    <div class="plot_optionbox" ng-if="currentAxis['Axis_gridlinesonoff']=='false'||currentAxis['Axis_gridlinesonoff']===false"><input ng-change="makeChart(currentPlot['itemid'])" ng-model="currentAxis['Axis_gridlinesonoff']" type="checkbox" id="plot_ygridsonoff"></div>
-                    <div class="plot_colorbox plot_charttextbox"><input ng-model="currentAxis['Axis_gridcolor']" ng-enter="makeChart(currentPlot['itemid'])" type="text" id="plot_ymajortickpicker"></div>
+                <div class="specsLine"><div class="specsLabel">Major Tick Interval</div><input class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentAxis['Axis_tickinterval']" placeholder="Automatic"></div>
+                <div class="specsLine"><div class="specsLabel">Grid Line Width</div><input class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentAxis['Axis_gridlinewidth']" value=""></div>
+                <div class="specsLine"><div class="specsLabelShort">Grid Line Color</div>
+                    <input class="specsInputShort" ng-if="currentAxis['Axis_gridlinesonoff']=='true'||currentAxis['Axis_gridlinesonoff']===true" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentAxis['Axis_gridlinesonoff']" type="checkbox" checked="checked">
+                    <input class="specsInputShort" ng-if="currentAxis['Axis_gridlinesonoff']=='false'||currentAxis['Axis_gridlinesonoff']===false" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentAxis['Axis_gridlinesonoff']" type="checkbox">
+                    <input class="specsInput" ng-model="currentAxis['Axis_gridcolor']" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" type="text">
                 </div>
-                <div class="plot_chartline"><div class="plot_chartlabel">Minor Tick Interval</div><div class="plot_charttextbox"><input ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentAxis['Axis_minortickinterval']" id="plot_yaxisminortickinterval" placeholder="Automatic"></div></div>
-                <div class="plot_chartline"><div class="plot_chartlabel">Minor Line Width</div><div class="plot_charttextbox"><input ng-enter="makeChart(currentPlot['itemid'])" ng-model="currentAxis['Axis_minorgridlinewidth']" id="plot_yminorgridlinewidth" value=""></div></div>
-                <div class="plot_chartline"><div class="plot_chartlabel">Minor Grid Line</div>
-                    <div class="plot_optionbox" ng-if="currentAxis['Axis_minorgridlinesonoff']=='true'||currentAxis['Axis_minorgridlinesonoff']===true"><input ng-change="makeChart(currentPlot['itemid'])" ng-model="currentAxis['Axis_minorgridlinesonoff']" type="checkbox" checked="checked" id="plot_yminorgridsonoff"></div>
-                    <div class="plot_optionbox" ng-if="currentAxis['Axis_minorgridlinesonoff']=='false'||currentAxis['Axis_minorgridlinesonoff']===false"><input ng-change="makeChart(currentPlot['itemid'])" ng-model="currentAxis['Axis_minorgridlinesonoff']" type="checkbox" id="plot_yminorgridsonoff"></div>
-                    <div class="plot_colorbox plot_charttextbox"><input ng-model="currentAxis['Axis_minorgridcolor']" ng-enter="makeChart(currentPlot['itemid'])" type="text" id="plot_yminortickpicker"></div>
+                <div class="specsLine"><div class="specsLabel">Minor Tick Interval</div><input class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentAxis['Axis_minortickinterval']" placeholder="Automatic"></div>
+                <div class="specsLine"><div class="specsLabel">Minor Line Width</div><input class="specsInput" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentAxis['Axis_minorgridlinewidth']" value=""></div>
+                <div class="specsLine"><div class="specsLabelShort">Minor Grid Line</div>
+                    <input class="specsInputShort" ng-if="currentAxis['Axis_minorgridlinesonoff']=='true'||currentAxis['Axis_minorgridlinesonoff']===true" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentAxis['Axis_minorgridlinesonoff']" type="checkbox" checked="checked">
+                    <input class="specsInputShort" ng-if="currentAxis['Axis_minorgridlinesonoff']=='false'||currentAxis['Axis_minorgridlinesonoff']===false" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentAxis['Axis_minorgridlinesonoff']" type="checkbox">
+                    <input class="specsInput" ng-model="currentAxis['Axis_minorgridcolor']" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" type="text">
                 </div>
             </div>
         </div>
@@ -398,65 +402,67 @@
 <div ng-show="plotSpecsFormat" class="plot_optionblock" id="plot_formatblock">
     <div id="plot_optionsright">
         <div  class="plot_datablock" id="plot_formatdata" >
+            <div class="specsTitle">Chart Format</div>
             <div class="plot_subtabline">
                 <div toggle-active='dataplot_subtab_active' ng-click="formatShowTitle=true; formatShowFormat=false; formatShowLegend=false" id="plot_formatTitle" class="xplot_subtab dataplot_subtab_active">Title</div>
                 <div toggle-active='' ng-click="formatShowTitle=false; formatShowFormat=true; formatShowLegend=false" id="plot_formatFormat" class="xplot_subtab">Format</div>
                 <div toggle-active='' ng-click="formatShowTitle=false; formatShowFormat=false; formatShowLegend=true" id="plot_formatLegend" class="xplot_subtab">Legend</div>
             </div>
             <div ng-show="formatShowTitle" id="plot_titleSection" class="plot_subclass">
-                <div class="plot_chartline">
-                    <div class="plot_chartlabel">Title</div>
-                    <input ng-if="currentPlot['Plot']['Title_onoff']===true" ng-model="currentPlot['Plot']['Title_onoff']" ng-change="makeChart(currentPlot['itemid'])" type="checkbox" id="titlecheck" class="nopadcheck" checked="checked">
-                    <input ng-if="currentPlot['Plot']['Title_onoff']!==true" ng-model="currentPlot['Plot']['Title_onoff']" ng-change="makeChart(currentPlot['itemid'])" type="checkbox" id="titlecheck" class="nopadcheck">
-                    <div class="plot_charttextbox"><input ng-model="currentPlot['Plot']['Title_text']" ng-enter="makeChart(currentPlot['itemid'])" id="plot_title" class="plot_chartoption" placeholder="Chart Title"></div>
+                <div class="specsLine">
+                    <div class="specsLabelShort">Title</div>
+                    <input ng-if="currentPlot['Plot']['Title_onoff']===true" ng-model="currentPlot['Plot']['Title_onoff']" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" type="checkbox" class="specsInputShort" checked="checked">
+                    <input ng-if="currentPlot['Plot']['Title_onoff']!==true" ng-model="currentPlot['Plot']['Title_onoff']" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" type="checkbox" class="specsInputShort">
+                    <input ng-model="currentPlot['Plot']['Title_text']" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" class="specsInput" placeholder="Chart Title">
                 </div>
-                <div class="plot_chartline">
-                    <div class="plot_chartlabel">Subtitle</div>
-                    <input ng-if="currentPlot['Plot']['Subtitle_onoff']===true" ng-model="currentPlot['Plot']['Subtitle_onoff']" ng-change="makeChart(currentPlot['itemid'])" type="checkbox" id="subtitlecheck" class="nopadcheck" checked="checked">
-                    <input ng-if="currentPlot['Plot']['Subtitle_onoff']===false" ng-model="currentPlot['Plot']['Subtitle_onoff']" ng-change="makeChart(currentPlot['itemid'])" type="checkbox" id="subtitlecheck" class="nopadcheck">
-                    <div class="plot_charttextbox"><input ng-model="currentPlot['Subtitle_text']" ng-enter="makeChart(currentPlot['itemid'])" id="plot_subtitle" class="plot_chartoption" placeholder="Chart Subtitle"></div>
+                <div class="specsLine">
+                    <div class="specsLabelShort">Subtitle</div>
+                    <input ng-if="currentPlot['Plot']['Subtitle_onoff']===true" ng-model="currentPlot['Plot']['Subtitle_onoff']" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" type="checkbox" class="specsInputShort" checked="checked">
+                    <input ng-if="currentPlot['Plot']['Subtitle_onoff']!==true" ng-model="currentPlot['Plot']['Subtitle_onoff']" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" type="checkbox" class="specsInputShort">
+                    <input ng-model="currentPlot['Plot']['Subtitle_text']" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" id="plot_subtitle" class="specsInput" placeholder="Chart Subtitle">
                 </div>
             </div>
             <div ng-show="formatShowFormat" id="plot_formatSection" class="plot_subclass">
-                <div class="plot_chartline"><div class="plot_chartformatlabel">Width</div><div class="plot_charttextbox"><input ng-model="currentPlot['Plot']['Chart_width']" ng-enter="makeChart(currentPlot['itemid'])" id="plot_width" class="plot_chartoption"></div></div>
-                <div class="plot_chartline"><div class="plot_chartformatlabel">Height</div><div class="plot_charttextbox"><input ng-model="currentPlot['Plot']['Chart_height']" ng-enter="makeChart(currentPlot['itemid'])" id="plot_height" class="plot_chartoption"></div></div>
-                <div class="plot_chartline"><div class="plot_chartformatlabel">Margin Left</div><div class="plot_charttextbox"><input ng-model="currentPlot['Plot']['Chart_marginleft']" ng-enter="makeChart(currentPlot['itemid'])" id="plot_marginleft" class="plot_chartoption"></div></div>
-                <div class="plot_chartline"><div class="plot_chartformatlabel">Margin Right</div><div class="plot_charttextbox"><input ng-model="currentPlot['Plot']['Chart_marginright']" ng-enter="makeChart(currentPlot['itemid'])" id="plot_marginright" class="plot_chartoption"></div></div>
-                <div class="plot_chartline"><div class="plot_chartformatlabel">Margin Top</div><div class="plot_charttextbox"><input ng-model="currentPlot['Plot']['Chart_margintop']" ng-enter="makeChart(currentPlot['itemid'])" id="plot_margintop" class="plot_chartoption"></div></div>
-                <div class="plot_chartline"><div class="plot_chartformatlabel">Margin Bottom</div><div class="plot_charttextbox"><input ng-model="currentPlot['Plot']['Chart_marginbottom']" ng-enter="makeChart(currentPlot['itemid'])" id="plot_marginbottom" class="plot_chartoption"></div></div>
+                <div class="specsLine"><div class="specsLabel">Width</div><input ng-model="currentPlot['Plot']['Chart_width']" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" class="specsInput"></div>
+                <div class="specsLine"><div class="specsLabel">Height</div><input ng-model="currentPlot['Plot']['Chart_height']" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" class="specsInput"></div>
+                <div class="specsLine"><div class="specsLabel">Margin Left</div><input ng-model="currentPlot['Plot']['Chart_marginleft']" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" class="specsInput"></div>
+                <div class="specsLine"><div class="specsLabel">Margin Right</div><input ng-model="currentPlot['Plot']['Chart_marginright']" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" class="specsInput"></div>
+                <div class="specsLine"><div class="specsLabel">Margin Top</div><input ng-model="currentPlot['Plot']['Chart_margintop']" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" class="specsInput"></div>
+                <div class="specsLine"><div class="specsLabel">Margin Bottom</div><input ng-model="currentPlot['Plot']['Chart_marginbottom']" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" class="specsInput"></div>
             </div>
             <div ng-show="formatShowLegend" id="plot_legendSection" class="plot_subclass">
-                <div class="plot_chartline" ng-if="currentPlot['Plot']['Legend_onoff']===true"><div class="plot_legendtextwide">Legend Show/Hide</div><input ng-model="currentPlot['Plot']['Legend_onoff']" ng-change="makeChart(currentPlot['itemid'])" type="checkbox" id="plot_legendonoff" class="nopadcheck" checked="checked"></div>
-                <div class="plot_chartline" ng-if="currentPlot['Plot']['Legend_onoff']===false"><div class="plot_legendtextwide">Legend Show/Hide</div><input ng-model="currentPlot['Plot']['Legend_onoff']" ng-change="makeChart(currentPlot['itemid'])" type="checkbox" id="plot_legendonoff" class="nopadcheck"></div>
-                <div class="plot_chartline"><div class="plot_legendtext">Layout</div>
-                    <select ng-if="currentPlot['Plot']['Legend_layout']=='horizontal'" ng-model="currentPlot['Plot']['Legend_layout']" id="plot_legendlayout" class="plot_legendselect"><option value="horizontal">Horizontal</option><option value="vertical">Vertical</option></select>								
-                    <select ng-if="currentPlot['Plot']['Legend_layout']=='vertical'" ng-model="currentPlot['Plot']['Legend_layout']" id="plot_legendlayout" class="plot_legendselect"><option value="vertical">Vertical</option><option value="horizontal">Horizontal</option></select>								
+                <div class="specsLine" ng-if="currentPlot['Plot']['Legend_onoff']===true"><div class="specsLabel">Legend Show/Hide</div><input ng-model="currentPlot['Plot']['Legend_onoff']" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" type="checkbox" class="specsInput" checked="checked"></div>
+                <div class="specsLine" ng-if="currentPlot['Plot']['Legend_onoff']===false"><div class="specsLabel">Legend Show/Hide</div><input ng-model="currentPlot['Plot']['Legend_onoff']" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" type="checkbox" class="specsInput"></div>
+                <div class="specsLine"><div class="specsLabel">Layout</div>
+                    <select ng-if="currentPlot['Plot']['Legend_layout']=='horizontal'" ng-model="currentPlot['Plot']['Legend_layout']" class="specsInput"><option value="horizontal">Horizontal</option><option value="vertical">Vertical</option></select>								
+                    <select ng-if="currentPlot['Plot']['Legend_layout']=='vertical'" ng-model="currentPlot['Plot']['Legend_layout']" class="specsInput"><option value="vertical">Vertical</option><option value="horizontal">Horizontal</option></select>								
                 </div>
-                <div class="plot_chartline"><div class="plot_legendtext">Alignment</div>
-                    <select ng-model="currentPlot['Plot']['Legend_align']" ng-change="makeChart(currentPlot['itemid'])" id="plot_legendalignment" class="plot_legendselect" ng-if="currentPlot['Plot']['Legend_align']=='left'"><option value="left">Left</option><option value="right">Right</option><option value="center">Center</option></select>
-                    <select ng-model="currentPlot['Plot']['Legend_align']" ng-change="makeChart(currentPlot['itemid'])" id="plot_legendalignment" class="plot_legendselect" ng-if="currentPlot['Plot']['Legend_align']=='right'"><option value="right">Right</option><option value="center">Center</option><option value="left">Left</option></select>
-                    <select ng-model="currentPlot['Plot']['Legend_align']" ng-change="makeChart(currentPlot['itemid'])" id="plot_legendalignment" class="plot_legendselect" ng-if="currentPlot['Plot']['Legend_align']=='center'"><option value="center">Center</option><option value="left">Left</option><option value="right">Right</option></select>
+                <div class="specsLine"><div class="specsLabel">Alignment</div>
+                    <select ng-model="currentPlot['Plot']['Legend_align']" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" class="specsInput" ng-if="currentPlot['Plot']['Legend_align']=='left'"><option value="left">Left</option><option value="right">Right</option><option value="center">Center</option></select>
+                    <select ng-model="currentPlot['Plot']['Legend_align']" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" class="specsInput" ng-if="currentPlot['Plot']['Legend_align']=='right'"><option value="right">Right</option><option value="center">Center</option><option value="left">Left</option></select>
+                    <select ng-model="currentPlot['Plot']['Legend_align']" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" class="specsInput" ng-if="currentPlot['Plot']['Legend_align']=='center'"><option value="center">Center</option><option value="left">Left</option><option value="right">Right</option></select>
                 </div>
-                <div class="plot_chartline"><div class="plot_legendtext">Vert Alignment</div>
-                    <select ng-model="currentPlot['Plot']['Legend_verticalalign']" ng-if="currentPlot['Plot']['Legend_verticalalign']=='top'" ng-change="makeChart(currentPlot['itemid'])" id="plot_legendverticalalignment" class="plot_legendselect"><option value="top">Top</option><option value="middle">Center</option><option value="bottom">Bottom</option></select>			
-                    <select ng-model="currentPlot['Plot']['Legend_verticalalign']" ng-if="currentPlot['Plot']['Legend_verticalalign']=='middle'" ng-change="makeChart(currentPlot['itemid'])" id="plot_legendverticalalignment" class="plot_legendselect"><option value="middle">Center</option><option value="bottom">Bottom</option><option value="top">Top</option></select>			
-                    <select ng-model="currentPlot['Plot']['Legend_verticalalign']" ng-if="currentPlot['Plot']['Legend_verticalalign']=='bottom'" ng-change="makeChart(currentPlot['itemid'])" id="plot_legendverticalalignment" class="plot_legendselect"><option value="bottom">Bottom</option><option value="top">Top</option><option value="middle">Center</option></select>			
+                <div class="specsLine"><div class="specsLabel">Vert Alignment</div>
+                    <select ng-model="currentPlot['Plot']['Legend_verticalalign']" ng-if="currentPlot['Plot']['Legend_verticalalign']=='top'" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" class="specsInput"><option value="top">Top</option><option value="middle">Center</option><option value="bottom">Bottom</option></select>			
+                    <select ng-model="currentPlot['Plot']['Legend_verticalalign']" ng-if="currentPlot['Plot']['Legend_verticalalign']=='middle'" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" class="specsInput"><option value="middle">Center</option><option value="bottom">Bottom</option><option value="top">Top</option></select>			
+                    <select ng-model="currentPlot['Plot']['Legend_verticalalign']" ng-if="currentPlot['Plot']['Legend_verticalalign']=='bottom'" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" class="specsInput"><option value="bottom">Bottom</option><option value="top">Top</option><option value="middle">Center</option></select>			
                 </div>
-                <div class="plot_chartline"><div class="plot_legendtext">X Offset</div>
-                    <input ng-model="currentPlot['Plot']['Legend_xoffset']" ng-enter="makeChart(currentPlot['itemid'])" id="plot_legendxoffset" class="plot_legendinput">
+                <div class="specsLine"><div class="specsLabel">X Offset</div>
+                    <input ng-model="currentPlot['Plot']['Legend_xoffset']" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" class="specsInput">
                 </div>
-                <div class="plot_chartline"><div class="plot_legendtext">Y Offset</div>
-                    <input ng-model="currentPlot['Plot']['Legend_yoffset']" ng-enter="makeChart(currentPlot['itemid'])" id="plot_legendyoffset" class="plot_legendinput">
+                <div class="specsLine"><div class="specsLabel">Y Offset</div>
+                    <input ng-model="currentPlot['Plot']['Legend_yoffset']" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" class="specsInput">
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+
 <div ng-show="plotSpecsText" class="plot_optionblock" id="plot_textblock">
     <div class="top_third" id="plot_plottextsection">
         <div class="plot_suboptions" id="plot_chartoptiontextsection" >
-        <div class="plot_chartoptionstitle">Text on Plot</div>
+        <div class="specsTitle">Text on Plot</div>
             <div id="plot_addlinewrapper"><div id="plot_addplottext" ng-click="addPlotItem(currentPlot['itemid'], 'text')">Add Text</div></div>
             <div id="plot_textnames">	
                 <div ng-repeat="obj in currentPlot['Plot']['Chart_textobj']">
@@ -467,21 +473,23 @@
                 </div>
             </div>
             <div id="plot_textoptions">	
-                <div class="plot_textline"><div class="plot_texttext">Text</div><input ng-model="currentText.textRawText" ng-enter="formatPlotText(currentPlot['itemid'], currentText['Format_id']); makeChart(currentPlot['itemid'])" id="plot_textText" class="plot_texttextbox" value=""></div>
-                <div class="plot_textline"><div class="plot_texttext">X Loc</div><input ng-model="currentText.textXLoc" ng-enter="makeChart(currentPlot['itemid'])" id="plot_textXLoc" class="plot_texttextbox" value=""></div>
-                <div class="plot_textline"><div class="plot_texttext">Y Loc</div><input ng-model="currentText.textYLoc" ng-enter="makeChart(currentPlot['itemid'])" id="plot_textYLoc" class="plot_texttextbox" value=""></div>
-                <div class="plot_textline"><div class="plot_texttext">Color</div><input ng-model="currentText.textColor" ng-enter="makeChart(currentPlot['itemid'])" id="plot_textColor" class="plot_texttextbox" value=""></div>
-                <div class="plot_textline"><div class="plot_texttext">Angle</div><input ng-model="currentText.textRotAng" ng-enter="makeChart(currentPlot['itemid'])" id="plot_textRotAng" class="plot_texttextbox" value=""></div>
-                <div class="plot_textline"><div class="plot_texttext">Size</div><input ng-model="currentText.textSize" ng-enter="makeChart(currentPlot['itemid'])" id="plot_textSize" class="plot_texttextbox" value=""></div>
+                <div class="specsLine"><div class="specsLabel">Text</div><input ng-model="currentText.textRawText" ng-enter="formatPlotText(currentPlot['itemid'], currentText['Format_id']); currentPlot['Plot']['needsUpdateFlag']=1" class="specsInput" value=""></div>
+                <div class="specsLine"><div class="specsLabel">X Loc</div><input ng-model="currentText.textXLoc" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" class="specsInput" value=""></div>
+                <div class="specsLine"><div class="specsLabel">Y Loc</div><input ng-model="currentText.textYLoc" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" class="specsInput" value=""></div>
+                <div class="specsLine"><div class="specsLabel">Color</div><input ng-model="currentText.textColor" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" class="specsInput" value=""></div>
+                <div class="specsLine"><div class="specsLabel">Angle</div><input ng-model="currentText.textRotAng" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" class="specsInput" value=""></div>
+                <div class="specsLine"><div class="specsLabel">Size</div><input ng-model="currentText.textSize" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" class="specsInput" value=""></div>
             </div>
         </div>
     </div>
 </div>
 
+
+
 <div ng-show="plotSpecsBands" class="plot_optionblock" id="plot_bandblock">
     <div class="top_third" id="plot_plotbandsection">
         <div class="plot_suboptions" id="plot_chartoptionbandsection" >
-        <div class="plot_chartoptionstitle">Plot Bands</div>
+        <div class="specsTitle">Plot Bands</div>
             <div id="plot_addbandwrapper"><div id="plot_addplotband" ng-click="addPlotItem(currentPlot['itemid'], 'band')">Add Band</div></div>
             <div id="plot_bandnames">	
                 <div ng-repeat="obj in currentPlot['Plot']['Chart_bandsobj']">
@@ -492,11 +500,11 @@
                 </div>
             </div>
             <div id="plot_bandoptions">	
-                <div class="plot_bandline"><div class="plot_bandtext">Start</div><input id="plot_bandstart" class="plot_bandtextbox" value="" ng-model="currentBand.Band_start" ng-enter="makeChart(currentPlot['itemid'])"></div>
-                <div class="plot_bandline"><div class="plot_bandtext">End</div><input id="plot_bandend" class="plot_bandtextbox" value="" ng-model="currentBand.Band_end" ng-enter="makeChart(currentPlot['itemid'])"></div>
-                <div class="plot_bandline"><div class="plot_bandtext">Color</div><input id="plot_bandcolor" class="plot_bandtextbox" ng-model="currentBand.color" ng-enter="makeChart(currentPlot['itemid'])"></div>
-                <div class="plot_bandline"><div class="plot_bandtext">X Axis</div><select class="plot_bandtextbox" ng-change="makeChart(currentPlot['itemid'])" ng-model="currentBand.Axis_id" name="plot_axis1" id="plot_bandxaxis1"><option ng-repeat="option in currentPlot['Plot']['Chart_xaxesobj']" value="{{option.Format_id}}">{{option.Axis_name}}</option></select></div>
-                <div class="plot_bandline"><div class="plot_bandtext">Y Axis</div><select class="plot_bandtextbox" ng-change="makeChart(currentPlot['itemid'])" ng-model="currentBand.Axis_id" name="plot_axis2" id="plot_bandyaxis2"><option ng-repeat="option in currentPlot['Plot']['Chart_yaxesobj']" value="{{option.Format_id}}">{{option.Axis_name}}</option></select></div>
+                <div class="specsLine"><div class="specsLabel">Start</div><input class="specsInput" value="" ng-model="currentBand.Band_start" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1"></div>
+                <div class="specsLine"><div class="specsLabel">End</div><input class="specsInput" value="" ng-model="currentBand.Band_end" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1"></div>
+                <div class="specsLine"><div class="specsLabel">Color</div><input class="specsInput" ng-model="currentBand.color" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1"></div>
+                <div class="specsLine"><div class="specsLabel">X Axis</div><select class="specsInput" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentBand.Axis_id" name="plot_axis1" id="plot_bandxaxis1"><option ng-repeat="option in currentPlot['Plot']['Chart_xaxesobj']" value="{{option.Format_id}}">{{option.Axis_name}}</option></select></div>
+                <div class="specsLine"><div class="specsLabel">Y Axis</div><select class="specsInput" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentBand.Axis_id" name="plot_axis2" id="plot_bandyaxis2"><option ng-repeat="option in currentPlot['Plot']['Chart_yaxesobj']" value="{{option.Format_id}}">{{option.Axis_name}}</option></select></div>
             </div>
         </div>
     </div>
@@ -505,7 +513,7 @@
 <div ng-show="plotSpecsLines" class="plot_optionblock" id="plot_lineblock">
     <div class="top_third" id="plot_plotlinesection">
         <div class="plot_suboptions" id="plot_chartoptionlinesection" >
-        <div class="plot_chartoptionstitle">Plot Lines</div>
+        <div class="specsTitle">Plot Lines</div>
             <div id="plot_addlinewrapper"><div id="plot_addplotline" ng-click="addPlotItem(currentPlot['itemid'], 'line')">Add Line</div></div>
             <div id="plot_linenames">	
                 <div ng-repeat="obj in currentPlot['Plot']['Chart_linesobj']">
@@ -516,11 +524,11 @@
                 </div>
             </div>
             <div id="plot_lineoptions">	
-                <div class="plot_lineline"><div class="plot_linetext">Value</div><input ng-model="currentLine.Line_value" ng-enter="makeChart(currentPlot['itemid'])" id="plot_linevalue" class="plot_linetextbox"></div>
-                <div class="plot_lineline"><div class="plot_linetext">Width</div><input ng-model="currentLine.Line_width" ng-enter="makeChart(currentPlot['itemid'])" id="plot_linewidth" class="plot_linetextbox"></div>
-                <div class="plot_lineline"><div class="plot_linetext">Color</div><input ng-model="currentLine.color" ng-enter="makeChart(currentPlot['itemid'])" id="plot_linecolor" class="plot_linetextbox"></div>
-                <div class="plot_lineline"><div class="plot_linetext">X Axis</div><select class="plot_bandtextbox" ng-change="makeChart(currentPlot['itemid'])" ng-model="currentLine.Axis_id" name="plot_axis1" id="plot_bandxaxis1"><option ng-repeat="option in currentPlot['Plot']['Chart_xaxesobj']" value="{{option.Format_id}}">{{option.Axis_name}}</option></select></div>
-                <div class="plot_lineline"><div class="plot_linetext">Y Axis</div><select class="plot_bandtextbox" ng-change="makeChart(currentPlot['itemid'])" ng-model="currentLine.Axis_id" name="plot_axis2" id="plot_bandyaxis2"><option ng-repeat="option in currentPlot['Plot']['Chart_yaxesobj']" value="{{option.Format_id}}">{{option.Axis_name}}</option></select></div>
+                <div class="specsLine"><div class="specsLabel">Value</div><input ng-model="currentLine.Line_value" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" class="specsInput"></div>
+                <div class="specsLine"><div class="specsLabel">Width</div><input ng-model="currentLine.Line_width" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" class="specsInput"></div>
+                <div class="specsLine"><div class="specsLabel">Color</div><input ng-model="currentLine.color" ng-enter="currentPlot['Plot']['needsUpdateFlag']=1" id="plot_linecolor" class="specsInput"></div>
+                <div class="specsLine"><div class="specsLabel">X Axis</div><select class="specsInput" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentLine.Axis_id" name="plot_axis1"><option ng-repeat="option in currentPlot['Plot']['Chart_xaxesobj']" value="{{option.Format_id}}">{{option.Axis_name}}</option></select></div>
+                <div class="specsLine"><div class="specsLabel">Y Axis</div><select class="specsInput" ng-change="currentPlot['Plot']['needsUpdateFlag']=1" ng-model="currentLine.Axis_id" name="plot_axis2"><option ng-repeat="option in currentPlot['Plot']['Chart_yaxesobj']" value="{{option.Format_id}}">{{option.Axis_name}}</option></select></div>
             </div>
         </div>
     </div>

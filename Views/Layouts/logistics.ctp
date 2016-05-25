@@ -11,14 +11,14 @@
 <head>
 	<?php 
 		echo $this->Html->charset(); 
-		if ($FileInfo['Workspace']['title']=='') { echo('<title>CADWOLF Workspace</title>'); }else { echo('<title>'.$FileInfo['Workspace']['title'].'</title>'); }
+		echo('<title>Logistics Page for CADWOLF</title>');
 		echo $this->Html->meta('favicon.ico', '/favicon.png', array('type' => 'icon'));
 		echo $this->Html->meta('icon');
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->Html->meta(array('property' => 'og:type', 'content' => 'article' ),'',array('inline'=>false));
-		echo $this->Html->meta(array('property' => 'og:title', 'content' => $FileInfo['Workspace']['title'] ),'',array('inline'=>false));
-		echo $this->Html->meta(array('property' => 'og:description', 'content' => $FileInfo['Workspace']['description'] ),'',array('inline'=>false));
+		echo $this->Html->meta(array('property' => 'og:title', 'content' => 'Logistiscs page for CADWOLF' ),'',array('inline'=>false));
+		echo $this->Html->meta(array('property' => 'og:description', 'content' => 'Logistics page for CADWOLF' ),'',array('inline'=>false));
 		echo $this->Html->meta(array('property' => 'og:image', 'content' => 'http://www.cadwolf.com/Images/blacklogo.jpg' ),'',array('inline'=>false));
 		echo $this->fetch('meta');
 		
@@ -29,7 +29,9 @@
     <link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="http://www.cadwolf.com/css/cadwolf.workspace.css" type="text/css">
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="http://www.cadwolf.com/css/cadwolf.logistics.css" type="text/css">
+    <link rel="stylesheet" href="http://www.cadwolf.com/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="http://www.cadwolf.com/css/cadwolf.leftbar.css" type="text/css">
     <link rel="stylesheet" href="http://www.cadwolf.com/css/ngDialog.min.css" type="text/css">
     <link rel="stylesheet" href="http://www.cadwolf.com/css/ngDialog-theme-default.min.css" type="text/css">
@@ -41,6 +43,6 @@
     </head>
 
     <?php echo $this->element('analyticstracking'); ?>
-	<?php echo $this->element('workspace'); ?>
+	<?php echo $this->element('logistic'); ?>
 
 </html>

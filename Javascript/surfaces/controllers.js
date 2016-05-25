@@ -344,8 +344,7 @@ surfaceApp.controller('surfaceController', ['$scope', '$http', '$sce',
                 colorData=this['Chart_dataobj'][dataIndex].zData;		
             }							
             if (this.Props.divideColormap=='0')
-            {	console.log('Setting the colormap of '+this.Props.Legend.colorMap+' for '+this['Chart_dataobj'][dataIndex].surfaceGeometry.vertices.length+' vertices');
-                for ( var i = 0; i < this['Chart_dataobj'][dataIndex].surfaceGeometry.vertices.length; i++ ) 	
+            {	for ( var i = 0; i < this['Chart_dataobj'][dataIndex].surfaceGeometry.vertices.length; i++ ) 	
                 {	var x=Math.floor(i/this['Chart_dataobj'][dataIndex].xLength);	
                     var y=i%this['Chart_dataobj'][dataIndex].yLength;	
                     var key=x+'-'+y;	

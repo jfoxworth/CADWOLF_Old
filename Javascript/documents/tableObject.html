@@ -17,7 +17,7 @@
     </div>
 </div>
 
-<div class="tableblock">
+<div class="tableblock" ng-if="editPerm">
     <table class="contenttable" style="width: {{obj.width}}px; text-align:{{obj.props.tableAlign}}" >
         <caption ng-show="obj.props.captionOn"><span ng-show="!obj.props.captionEdit" ng-dblclick="obj.props.captionEdit=true">{{obj.props.caption}}</span><span ng-show="obj.props.captionEdit"><input class="tableinput" ng-enter="obj.props.captionEdit=false" ng-model="obj.props.caption"/></span></caption>
         <tbody>
@@ -29,7 +29,24 @@
                 <td class="label" ng-if="obj.props.rowLabels" style="border:{{obj.props.borderWidth}}px solid #000;">{{$index}}</td>
                 <td toggle-table-data ng-repeat="col in row track by $index" style="border:{{obj.props.borderWidth}}px solid #000;">
                     <div class="tableShow" ng-show="!obj.props.data[$parent.$index][$index]['showEquation']" ng-click="obj.props.currentRow=$parent.$index; obj.props.currentCol=$index;" ng-dblclick="obj.props.data[$parent.$index][$index]['showEquation']=true"><span>{{obj['props']['data'][$parent.$index][$index]['real']}}</span><span ng-if="obj['props']['data'][$parent.$index][$index]['imag']!=0">+{{obj['props']['data'][$parent.$index][$index]['imag']}}i</span> <span ng-if="obj['props']['data'][$parent.$index][$index]['units']!=''">{{obj['props']['data'][$parent.$index][$index]['units']}}</span></div>
-                    <div class="tableEquation" ng-show="obj.props.data[$parent.$index][$index]['showEquation']" ng-click="obj.props.currentRow=$parent.$index; obj.props.currentCol=$index;"><input class="tableinput" ng-model="obj['props']['data'][$parent.$index][$index]['equation']" ng-enter="obj['props']['data'][$parent.$index][$index]['showEquation']=false; obj['props']['data'][$parent.$index][$index]['needsUpdateFlag']=1; obj.solveCol=$parent.$index; obj.solveRow=$index; runEquationDigest();" /></div>
+                    <div class="tableEquation" ng-show="obj.props.data[$parent.$index][$index]['showEquation']" ng-click="obj.props.currentRow=$parent.$index; obj.props.currentCol=$index;"><input class="tableinput" ng-model="obj['props']['data'][$parent.$index][$index]['equation']" ng-enter="obj['props']['data'][$parent.$index][$index]['showEquation']=false; obj['props']['data'][$parent.$index][$index]['needsUpdateFlag']=1; obj.solveCol=$parent.$index; obj.solveRow=$index; $parent.runEquationDigest();" /></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="tableblock" ng-if="!editPerm">
+    <table class="contenttable" style="width: {{obj.width}}px; text-align:{{obj.props.tableAlign}}" >
+        <caption ng-show="obj.props.captionOn"><span ng-show="!obj.props.captionEdit">{{obj.props.caption}}</span></caption>
+        <tbody>
+            <tr table-show-col-headers numcols="obj.props.data[0].length" tableid="obj.itemid" showlabels="obj.props.rowLabels" ng-if="obj.props.colLabels"></tr>
+            <tr ng-repeat="row in obj.props.data track by $index" class="normalrow" ng-init="row.showEdits=false" >
+                <td class="empty"><div ng-show="false" class="trdelete">&nbsp</div></td>
+                <td class="empty"><div ng-show="false" class="tradd"></div></td>
+                <td class="label" ng-if="obj.props.rowLabels" style="border:{{obj.props.borderWidth}}px solid #000;">{{$index}}</td>
+                <td toggle-table-data ng-repeat="col in row track by $index" style="border:{{obj.props.borderWidth}}px solid #000;">
+                    <div class="tableShow"><span>{{obj['props']['data'][$parent.$index][$index]['equation']}}</span></div>
                 </td>
             </tr>
         </tbody>
