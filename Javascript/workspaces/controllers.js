@@ -51,8 +51,6 @@ cadwolfApp.controller('workspacesController', ['$scope', '$http', '$sce', 'ngDia
             $scope.fileDisplay=true;                        $scope.permissionDisplay = false;           
             $scope.fileClass="folders_current";             $scope.fileTextClass= "leftNavTextCurrent";      
             $scope.permissionClass="permissions";           $scope.permissionTextClass = "leftNavText";    
-            $scope.userName=document.getElementById('username').innerHTML;
-            $scope.userID=document.getElementById('userid').innerHTML;
             $scope.sortMe='Workspace.rank';
             $scope.showImageUpload=false;
             $scope.showInsert=true;
@@ -69,6 +67,8 @@ cadwolfApp.controller('workspacesController', ['$scope', '$http', '$sce', 'ngDia
             then(function(response)
                  {  myResponse=response;
                     tempData=response.data.subFiles;
+                    $scope.userName=response.data.userName;
+                    $scope.userID=response.data.userID;
                     $scope.cadwolfWorkspace=new Array;
                     $scope.cadwolfThisspace=JSON.parse(JSON.stringify(response.data.thisFile));
                     $scope.cadwolfPermTree=JSON.parse(JSON.stringify(response.data.permTree));

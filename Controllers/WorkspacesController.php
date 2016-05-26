@@ -24,20 +24,8 @@ class WorkspacesController extends AppController {
 		$this->set('timezone', $this->Auth->user('time zone'));																											//
     	$this->set('myurl', Router::url(null, true), array());																											//
 		$this->set('myid', $DirInfo['ID']);																																//
-		$this->set('user', $this->Auth->user('username'));																												//
-		$this->set('userid', $this->Auth->user('id'));																													//
 		$FileInfo=$this->GetFileInfo($DirInfo, "FileInfo", 0);																											//	
 		$this->set("FileInfo", $FileInfo);																																//	
-//		$this->set('permissionTree', $this->getPermTree($DirInfo['ID']));																								//
-//		if (($Permissions['edit']=='1')||($Permissions['admin']=='1')||($Permissions['view']=='1'))																		//
-//		{																																								//
-//			$myFiles = $this->Workspace->find('all', array('conditions' => array('Workspace.parent_id' => $DirInfo['ID']), 'order' => array('Workspace.rank ASC', 'Workspace.modified DESC', 'Workspace.File_or_Folder ASC'), 'recursive'=>'-1'));	//
-//			foreach ($myFiles as $Index=>$thisFolder)																													//
-//			{	$tempPerms = $this->Permission->find('all', array('conditions' => array('workspace_id' => $thisFolder['Workspace']['id'])));							//
-//				$myFiles[$Index]['Permissions']=$tempPerms;																												//
-//			}																																							//
-//			$this->set('MyFiles', $myFiles);																															//
-//		}																																								//
     }																																									//
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -71,9 +59,11 @@ public function getInitialData() 		                     																								
 	   }																																			          			//
     }																																				          			//
     $permissionTree=$this->getPermTree($DirInfo['ID']);                 																								//
-    $returnObject=Array();                                                                                                                                          //
-    $returnObject['subFiles']=$myFiles;                                                                                                                                  //
-    $returnObject['thisFile']=$fileInfo;                                                                                                                                 //
+    $returnObject=Array();                                                                                                                                              //
+    $returnObject['userName']=$this->Auth->user('username');                                                                                                            //
+    $returnObject['userID']=$this->Auth->user('id');                                                                                                                    //
+    $returnObject['subFiles']=$myFiles;                                                                                                                                 //
+    $returnObject['thisFile']=$fileInfo;                                                                                                                                //
     $returnObject['permTree']=$permissionTree;                                                                                                                          //
     $returnObject['permissions']=$Permissions;                                                                                                                          //
     echo(json_encode($returnObject));	   																													          	//
